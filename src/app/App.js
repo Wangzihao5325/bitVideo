@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Provider } from 'react-redux';
+import store from '../store/index';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { MainStack, SubjectStack, TaskStack, MineStack } from '../app/register_screens';
 import * as Colors from '../global/Colors';
@@ -26,7 +28,9 @@ const AppContainer = createAppContainer(Router);
 export default class App extends Component {
   render() {
     return (
-      <AppContainer />
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
     );
   }
 }

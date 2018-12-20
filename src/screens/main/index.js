@@ -1,31 +1,42 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Video from 'react-native-video';
-import WebView from 'react-native-android-fullscreen-webview-video';
-
-export default class MainScreen extends PureComponent {
+import { View, TouchableHighlight, StyleSheet, Text, SafeAreaView } from 'react-native';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
+import store from '../../store/index';
+import { test_add, test_min } from '../../store/actions/testAction';
+class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null
         }
     };
 
-    onBuffer = () => {
-        console.log('is on buffer');
+    add = () => {
+        store.dispatch(test_add());
     }
-    videoError = () => {
-        console.log('is on error');
+    min = () => {
+        store.dispatch(test_min());
     }
-
     render() {
         return (
-            <WebView
-            styles={{flex:1}}
-                source={{ uri: 'https://me.guiji365.com/share/AzUc08XrXJAC6Or7' }}
-            />
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={{ flex: 1 }}>
+                    <TouchableHighlight onPress={this.add}><Text>+</Text></TouchableHighlight>
+                    <TouchableHighlight onPress={this.min}><Text>-</Text></TouchableHighlight>
+                    <Text>{this.props.num}</Text>
+                </View>
+            </SafeAreaView>
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        num: store.test.num
+    }
+}
+export default connect(mapState2Props)(MainScreen);
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
