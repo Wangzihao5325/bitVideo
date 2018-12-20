@@ -20,7 +20,7 @@ export default class MainScreen extends PureComponent {
     render() {
         return (
             <WebView
-            styles={{flex:1}}
+                styles={{ flex: 1 }}
                 source={{ uri: 'https://me.guiji365.com/share/AzUc08XrXJAC6Or7' }}
             />
         );
