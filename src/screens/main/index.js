@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Platform, PixelRatio, SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import WebView from 'react-native-android-fullscreen-webview-video';
 import * as PixelUtil from '../../global/utils/PixelUtil';
 
@@ -28,14 +28,14 @@ export default class MainScreen extends PureComponent {
                     source={{
                         html:
                             `<div>
-                            <iframe 
-                              width="${WV_Width}" 
-                              height="${WV_Height}" 
-                              src="https://me.guiji365.com/share/AzUc08XrXJAC6Or7" 
-                              frameborder="0" 
-                            >
-                            </iframe> 
-                        </div> `
+                                <iframe 
+                                  width="${WV_Width}" 
+                                  height="${WV_Height}" 
+                                  src="https://me.guiji365.com/share/AzUc08XrXJAC6Or7" 
+                                  frameborder="0" 
+                                >
+                                </iframe> 
+                            </div> `
                     }}
                 />
             </SafeAreaView>
