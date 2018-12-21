@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Platform, PixelRatio, SafeAreaView, StyleSheet } from 'react-native';
-import Video from 'react-native-video';
 import WebView from 'react-native-android-fullscreen-webview-video';
+import * as PixelUtil from '../../global/utils/PixelUtil';
 
 export default class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -18,14 +18,9 @@ export default class MainScreen extends PureComponent {
     }
 
     render() {
-        let WV_Width = 800;
-        let WV_Height = 600;
-        if (Platform.OS === 'android') {
-            //ios以px显示 android以dp显示，需要统一
-            let pixal = PixelRatio.get();
-            WV_Width = WV_Width / pixal;
-            WV_Height = WV_Height / pixal;
-        }
+
+        let WV_Width = PixelUtil.webviewSizeUnifyFromDPToPX(200);
+        let WV_Height = PixelUtil.webviewSizeUnifyFromDPToPX(150);
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <WebView

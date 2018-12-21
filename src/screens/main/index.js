@@ -1,42 +1,47 @@
 import React, { PureComponent } from 'react';
-import { View, TouchableHighlight, StyleSheet, Text, SafeAreaView } from 'react-native';
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
-import store from '../../store/index';
-import { test_add, test_min } from '../../store/actions/testAction';
-class MainScreen extends PureComponent {
+import { Platform, PixelRatio, SafeAreaView, StyleSheet } from 'react-native';
+import WebView from 'react-native-android-fullscreen-webview-video';
+import * as PixelUtil from '../../global/utils/PixelUtil';
+
+export default class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null
         }
     };
 
-    add = () => {
-        store.dispatch(test_add());
+    onBuffer = () => {
+        console.log('is on buffer');
     }
-    min = () => {
-        store.dispatch(test_min());
+    videoError = () => {
+        console.log('is on error');
     }
+
     render() {
+
+        let WV_Width = PixelUtil.webviewSizeUnifyFromDPToPX(200);
+        let WV_Height = PixelUtil.webviewSizeUnifyFromDPToPX(150);
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <View style={{ flex: 1 }}>
-                    <TouchableHighlight onPress={this.add}><Text>+</Text></TouchableHighlight>
-                    <TouchableHighlight onPress={this.min}><Text>-</Text></TouchableHighlight>
-                    <Text>{this.props.num}</Text>
-                </View>
+                <WebView
+                    originWhitelist={['*']}
+                    source={{
+                        html:
+                            `<div>
+                            <iframe 
+                              width="${WV_Width}" 
+                              height="${WV_Height}" 
+                              src="https://me.guiji365.com/share/AzUc08XrXJAC6Or7" 
+                              frameborder="0" 
+                            >
+                            </iframe> 
+                        </div> `
+                    }}
+                />
             </SafeAreaView>
         );
     }
 }
-
-function mapState2Props(store) {
-    return {
-        num: store.test.num
-    }
-}
-export default connect(mapState2Props)(MainScreen);
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
