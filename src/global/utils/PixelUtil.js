@@ -15,7 +15,7 @@ const webviewSizeUnifyFromDPToPX = function (dpNum) {
 /**
  * 以iOS平台为准，即输入是iOS平台的px(iOS平台在加载webview内嵌iframe时是以px为单位进行显示,Android以dp进行显示)
  * 在保持iOS与Android webview大小相同的情况下返回双端的size
- * @param {number} dpNum 
+ * @param {number} pxNum 
  */
 const webviewSizeUnifyInFromPXToDP = function (pxNum) {
     let result = pxNum;
