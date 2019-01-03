@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import WebView from 'react-native-android-fullscreen-webview-video';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import * as PixelUtil from '../../global/utils/PixelUtil';
 import * as Colors from '../../global/Colors';
+
+import TabBar from '../../components/tabBar/index';
 
 export default class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -11,48 +12,33 @@ export default class MainScreen extends PureComponent {
         }
     };
 
-    onBuffer = () => {
-        console.log('is on buffer');
-    }
-    videoError = () => {
-        console.log('is on error');
-    }
-
     render() {
 
         let WV_Width = PixelUtil.webviewSizeUnifyFromDPToPX(200);
         let WV_Height = PixelUtil.webviewSizeUnifyFromDPToPX(150);
         return (
-            <SafeAreaView style={styles.container}>
-                <WebView
-                    originWhitelist={['*']}
-                    source={{
-                        html:
-                            `<div>
-                                <iframe 
-                                  width="${WV_Width}" 
-                                  height="${WV_Height}" 
-                                  src="https://me.guiji365.com/share/AzUc08XrXJAC6Or7" 
-                                  frameborder="0" 
-                                >
-                                </iframe> 
-                            </div> `
-                    }}
-                />
+            <SafeAreaView style={styles.safeArea}>
+                <View style={styles.container}>
+                    <View style={styles.headerContainer}>
+                        <TabBar tabNames={['推荐', '搞笑', '电视剧', '动漫', '综艺']} tabTap={(classfiy) => { console.log(classfiy) }} />
+                    </View>
+                </View>
             </SafeAreaView>
         );
     }
 }
 const styles = StyleSheet.create({
-    container: {
+    safeArea: {
         flex: 1,
         backgroundColor: Colors.SAFE_AREA_BGCOLOR
     },
-    bgVideo: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0
+    container: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
+    headerContainer: {
+        display: 'flex',
+        height: 75,
+        backgroundColor: Colors.SAFE_AREA_BGCOLOR
     }
 });
