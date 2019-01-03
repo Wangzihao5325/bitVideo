@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import * as Colors from '../../global/Colors';
 
 import Header from './header';
+import Content from './content';
 
 export default class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -16,6 +17,7 @@ export default class MainScreen extends PureComponent {
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.container}>
                     <Header />
+                    <Content />
                 </View>
             </SafeAreaView>
         );

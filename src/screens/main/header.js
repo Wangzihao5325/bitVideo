@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import * as Colors from '../../global/Colors';
+import * as In18 from '../../global/In18';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TabBar from '../../components/tabBar/index';
@@ -29,8 +30,8 @@ export default class Header extends PureComponent {
                         backgroundColor={Colors.SAFE_AREA_BGCOLOR}
                         onPress={this.showAll}
                     >
-                        全部
-                </Icon.Button>
+                        {In18.ALL_TEXT}
+                    </Icon.Button>
                 </View>
             </View>
         );
