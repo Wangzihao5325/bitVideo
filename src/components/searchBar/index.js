@@ -5,7 +5,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const BG_COLOR = 'rgb(74,63,58)';
 export default class SearchBar extends PureComponent {
     search = () => {
-        console.log('startSearch');
+        if(this.props.search){
+            this.props.search();
+        }
     }
     render() {
         let remommendText = this.props.recommendText ? this.props.recommendText : '';
