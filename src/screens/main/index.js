@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
-import * as PixelUtil from '../../global/utils/PixelUtil';
 import * as Colors from '../../global/Colors';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import TabBar from '../../components/tabBar/index';
+import SearchBar from '../../components/searchBar/index';
 
 export default class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -11,16 +12,28 @@ export default class MainScreen extends PureComponent {
             header: null
         }
     };
-
+    showAll = () => {
+        console.log('showAll is clicking!');
+    }
     render() {
 
-        let WV_Width = PixelUtil.webviewSizeUnifyFromDPToPX(200);
-        let WV_Height = PixelUtil.webviewSizeUnifyFromDPToPX(150);
         return (
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.container}>
                     <View style={styles.headerContainer}>
                         <TabBar tabNames={['推荐', '搞笑', '电视剧', '动漫', '综艺']} tabTap={(classfiy) => { console.log(classfiy) }} />
+                        <View style={styles.searchContainer}>
+                            <SearchBar recommendText='雷人糗事'/>
+                            <Icon.Button
+                                name="bars"
+                                size={20}
+                                color='rgb(250,214,72)'
+                                backgroundColor={Colors.SAFE_AREA_BGCOLOR}
+                                onPress={this.showAll}
+                            >
+                                全部
+                            </Icon.Button>
+                        </View>
                     </View>
                 </View>
             </SafeAreaView>
@@ -38,7 +51,11 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         display: 'flex',
-        height: 75,
+        height: 80,
         backgroundColor: Colors.SAFE_AREA_BGCOLOR
+    },
+    searchContainer: {
+        flex: 1,
+        flexDirection: 'row'
     }
 });
