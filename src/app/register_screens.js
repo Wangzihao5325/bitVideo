@@ -8,7 +8,7 @@ import SubjectScreen from '../screens/subject/index';
 import TaskScreen from '../screens/task/index';
 import MineScreen from '../screens/mine/index';
 
-const TAB_ICON_KEY_STR = ['line-chart', 'file-text-o', 'dot-circle-o', 'user-o'];
+const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
 let MainStack = createStackNavigator(
     {
