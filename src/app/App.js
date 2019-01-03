@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import store from '../store/index';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
@@ -29,6 +29,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <StatusBar barStyle="light-content" />
         <AppContainer />
       </Provider>
     );

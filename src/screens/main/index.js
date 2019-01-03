@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import WebView from 'react-native-android-fullscreen-webview-video';
 import * as PixelUtil from '../../global/utils/PixelUtil';
+import * as Colors from '../../global/Colors';
 
 export default class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -22,7 +23,7 @@ export default class MainScreen extends PureComponent {
         let WV_Width = PixelUtil.webviewSizeUnifyFromDPToPX(200);
         let WV_Height = PixelUtil.webviewSizeUnifyFromDPToPX(150);
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={styles.container}>
                 <WebView
                     originWhitelist={['*']}
                     source={{
@@ -45,9 +46,7 @@ export default class MainScreen extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: Colors.SAFE_AREA_BGCOLOR
     },
     bgVideo: {
         position: 'absolute',
