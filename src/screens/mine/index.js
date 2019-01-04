@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+
+import Header from './header';
+
 export default class MineScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -14,7 +17,7 @@ export default class MineScreen extends PureComponent {
                 source={require('../../image/mine/mine_background.png')}
             >
                 <SafeAreaView style={styles.container}>
-
+                    <Header />
                 </SafeAreaView>
             </ImageBackground>
         );
