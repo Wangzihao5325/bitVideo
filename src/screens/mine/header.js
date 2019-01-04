@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -30,9 +30,18 @@ class TopBtns extends PureComponent {
     }
 }
 class Avater extends PureComponent {
+    login = () => {
+        console.log('please login');
+    }
+    register = () => {
+        console.log('please register');
+    }
     render() {
         return (
-            <View >
+            <View style={styles.avaterContainer}>
+                <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />
+                <Text style={styles.LoginText}><Text onPress={this.login}>登陆</Text>/<Text onPress={this.register}>注册</Text></Text>
+                <View style={styles.rechargeContainer}></View>
             </View>
         );
     }
@@ -42,6 +51,7 @@ export default class Header extends PureComponent {
         return (
             <View>
                 <TopBtns />
+                <Avater />
             </View>
         );
     }
@@ -61,5 +71,25 @@ const styles = StyleSheet.create({
         height: 70,
         width: '100%',
         backgroundColor: 'transparent',
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    avaterImage: {
+        height: 63,
+        width: 63,
+        borderRadius: 31,
+        marginTop: 7,
+        marginLeft: 15
+    },
+    LoginText: {
+        color: 'white',
+        fontSize: 18,
+        alignSelf: 'center',
+        marginLeft: 23
+    },
+    rechargeContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
     }
 });
