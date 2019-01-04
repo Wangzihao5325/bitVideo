@@ -11,8 +11,8 @@ import SearchBar from '../../components/searchBar/index';
 export default class Header extends PureComponent {
 
     state = {
-        globalType: ['推荐1', '搞笑1', '电视剧1', '动漫1', '综艺1'],
-        recommendSearch: '雷人糗事'
+        globalType: In18.DEFALUT_GLOBALE_TYPE,
+        recommendSearch: In18.DEFALUT_RECOMMEND_SEARCH
     };
 
     showAll = () => {
