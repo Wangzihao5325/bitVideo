@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -41,7 +41,11 @@ class Avater extends PureComponent {
             <View style={styles.avaterContainer}>
                 <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />
                 <Text style={styles.LoginText}><Text onPress={this.login}>登陆</Text>/<Text onPress={this.register}>注册</Text></Text>
-                <View style={styles.rechargeContainer}></View>
+                <View style={styles.rechargeContainer}>
+                    <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
+                        <Text style={styles.rechargeText}>充值爱逗币</Text>
+                    </ImageBackground>
+                </View>
             </View>
         );
     }
@@ -85,11 +89,25 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         alignSelf: 'center',
-        marginLeft: 23
+        marginLeft: 23,
+        marginTop:15
     },
     rechargeContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+    },
+    imageBackground: {
+        height: 30,
+        width: 101,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop:30
+    },
+    rechargeText: {
+        color: 'white',
+        fontSize: 14
     }
 });
