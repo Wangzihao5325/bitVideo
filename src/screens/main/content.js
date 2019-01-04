@@ -34,7 +34,7 @@ export default class Content extends PureComponent {
     render() {
         return (
             <ScrollView>
-                {/* <CarouselContainer /> */}
+                <CarouselContainer />
             </ScrollView>
         );
     }
