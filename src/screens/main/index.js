@@ -11,8 +11,8 @@ export default class MainScreen extends PureComponent {
             header: null
         }
     };
-    render() {
 
+    render() {
         return (
             <SafeAreaView style={styles.safeArea}>
                 <View style={styles.container}>

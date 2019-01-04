@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Api from '../../socket/index';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
 
@@ -9,6 +10,11 @@ import SearchBar from '../../components/searchBar/index';
 
 export default class Header extends PureComponent {
 
+    state = {
+        globalType: ['推荐1', '搞笑1', '电视剧1', '动漫1', '综艺1'],
+        recommendSearch: '雷人糗事'
+    };
+
     showAll = () => {
         console.log('showAll is clicking!');
     }
@@ -17,12 +23,21 @@ export default class Header extends PureComponent {
         console.log('start search');
     }
 
+    componentDidMount() {
+        Api.getGlobalType((result) => {
+            let typeArr = result.map((obj) => {
+                return obj.name
+            });
+            this.setState({ globalType: typeArr });
+        });
+    }
+
     render() {
         return (
             <View style={styles.headerContainer}>
-                <TabBar tabNames={['推荐', '搞笑', '电视剧', '动漫', '综艺']} tabTap={(classfiy) => { console.log(classfiy) }} />
+                <TabBar tabNames={this.state.globalType} tabTap={(classfiy) => { console.log(classfiy) }} />
                 <View style={styles.searchContainer}>
-                    <SearchBar recommendText='雷人糗事' search={this.search} />
+                    <SearchBar recommendText={this.state.recommendSearch} search={this.search} />
                     <Icon.Button
                         name="bars"
                         size={20}

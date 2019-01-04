@@ -51,4 +51,11 @@ class api {
             }
         )
     }
+
+    getGlobalType(onSuccess, onError) {
+        const url = '/api/video/globaltype';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
+
+export default new api();
