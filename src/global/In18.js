@@ -7,6 +7,12 @@ const ALL_TEXT = '全部';
 
 const DEFALUT_GLOBALE_TYPE = ['推荐1', '搞笑1', '电视剧1', '动漫1', '综艺1'];
 const DEFALUT_RECOMMEND_SEARCH = '雷人糗事';
+
+const LOGIN = '登陆';
+const REGISTER = '注册';
+const RECHARGE = '充值爱逗币';
+const TODAY_WATCH_TIMES = '今日观影次数';
+const SHARE_TIMES = '推广得观影次数';
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -17,4 +23,10 @@ export {
 
     DEFALUT_GLOBALE_TYPE,
     DEFALUT_RECOMMEND_SEARCH,
+
+    LOGIN,
+    REGISTER,
+    RECHARGE,
+    TODAY_WATCH_TIMES,
+    SHARE_TIMES
 };

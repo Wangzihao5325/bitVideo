@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
+import * as In18 from '../../global/In18';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -40,10 +41,10 @@ class Avater extends PureComponent {
         return (
             <View style={styles.avaterContainer}>
                 <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />
-                <Text style={styles.LoginText}><Text onPress={this.login}>登陆</Text>/<Text onPress={this.register}>注册</Text></Text>
+                <Text style={styles.LoginText}><Text onPress={this.login}>{In18.LOGIN}</Text>/<Text onPress={this.register}>{In18.REGISTER}</Text></Text>
                 <View style={styles.rechargeContainer}>
                     <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
-                        <Text style={styles.rechargeText}>充值爱逗币</Text>
+                        <Text style={styles.rechargeText}>{In18.RECHARGE}</Text>
                     </ImageBackground>
                 </View>
             </View>
@@ -54,7 +55,17 @@ class CountList extends PureComponent {
     render() {
         return (
             <View style={styles.countListContainer}>
-                <View style={styles.countListboard}></View>
+                <View style={styles.countListboard}>
+                    <View style={styles.watchTimesBoard}>
+                        <Text style={styles.countListNumText}><Text>0</Text>/9</Text>
+                        <Text style={styles.countListText}>{In18.TODAY_WATCH_TIMES}</Text>
+                    </View>
+                    <View style={styles.separate} />
+                    <View style={styles.watchTimesBoard}>
+                        <Text style={styles.countListNumText}>0</Text>
+                        <Text style={styles.countListText}>{In18.SHARE_TIMES}</Text>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -127,6 +138,7 @@ const styles = StyleSheet.create({
     },
     countListboard: {
         flex: 1,
+        flexDirection: 'row',
         height: 83,
         marginTop: 31,
         marginHorizontal: 27,
@@ -134,6 +146,26 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.1
+        shadowOpacity: 0.1,
+    },
+    watchTimesBoard: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    countListNumText: {
+        fontSize: 20,
+        color: 'rgb(73,114,255)'
+    },
+    countListText: {
+        fontSize: 14,
+        color: 'rgb(54,54,54)',
+        marginTop: 7
+    },
+    separate: {
+        height: 20,
+        width: 2,
+        backgroundColor: 'rgb(220,216,217)',
+        alignSelf: 'center'
     }
 });
