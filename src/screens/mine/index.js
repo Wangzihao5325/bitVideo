@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 
 import Header from './header';
+import FunList from './funList';
 
 export default class MineScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -18,6 +19,7 @@ export default class MineScreen extends PureComponent {
             >
                 <SafeAreaView style={styles.container}>
                     <Header />
+                    <FunList />
                 </SafeAreaView>
             </ImageBackground>
         );
