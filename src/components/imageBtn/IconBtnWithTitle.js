@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { TouchableHighlight, Image, View, Text, StyleSheet } from 'react-native';
+import * as Sizes from '../../global/Sizes';
 
 const ICON_SIZE = 22;
 const TITLE_SIZE = 14;
@@ -30,7 +31,7 @@ export default class IconBtn extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         height: 45,
-        width: 60,
+        width: Sizes.ICON_BTN_WITH_TITLE_CONTAINER_WIDTH,
         display: 'flex'
     },
     flexView: {
