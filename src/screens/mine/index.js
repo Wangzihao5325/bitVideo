@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, ImageBackground, SafeAreaView } from 'react-nat
 import Header from './header';
 import FunList from './funList';
 import History from './history';
+import Bottom from './bottom';
 
 export default class MineScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -22,6 +23,7 @@ export default class MineScreen extends PureComponent {
                     <Header />
                     <FunList />
                     <History />
+                    <Bottom />
                 </SafeAreaView>
             </ImageBackground>
         );

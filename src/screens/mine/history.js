@@ -59,7 +59,7 @@ class Snap extends PureComponent {
 export default class History extends PureComponent {
     render() {
         return (
-            <View>
+            <View >
                 <Header />
                 <Snap />
             </View>
@@ -67,9 +67,6 @@ export default class History extends PureComponent {
     }
 }
 const styles = StyleSheet.create({
-    container: {
-
-    },
     headerContainer: {
         height: 22,
         width: '100%',
