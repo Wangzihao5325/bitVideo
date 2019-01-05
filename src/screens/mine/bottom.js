@@ -27,7 +27,7 @@ export default class Bottom extends PureComponent {
     }
     render() {
         return (
-            <View >
+            <View style={{ paddingBottom: 20 }} >
                 <Item source={require('../../image/mine/myCache.png')} title='我的缓存' onPress={this.myCache} />
                 <Item source={require('../../image/mine/myCache.png')} title='我的收藏' onPress={this.myStar} />
                 <Item source={require('../../image/mine/myCache.png')} title='帮助反馈' onPress={this.getHelp} />

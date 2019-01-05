@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { ScrollView, View, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 
 import Header from './header';
 import FunList from './funList';
@@ -15,17 +15,21 @@ export default class MineScreen extends PureComponent {
 
     render() {
         return (
-            <ImageBackground
-                style={styles.imageBackground}
-                source={require('../../image/mine/mine_background.png')}
-            >
-                <SafeAreaView style={styles.container}>
-                    <Header />
-                    <FunList />
-                    <History />
-                    <Bottom />
-                </SafeAreaView>
-            </ImageBackground>
+            <ScrollView style={{ height: 1000, width: '100%' }} showsVerticalScrollIndicator={false} alwaysBounceVertical={false}>
+                <ImageBackground
+                    style={styles.imageBackground}
+                    source={require('../../image/mine/mine_background.png')}
+                >
+                    <SafeAreaView style={styles.container}>
+                        <View style={{ flex: 1 }}>
+                            <Header />
+                            <FunList />
+                            <History />
+                            <Bottom />
+                        </View>
+                    </SafeAreaView>
+                </ImageBackground>
+            </ScrollView>
         );
     }
 }
@@ -35,6 +39,6 @@ const styles = StyleSheet.create({
     },
     imageBackground: {
         width: '100%',
-        height: 207
+        height: 207,//780
     }
 });
