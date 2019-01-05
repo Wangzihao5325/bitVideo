@@ -50,12 +50,22 @@ class Avater extends PureComponent {
         );
     }
 }
+class CountList extends PureComponent {
+    render() {
+        return (
+            <View style={styles.countListContainer}>
+                <View style={styles.countListboard}></View>
+            </View>
+        );
+    }
+}
 export default class Header extends PureComponent {
     render() {
         return (
             <View>
                 <TopBtns />
                 <Avater />
+                <CountList />
             </View>
         );
     }
@@ -90,7 +100,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignSelf: 'center',
         marginLeft: 23,
-        marginTop:15
+        marginTop: 15
     },
     rechargeContainer: {
         flex: 1,
@@ -104,10 +114,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:30
+        marginTop: 30
     },
     rechargeText: {
         color: 'white',
         fontSize: 14
+    },
+    countListContainer: {
+        height: 83 + 31,
+        width: '100%',
+        backgroundColor: 'transparent'
+    },
+    countListboard: {
+        flex: 1,
+        height: 83,
+        marginTop: 31,
+        marginHorizontal: 27,
+        backgroundColor: 'white',
+        borderRadius: 5,
+        shadowColor: 'black',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.1
     }
 });
