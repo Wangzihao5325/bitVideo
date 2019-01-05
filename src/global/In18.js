@@ -13,6 +13,11 @@ const REGISTER = '注册';
 const RECHARGE = '充值爱逗币';
 const TODAY_WATCH_TIMES = '今日观影次数';
 const SHARE_TIMES = '推广得观影次数';
+const IDOL_MONEY = '爱逗币';
+const SHARE_CODE = '邀请码';
+const INVITE_PEOPLE = '邀请好友';
+const TASK_CENTER = '任务中心';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -28,5 +33,9 @@ export {
     REGISTER,
     RECHARGE,
     TODAY_WATCH_TIMES,
-    SHARE_TIMES
+    SHARE_TIMES,
+    IDOL_MONEY,
+    SHARE_CODE,
+    INVITE_PEOPLE,
+    TASK_CENTER
 };
