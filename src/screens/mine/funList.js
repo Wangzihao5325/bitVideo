@@ -20,7 +20,7 @@ export default class FunList extends PureComponent {
                 </View>
                 <View style={styles.moneyShowContainer}>
                     <View style={styles.flexView}>
-                        <Text style={styles.moneyText}>剩余<Text>:</Text><Text>120</Text></Text>
+                        <Text style={styles.moneyText}>{In18.OVERPLUS}<Text>:</Text><Text>120</Text></Text>
                     </View>
                 </View>
             </View>

@@ -17,6 +17,7 @@ const IDOL_MONEY = '爱逗币';
 const SHARE_CODE = '邀请码';
 const INVITE_PEOPLE = '邀请好友';
 const TASK_CENTER = '任务中心';
+const OVERPLUS = '剩余';
 
 export {
     MAIN_PAGE_TITLE,
@@ -37,5 +38,6 @@ export {
     IDOL_MONEY,
     SHARE_CODE,
     INVITE_PEOPLE,
-    TASK_CENTER
+    TASK_CENTER,
+    OVERPLUS
 };
