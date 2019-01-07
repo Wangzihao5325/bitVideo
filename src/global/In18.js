@@ -25,6 +25,12 @@ const PASSWORD_LOGIN = '密码登陆';
 const WELCOME_BACK = 'Welcome Back';
 const SIGN_IN_TO_CONTAINE = 'sign in to continue';
 
+//帮助反馈页面
+const HELP_SUBMIT = '帮助反馈';
+const PLEASE_INPUT_SUGGEST = '请输入意见或建议';
+const PLEASE_INPUT_CONTRACT = '联系方式:邮箱、qq、手机号';
+const SUBMIT_SUGGEXT = '提交反馈';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -51,5 +57,10 @@ export {
 
     PASSWORD_LOGIN,
     WELCOME_BACK,
-    SIGN_IN_TO_CONTAINE
+    SIGN_IN_TO_CONTAINE,
+
+    HELP_SUBMIT,
+    PLEASE_INPUT_SUGGEST,
+    PLEASE_INPUT_CONTRACT,
+    SUBMIT_SUGGEXT
 };

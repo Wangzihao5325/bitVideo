@@ -6,7 +6,9 @@ import { iconMake } from '../components/icons/Vector_icons';
 import MainScreen from '../screens/main/index';
 import SubjectScreen from '../screens/subject/index';
 import TaskScreen from '../screens/task/index';
+
 import MineScreen from '../screens/mine/index';
+import HelpScreen from '../screens/mine/help/index';
 
 const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
@@ -75,7 +77,8 @@ TaskStack.navigationOptions = ({ navigation }) => {
 // 我的router
 let MineStack = createStackNavigator(
     {
-        MineScreen
+        MineScreen,
+        HelpScreen
     },
     {
         navigationOptions: { gesturesEnabled: false }

@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, TouchableHighlight, Image, Text } from 'react-native';
+import PropTypes from 'prop-types';
+
 class Item extends PureComponent {
     render() {
         return (
@@ -16,6 +18,10 @@ class Item extends PureComponent {
     }
 }
 export default class Bottom extends PureComponent {
+    static contextTypes = {
+        mineNavigation: PropTypes.object
+    }
+
     myCache = () => {
         console.log('my cache');
     }
@@ -23,7 +29,8 @@ export default class Bottom extends PureComponent {
         console.log('my myStar');
     }
     getHelp = () => {
-        console.log('my getHelp');
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('HelpScreen');
     }
     render() {
         return (

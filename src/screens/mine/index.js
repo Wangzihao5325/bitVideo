@@ -10,7 +10,8 @@ import Bottom from './bottom';
 export default class MineScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
-            header: null
+            header: null,
+            headerBackTitle: null
         }
     };
 
