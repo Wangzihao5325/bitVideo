@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight } from 'react-
 import * as In18 from '../../global/In18';
 
 import VectorIconBtn from '../../components/imageBtn/VectorIconBtn';
+import MobileInput from '../../components/input/MobileInput';
 
 class Header extends PureComponent {
     render() {
@@ -36,12 +37,22 @@ class MainTitle extends PureComponent {
         );
     }
 }
+class InputField extends PureComponent {
+    render() {
+        return (
+            <View style={styles.inputFieldContainer}>
+                <MobileInput />
+            </View>
+        );
+    }
+}
 export default class LoginModel extends PureComponent {
     render() {
         return (
             <SafeAreaView>
                 <Header goBack={() => this.props.navigation.goBack()} />
                 <MainTitle />
+                <InputField />
             </SafeAreaView>
         );
     }
@@ -101,5 +112,10 @@ const styles = StyleSheet.create({
     H2Text: {
         color: 'rgb(151,151,151)',
         fontSize: 16
+    },
+    inputFieldContainer: {
+        height: 200,
+        width: '100%',
+        marginTop: 58
     }
 });
