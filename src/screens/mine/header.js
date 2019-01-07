@@ -1,17 +1,24 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
 import * as In18 from '../../global/In18';
+import PropTypes from 'prop-types';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
 const ICON_SIZE = 26;
 const CONTAINER_HEIGHT = ICON_SIZE;
 class TopBtns extends PureComponent {
+
+    static contextTypes = {
+        mineNavigation: PropTypes.object
+    }
+
     customPress = () => {
         console.log('custom pressing');
     }
     settingPress = () => {
-        console.log('setting pressing');
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('MyModel');
     }
     render() {
         return (

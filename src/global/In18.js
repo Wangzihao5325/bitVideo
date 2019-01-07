@@ -21,6 +21,8 @@ const TASK_CENTER = '任务中心';
 const OVERPLUS = '剩余';
 const WATCH_HISTORY = '播放记录';
 
+const PASSWORD_LOGIN = '密码登陆';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -43,5 +45,7 @@ export {
     INVITE_PEOPLE,
     TASK_CENTER,
     OVERPLUS,
-    WATCH_HISTORY
+    WATCH_HISTORY,
+
+    PASSWORD_LOGIN
 };

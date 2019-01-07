@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import store from '../store/index';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import { MainStack, SubjectStack, TaskStack, MineStack } from '../app/register_screens';
 import * as Colors from '../global/Colors';
+
+import LoginModel from '../screens/loginModel/index';
 
 const Router = createBottomTabNavigator(
   {
@@ -23,13 +25,29 @@ const Router = createBottomTabNavigator(
   }
 );
 
-const AppContainer = createAppContainer(Router);
+const RouterWithModal = createStackNavigator(
+  {
+    Main: {
+      screen: Router
+    },
+    MyModel: {
+      screen: LoginModel
+    },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  }
+);
+
+// const AppContainer = createAppContainer(Router);
+const AppContainer = createAppContainer(RouterWithModal);
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="default" />
         <AppContainer />
       </Provider>
     );

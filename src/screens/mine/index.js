@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ScrollView, View, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import PropTypes from 'prop-types';
 
 import Header from './header';
 import FunList from './funList';
@@ -12,6 +13,16 @@ export default class MineScreen extends PureComponent {
             header: null
         }
     };
+
+    static childContextTypes = {
+        mineNavigation: PropTypes.object,
+    }
+
+    getChildContext() {
+        return {
+            mineNavigation: this.props.navigation
+        }
+    }
 
     render() {
         return (
