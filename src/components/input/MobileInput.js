@@ -6,12 +6,12 @@ import IconBtn from '../../components/imageBtn/IconBtn';
 
 const DEFALUT_WIDTH = Sizes.DEVICE_WIDTH - 34 - 31;
 export default class MobileInput extends PureComponent {
-    render() {
-        clear = () => {
-            if (this.input) {
-                this.input.clear();
-            }
+    clear = () => {
+        if (this.input) {
+            this.input.clear();
         }
+    }
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.contentView}>
@@ -21,7 +21,6 @@ export default class MobileInput extends PureComponent {
                         ref={(ref) => this.input = ref}
                         style={styles.textInput}
                         placeholder='请输入手机号码'
-                        clearButtonMode='always'
                         placeholderTextColor='rgb(151,151,151)' />
                     <IconBtn
                         onPress={this.clear}
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
         height: 44,
         width: DEFALUT_WIDTH,
         display: 'flex',
-        borderBottomColor: 'rgb(238,238,238)',
+        borderBottomColor: '#909090',
         borderBottomWidth: StyleSheet.hairlineWidth,
         marginLeft: 34
     },
