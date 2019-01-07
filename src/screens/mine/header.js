@@ -69,7 +69,7 @@ class CountList extends PureComponent {
                     </View>
                     <View style={styles.separate} />
                     <View style={styles.watchTimesBoard}>
-                        <Text style={styles.countListNumText}>0</Text>
+                        <Image source={require('../../image/mine/mine_share.png')} />
                         <Text style={styles.countListText}>{In18.SHARE_TIMES}</Text>
                     </View>
                 </View>
