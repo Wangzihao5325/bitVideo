@@ -22,6 +22,8 @@ const OVERPLUS = '剩余';
 const WATCH_HISTORY = '播放记录';
 
 const PASSWORD_LOGIN = '密码登陆';
+const WELCOME_BACK = 'Welcome Back';
+const SIGN_IN_TO_CONTAINE = 'sign in to continue';
 
 export {
     MAIN_PAGE_TITLE,
@@ -47,5 +49,7 @@ export {
     OVERPLUS,
     WATCH_HISTORY,
 
-    PASSWORD_LOGIN
+    PASSWORD_LOGIN,
+    WELCOME_BACK,
+    SIGN_IN_TO_CONTAINE
 };

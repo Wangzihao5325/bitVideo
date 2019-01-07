@@ -21,11 +21,27 @@ class Header extends PureComponent {
         );
     }
 }
+
+class MainTitle extends PureComponent {
+    render() {
+        return (
+            <View style={styles.mainTitleContainer}>
+                <View style={styles.mainTitleH1}>
+                    <Text style={styles.H1Text}>{In18.WELCOME_BACK}</Text>
+                </View>
+                <View style={styles.mainTitleH2}>
+                    <Text style={styles.H2Text}>{In18.SIGN_IN_TO_CONTAINE}</Text>
+                </View>
+            </View>
+        );
+    }
+}
 export default class LoginModel extends PureComponent {
     render() {
         return (
             <SafeAreaView>
                 <Header goBack={() => this.props.navigation.goBack()} />
+                <MainTitle />
             </SafeAreaView>
         );
     }
@@ -59,5 +75,31 @@ const styles = StyleSheet.create({
     headerRegister: {
         color: 'rgb(32,32,32)',
         fontSize: 18
+    },
+    mainTitleContainer: {
+        height: 72,
+        width: '100%',
+        marginTop: 80,
+        display: 'flex'
+    },
+    mainTitleH1: {
+        flex: 1,
+        height: 33,
+        marginLeft: 30,
+        justifyContent: 'center'
+    },
+    H1Text: {
+        color: 'rgb(32,32,32)',
+        fontSize: 24
+    },
+    mainTitleH2: {
+        flex: 1,
+        height: 22,
+        marginLeft: 34,
+        justifyContent: 'center'
+    },
+    H2Text: {
+        color: 'rgb(151,151,151)',
+        fontSize: 16
     }
 });
