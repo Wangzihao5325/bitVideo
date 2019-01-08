@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
+
+import ModalHeader from '../modalComponent/ModalHeader';
+
 export default class RegisterModal extends PureComponent {
     goBack = () => {
         this.props.navigation.goBack()
     }
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                <Text style={{ marginTop: 100 }} onPress={this.goBack}>back</Text>
-            </View>
+            <SafeAreaView>
+                <ModalHeader title='注册' goBack={this.goBack} />
+            </SafeAreaView>
         );
     }
 }
