@@ -21,7 +21,9 @@ export default class MobileInput extends PureComponent {
                         ref={(ref) => this.input = ref}
                         style={styles.textInput}
                         placeholder='请输入手机号码'
-                        placeholderTextColor='rgb(151,151,151)' />
+                        placeholderTextColor='rgb(151,151,151)'
+                        keyboardType='number-pad'
+                    />
                     <IconBtn
                         onPress={this.clear}
                         height={16}
