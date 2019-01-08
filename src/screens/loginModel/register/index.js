@@ -19,15 +19,35 @@ class Btn extends PureComponent {
     }
 }
 
-class protocolAgreeLine extends PureComponent {
+class ProtocolAgreeLine extends PureComponent {
     state = {
         isAgree: false,
-        source: require('../../../image/mine/')
+        source: require('../../../image/mine/not_agree_protocol.png')
+    }
+    pressing = () => {
+        this.setState(function (preState) {
+            if (preState.isAgree) {
+                return {
+                    isAgree: false,
+                    source: require('../../../image/mine/not_agree_protocol.png')
+                }
+            } else {
+                return {
+                    isAgree: true,
+                    source: require('../../../image/mine/agree_protocol.png')
+                }
+            }
+        });
     }
     render() {
-        <View style={styles.protocolAgreeLineContainer}>
-            <Image source></Image>
-        </View>
+        return (
+            <View style={styles.protocolAgreeLineContainer}>
+                <TouchableHighlight style={{ marginLeft: 78 }} onPress={this.pressing} underlayColor='transparent'>
+                    <Image source={this.state.source}></Image>
+                </TouchableHighlight>
+                <Text style={styles.protocolAgreeLineText}>我已阅读并已同意<Text style={styles.highlightText}>《用户注册协议》</Text></Text>
+            </View>
+        );
     }
 }
 
@@ -75,6 +95,7 @@ export default class RegisterModal extends PureComponent {
                 <TouchableHighlight style={[styles.nextStep, styleObj]} onPress={this.goToNext}>
                     <Text style={styles.nextStepText}>下一步</Text>
                 </TouchableHighlight>
+                <ProtocolAgreeLine />
             </SafeAreaView>
         );
     }
@@ -111,9 +132,19 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     protocolAgreeLineContainer: {
+        marginTop: 20,
         height: 17,
         width: '100%',
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    protocolAgreeLineText: {
+        marginLeft: 14,
+        fontSize: 12,
+        color: 'rgb(54,54,54)'
+    },
+    highlightText: {
+        color: 'rgb(73,114,255)'
     }
 });
