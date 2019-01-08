@@ -46,6 +46,8 @@ const PLEASE_INPUT_INVITE_CODE2 = '请输入邀请码(选填)'
 
 //注册-输入验证码页面
 const INPUT_VER_CODE = '输入验证码';
+const CLICK_TO_GET_VER_CODE = '点击获取验证码至:'
+const PLEASE_SET_PASSWORD = '请设置密码(6-12位数字或字母)';
 
 export {
     MAIN_PAGE_TITLE,
@@ -92,5 +94,7 @@ export {
     NEXT_STEP,
     PLEASE_INPUT_INVITE_CODE2,
 
-    INPUT_VER_CODE
+    INPUT_VER_CODE,
+    CLICK_TO_GET_VER_CODE,
+    PLEASE_SET_PASSWORD
 };

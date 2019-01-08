@@ -14,12 +14,12 @@ export default class RegisterStepTwoScreen extends PureComponent {
         return (
             <SafeAreaView >
                 <ModalHeader title={In18.INPUT_VER_CODE} goBack={this.goBack} />
-                <Text style={styles.titleText}>点击获取验证码至:</Text>
+                <Text style={styles.titleText}>{In18.CLICK_TO_GET_VER_CODE}</Text>
                 <Text style={styles.mobileText}>+86187****1234</Text>
                 <PasswordInputWithVerificationCode style={{ marginTop: 48 }} />
-                <PasswordInput placeHolder='请设置密码(6-12位数字或字母)' style={{ marginTop: 53 }} />
+                <PasswordInput placeHolder={In18.PLEASE_SET_PASSWORD} style={{ marginTop: 53 }} />
                 <TouchableHighlight style={styles.btn}>
-                    <Text style={styles.btnText}>注册</Text>
+                    <Text style={styles.btnText}>{In18.REGISTER}</Text>
                 </TouchableHighlight>
             </SafeAreaView>
         );
