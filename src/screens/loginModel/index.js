@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight } from 'react-native';
+import PropTypes from 'prop-types';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
 
@@ -9,6 +10,16 @@ import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 
 class Header extends PureComponent {
+
+    static contextTypes = {
+        modalNavigation: PropTypes.object
+    }
+
+    goToRegister = () => {
+        const { modalNavigation } = this.context;
+        modalNavigation.navigate('MyRegisterModal');
+    }
+
     render() {
         return (
             <View style={styles.headerContainer}>
@@ -18,7 +29,7 @@ class Header extends PureComponent {
                 <View style={styles.headerTitleContainer}>
                     <Text style={styles.headerTitle}>{In18.PASSWORD_LOGIN}</Text>
                 </View>
-                <TouchableHighlight style={[styles.headerFlexContainer, { justifyContent: 'center' }]}>
+                <TouchableHighlight onPress={this.goToRegister} style={[styles.headerFlexContainer, { justifyContent: 'center' }]}>
                     <Text style={styles.headerRegister}>{In18.REGISTER}</Text>
                 </TouchableHighlight>
             </View>
@@ -87,6 +98,17 @@ class InputField extends PureComponent {
     }
 }
 export default class LoginModel extends PureComponent {
+
+    static childContextTypes = {
+        modalNavigation: PropTypes.object,
+    }
+
+    getChildContext() {
+        return {
+            modalNavigation: this.props.navigation
+        }
+    }
+
     render() {
         return (
             <SafeAreaView>

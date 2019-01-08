@@ -7,6 +7,7 @@ import { MainStack, SubjectStack, TaskStack, MineStack } from '../app/register_s
 import * as Colors from '../global/Colors';
 
 import LoginModel from '../screens/loginModel/index';
+import RegisterModal from '../screens/loginModel/register/index';
 
 const Router = createBottomTabNavigator(
   {
@@ -32,6 +33,9 @@ const RouterWithModal = createStackNavigator(
     },
     MyModel: {
       screen: LoginModel
+    },
+    MyRegisterModal: {
+      screen: RegisterModal
     },
   },
   {

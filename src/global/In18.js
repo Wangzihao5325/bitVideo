@@ -32,6 +32,9 @@ const PLEASE_INPUT_SUGGEST = '请输入意见或建议';
 const PLEASE_INPUT_CONTRACT = '联系方式:邮箱、qq、手机号';
 const SUBMIT_SUGGEXT = '提交反馈';
 const LOST_PASSWORD = '忘记密码';
+const PLEASE_INPUT_PASSWORD = '请输入密码';
+const GET_VER_CODE = '获取验证码';
+const PLEASE_INPUT_PHONE_NUMBER = '请输入手机号码';
 
 
 export {
@@ -67,5 +70,8 @@ export {
     PLEASE_INPUT_SUGGEST,
     PLEASE_INPUT_CONTRACT,
     SUBMIT_SUGGEXT,
-    LOST_PASSWORD
+    LOST_PASSWORD,
+    PLEASE_INPUT_PASSWORD,
+    GET_VER_CODE,
+    PLEASE_INPUT_PHONE_NUMBER
 };

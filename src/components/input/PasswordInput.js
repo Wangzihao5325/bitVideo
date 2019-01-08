@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, Image, TextInput, StyleSheet } from 'react-native';
+import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
@@ -30,7 +31,7 @@ export default class PasswordInput extends PureComponent {
                     <TextInput
                         secureTextEntry={this.state.secureTextEntry}
                         style={styles.textInput}
-                        placeholder='请输入密码'
+                        placeholder={In18.PLEASE_INPUT_PASSWORD}
                         placeholderTextColor='rgb(151,151,151)'
                     />
                     <IconBtn

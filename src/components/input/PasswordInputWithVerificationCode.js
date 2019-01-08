@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, TextInput, TouchableHighlight, Text } from 'react-native';
+import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
 
 const DEFALUT_WIDTH = Sizes.DEVICE_WIDTH - 34 - 31;
 export default class PasswordInputWithVerificationCode extends PureComponent {
     state = {
-        text: '获取验证码',
+        text: In18.GET_VER_CODE,
         disable: false,
     };
 
@@ -29,7 +30,7 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
                 clearInterval(this.interval);
                 this.setState((preState, props) => {
                     return {
-                        text: '获取验证码',
+                        text: In18.GET_VER_CODE,
                         disable: false
                     }
                 });
@@ -38,7 +39,7 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
             time = time - 1;
             this.setState((preState, props) => {
                 return {
-                    text: time + ' S'
+                    text: time + ' s'
                 }
             });
         }, 1000);
@@ -52,7 +53,7 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
                     <TextInput
                         secureTextEntry={this.state.secureTextEntry}
                         style={styles.textInput}
-                        placeholder='请输入密码'
+                        placeholder={In18.PLEASE_INPUT_PASSWORD}
                         placeholderTextColor='rgb(151,151,151)'
                     />
                     <TouchableHighlight

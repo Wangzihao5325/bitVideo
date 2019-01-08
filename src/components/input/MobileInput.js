@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, TextInput, Text } from 'react-native';
+import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
@@ -20,7 +21,7 @@ export default class MobileInput extends PureComponent {
                     <TextInput
                         ref={(ref) => this.input = ref}
                         style={styles.textInput}
-                        placeholder='请输入手机号码'
+                        placeholder={In18.PLEASE_INPUT_PHONE_NUMBER}
                         placeholderTextColor='rgb(151,151,151)'
                         keyboardType='number-pad'
                     />
