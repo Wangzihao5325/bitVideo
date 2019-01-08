@@ -36,6 +36,7 @@ const PLEASE_INPUT_PASSWORD = '请输入密码';
 const GET_VER_CODE = '获取验证码';
 const PLEASE_INPUT_VER_CODE = '请输入验证码';
 const PLEASE_INPUT_PHONE_NUMBER = '请输入手机号码';
+const PLEASE_INPUT_INVITE_CODE = '请输入邀请码';
 
 
 export {
@@ -75,5 +76,6 @@ export {
     PLEASE_INPUT_PASSWORD,
     GET_VER_CODE,
     PLEASE_INPUT_VER_CODE,
-    PLEASE_INPUT_PHONE_NUMBER
+    PLEASE_INPUT_PHONE_NUMBER,
+    PLEASE_INPUT_INVITE_CODE
 };
