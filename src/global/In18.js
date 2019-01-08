@@ -44,6 +44,9 @@ const PROTOCOL_TEXT_PART2 = '《用户注册协议》';
 const NEXT_STEP = '下一步';
 const PLEASE_INPUT_INVITE_CODE2 = '请输入邀请码(选填)'
 
+//注册-输入验证码页面
+const INPUT_VER_CODE = '输入验证码';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -87,5 +90,7 @@ export {
     PROTOCOL_TEXT_PART1,
     PROTOCOL_TEXT_PART2,
     NEXT_STEP,
-    PLEASE_INPUT_INVITE_CODE2
+    PLEASE_INPUT_INVITE_CODE2,
+
+    INPUT_VER_CODE
 };

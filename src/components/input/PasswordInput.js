@@ -20,6 +20,7 @@ export default class PasswordInput extends PureComponent {
         })
     }
     render() {
+        let placeHolderText = this.props.placeHolder ? this.props.placeHolder : In18.PLEASE_INPUT_PASSWORD;
         let imageSource = require('../../image/mine/eyes_close.png');
         if (!this.state.secureTextEntry) {
             imageSource = require('../../image/mine/eyes_open.png');
@@ -31,7 +32,7 @@ export default class PasswordInput extends PureComponent {
                     <TextInput
                         secureTextEntry={this.state.secureTextEntry}
                         style={styles.textInput}
-                        placeholder={In18.PLEASE_INPUT_PASSWORD}
+                        placeholder={placeHolderText}
                         placeholderTextColor='rgb(151,151,151)'
                     />
                     <IconBtn
