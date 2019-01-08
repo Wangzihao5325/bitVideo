@@ -14,7 +14,7 @@ export default class MobileInput extends PureComponent {
     }
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.props.style]}>
                 <View style={styles.contentView}>
                     <Image source={require('../../image/mine/mobile_input.png')} />
                     <Text style={styles.text}>+86</Text>
