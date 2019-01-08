@@ -62,6 +62,7 @@ export default class RegisterModal extends PureComponent {
     }
     goToNext = () => {
         console.log('go to next');
+        this.props.navigation.navigate('RegisterStepTwoModal')
     }
     showInviteCodeInput = () => {
         this.setState(function (preState) {

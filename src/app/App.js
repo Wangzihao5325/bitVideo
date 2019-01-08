@@ -8,6 +8,7 @@ import * as Colors from '../global/Colors';
 
 import LoginModel from '../screens/loginModel/index';
 import RegisterModal from '../screens/loginModel/register/index';
+import RegisterStepTwoModal from '../screens/loginModel/register/RegisterStepTwo';
 
 const Router = createBottomTabNavigator(
   {
@@ -37,6 +38,9 @@ const RouterWithModal = createStackNavigator(
     MyRegisterModal: {
       screen: RegisterModal
     },
+    RegisterStepTwoModal: {
+      screen: RegisterStepTwoModal
+    }
   },
   {
     mode: 'modal',
