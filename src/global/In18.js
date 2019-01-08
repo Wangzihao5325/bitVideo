@@ -21,6 +21,7 @@ const TASK_CENTER = '任务中心';
 const OVERPLUS = '剩余';
 const WATCH_HISTORY = '播放记录';
 
+const FAST_LOGIN = '快捷登陆';
 const PASSWORD_LOGIN = '密码登陆';
 const WELCOME_BACK = 'Welcome Back';
 const SIGN_IN_TO_CONTAINE = 'sign in to continue';
@@ -57,6 +58,7 @@ export {
     OVERPLUS,
     WATCH_HISTORY,
 
+    FAST_LOGIN,
     PASSWORD_LOGIN,
     WELCOME_BACK,
     SIGN_IN_TO_CONTAINE,

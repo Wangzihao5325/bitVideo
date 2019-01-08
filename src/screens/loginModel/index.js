@@ -6,6 +6,7 @@ import * as Sizes from '../../global/Sizes';
 import VectorIconBtn from '../../components/imageBtn/VectorIconBtn';
 import MobileInput from '../../components/input/MobileInput';
 import PasswordInput from '../../components/input/PasswordInput';
+import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 
 class Header extends PureComponent {
     render() {
@@ -40,6 +41,9 @@ class MainTitle extends PureComponent {
     }
 }
 class InputField extends PureComponent {
+    state = {
+        loginType: true //true 密码登陆 false 快捷登陆
+    };
     lostPassword = () => {
         console.log('lost password');
     }
@@ -47,13 +51,23 @@ class InputField extends PureComponent {
         console.log('login');
     }
     changeLoginWay = () => {
-        console.log('chage login way');
+        this.setState(function (preState) {
+            let newType = !preState.loginType;
+            return {
+                loginType: newType
+            }
+        });
     }
     render() {
+        let loginTypeText = In18.PASSWORD_LOGIN;
+        if (!this.state.loginType) {
+            loginTypeText = In18.FAST_LOGIN;
+        }
         return (
             <View style={styles.inputFieldContainer}>
                 <MobileInput />
-                <PasswordInput style={{ marginTop: 30 }} />
+                {this.state.loginType && <PasswordInput style={{ marginTop: 30 }} />}
+                {!this.state.loginType && <PasswordInputWithVerificationCode style={{ marginTop: 30 }} />}
                 <View style={styles.lostPasswordContainer}>
                     <Text
                         style={styles.lostPasswordText}
@@ -66,7 +80,7 @@ class InputField extends PureComponent {
                     <Text style={styles.loginBtnText}>{In18.LOGIN}</Text>
                 </TouchableHighlight>
                 <View style={styles.changeLoginWayContainer}>
-                    <Text style={styles.changeLoginWayText} onPress={this.changeLoginWay}>快捷登陆</Text>
+                    <Text style={styles.changeLoginWayText} onPress={this.changeLoginWay}>{loginTypeText}</Text>
                 </View>
             </View>
         );
