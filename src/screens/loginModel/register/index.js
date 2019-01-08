@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
+import * as In18 from '../../../global/In18';
 
 import ModalHeader from '../modalComponent/ModalHeader';
 import MobileInput from '../../../components/input/MobileInput';
@@ -45,7 +46,7 @@ class ProtocolAgreeLine extends PureComponent {
                 <TouchableHighlight style={{ marginLeft: 78 }} onPress={this.pressing} underlayColor='transparent'>
                     <Image source={this.state.source}></Image>
                 </TouchableHighlight>
-                <Text style={styles.protocolAgreeLineText}>我已阅读并已同意<Text style={styles.highlightText}>《用户注册协议》</Text></Text>
+                <Text style={styles.protocolAgreeLineText}>{In18.PROTOCOL_TEXT_PART1}<Text style={styles.highlightText}>{In18.PROTOCOL_TEXT_PART2}</Text></Text>
             </View>
         );
     }
@@ -84,16 +85,16 @@ export default class RegisterModal extends PureComponent {
         }
         return (
             <SafeAreaView>
-                <ModalHeader title='注册' goBack={this.goBack} />
+                <ModalHeader title={In18.REGISTER} goBack={this.goBack} />
                 <MobileInput style={{ marginTop: 81 }} />
                 <Btn
                     onPress={this.showInviteCodeInput}
                     imageSource={this.state.btnImageSource}
-                    title='请输入邀请码(选填)'
+                    title={In18.PLEASE_INPUT_INVITE_CODE2}
                 />
                 {this.state.isShowInviteInput && <UnderlineInput style={{ marginTop: 28 }} />}
                 <TouchableHighlight style={[styles.nextStep, styleObj]} onPress={this.goToNext}>
-                    <Text style={styles.nextStepText}>下一步</Text>
+                    <Text style={styles.nextStepText}>{In18.NEXT_STEP}</Text>
                 </TouchableHighlight>
                 <ProtocolAgreeLine />
             </SafeAreaView>

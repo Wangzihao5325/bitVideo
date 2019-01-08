@@ -38,6 +38,11 @@ const PLEASE_INPUT_VER_CODE = '请输入验证码';
 const PLEASE_INPUT_PHONE_NUMBER = '请输入手机号码';
 const PLEASE_INPUT_INVITE_CODE = '请输入邀请码';
 
+//注册页面
+const PROTOCOL_TEXT_PART1 = '我已阅读并已同意';
+const PROTOCOL_TEXT_PART2 = '《用户注册协议》';
+const NEXT_STEP = '下一步';
+const PLEASE_INPUT_INVITE_CODE2 = '请输入邀请码(选填)'
 
 export {
     MAIN_PAGE_TITLE,
@@ -77,5 +82,10 @@ export {
     GET_VER_CODE,
     PLEASE_INPUT_VER_CODE,
     PLEASE_INPUT_PHONE_NUMBER,
-    PLEASE_INPUT_INVITE_CODE
+    PLEASE_INPUT_INVITE_CODE,
+
+    PROTOCOL_TEXT_PART1,
+    PROTOCOL_TEXT_PART2,
+    NEXT_STEP,
+    PLEASE_INPUT_INVITE_CODE2
 };
