@@ -49,11 +49,11 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
         return (
             <View style={[styles.container, this.props.style]}>
                 <View style={styles.contentView}>
-                    <Image source={require('../../image/mine/password.png')} />
+                    <Image source={require('../../image/mine/ver_code.png')} />
                     <TextInput
                         secureTextEntry={this.state.secureTextEntry}
                         style={styles.textInput}
-                        placeholder={In18.PLEASE_INPUT_PASSWORD}
+                        placeholder={In18.PLEASE_INPUT_VER_CODE}
                         placeholderTextColor='rgb(151,151,151)'
                     />
                     <TouchableHighlight

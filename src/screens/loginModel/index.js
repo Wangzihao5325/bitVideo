@@ -70,9 +70,9 @@ class InputField extends PureComponent {
         });
     }
     render() {
-        let loginTypeText = In18.PASSWORD_LOGIN;
+        let loginTypeText = In18.FAST_LOGIN;
         if (!this.state.loginType) {
-            loginTypeText = In18.FAST_LOGIN;
+            loginTypeText = In18.PASSWORD_LOGIN;
         }
         return (
             <View style={styles.inputFieldContainer}>

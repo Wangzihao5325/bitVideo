@@ -34,6 +34,7 @@ const SUBMIT_SUGGEXT = '提交反馈';
 const LOST_PASSWORD = '忘记密码';
 const PLEASE_INPUT_PASSWORD = '请输入密码';
 const GET_VER_CODE = '获取验证码';
+const PLEASE_INPUT_VER_CODE = '请输入验证码';
 const PLEASE_INPUT_PHONE_NUMBER = '请输入手机号码';
 
 
@@ -73,5 +74,6 @@ export {
     LOST_PASSWORD,
     PLEASE_INPUT_PASSWORD,
     GET_VER_CODE,
+    PLEASE_INPUT_VER_CODE,
     PLEASE_INPUT_PHONE_NUMBER
 };
