@@ -4,6 +4,7 @@ import * as In18 from '../../global/In18';
 
 import VectorIconBtn from '../../components/imageBtn/VectorIconBtn';
 import MobileInput from '../../components/input/MobileInput';
+import PasswordInput from '../../components/input/PasswordInput';
 
 class Header extends PureComponent {
     render() {
@@ -42,6 +43,7 @@ class InputField extends PureComponent {
         return (
             <View style={styles.inputFieldContainer}>
                 <MobileInput />
+                <PasswordInput style={{ marginTop: 30 }} />
             </View>
         );
     }
