@@ -9,7 +9,7 @@ const MORE_TEXT = '更多';
 const DEFALUT_GLOBALE_TYPE = ['推荐1', '搞笑1', '电视剧1', '动漫1', '综艺1'];
 const DEFALUT_RECOMMEND_SEARCH = '雷人糗事';
 
-const LOGIN = '登陆';
+const LOGIN = '登录';
 const REGISTER = '注册';
 const RECHARGE = '充值爱逗币';
 const TODAY_WATCH_TIMES = '今日观影次数';
@@ -30,6 +30,8 @@ const HELP_SUBMIT = '帮助反馈';
 const PLEASE_INPUT_SUGGEST = '请输入意见或建议';
 const PLEASE_INPUT_CONTRACT = '联系方式:邮箱、qq、手机号';
 const SUBMIT_SUGGEXT = '提交反馈';
+const LOST_PASSWORD = '忘记密码';
+
 
 export {
     MAIN_PAGE_TITLE,
@@ -62,5 +64,6 @@ export {
     HELP_SUBMIT,
     PLEASE_INPUT_SUGGEST,
     PLEASE_INPUT_CONTRACT,
-    SUBMIT_SUGGEXT
+    SUBMIT_SUGGEXT,
+    LOST_PASSWORD
 };

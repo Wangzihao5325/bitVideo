@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import * as In18 from '../../global/In18';
+import * as Sizes from '../../global/Sizes';
 
 import VectorIconBtn from '../../components/imageBtn/VectorIconBtn';
 import MobileInput from '../../components/input/MobileInput';
@@ -39,11 +40,34 @@ class MainTitle extends PureComponent {
     }
 }
 class InputField extends PureComponent {
+    lostPassword = () => {
+        console.log('lost password');
+    }
+    login = () => {
+        console.log('login');
+    }
+    changeLoginWay = () => {
+        console.log('chage login way');
+    }
     render() {
         return (
             <View style={styles.inputFieldContainer}>
                 <MobileInput />
                 <PasswordInput style={{ marginTop: 30 }} />
+                <View style={styles.lostPasswordContainer}>
+                    <Text
+                        style={styles.lostPasswordText}
+                        onPress={this.lostPassword}
+                    >
+                        {In18.LOST_PASSWORD}
+                    </Text>
+                </View>
+                <TouchableHighlight style={styles.loginBtn} onPress={this.login}>
+                    <Text style={styles.loginBtnText}>{In18.LOGIN}</Text>
+                </TouchableHighlight>
+                <View style={styles.changeLoginWayContainer}>
+                    <Text style={styles.changeLoginWayText} onPress={this.changeLoginWay}>快捷登陆</Text>
+                </View>
             </View>
         );
     }
@@ -119,5 +143,46 @@ const styles = StyleSheet.create({
         height: 200,
         width: '100%',
         marginTop: 58
+    },
+    lostPasswordContainer: {
+        marginTop: 10,
+        height: 17,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        alignItems: 'center'
+    },
+    lostPasswordText: {
+        marginRight: 42.5,
+        fontSize: 12,
+        color: 'rgb(73,114,255)'
+    },
+    loginBtn: {
+        marginTop: 30,
+        height: 46,
+        width: Sizes.DEVICE_WIDTH - 34 - 31,
+        marginLeft: 34,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 23,
+        backgroundColor: 'rgb(73,114,255)'
+    },
+    loginBtnText: {
+        color: 'white',
+        fontSize: 16
+    },
+    changeLoginWayContainer: {
+        marginTop: 24,
+        height: 22,
+        width: Sizes.DEVICE_WIDTH - 34 - 31,
+        marginLeft: 34,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    changeLoginWayText: {
+        fontSize: 16,
+        color: 'rgb(73,114,255)'
     }
 });
