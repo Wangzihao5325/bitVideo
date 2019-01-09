@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, ImageBackground, ScrollView, View, Text, StyleSheet } from 'react-native';
 export default class TaskScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -10,11 +10,22 @@ export default class TaskScreen extends PureComponent {
 
     render() {
         return (
-            <SafeAreaView>
-                <View style={styles.container}>
-                    <Text>TaskScreen</Text>
-                </View>
-            </SafeAreaView>
+            <ScrollView
+                style={{ height: 1136, width: '100%' }}
+                bounces={false}
+                showsVerticalScrollIndicator={false}
+            >
+                <ImageBackground
+                    style={styles.imageBackground}
+                    source={require('../../image/task/task_background.png')}
+                >
+                    <SafeAreaView>
+                        <View style={styles.container}>
+                            <Text>TaskScreen</Text>
+                        </View>
+                    </SafeAreaView>
+                </ImageBackground>
+            </ScrollView>
         );
     }
 }
@@ -24,5 +35,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
+    },
+    imageBackground: {
+        width: '100%',
+        height: 1136,//780
     }
 });
