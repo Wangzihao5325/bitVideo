@@ -1,11 +1,20 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 export default class TaskScreen extends PureComponent {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            header: null,
+            // headerBackTitle: null
+        }
+    };
+
     render() {
         return (
-            <View style={styles.container}>
-                <Text>TaskScreen</Text>
-            </View>
+            <SafeAreaView>
+                <View style={styles.container}>
+                    <Text>TaskScreen</Text>
+                </View>
+            </SafeAreaView>
         );
     }
 }
