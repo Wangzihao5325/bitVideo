@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { SafeAreaView, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import * as In18 from '../../../global/In18';
 
 import ModalHeader from '../modalComponent/ModalHeader';

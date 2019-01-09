@@ -49,6 +49,9 @@ const INPUT_VER_CODE = '输入验证码';
 const CLICK_TO_GET_VER_CODE = '点击获取验证码至:'
 const PLEASE_SET_PASSWORD = '请设置密码(6-12位数字或字母)';
 
+//登陆-忘记密码页面
+const CHANGE_PASSWORD = '修改密码';
+const SUBMIT_TEXT = '提交';
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -96,5 +99,8 @@ export {
 
     INPUT_VER_CODE,
     CLICK_TO_GET_VER_CODE,
-    PLEASE_SET_PASSWORD
+    PLEASE_SET_PASSWORD,
+
+    CHANGE_PASSWORD,
+    SUBMIT_TEXT
 };

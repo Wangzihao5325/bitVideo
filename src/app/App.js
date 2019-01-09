@@ -9,6 +9,7 @@ import * as Colors from '../global/Colors';
 import LoginModel from '../screens/loginModel/index';
 import RegisterModal from '../screens/loginModel/register/index';
 import RegisterStepTwoModal from '../screens/loginModel/register/RegisterStepTwo';
+import LostPasswordModal from '../screens/loginModel/lostPassword/index';
 
 const Router = createBottomTabNavigator(
   {
@@ -40,6 +41,9 @@ const RouterWithModal = createStackNavigator(
     },
     RegisterStepTwoModal: {
       screen: RegisterStepTwoModal
+    },
+    LostPasswordModal: {
+      screen: LostPasswordModal
     }
   },
   {

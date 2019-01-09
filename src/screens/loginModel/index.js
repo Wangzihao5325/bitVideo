@@ -55,8 +55,14 @@ class InputField extends PureComponent {
     state = {
         loginType: true //true 密码登陆 false 快捷登陆
     };
+
+    static contextTypes = {
+        modalNavigation: PropTypes.object
+    }
+
     lostPassword = () => {
-        console.log('lost password');
+        const { modalNavigation } = this.context;
+        modalNavigation.navigate('LostPasswordModal');
     }
     login = () => {
         console.log('login');
