@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, TouchableHighlight, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import * as In18 from '../../global/In18';
 
 class Item extends PureComponent {
     render() {
@@ -22,9 +23,6 @@ export default class Bottom extends PureComponent {
         mineNavigation: PropTypes.object
     }
 
-    myCache = () => {
-        console.log('my cache');
-    }
     myStar = () => {
         console.log('my myStar');
     }
@@ -35,8 +33,8 @@ export default class Bottom extends PureComponent {
     render() {
         return (
             <View style={{ paddingBottom: 20 }} >
-                <Item source={require('../../image/mine/my_video.png')} title='我的收藏' onPress={this.myStar} />
-                <Item source={require('../../image/mine/get_help.png')} title='帮助反馈' onPress={this.getHelp} />
+                <Item source={require('../../image/mine/my_video.png')} title={In18.MY_STAR} onPress={this.myStar} />
+                <Item source={require('../../image/mine/get_help.png')} title={In18.HELP_SUBMIT} onPress={this.getHelp} />
             </View>
         );
     }

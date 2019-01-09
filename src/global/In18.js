@@ -20,6 +20,7 @@ const INVITE_PEOPLE = '邀请好友';
 const TASK_CENTER = '任务中心';
 const OVERPLUS = '剩余';
 const WATCH_HISTORY = '播放记录';
+const MY_STAR = '我的收藏';
 
 const FAST_LOGIN = '快捷登陆';
 const PASSWORD_LOGIN = '密码登陆';
@@ -79,6 +80,7 @@ export {
     TASK_CENTER,
     OVERPLUS,
     WATCH_HISTORY,
+    MY_STAR,
 
     FAST_LOGIN,
     PASSWORD_LOGIN,
