@@ -62,7 +62,7 @@ export default class RegisterModal extends PureComponent {
     }
     goToNext = () => {
         console.log('go to next');
-        this.props.navigation.navigate('RegisterStepTwoModal')
+        this.props.navigation.navigate('RegisterStepTwoModal');
     }
     showInviteCodeInput = () => {
         this.setState(function (preState) {
@@ -79,6 +79,9 @@ export default class RegisterModal extends PureComponent {
             }
         });
     }
+    gotoChangeCountryCode = () => {
+        this.props.navigation.navigate('CountryCodeModal');
+    }
     render() {
         let styleObj = { marginTop: 102 };
         if (this.state.isShowInviteInput) {
@@ -87,7 +90,7 @@ export default class RegisterModal extends PureComponent {
         return (
             <SafeAreaView>
                 <ModalHeader title={In18.REGISTER} goBack={this.goBack} />
-                <MobileInput style={{ marginTop: 81 }} />
+                <MobileInput style={{ marginTop: 81 }} changeCode={this.gotoChangeCountryCode} />
                 <Btn
                     onPress={this.showInviteCodeInput}
                     imageSource={this.state.btnImageSource}

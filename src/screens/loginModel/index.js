@@ -75,6 +75,10 @@ class InputField extends PureComponent {
             }
         });
     }
+    gotoChangeCountryCode = () => {
+        const { modalNavigation } = this.context;
+        modalNavigation.navigate('CountryCodeModal');
+    }
     render() {
         let loginTypeText = In18.FAST_LOGIN;
         if (!this.state.loginType) {
@@ -82,7 +86,7 @@ class InputField extends PureComponent {
         }
         return (
             <View style={styles.inputFieldContainer}>
-                <MobileInput />
+                <MobileInput changeCode={this.gotoChangeCountryCode} />
                 {this.state.loginType && <PasswordInput style={{ marginTop: 30 }} />}
                 {!this.state.loginType && <PasswordInputWithVerificationCode style={{ marginTop: 30 }} />}
                 <View style={styles.lostPasswordContainer}>

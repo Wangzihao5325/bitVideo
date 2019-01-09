@@ -15,11 +15,14 @@ export default class LostPassword extends PureComponent {
     submit = () => {
         console.log('go to submit');
     }
+    gotoChangeCountryCode = () => {
+        this.props.navigation.navigate('CountryCodeModal');
+    }
     render() {
         return (
             <SafeAreaView>
                 <ModalHeader title={In18.CHANGE_PASSWORD} goBack={this.goBack} />
-                <MobileInput style={{ marginTop: 80 }} />
+                <MobileInput style={{ marginTop: 80 }} changeCode={this.gotoChangeCountryCode} />
                 <PasswordInputWithVercode style={{ marginTop: 34 }} />
                 <PasswordInput style={{ marginTop: 30 }} placeHolder={In18.PLEASE_SET_PASSWORD} />
                 <TouchableHighlight style={styles.btn}>

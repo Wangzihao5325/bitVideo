@@ -52,6 +52,10 @@ const PLEASE_SET_PASSWORD = '请设置密码(6-12位数字或字母)';
 //登陆-忘记密码页面
 const CHANGE_PASSWORD = '修改密码';
 const SUBMIT_TEXT = '提交';
+
+//国家代码
+const COUNTRY_CODE = '国家代码';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -102,5 +106,7 @@ export {
     PLEASE_SET_PASSWORD,
 
     CHANGE_PASSWORD,
-    SUBMIT_TEXT
+    SUBMIT_TEXT,
+
+    COUNTRY_CODE
 };

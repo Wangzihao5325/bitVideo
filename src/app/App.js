@@ -10,6 +10,7 @@ import LoginModel from '../screens/loginModel/index';
 import RegisterModal from '../screens/loginModel/register/index';
 import RegisterStepTwoModal from '../screens/loginModel/register/RegisterStepTwo';
 import LostPasswordModal from '../screens/loginModel/lostPassword/index';
+import CountryCodeModal from '../screens/loginModel/countryCode/index';
 
 const Router = createBottomTabNavigator(
   {
@@ -44,6 +45,9 @@ const RouterWithModal = createStackNavigator(
     },
     LostPasswordModal: {
       screen: LostPasswordModal
+    },
+    CountryCodeModal: {
+      screen: CountryCodeModal
     }
   },
   {
