@@ -54,6 +54,11 @@ const PLEASE_SET_PASSWORD = '请设置密码(6-12位数字或字母)';
 const CHANGE_PASSWORD = '修改密码';
 const SUBMIT_TEXT = '提交';
 
+//任务界面
+const START_TO_DO_TASK = '爱逗君开始做任务了';
+const MY_INVITE = '我的邀请';
+const GIFT_CENTER = '兑换中心';
+
 //国家代码
 const COUNTRY_CODE = '国家代码';
 
@@ -109,6 +114,10 @@ export {
 
     CHANGE_PASSWORD,
     SUBMIT_TEXT,
+
+    START_TO_DO_TASK,
+    MY_INVITE,
+    GIFT_CENTER,
 
     COUNTRY_CODE
 };

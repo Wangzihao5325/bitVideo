@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, ImageBackground, ScrollView, View, Text, StyleSheet } from 'react-native';
+
+import Header from './header';
+import Middle from './middle';
+
 export default class TaskScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null,
-            // headerBackTitle: null
+            headerBackTitle: null
         }
     };
 
@@ -19,10 +23,9 @@ export default class TaskScreen extends PureComponent {
                     style={styles.imageBackground}
                     source={require('../../image/task/task_background.png')}
                 >
-                    <SafeAreaView>
-                        <View style={styles.container}>
-                            <Text>TaskScreen</Text>
-                        </View>
+                    <SafeAreaView style={styles.container}>
+                        <Header />
+                        <Middle />
                     </SafeAreaView>
                 </ImageBackground>
             </ScrollView>
@@ -32,9 +35,7 @@ export default class TaskScreen extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
     },
     imageBackground: {
         width: '100%',
