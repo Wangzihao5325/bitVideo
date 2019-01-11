@@ -56,6 +56,11 @@ class api {
         const url = '/api/video/globaltype';
         this.getFetch(url, onSuccess, onError);
     }
+
+    getTaskList(onSuccess, onError) {
+        const url = '/api/user/task/list';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

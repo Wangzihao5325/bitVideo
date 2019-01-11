@@ -3,6 +3,7 @@ import { SafeAreaView, ImageBackground, ScrollView, View, Text, StyleSheet } fro
 
 import Header from './header';
 import Middle from './middle';
+import BottomTaskList from './bottomTaskList';
 
 export default class TaskScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -26,6 +27,7 @@ export default class TaskScreen extends PureComponent {
                     <SafeAreaView style={styles.container}>
                         <Header />
                         <Middle />
+                        <BottomTaskList />
                     </SafeAreaView>
                 </ImageBackground>
             </ScrollView>

@@ -6,7 +6,7 @@ class Btn extends PureComponent {
     render() {
         return (
             <ImageBackground style={styles.background} source={require('../../image/task/btn_background1.png')}>
-                <TouchableHighlight style={styles.btn} onPress={this.props.onPress}>
+                <TouchableHighlight style={styles.btn} onPress={this.props.onPress} underlayColor='transparent'>
                     <View style={styles.btn}>
                         <Image style={styles.image} source={this.props.source} />
                         <Text style={styles.text}>{this.props.title}</Text>
