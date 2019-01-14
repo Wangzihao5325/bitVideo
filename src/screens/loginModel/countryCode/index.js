@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, SectionList, View, Text, TextInput, StyleSheet } from 'react-native';
+import { SafeAreaView, SectionList, View, Text, TextInput, TouchableHighlight, StyleSheet } from 'react-native';
+import store from '../../../store/index';
+import { countryCodeChange } from '../../../store/actions/countryAction';
 import * as In18 from '../../../global/In18';
 import * as Sizes from '../../../global/Sizes';
 import CH_sections from '../../../global/doc/Country_code_CH';
@@ -17,16 +19,24 @@ class SectionHeader extends PureComponent {
     }
 }
 class Item extends PureComponent {
+    itemOnPress = () => {
+        let textArr = this.props.item.split(' ');
+        let countryCode = textArr[1];
+        store.dispatch(countryCodeChange(countryCode));
+        this.props.itemPress();
+    }
     render() {
         let textArr = this.props.item.split(' ');
         return (
-            <View style={styles.itemContainer}>
-                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Text style={styles.itemText}>{textArr[0]}</Text>
-                    <Text style={styles.itemText2}>{textArr[1]}</Text>
+            <TouchableHighlight onPress={this.itemOnPress} underlayColor='transparent'>
+                <View style={styles.itemContainer} >
+                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Text style={styles.itemText}>{textArr[0]}</Text>
+                        <Text style={styles.itemText2}>{textArr[1]}</Text>
+                    </View>
+                    <View style={styles.borderView} />
                 </View>
-                <View style={styles.borderView} />
-            </View>
+            </TouchableHighlight>
         );
     }
 }
@@ -80,7 +90,7 @@ export default class CountryCode extends PureComponent {
                     renderSectionHeader={({ section: { title } }) => (
                         <SectionHeader title={title} />
                     )}
-                    renderItem={({ item, index, section }) => <Item key={index} item={item} />}
+                    renderItem={({ item, index, section }) => <Item key={index} item={item} itemPress={this.goBack} />}
                     sections={this.state.listData}
                 />
             </SafeAreaView>
