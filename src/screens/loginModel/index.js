@@ -9,6 +9,7 @@ import MobileInput from '../../components/input/MobileInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 
+let reg = { mobile: '', password: '' };
 class Header extends PureComponent {
 
     static contextTypes = {
@@ -79,6 +80,9 @@ class InputField extends PureComponent {
         const { modalNavigation } = this.context;
         modalNavigation.navigate('CountryCodeModal');
     }
+    mobileTextChange = (mobileText) => {
+        reg.mobile = mobileText;
+    }
     render() {
         let loginTypeText = In18.FAST_LOGIN;
         if (!this.state.loginType) {
@@ -86,7 +90,7 @@ class InputField extends PureComponent {
         }
         return (
             <View style={styles.inputFieldContainer}>
-                <MobileInput changeCode={this.gotoChangeCountryCode} />
+                <MobileInput onTextChange={this.mobileTextChange} changeCode={this.gotoChangeCountryCode} />
                 {this.state.loginType && <PasswordInput style={{ marginTop: 30 }} />}
                 {!this.state.loginType && <PasswordInputWithVerificationCode style={{ marginTop: 30 }} />}
                 <View style={styles.lostPasswordContainer}>

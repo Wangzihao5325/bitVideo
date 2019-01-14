@@ -14,6 +14,11 @@ class MobileInput extends PureComponent {
             this.input.clear();
         }
     }
+    textOnchange = (text) => {
+        if (this.props.onTextChange) {
+            this.props.onTextChange(text);
+        }
+    }
     render() {
         return (
             <View style={[styles.container, this.props.style]}>
@@ -22,6 +27,7 @@ class MobileInput extends PureComponent {
                     <Text onPress={this.props.changeCode} style={styles.text}>{this.props.countryCode}</Text>
                     <TextInput
                         ref={(ref) => this.input = ref}
+                        onChangeText={this.textOnchange}
                         style={styles.textInput}
                         placeholder={In18.PLEASE_INPUT_PHONE_NUMBER}
                         placeholderTextColor='rgb(151,151,151)'
