@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, SectionList, View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, SectionList, View, Text, TextInput, StyleSheet } from 'react-native';
 import * as In18 from '../../../global/In18';
 import * as Sizes from '../../../global/Sizes';
+import CH_sections from '../../../global/doc/Country_code_CH';
 
 import ModalHeader from '../modalComponent/ModalHeader';
-import CH_sections from '../../../global/doc/Country_code_CH';
+import IconBtn from '../../../components/imageBtn/IconBtn';
+
 class SectionHeader extends PureComponent {
     render() {
         return (
@@ -28,14 +30,30 @@ class Item extends PureComponent {
         );
     }
 }
+class SearchHeader extends PureComponent {
+    render() {
+        return (
+            <View style={styles.searchHeaderContainer}>
+                <View style={styles.searchContent}>
+                    <IconBtn height={18} width={18} onPress={this.props.search} source={require('../../../image/mine/search.png')} />
+                    <TextInput style={{ flex: 1, marginLeft: 8 }} placeholder='搜索' />
+                </View>
+            </View>
+        );
+    }
+}
 export default class CountryCode extends PureComponent {
     goBack = () => {
         this.props.navigation.goBack()
+    }
+    search = () => {
+        console.log('search');
     }
     render() {
         return (
             <SafeAreaView>
                 <ModalHeader title={In18.COUNTRY_CODE} goBack={this.goBack} />
+                <SearchHeader search={this.search} />
                 <SectionList
                     renderSectionHeader={({ section: { title } }) => (
                         <SectionHeader title={title} />
@@ -80,5 +98,20 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         fontSize: 18,
         color: 'rgb(100,100,100)'
+    },
+    searchHeaderContainer: {
+        height: 34,
+        width: '100%',
+        marginTop: 30,
+        marginBottom: 20
+    },
+    searchContent: {
+        marginHorizontal: 15,
+        flex: 1,
+        borderRadius: 17,
+        backgroundColor: 'rgb(239,244,247)',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 17
     }
 });
