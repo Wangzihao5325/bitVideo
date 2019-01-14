@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, TextInput, Text } from 'react-native';
+import { connect } from 'react-redux';
+import store from '../../store/index';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
 const DEFALUT_WIDTH = Sizes.DEVICE_WIDTH - 34 - 31;
-export default class MobileInput extends PureComponent {
+class MobileInput extends PureComponent {
     clear = () => {
         if (this.input) {
             this.input.clear();
@@ -17,7 +19,7 @@ export default class MobileInput extends PureComponent {
             <View style={[styles.container, this.props.style]}>
                 <View style={styles.contentView}>
                     <Image source={require('../../image/mine/mobile_input.png')} />
-                    <Text onPress={this.props.changeCode} style={styles.text}>+86</Text>
+                    <Text onPress={this.props.changeCode} style={styles.text}>{this.props.countryCode}</Text>
                     <TextInput
                         ref={(ref) => this.input = ref}
                         style={styles.textInput}
@@ -36,6 +38,15 @@ export default class MobileInput extends PureComponent {
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        countryCode: store.countryCode.countryCode
+    }
+}
+
+export default connect(mapState2Props)(MobileInput);
+
 const styles = StyleSheet.create({
     container: {
         height: 44,
