@@ -35,19 +35,40 @@ class SearchHeader extends PureComponent {
         return (
             <View style={styles.searchHeaderContainer}>
                 <View style={styles.searchContent}>
-                    <IconBtn height={18} width={18} onPress={this.props.search} source={require('../../../image/mine/search.png')} />
-                    <TextInput style={{ flex: 1, marginLeft: 8 }} placeholder='搜索' />
+                    <IconBtn height={18} width={18} source={require('../../../image/mine/search.png')} />
+                    <TextInput style={{ flex: 1, marginLeft: 8 }} onChangeText={this.props.search} placeholder='搜索' />
                 </View>
             </View>
         );
     }
 }
 export default class CountryCode extends PureComponent {
+    state = {
+        listData: CH_sections
+    }
     goBack = () => {
         this.props.navigation.goBack()
     }
-    search = () => {
-        console.log('search');
+    search = (text) => {
+        let listData = [];
+        CH_sections.forEach((itemObj) => {
+            let searchData = itemObj.data.filter((country) => {
+                let index = country.indexOf(text);
+                if (index >= 0) {
+                    return true;
+                } else {
+                    return false
+                }
+            });
+            if (searchData.length > 0) {
+                let itemObjCopy = JSON.parse(JSON.stringify(itemObj));
+                itemObjCopy.data = searchData;
+                listData.push(itemObjCopy);
+            }
+        });
+        this.setState({
+            listData: listData
+        });
     }
     render() {
         return (
@@ -59,7 +80,7 @@ export default class CountryCode extends PureComponent {
                         <SectionHeader title={title} />
                     )}
                     renderItem={({ item, index, section }) => <Item key={index} item={item} />}
-                    sections={CH_sections}
+                    sections={this.state.listData}
                 />
             </SafeAreaView>
         );
