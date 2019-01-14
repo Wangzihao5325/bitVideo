@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView, View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
+import { registerReg } from '../../../global/Reg';
 
 import ModalHeader from '../modalComponent/ModalHeader';
 import MobileInput from '../../../components/input/MobileInput';
@@ -53,17 +54,22 @@ class ProtocolAgreeLine extends PureComponent {
 }
 
 export default class RegisterModal extends PureComponent {
+
     state = {
         isShowInviteInput: false,
         btnImageSource: require('../../../image/mine/arrow_down.png')
     };
+
     goBack = () => {
         this.props.navigation.goBack()
     }
+
     goToNext = () => {
-        console.log('go to next');
-        this.props.navigation.navigate('RegisterStepTwoModal');
+        if (this.agreeLine.state.isAgree) {
+            this.props.navigation.navigate('RegisterStepTwoModal');
+        }
     }
+
     showInviteCodeInput = () => {
         this.setState(function (preState) {
             if (preState.isShowInviteInput) {
@@ -79,9 +85,19 @@ export default class RegisterModal extends PureComponent {
             }
         });
     }
+
     gotoChangeCountryCode = () => {
         this.props.navigation.navigate('CountryCodeModal');
     }
+
+    mobileTextChange = (text) => {
+        registerReg.mobile = text;
+    }
+
+    inviteCodeChange = (text) => {
+        registerReg.inviteCode = text;
+    }
+
     render() {
         let styleObj = { marginTop: 102 };
         if (this.state.isShowInviteInput) {
@@ -90,17 +106,17 @@ export default class RegisterModal extends PureComponent {
         return (
             <SafeAreaView>
                 <ModalHeader title={In18.REGISTER} goBack={this.goBack} />
-                <MobileInput style={{ marginTop: 81 }} changeCode={this.gotoChangeCountryCode} />
+                <MobileInput style={{ marginTop: 81 }} onTextChange={this.mobileTextChange} changeCode={this.gotoChangeCountryCode} />
                 <Btn
                     onPress={this.showInviteCodeInput}
                     imageSource={this.state.btnImageSource}
                     title={In18.PLEASE_INPUT_INVITE_CODE2}
                 />
-                {this.state.isShowInviteInput && <UnderlineInput style={{ marginTop: 28 }} />}
+                {this.state.isShowInviteInput && <UnderlineInput onTextChange={this.inviteCodeChange} style={{ marginTop: 28 }} />}
                 <TouchableHighlight style={[styles.nextStep, styleObj]} onPress={this.goToNext}>
                     <Text style={styles.nextStepText}>{In18.NEXT_STEP}</Text>
                 </TouchableHighlight>
-                <ProtocolAgreeLine />
+                <ProtocolAgreeLine ref={(ref) => this.agreeLine = ref} />
             </SafeAreaView>
         );
     }

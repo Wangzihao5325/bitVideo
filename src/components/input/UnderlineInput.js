@@ -5,6 +5,11 @@ import * as Sizes from '../../global/Sizes';
 
 const DEFALUT_WIDTH = Sizes.DEVICE_WIDTH - 34 - 31;
 export default class UnderlineInput extends PureComponent {
+    textOnChange = (text) => {
+        if (this.props.onTextChange) {
+            this.props.onTextChange(text);
+        }
+    }
     render() {
         return (
             <View style={[styles.container, this.props.style]}>
@@ -12,6 +17,7 @@ export default class UnderlineInput extends PureComponent {
                     <Image source={require('../../image/mine/ver_code.png')} />
                     <TextInput
                         ref={(ref) => this.input = ref}
+                        onChangeText={this.textOnChange}
                         style={styles.textInput}
                         placeholder={In18.PLEASE_INPUT_INVITE_CODE}
                         placeholderTextColor='rgb(151,151,151)'
