@@ -9,7 +9,7 @@ import MobileInput from '../../components/input/MobileInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 
-let reg = { mobile: '', password: '' };
+let reg = { mobile: '', password: '', code: '' };
 class Header extends PureComponent {
 
     static contextTypes = {
@@ -65,9 +65,11 @@ class InputField extends PureComponent {
         const { modalNavigation } = this.context;
         modalNavigation.navigate('LostPasswordModal');
     }
+
     login = () => {
         console.log('login');
     }
+
     changeLoginWay = () => {
         this.setState(function (preState) {
             let newType = !preState.loginType;
@@ -76,12 +78,22 @@ class InputField extends PureComponent {
             }
         });
     }
+
     gotoChangeCountryCode = () => {
         const { modalNavigation } = this.context;
         modalNavigation.navigate('CountryCodeModal');
     }
+
     mobileTextChange = (mobileText) => {
         reg.mobile = mobileText;
+    }
+
+    passwordTextChange = (passwordText) => {
+        reg.password = passwordText;
+    }
+
+    codeTextChange = (codeText) => {
+        reg.code = codeText;
     }
     render() {
         let loginTypeText = In18.FAST_LOGIN;
@@ -91,8 +103,8 @@ class InputField extends PureComponent {
         return (
             <View style={styles.inputFieldContainer}>
                 <MobileInput onTextChange={this.mobileTextChange} changeCode={this.gotoChangeCountryCode} />
-                {this.state.loginType && <PasswordInput style={{ marginTop: 30 }} />}
-                {!this.state.loginType && <PasswordInputWithVerificationCode style={{ marginTop: 30 }} />}
+                {this.state.loginType && <PasswordInput onTextChange={this.passwordTextChange} style={{ marginTop: 30 }} />}
+                {!this.state.loginType && <PasswordInputWithVerificationCode onTextChange={this.codeTextChange} style={{ marginTop: 30 }} />}
                 <View style={styles.lostPasswordContainer}>
                     <Text
                         style={styles.lostPasswordText}

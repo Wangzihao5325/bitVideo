@@ -45,6 +45,12 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
         }, 1000);
     }
 
+    textOnChange = (text) => {
+        if (this.props.onTextChange) {
+            this.props.onTextChange(text);
+        }
+    }
+
     render() {
         return (
             <View style={[styles.container, this.props.style]}>
@@ -52,6 +58,7 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
                     <Image source={require('../../image/mine/ver_code.png')} />
                     <TextInput
                         secureTextEntry={this.state.secureTextEntry}
+                        onChangeText={this.textOnChange}
                         style={styles.textInput}
                         placeholder={In18.PLEASE_INPUT_VER_CODE}
                         placeholderTextColor='rgb(151,151,151)'
