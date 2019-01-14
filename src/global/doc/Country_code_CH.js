@@ -71,4 +71,5 @@ const CH_sections = [
     // { title: 'Title3', data: ['item5', 'item6'] },
     // { title: 'Title3', data: ['item5', 'item6'] },
     // { title: 'Title3', data: ['item5', 'item6'] },
-]
+];
+export default CH_sections;

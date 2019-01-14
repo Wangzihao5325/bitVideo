@@ -4,7 +4,7 @@ import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 
 export default class Item extends PureComponent {
-    render() {
+    render() { 
         return (
             <View style={styles.itemContainer}>
                 <View style={styles.tab}>
