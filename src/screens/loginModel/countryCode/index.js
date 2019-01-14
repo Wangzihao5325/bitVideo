@@ -76,6 +76,7 @@ export default class CountryCode extends PureComponent {
                 <ModalHeader title={In18.COUNTRY_CODE} goBack={this.goBack} />
                 <SearchHeader search={this.search} />
                 <SectionList
+                    style={{ height: Sizes.DEVICE_HEIGHT - 182, width: '100%' }}
                     renderSectionHeader={({ section: { title } }) => (
                         <SectionHeader title={title} />
                     )}
