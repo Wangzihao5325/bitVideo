@@ -3,13 +3,15 @@ import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight } from 'react-
 import PropTypes from 'prop-types';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
+import Api from '../../socket/index';
+import Variables from '../../global/Variables';
 
 import VectorIconBtn from '../../components/imageBtn/VectorIconBtn';
 import MobileInput from '../../components/input/MobileInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 
-let reg = { mobile: '', password: '', code: '' };
+let reg = { mobile: '', password: '', code: '', verCode: '' };
 class Header extends PureComponent {
 
     static contextTypes = {
@@ -67,7 +69,20 @@ class InputField extends PureComponent {
     }
 
     login = () => {
-        console.log('login');
+        if (this.state.loginType) {
+            Api.postLogin(reg.mobile, 'P', reg.password, null, this.loginSuccess);
+        } else {
+            Api.postLogin(reg.mobile, 'C', reg.code, reg.verCode, this.loginSuccess);
+        }
+    }
+
+    loginSuccess = (e) => {
+        if (e.token) {
+            Variables.account.token = e.token;
+        }
+        // console.log(e);
+        const { modalNavigation } = this.context;
+        modalNavigation.pop();
     }
 
     changeLoginWay = () => {
@@ -95,6 +110,15 @@ class InputField extends PureComponent {
     codeTextChange = (codeText) => {
         reg.code = codeText;
     }
+
+    getMessageCode = () => {
+        Api.postMessageCode(reg.mobile, (e) => {
+            if (e.verification_key) {
+                reg.verCode = e.verification_key
+            }
+        });
+    }
+
     render() {
         let loginTypeText = In18.FAST_LOGIN;
         if (!this.state.loginType) {
@@ -104,7 +128,7 @@ class InputField extends PureComponent {
             <View style={styles.inputFieldContainer}>
                 <MobileInput onTextChange={this.mobileTextChange} changeCode={this.gotoChangeCountryCode} />
                 {this.state.loginType && <PasswordInput onTextChange={this.passwordTextChange} style={{ marginTop: 30 }} />}
-                {!this.state.loginType && <PasswordInputWithVerificationCode onTextChange={this.codeTextChange} style={{ marginTop: 30 }} />}
+                {!this.state.loginType && <PasswordInputWithVerificationCode getMessageCode={this.getMessageCode} onTextChange={this.codeTextChange} style={{ marginTop: 30 }} />}
                 <View style={styles.lostPasswordContainer}>
                     <Text
                         style={styles.lostPasswordText}

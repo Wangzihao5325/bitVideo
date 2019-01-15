@@ -83,6 +83,20 @@ class api {
         }
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    postLogin(mobile, type, password, verCode, onSuccess, onError) {
+        const url = '/api/login';
+        let formData = new FormData();
+        formData.append('mobile', mobile);
+        formData.append('type', type);
+        if (type === 'P') {
+            formData.append('password', password);
+        } else {
+            formData.append('code', password);
+            formData.append('verification_key', verCode);
+        }
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();

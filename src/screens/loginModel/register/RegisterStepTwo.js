@@ -22,7 +22,7 @@ class RegisterStepTwoScreen extends PureComponent {
             if (e.verification_key) {
                 registerReg.verification_key = e.verification_key
             }
-        })
+        });
     }
 
     register = () => {
