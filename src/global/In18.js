@@ -65,6 +65,7 @@ const GO_TO_WATCH_MOVIE = '去观看';
 const GO_TO_INVITE = '去邀请';
 const GO_TO_CLICK = '去点击';
 const GO_TO_SHARE = '去分享';
+const DAILY_TASK = '日常任务';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -132,6 +133,7 @@ export {
     GO_TO_INVITE,
     GO_TO_CLICK,
     GO_TO_SHARE,
+    DAILY_TASK,
 
     COUNTRY_CODE
 };

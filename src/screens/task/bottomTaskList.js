@@ -88,6 +88,17 @@ class Item extends PureComponent {
     }
 }
 
+class ListHeader extends PureComponent {
+    render() {
+        return (
+            <View style={styles.listHeader}>
+                <View style={styles.listHeaderFlexView} />
+                <Text style={styles.listHeaderText}>{In18.DAILY_TASK}</Text>
+            </View>
+        );
+    }
+}
+
 export default class bottomTaskList extends PureComponent {
     state = {
         listData: []
@@ -106,6 +117,7 @@ export default class bottomTaskList extends PureComponent {
     render() {
         return (
             <View style={{ flex: 1 }}>
+                <ListHeader />
                 {this.state.listData.length > 0 &&
                     <FlatList
                         data={this.state.listData}
@@ -174,5 +186,26 @@ const styles = StyleSheet.create({
     enableBtnText: {
         fontSize: 12,
         color: 'white'
+    },
+    listHeader: {
+        height: 25,
+        width: '100%',
+        display: 'flex',
+        marginTop: 23,
+        marginBottom: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    listHeaderFlexView: {
+        height: 20,
+        width: 4,
+        borderRadius: 2,
+        backgroundColor: 'rgb(73,114,255)',
+        marginLeft: 15
+    },
+    listHeaderText: {
+        marginLeft: 10,
+        fontSize: 18,
+        color: 'rgb(54,54,54)'
     }
 });
