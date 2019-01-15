@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground, TouchableHighlight } from 'react-native';
 import * as In18 from '../../global/In18';
 import PropTypes from 'prop-types';
 
@@ -63,6 +63,9 @@ class Avater extends PureComponent {
     }
 }
 class CountList extends PureComponent {
+    goToSpread = () => {
+        console.log('go to share');
+    }
     render() {
         return (
             <View style={styles.countListContainer}>
@@ -73,8 +76,12 @@ class CountList extends PureComponent {
                     </View>
                     <View style={styles.separate} />
                     <View style={styles.watchTimesBoard}>
-                        <Image source={require('../../image/mine/mine_share.png')} />
-                        <Text style={styles.countListText}>{In18.SHARE_TIMES}</Text>
+                        <TouchableHighlight onPress={this.goToSpread} style={styles.watchTimesBoard} underlayColor='transparent'>
+                            <View style={styles.watchTimesBoard}>
+                                <Image source={require('../../image/mine/mine_share.png')} />
+                                <Text style={styles.countListText}>{In18.SHARE_TIMES}</Text>
+                            </View>
+                        </TouchableHighlight>
                     </View>
                 </View>
             </View>
