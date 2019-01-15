@@ -17,7 +17,9 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
     }
 
     _getMessageCode = () => {
-        // this.props.getMessageCode();//
+        if (this.props.getMessageCode) {
+            this.props.getMessageCode();
+        }
         let time = 59;
         this.setState((preState, props) => {
             return {

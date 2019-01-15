@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import store from '../../../store/index';
 import * as In18 from '../../../global/In18';
 import { registerReg } from '../../../global/Reg';
+import Api from '../../../socket/index';
 
 import ModalHeader from '../modalComponent/ModalHeader';
 import PasswordInputWithVerificationCode from '../../../components/input/PasswordInputWithVerificationCode';
@@ -12,6 +13,9 @@ import PasswordInput from '../../../components/input/PasswordInput';
 class RegisterStepTwoScreen extends PureComponent {
     goBack = () => {
         this.props.navigation.goBack()
+    }
+    getMessageCode = () => {
+        Api.postMessageCode(registerReg.mobile, (e) => { console.log(e) })
     }
     render() {
         let mobile = registerReg.mobile.split('');
@@ -22,7 +26,7 @@ class RegisterStepTwoScreen extends PureComponent {
                 <ModalHeader title={In18.INPUT_VER_CODE} goBack={this.goBack} />
                 <Text style={styles.titleText}>{In18.CLICK_TO_GET_VER_CODE}</Text>
                 <Text style={styles.mobileText}>{`${this.props.countryCode} `}<Text>{securityMobile}</Text></Text>
-                <PasswordInputWithVerificationCode style={{ marginTop: 48 }} />
+                <PasswordInputWithVerificationCode getMessageCode={this.getMessageCode} style={{ marginTop: 48 }} />
                 <PasswordInput placeHolder={In18.PLEASE_SET_PASSWORD} style={{ marginTop: 53 }} />
                 <TouchableHighlight style={styles.btn}>
                     <Text style={styles.btnText}>{In18.REGISTER}</Text>

@@ -61,6 +61,13 @@ class api {
         const url = '/api/user/task/list';
         this.getFetch(url, onSuccess, onError);
     }
+
+    postMessageCode(mobile, onSuccess, onError) {
+        const url = '/api/mobile/verify-code';
+        let formData = new FormData();
+        formData.append('mobile', mobile);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();
