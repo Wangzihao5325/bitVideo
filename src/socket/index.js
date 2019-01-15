@@ -108,6 +108,11 @@ class api {
         formData.append('code', code);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    getActerList(onSuccess, onError) {
+        const url = '/api/video/special/actor/list';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();
