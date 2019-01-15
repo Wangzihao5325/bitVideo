@@ -38,17 +38,21 @@ class TopBtns extends PureComponent {
     }
 }
 class Avater extends PureComponent {
+
+    static contextTypes = {
+        mineNavigation: PropTypes.object
+    }
+
     login = () => {
-        console.log('please login');
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('MyModel');
     }
-    register = () => {
-        console.log('please register');
-    }
+
     render() {
         return (
             <View style={styles.avaterContainer}>
                 <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />
-                <Text style={styles.LoginText}><Text onPress={this.login}>{In18.LOGIN}</Text>/<Text onPress={this.register}>{In18.REGISTER}</Text></Text>
+                <Text style={styles.LoginText} onPress={this.login}><Text>{In18.LOGIN}</Text>/<Text>{In18.REGISTER}</Text></Text>
                 <View style={styles.rechargeContainer}>
                     <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
                         <Text style={styles.rechargeText}>{In18.RECHARGE}</Text>

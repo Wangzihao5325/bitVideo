@@ -15,9 +15,9 @@ export default class FunList extends PureComponent {
         console.log('go to money');
     }
 
-    goToTaskCenter = () => {
-        const { mineNavigation } = this.context;
-        mineNavigation.navigate('TaskScreen');
+    goToGiftCenter = () => {
+        // const { mineNavigation } = this.context;
+        // mineNavigation.navigate('TaskScreen');
     }
     render() {
         return (
@@ -26,7 +26,7 @@ export default class FunList extends PureComponent {
                     <IconBtnWithTitle source={require('../../image/mine/idol_money.png')} title={In18.IDOL_MONEY} onPress={this.goToMoney} />
                     <IconBtnWithTitle source={require('../../image/mine/share_code.png')} title={In18.SHARE_CODE} onPress={this.goToMoney} />
                     <IconBtnWithTitle source={require('../../image/mine/invite_people.png')} title={In18.INVITE_PEOPLE} onPress={this.goToMoney} />
-                    <IconBtnWithTitle source={require('../../image/mine/task_center.png')} title={In18.TASK_CENTER} onPress={this.goToTaskCenter} />
+                    <IconBtnWithTitle source={require('../../image/mine/task_center.png')} title={In18.GIFT_CENTER} onPress={this.goToGiftCenter} />
                 </View>
                 <View style={styles.moneyShowContainer}>
                     <View style={styles.flexView}>
