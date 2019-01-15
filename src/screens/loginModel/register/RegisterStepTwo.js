@@ -11,12 +11,37 @@ import PasswordInputWithVerificationCode from '../../../components/input/Passwor
 import PasswordInput from '../../../components/input/PasswordInput';
 
 class RegisterStepTwoScreen extends PureComponent {
+
     goBack = () => {
         this.props.navigation.goBack()
     }
+
     getMessageCode = () => {
-        Api.postMessageCode(registerReg.mobile, (e) => { console.log(e) })
+        Api.postMessageCode(registerReg.mobile, (e) => {
+            if (e.verification_key) {
+                registerReg.verification_key = e.verification_key
+            }
+        })
     }
+
+    register = () => {
+        Api.postRegister(registerReg.mobile,
+            registerReg.verification_key,
+            registerReg.code,
+            null,
+            registerReg.password,
+            registerReg.inviteCode,
+            () => { console.log('success') });
+    }
+
+    codeOnChange = (codeText) => {
+        registerReg.code = codeText;
+    }
+
+    passwordOnChange = (passwordText) => {
+        registerReg.password = passwordText;
+    }
+
     render() {
         let mobile = registerReg.mobile.split('');
         mobile.splice(3, 4, '****');
@@ -26,9 +51,9 @@ class RegisterStepTwoScreen extends PureComponent {
                 <ModalHeader title={In18.INPUT_VER_CODE} goBack={this.goBack} />
                 <Text style={styles.titleText}>{In18.CLICK_TO_GET_VER_CODE}</Text>
                 <Text style={styles.mobileText}>{`${this.props.countryCode} `}<Text>{securityMobile}</Text></Text>
-                <PasswordInputWithVerificationCode getMessageCode={this.getMessageCode} style={{ marginTop: 48 }} />
-                <PasswordInput placeHolder={In18.PLEASE_SET_PASSWORD} style={{ marginTop: 53 }} />
-                <TouchableHighlight style={styles.btn}>
+                <PasswordInputWithVerificationCode onTextChange={this.codeOnChange} getMessageCode={this.getMessageCode} style={{ marginTop: 48 }} />
+                <PasswordInput onTextChange={this.passwordOnChange} placeHolder={In18.PLEASE_SET_PASSWORD} style={{ marginTop: 53 }} />
+                <TouchableHighlight style={styles.btn} onPress={}>
                     <Text style={styles.btnText}>{In18.REGISTER}</Text>
                 </TouchableHighlight>
             </SafeAreaView>

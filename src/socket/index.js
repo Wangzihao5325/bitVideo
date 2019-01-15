@@ -68,6 +68,21 @@ class api {
         formData.append('mobile', mobile);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    postRegister(mobile, verKey, code, devCode, password, inviteCode, onSuccess, onError) {
+        const url = '/api/register';
+        let formData = new FormData();
+        formData.append('mobile', mobile);
+        formData.append('verification_key', verKey);
+        formData.append('code', code);
+        formData.append('device_code', devCode);
+        formData.append('password', password);
+        formData.append('password_confirmation', password);
+        if (inviteCode) {
+            formData.append('invite_code', inviteCode);
+        }
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();

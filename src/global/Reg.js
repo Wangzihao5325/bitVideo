@@ -1,7 +1,10 @@
 let registerReg = {
     mobile: '',
     inviteCode: '',
-    ProtocolAgree: false
+    ProtocolAgree: false,
+    verification_key: '',
+    code: '',
+    password: ''
 }
 
 export {
