@@ -1,30 +1,84 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image, FlatList, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, TouchableHighlight, StyleSheet, ImageBackground } from 'react-native';
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 
-export default class Item extends PureComponent {
-    render() { 
+class UnUseBtn extends PureComponent {
+    btnPress = () => {
+        if (this.props.btnPress) {
+            this.props.btnPress();
+        }
+    }
+    render() {
+        if (this.props.enable) {
+            return (
+                <ImageBackground style={styles.enableBtnBG} source={require('../../image/task/task_tab_btn_background.png')}>
+                    <TouchableHighlight style={{ margin: 4, flex: 1, justifyContent: 'center', alignItems: 'center' }} onPress={this.btnPress} underlayColor='transparent'>
+                        <Text style={styles.enableBtnText}>{this.props.enableTitle}</Text>
+                    </TouchableHighlight>
+                </ImageBackground>
+            );
+        } else {
+            return (
+                <View style={styles.unableBtn}>
+                    <Text style={styles.unableBtnText}>{this.props.unableTitle}</Text>
+                </View>
+            );
+        }
+    }
+}
+class Item extends PureComponent {
+    render() {
+        let sourceUrl = require('../../image/task/check_in_task.png');
+        let ableBtnTitle = '去签到';
+        let unableTitle = '已签到';
+        switch (this.props.item.key) {
+            case 'SAILY_SIGN_IN':
+                sourceUrl = require('../../image/task/check_in_task.png');
+                ableBtnTitle = '去签到';
+                unableTitle = '已签到';
+                break;
+            case 'LOOKED_VIDEO_SATISFY':
+                sourceUrl = require('../../image/task/LOOKED_VIDEO_SATISFY.png');
+                ableBtnTitle = '去观看';
+                unableTitle = '已完成';
+                break;
+            case 'INVITE_REGISTER':
+                sourceUrl = require('../../image/task/INVITE_REGISTER.png');
+                ableBtnTitle = '去邀请';
+                unableTitle = '已完成';
+                break;
+            case 'CLICK_AD':
+                sourceUrl = require('../../image/task/LOOKED_VIDEO_SATISFY.png');
+                ableBtnTitle = '去点击';
+                unableTitle = '已完成';
+                break;
+            case 'DAILY_SHARED':
+                sourceUrl = require('../../image/task/LOOKED_VIDEO_SATISFY.png');
+                ableBtnTitle = '去分享';
+                unableTitle = '已完成';
+                break;
+        }
         return (
             <View style={styles.itemContainer}>
                 <View style={styles.tab}>
                     <View style={styles.iconContainer}>
-                        <Image style={styles.icon} source={require('../../image/task/check_in_task.png')} />
+                        <Image style={styles.icon} source={sourceUrl} />
                     </View>
                     <View style={{ flex: 1, marginLeft: 8 }}>
                         <View style={styles.flexView}>
-                            <View>
-                                <Text style={styles.titleText}>签到任务</Text>
-                                <View style={{ height: 20, display: 'flex', marginTop: 4, flexDirection: 'row' }}>
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.titleText}>{this.props.item.title}</Text>
+                                <View style={{ height: 20, display: 'flex', marginTop: 6, flexDirection: 'row' }}>
                                     <Image style={{ height: 15, width: 15 }} source={require('../../image/task/idol_money.png')} />
-                                    <Text style={{ color: 'rgb(73,114,255)', fontSize: 14 }}>+10爱逗币</Text>
+                                    <Text style={{ color: 'rgb(73,114,255)', fontSize: 14 }}>+<Text>{this.props.item.coins}</Text>爱逗币</Text>
                                 </View>
                             </View>
-                            <View>
-                                {/* <TouchableHighlight></TouchableHighlight> */}
+                            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                                <UnUseBtn enable={!this.props.item.sign} enableTitle={ableBtnTitle} unableTitle={unableTitle} />
                             </View>
                         </View>
-                        <Text style={{ marginBottom: 14, fontSize: 10, color: 'rgb(151,151,151)' }}>每日点击签到即可获得爱逗币</Text>
+                        <Text style={{ marginBottom: 14, fontSize: 10, color: 'rgb(151,151,151)' }}>{this.props.item.remark}</Text>
                     </View>
 
                 </View>
@@ -33,7 +87,7 @@ export default class Item extends PureComponent {
     }
 }
 
-class bottomTaskList extends PureComponent {
+export default class bottomTaskList extends PureComponent {
     state = {
         listData: []
     };
@@ -52,7 +106,10 @@ class bottomTaskList extends PureComponent {
         return (
             <View style={{ flex: 1 }}>
                 {this.state.listData.length > 0 &&
-                    <FlatList />
+                    <FlatList
+                        data={this.state.listData}
+                        renderItem={({ item }) => <Item item={item} />}
+                    />
                 }
             </View>
         );
@@ -65,7 +122,7 @@ const styles = StyleSheet.create({
         display: 'flex'
     },
     tab: {
-        height: 110 - 20,
+        height: 120 - 20,
         width: Sizes.DEVICE_WIDTH - 30,
         marginHorizontal: 15,
         marginVertical: 10,
@@ -94,5 +151,27 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 16,
         color: 'rgb(54,54,54)'
+    },
+    unableBtn: {
+        height: 30,
+        width: 80,
+        backgroundColor: 'rgb(242,244,245)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 16
+    },
+    unableBtnText: {
+        fontSize: 12,
+        color: 'rgb(151,151,151)'
+    },
+    enableBtnBG: {
+        height: 38,
+        width: 88,
+        marginRight: 13
+    },
+    enableBtnText: {
+        fontSize: 12,
+        color: 'white'
     }
 });
