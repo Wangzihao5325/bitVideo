@@ -58,6 +58,13 @@ const SUBMIT_TEXT = '提交';
 const START_TO_DO_TASK = '爱逗君开始做任务了';
 const MY_INVITE = '我的邀请';
 const GIFT_CENTER = '兑换中心';
+const GO_TO_CHECK = '去签到';
+const HAVE_CHECKED = '已签到';
+const HAVE_DONE = '已完成';
+const GO_TO_WATCH_MOVIE = '去观看';
+const GO_TO_INVITE = '去邀请';
+const GO_TO_CLICK = '去点击';
+const GO_TO_SHARE = '去分享';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -118,6 +125,13 @@ export {
     START_TO_DO_TASK,
     MY_INVITE,
     GIFT_CENTER,
+    GO_TO_CHECK,
+    HAVE_CHECKED,
+    HAVE_DONE,
+    GO_TO_WATCH_MOVIE,
+    GO_TO_INVITE,
+    GO_TO_CLICK,
+    GO_TO_SHARE,
 
     COUNTRY_CODE
 };

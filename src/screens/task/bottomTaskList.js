@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, Text, Image, FlatList, TouchableHighlight, StyleSheet, ImageBackground } from 'react-native';
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
+import * as In18 from '../../global/In18';
 
 class UnUseBtn extends PureComponent {
     btnPress = () => {
@@ -30,33 +31,33 @@ class UnUseBtn extends PureComponent {
 class Item extends PureComponent {
     render() {
         let sourceUrl = require('../../image/task/check_in_task.png');
-        let ableBtnTitle = '去签到';
-        let unableTitle = '已签到';
+        let ableBtnTitle = In18.GO_TO_CHECK;
+        let unableTitle = In18.HAVE_CHECKED;
         switch (this.props.item.key) {
             case 'SAILY_SIGN_IN':
                 sourceUrl = require('../../image/task/check_in_task.png');
-                ableBtnTitle = '去签到';
-                unableTitle = '已签到';
+                ableBtnTitle = In18.GO_TO_CHECK;
+                unableTitle = In18.HAVE_CHECKED;
                 break;
             case 'LOOKED_VIDEO_SATISFY':
                 sourceUrl = require('../../image/task/LOOKED_VIDEO_SATISFY.png');
-                ableBtnTitle = '去观看';
-                unableTitle = '已完成';
+                ableBtnTitle = In18.GO_TO_WATCH_MOVIE;
+                unableTitle = In18.HAVE_DONE;
                 break;
             case 'INVITE_REGISTER':
                 sourceUrl = require('../../image/task/INVITE_REGISTER.png');
-                ableBtnTitle = '去邀请';
-                unableTitle = '已完成';
+                ableBtnTitle = In18.GO_TO_INVITE;
+                unableTitle = In18.HAVE_DONE;
                 break;
             case 'CLICK_AD':
                 sourceUrl = require('../../image/task/LOOKED_VIDEO_SATISFY.png');
-                ableBtnTitle = '去点击';
-                unableTitle = '已完成';
+                ableBtnTitle = In18.GO_TO_CLICK;
+                unableTitle = In18.HAVE_DONE;
                 break;
             case 'DAILY_SHARED':
                 sourceUrl = require('../../image/task/LOOKED_VIDEO_SATISFY.png');
-                ableBtnTitle = '去分享';
-                unableTitle = '已完成';
+                ableBtnTitle = In18.GO_TO_SHARE;
+                unableTitle = In18.HAVE_DONE;
                 break;
         }
         return (
@@ -71,7 +72,7 @@ class Item extends PureComponent {
                                 <Text style={styles.titleText}>{this.props.item.title}</Text>
                                 <View style={{ height: 20, display: 'flex', marginTop: 6, flexDirection: 'row' }}>
                                     <Image style={{ height: 15, width: 15 }} source={require('../../image/task/idol_money.png')} />
-                                    <Text style={{ color: 'rgb(73,114,255)', fontSize: 14 }}>+<Text>{this.props.item.coins}</Text>爱逗币</Text>
+                                    <Text style={{ color: 'rgb(73,114,255)', fontSize: 14 }}>+<Text>{this.props.item.coins}</Text>{In18.IDOL_MONEY}</Text>
                                 </View>
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
