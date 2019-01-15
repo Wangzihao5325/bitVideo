@@ -97,6 +97,17 @@ class api {
         }
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    postResetPassword(mobile, password, verCode, code, onSuccess, onError) {
+        const url = '/api/user/reset-pwd';
+        let formData = new FormData();
+        formData.append('mobile', mobile);
+        formData.append('password', password);
+        formData.append('password_confirmation', password);
+        formData.append('verification_key', verCode);
+        formData.append('code', code);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();
