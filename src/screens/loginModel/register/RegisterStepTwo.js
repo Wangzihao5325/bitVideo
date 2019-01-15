@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import DeviceInfo from 'react-native-device-info';
 import store from '../../../store/index';
 import * as In18 from '../../../global/In18';
 import { registerReg } from '../../../global/Reg';
@@ -13,7 +14,7 @@ import PasswordInput from '../../../components/input/PasswordInput';
 class RegisterStepTwoScreen extends PureComponent {
 
     goBack = () => {
-        this.props.navigation.goBack()
+        this.props.navigation.goBack();
     }
 
     getMessageCode = () => {
@@ -25,13 +26,18 @@ class RegisterStepTwoScreen extends PureComponent {
     }
 
     register = () => {
+        const uniqueId = DeviceInfo.getUniqueID();
+        let inviteCode = registerReg.inviteCode === '' ? null : registerReg.inviteCode;
         Api.postRegister(registerReg.mobile,
             registerReg.verification_key,
             registerReg.code,
-            null,
+            uniqueId,
             registerReg.password,
-            registerReg.inviteCode,
-            () => { console.log('success') });
+            inviteCode,
+            () => {
+                this.props.navigation.pop(2);
+            });
+
     }
 
     codeOnChange = (codeText) => {
@@ -53,7 +59,7 @@ class RegisterStepTwoScreen extends PureComponent {
                 <Text style={styles.mobileText}>{`${this.props.countryCode} `}<Text>{securityMobile}</Text></Text>
                 <PasswordInputWithVerificationCode onTextChange={this.codeOnChange} getMessageCode={this.getMessageCode} style={{ marginTop: 48 }} />
                 <PasswordInput onTextChange={this.passwordOnChange} placeHolder={In18.PLEASE_SET_PASSWORD} style={{ marginTop: 53 }} />
-                <TouchableHighlight style={styles.btn} onPress={}>
+                <TouchableHighlight style={styles.btn} onPress={this.register}>
                     <Text style={styles.btnText}>{In18.REGISTER}</Text>
                 </TouchableHighlight>
             </SafeAreaView>
