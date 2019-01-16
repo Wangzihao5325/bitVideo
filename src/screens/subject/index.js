@@ -14,7 +14,7 @@ export default class SubjectScreen extends PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.titleText}>人气明星</Text>
+                <Text style={styles.titleText}>{In18.FAVOURITE_IDOL}</Text>
                 <IdolTabList />
             </View>
         );

@@ -67,6 +67,11 @@ const GO_TO_CLICK = '去点击';
 const GO_TO_SHARE = '去分享';
 const DAILY_TASK = '日常任务';
 
+//专题页面
+const FAVOURITE_IDOL = '人气明星';
+const SEE_RIGHT_NOW = '立即查看';
+const ACTOR_WORKS = '作品:';
+
 //国家代码
 const COUNTRY_CODE = '国家代码';
 
@@ -134,6 +139,10 @@ export {
     GO_TO_CLICK,
     GO_TO_SHARE,
     DAILY_TASK,
+
+    FAVOURITE_IDOL,
+    SEE_RIGHT_NOW,
+    ACTOR_WORKS,
 
     COUNTRY_CODE
 };

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, Text, TouchableHighlight, FlatList } from 'react-native';
 import Api from '../../socket/index';
+import * as In18 from '../../global/In18';
 
 class Item extends PureComponent {
 
@@ -21,7 +22,7 @@ class Item extends PureComponent {
                             <Image style={styles.itemImage} source={{ uri: url }} />
                             <View style={{ flex: 1, justifyContent: 'space-around' }}>
                                 <Text style={styles.actorName}>{actorName}</Text>
-                                <Text style={styles.actorFocus}><Text>作品:</Text>{focus}</Text>
+                                <Text style={styles.actorFocus}><Text>{In18.ACTOR_WORKS}</Text>{focus}</Text>
                             </View>
                         </View>
                         <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -29,7 +30,7 @@ class Item extends PureComponent {
                         </View>
                     </View>
                     <View style={styles.itemFlexView}>
-                        <TouchableHighlight onPress={this.seeActorDetails} style={styles.tabBtn} underlayColor='transparent'><Text style={styles.tabBtnText}>立即查看</Text></TouchableHighlight>
+                        <TouchableHighlight onPress={this.seeActorDetails} style={styles.tabBtn} underlayColor='transparent'><Text style={styles.tabBtnText}>{In18.SEE_RIGHT_NOW}</Text></TouchableHighlight>
                     </View>
                 </View>
             </View>
