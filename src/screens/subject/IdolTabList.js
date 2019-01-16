@@ -1,32 +1,31 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Image, Text, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableHighlight, FlatList } from 'react-native';
 import Api from '../../socket/index';
 
-export default class Item extends PureComponent {
-    componentDidMount() {
-        Api.getActerList((e) => {
-            console.log(e);
-        });
-    }
+class Item extends PureComponent {
 
     seeActorDetails = () => {
         console.log('actor details');
     }
 
     render() {
+        let actorName = this.props.item.name ? this.props.item.name : '';
+        let focus = this.props.item.video_count ? this.props.item.video_count : '';
+        let intro = this.props.item.intro ? this.props.item.intro : '';
+        let url = this.props.item.cover_path ? this.props.item.cover_path : '';
         return (
             <View style={styles.itemContainer}>
                 <View style={styles.itemTab}>
                     <View style={styles.itemContent}>
                         <View style={{ height: 63, width: 234, marginTop: 16, display: 'flex', flexDirection: 'row' }}>
-                            <Image style={styles.itemImage} source={{ uri: "https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=6b50bd25cfcec3fd8b3ea073eeb3b302/6159252dd42a2834e6d976e257b5c9ea14cebfd8.jpg" }} />
+                            <Image style={styles.itemImage} source={{ uri: url }} />
                             <View style={{ flex: 1, justifyContent: 'space-around' }}>
-                                <Text style={styles.actorName}>刘德华</Text>
-                                <Text style={styles.actorFocus}>关注：1566.2万</Text>
+                                <Text style={styles.actorName}>{actorName}</Text>
+                                <Text style={styles.actorFocus}><Text>作品:</Text>{focus}</Text>
                             </View>
                         </View>
                         <View style={{ flex: 1, justifyContent: 'center' }}>
-                            <Text style={{ marginLeft: 10, color: 'rgb(100,100,100)', fontSize: 10 }}>刘德华（AndyLau），1961年9月27日出生于中国香港，中国香港男演员、歌手、作词人、制片人。</Text>
+                            <Text style={{ marginLeft: 10, color: 'rgb(100,100,100)', fontSize: 10 }}>{intro}</Text>
                         </View>
                     </View>
                     <View style={styles.itemFlexView}>
@@ -38,15 +37,25 @@ export default class Item extends PureComponent {
     }
 }
 
-class IdolTabList extends PureComponent {
+export default class IdolTabList extends PureComponent {
+    state = {
+        data: []
+    };
     componentDidMount() {
         Api.getActerList((e) => {
             console.log(e);
+            if (e.data) {
+                this.setState({ data: e.data });
+            }
         });
     }
     render() {
         return (
-            <View></View>
+            <FlatList
+                data={this.state.data}
+                renderItem={({ item }) => <Item item={item} />}
+                horizontal={true}
+            />
         );
     }
 }

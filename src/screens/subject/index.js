@@ -14,8 +14,8 @@ export default class SubjectScreen extends PureComponent {
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.titleText}>人气明星</Text>
                 <IdolTabList />
-                <Text>SubjectScreen</Text>
             </View>
         );
     }
@@ -23,8 +23,14 @@ export default class SubjectScreen extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: 'white',
+    },
+    titleText: {
+        marginTop: 18,
+        marginBottom: 14,
+        marginLeft: 15,
+        color: 'rgb(54,54,54)',
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 });
