@@ -113,6 +113,11 @@ class api {
         const url = '/api/video/special/actor/list';
         this.getFetch(url, onSuccess, onError);
     }
+
+    getVideoTypeList(onSuccess, onError) {
+        const url = '/api/video/special/type/list';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import * as In18 from '../../global/In18';
 
 import IdolTabList from './IdolTabList';
+import HotSubject from './HotSubject';
 
 export default class SubjectScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -16,6 +17,7 @@ export default class SubjectScreen extends PureComponent {
             <View style={styles.container}>
                 <Text style={styles.titleText}>{In18.FAVOURITE_IDOL}</Text>
                 <IdolTabList />
+                <HotSubject />
             </View>
         );
     }
