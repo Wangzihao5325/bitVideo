@@ -26,7 +26,7 @@ class Item extends PureComponent {
                             </View>
                         </View>
                         <View style={{ flex: 1, justifyContent: 'center' }}>
-                            <Text style={{ marginLeft: 10, color: 'rgb(100,100,100)', fontSize: 10 }}>{intro}</Text>
+                            <Text ellipsizeMode='tail' numberOfLines={1} style={{ marginLeft: 10, color: 'rgb(100,100,100)', fontSize: 14 }}>{intro}</Text>
                         </View>
                     </View>
                     <View style={styles.itemFlexView}>
