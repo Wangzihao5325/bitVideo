@@ -33,7 +33,7 @@ export default class SubjectScreen extends PureComponent {
 
     render() {
         return (
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                 <Text style={styles.titleText}>{In18.FAVOURITE_IDOL}</Text>
                 <IdolTabList />
                 <TitleHeader
