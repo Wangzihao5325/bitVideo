@@ -25,6 +25,7 @@ export default class Header extends PureComponent {
 
     componentDidMount() {
         Api.getGlobalType((result) => {
+            console.log(result);
             let typeArr = result.map((obj) => {
                 return obj.name
             });

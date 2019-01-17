@@ -10,7 +10,6 @@ export default class TopRecommendVideos extends PureComponent {
     };
     componentDidMount() {
         Api.getTopRecommendVideo((e) => {
-            console.log(e);
             if (e.data) {
                 let data = e.data;
                 if (data.length > 9) {

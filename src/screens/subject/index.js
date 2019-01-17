@@ -48,6 +48,7 @@ export default class SubjectScreen extends PureComponent {
                     btnTitle={In18.MORE_TEXT}
                     showMore={() => { console.log('11223344') }} />
                 <TopRecommendVideos />
+                <View style={{ height: 30, width: '100%' }} />
             </ScrollView>
         );
     }
