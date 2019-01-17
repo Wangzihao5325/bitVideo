@@ -71,6 +71,9 @@ const DAILY_TASK = '日常任务';
 const FAVOURITE_IDOL = '人气明星';
 const SEE_RIGHT_NOW = '立即查看';
 const ACTOR_WORKS = '作品:';
+const HOT_SUBJECT = '热门专题';
+const HOT_MOVIE = '最新榜单专题推荐';
+
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -143,6 +146,8 @@ export {
     FAVOURITE_IDOL,
     SEE_RIGHT_NOW,
     ACTOR_WORKS,
+    HOT_SUBJECT,
+    HOT_MOVIE,
 
     COUNTRY_CODE
 };

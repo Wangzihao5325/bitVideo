@@ -38,14 +38,14 @@ export default class SubjectScreen extends PureComponent {
                 <IdolTabList />
                 <TitleHeader
                     imageSource={require('../../image/subject/hot_subject.png')}
-                    title='热门专题'
-                    btnTitle='更多'
+                    title={In18.HOT_SUBJECT}
+                    btnTitle={In18.MORE_TEXT}
                     showMore={() => { console.log('11223344') }} />
                 <HotSubject />
                 <TitleHeader
                     imageSource={require('../../image/subject/newest_movie.png')}
-                    title='最新榜单专题推荐'
-                    btnTitle='更多'
+                    title={In18.HOT_MOVIE}
+                    btnTitle={In18.MORE_TEXT}
                     showMore={() => { console.log('11223344') }} />
                 <TopRecommendVideos />
             </ScrollView>
