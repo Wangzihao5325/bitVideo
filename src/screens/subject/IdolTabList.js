@@ -51,11 +51,15 @@ export default class IdolTabList extends PureComponent {
     }
     render() {
         return (
-            <FlatList
-                data={this.state.data}
-                renderItem={({ item }) => <Item item={item} />}
-                horizontal={true}
-            />
+            <View style={styles.flatList}>
+                <FlatList
+                    style={{ marginTop: 2 }}
+                    data={this.state.data}
+                    renderItem={({ item }) => <Item item={item} />}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                />
+            </View>
         );
     }
 }
@@ -63,11 +67,12 @@ export default class IdolTabList extends PureComponent {
 const styles = StyleSheet.create({
     itemContainer: {
         width: 234 + 10,
-        height: 161,
+        height: 163,
         display: 'flex',
         alignItems: 'center'
     },
     itemTab: {
+        marginTop: 2,
         width: 234,
         height: 161,
         marginLeft: 5,
@@ -123,5 +128,9 @@ const styles = StyleSheet.create({
     tabBtnText: {
         color: 'white',
         fontSize: 12,
+    },
+    flatList: {
+        width: '100%',
+        height: 170,
     }
 });
