@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import Api from '../../socket/index';
 
 import MovieAvater from '../../components/imageBtn/MovieAvater';
@@ -23,7 +23,13 @@ export default class TopRecommendVideos extends PureComponent {
     render() {
         return (
             <View>
-                <MovieAvater />
+                <FlatList
+                    horizontal={false}
+                    numColumns={3}
+                    data={this.state.data}
+                    renderItem={({ item }) => <MovieAvater imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
+                    columnWrapperStyle={{ marginTop: 20 }}
+                />
             </View>
         );
     }
