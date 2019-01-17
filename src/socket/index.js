@@ -118,6 +118,11 @@ class api {
         const url = '/api/video/special/type/list';
         this.getFetch(url, onSuccess, onError);
     }
+
+    getTopRecommendVideo(onSuccess, onError) {
+        const url = '/api/video/lists';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

@@ -4,6 +4,7 @@ import * as In18 from '../../global/In18';
 
 import IdolTabList from './IdolTabList';
 import HotSubject from './HotSubject';
+import TopRecommendVideos from './TopRecommendVideos';
 
 class TitleHeader extends PureComponent {
     show_more = () => {
@@ -46,7 +47,7 @@ export default class SubjectScreen extends PureComponent {
                     title='最新榜单专题推荐'
                     btnTitle='更多'
                     showMore={() => { console.log('11223344') }} />
-                <View style={{ height: 500, width: '100%' }} />
+                <TopRecommendVideos />
             </ScrollView>
         );
     }

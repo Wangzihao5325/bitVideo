@@ -22,7 +22,6 @@ export default class HotSubject extends PureComponent {
 
     componentDidMount() {
         Api.getVideoTypeList((e) => {
-            console.log(e);
             if (e.film) {
                 let data = e.film;
                 if (data.length > 8) {
