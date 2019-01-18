@@ -5,8 +5,8 @@ import PropsTypes from 'prop-types';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const THEME_COLOR = 'transparent';
 const CONTAINER_BORDER_COLOR = '#909090';
-const NORMAL_TEXT_COLOR = 'white';//'#909090'
-const ITEM_HIGHLIGHT_COLOR = 'white';//'rgb(0,122,204)'
+const NORMAL_TEXT_COLOR = '#909090';
+const ITEM_HIGHLIGHT_COLOR = 'rgb(0,122,204)';
 const ITEM_MARGIN_HOR = 5;
 const ITEM_MARGIN_VER = 2;
 
@@ -32,7 +32,7 @@ class Item extends PureComponent {
         this.props.itemTap(this.props.keyValue);
     }
     render() {
-        let itemStyle = this.state.isHighLight ? null : null;//styles.itemContainerHighlight//选中按钮底部蓝色下划线
+        let itemStyle = this.state.isHighLight ? styles.itemContainerHighlight : null;////选中按钮底部蓝色下划线
         let textStyle = this.state.isHighLight ? styles.itemTextHighlight : null;
         return (
             <TouchableHighlight style={[styles.itemContainer, itemStyle]} onPress={this._itemPress} underlayColor={'transparent'}>
@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         width: DEVICE_WIDTH,
-        // borderBottomColor: CONTAINER_BORDER_COLOR,//底部浅灰色分割线
-        // borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: CONTAINER_BORDER_COLOR,//底部浅灰色分割线
+        borderBottomWidth: StyleSheet.hairlineWidth,
         backgroundColor: THEME_COLOR
     },
     itemContainer: {

@@ -1,7 +1,7 @@
 const NAVI_BGCOLOR = 'rgb(250,250,250)';
 const NAVI_ACTIVE_TINT_COLOR = 'rgb(240,190,65)';
 const NAVI_DEFAULT_TINT_COLOR = '#909090';
-const SAFE_AREA_BGCOLOR = 'rgb(31,16,9)';
+const SAFE_AREA_BGCOLOR = 'white';
 export {
     NAVI_BGCOLOR,
     NAVI_ACTIVE_TINT_COLOR,
