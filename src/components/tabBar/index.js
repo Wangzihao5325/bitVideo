@@ -92,9 +92,9 @@ export default class TabBar extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        width: DEVICE_WIDTH,
-        borderBottomColor: CONTAINER_BORDER_COLOR,//底部浅灰色分割线
-        borderBottomWidth: StyleSheet.hairlineWidth,
+        width: DEVICE_WIDTH - 60,
+        // borderBottomColor: CONTAINER_BORDER_COLOR,//底部浅灰色分割线
+        // borderBottomWidth: StyleSheet.hairlineWidth,
         backgroundColor: THEME_COLOR
     },
     itemContainer: {

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import Api from '../../socket/index';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
@@ -36,7 +36,10 @@ export default class Header extends PureComponent {
     render() {
         return (
             <View style={styles.headerContainer}>
-                <TabBar tabNames={this.state.globalType} tabTap={(classfiy) => { console.log(classfiy) }} />
+                <View style={{ display: 'flex', flexDirection: 'row' }}>
+                    <Image style={{ height: 30, width: 40, marginLeft: 10 }} source={require('../../image/main/app_icon.png')} />
+                    <TabBar tabNames={this.state.globalType} tabTap={(classfiy) => { console.log(classfiy) }} />
+                </View>
                 <View style={styles.searchContainer}>
                     <SearchBar recommendText={this.state.recommendSearch} search={this.search} />
                     <Icon.Button
