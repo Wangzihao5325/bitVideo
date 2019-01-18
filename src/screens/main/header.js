@@ -7,6 +7,7 @@ import * as In18 from '../../global/In18';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TabBar from '../../components/tabBar/index';
 import SearchBar from '../../components/searchBar/index';
+import IconBtn from '../../components/imageBtn/IconBtn';
 
 export default class Header extends PureComponent {
 
@@ -39,6 +40,7 @@ export default class Header extends PureComponent {
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <Image style={{ height: 30, width: 40, marginLeft: 10 }} source={require('../../image/main/app_icon.png')} />
                     <TabBar tabNames={this.state.globalType} tabTap={(classfiy) => { console.log(classfiy) }} />
+                    <IconBtn style={{ alignSelf: 'center', marginRight: 15 }} height={20} width={20} source={require('../../image/main/list.png')} />
                 </View>
                 <View style={styles.searchContainer}>
                     <SearchBar recommendText={this.state.recommendSearch} search={this.search} />

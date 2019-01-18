@@ -14,7 +14,7 @@ export default class IconBtn extends PureComponent {
     render() {
         return (
             <TouchableHighlight
-                style={{ height: this.height, width: this.width, display: 'flex' }}
+                style={[{ height: this.height, width: this.width, display: 'flex' }, this.props.style]}
                 onPress={this.btnOnPress}
                 underlayColor='transparent'
             >
