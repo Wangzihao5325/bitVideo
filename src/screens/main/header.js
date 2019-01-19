@@ -43,7 +43,10 @@ export default class Header extends PureComponent {
                 </View>
                 <View style={styles.searchContainer}>
                     <SearchBarBtn style={{ marginLeft: 15 }} />
-
+                    <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
+                        <IconBtn style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/star.png')} />
+                        <IconBtn style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/clock.png')} />
+                    </View>
                 </View>
             </View>
         );
