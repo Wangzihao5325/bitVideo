@@ -4,10 +4,9 @@ import Api from '../../socket/index';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
 import TabBar from '../../components/tabBar/index';
-import SearchBar from '../../components/searchBar/index';
 import IconBtn from '../../components/imageBtn/IconBtn';
+import SearchBarBtn from '../../components/searchBar/SearchBarBtn';
 
 export default class Header extends PureComponent {
 
@@ -43,16 +42,8 @@ export default class Header extends PureComponent {
                     <IconBtn style={{ alignSelf: 'center', marginRight: 15 }} height={20} width={20} source={require('../../image/main/list.png')} />
                 </View>
                 <View style={styles.searchContainer}>
-                    <SearchBar recommendText={this.state.recommendSearch} search={this.search} />
-                    <Icon.Button
-                        name="bars"
-                        size={20}
-                        color='rgb(250,214,72)'
-                        backgroundColor={Colors.SAFE_AREA_BGCOLOR}
-                        onPress={this.showAll}
-                    >
-                        {In18.ALL_TEXT}
-                    </Icon.Button>
+                    <SearchBarBtn style={{ marginLeft: 15 }} />
+
                 </View>
             </View>
         );
@@ -67,6 +58,7 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop: 6
     }
 });
