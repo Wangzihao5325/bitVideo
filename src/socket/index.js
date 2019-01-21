@@ -123,6 +123,11 @@ class api {
         const url = '/api/video/lists';
         this.getFetch(url, onSuccess, onError);
     }
+
+    postGlobalTypeVideo(type, onSuccess, onError) {
+        const url = `/api/video/index/viewmodule?global_type=${type}`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

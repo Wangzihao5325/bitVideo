@@ -30,6 +30,9 @@ export default class Header extends PureComponent {
                 return obj.name
             });
             this.setState({ globalType: typeArr });
+            Api.postGlobalTypeVideo('recommend',(e)=>{
+                console.log(e);
+            })
         });
     }
 
