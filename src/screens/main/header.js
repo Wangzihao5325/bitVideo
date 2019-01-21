@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import Api from '../../socket/index';
+import store from '../../store/index';
+import { setMainPageData } from '../../store/actions/mainPageDataAction';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
 
@@ -30,8 +32,10 @@ export default class Header extends PureComponent {
                 return obj.name
             });
             this.setState({ globalType: typeArr });
-            Api.postGlobalTypeVideo('recommend',(e)=>{
-                console.log(e);
+            Api.postGlobalTypeVideo(typeArr[0], (e) => {
+                if (e.data) {
+                    store.dispatch(setMainPageData(e.data));
+                }
             })
         });
     }
