@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
 import Carousel from 'react-native-looped-carousel';
 import TitleHeader from '../../components/titleHeader/index';
+import MovieAvater from '../../components/imageBtn/MovieAvater';
 
 class CarouselContainer extends PureComponent {
     state = {
@@ -46,16 +47,45 @@ class CarouselContainer extends PureComponent {
         );
     }
 }
+class VideoContainer extends PureComponent {
+    state = {
+        data: []
+    };
+
+    static getDerivedStateFromProps(props, state) {
+        let videoData = props.data.filter((item) => { return item.module === 'recommend_hot' });
+        videoData = videoData[0].m_video_data;
+        return {
+            data: videoData
+        }
+    }
+
+    render() {
+
+        return (
+            <View>
+                <FlatList
+                    horizontal={false}
+                    numColumns={3}
+                    data={this.state.data}
+                    renderItem={({ item }) => <MovieAvater imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
+                    columnWrapperStyle={{ marginTop: 20 }}
+                />
+            </View>
+        );
+    }
+}
 class Content extends PureComponent {
     render() {
         return (
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 {this.props.data && <CarouselContainer data={this.props.data} />}
                 <TitleHeader
                     imageSource={require('../../image/main/global_movie.png')}
                     title={In18.GLOBAL_MOVIE}
                     btnTitle={In18.MORE_TEXT}
                     showMore={() => { console.log('11223344') }} />
+                {this.props.data && <VideoContainer data={this.props.data} />}
             </ScrollView>
         );
     }
