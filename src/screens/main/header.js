@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import Api from '../../socket/index';
 import store from '../../store/index';
-import { setMainPageData } from '../../store/actions/mainPageDataAction';
+import { setMainPageData, setGlobalTypeData, setNowGlobalType } from '../../store/actions/mainPageDataAction';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
 
@@ -17,6 +17,26 @@ export default class Header extends PureComponent {
         recommendSearch: In18.DEFALUT_RECOMMEND_SEARCH
     };
 
+    componentDidMount() {
+        Api.getGlobalType((result) => {
+            console.log(result);
+            store.dispatch(setGlobalTypeData(result));
+            let typeArr = result.map((obj) => {
+                return obj.name
+            });
+            this.setState({ globalType: typeArr });
+            let defalutType = result[0].key;
+            store.dispatch(setNowGlobalType(defalutType));
+            Api.postGlobalTypeVideo(defalutType, (e) => {
+                console.log(e);
+                if (e.data) {
+                    store.dispatch(setMainPageData(e.data));
+
+                }
+            })
+        });
+    }
+
     showAll = () => {
         console.log('showAll is clicking!');
     }
@@ -25,19 +45,9 @@ export default class Header extends PureComponent {
         console.log('start search');
     }
 
-    componentDidMount() {
-        Api.getGlobalType((result) => {
-            console.log(result);
-            let typeArr = result.map((obj) => {
-                return obj.name
-            });
-            this.setState({ globalType: typeArr });
-            Api.postGlobalTypeVideo(typeArr[0], (e) => {
-                if (e.data) {
-                    store.dispatch(setMainPageData(e.data));
-                }
-            })
-        });
+    classifyChanged = (classify) => {
+        console.log(classify);
+        console.log('11223344');
     }
 
     render() {
@@ -45,7 +55,7 @@ export default class Header extends PureComponent {
             <View style={styles.headerContainer}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <Image style={{ height: 30, width: 40, marginLeft: 10 }} source={require('../../image/main/app_icon.png')} />
-                    <TabBar tabNames={this.state.globalType} tabTap={(classfiy) => { console.log(classfiy) }} />
+                    <TabBar tabNames={this.state.globalType} tabTap={this.classifyChanged} />
                     <IconBtn style={{ alignSelf: 'center', marginRight: 15 }} height={20} width={20} source={require('../../image/main/list.png')} />
                 </View>
                 <View style={styles.searchContainer}>
