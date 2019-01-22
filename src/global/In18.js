@@ -74,6 +74,9 @@ const ACTOR_WORKS = '作品:';
 const HOT_SUBJECT = '热门专题';
 const HOT_MOVIE = '最新榜单专题推荐';
 
+//首页
+const GLOBAL_MOVIE = '全球院线大片';
+
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -149,5 +152,7 @@ export {
     HOT_SUBJECT,
     HOT_MOVIE,
 
-    COUNTRY_CODE
+    GLOBAL_MOVIE,
+
+    COUNTRY_CODE,
 };
