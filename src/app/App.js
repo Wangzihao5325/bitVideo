@@ -12,6 +12,8 @@ import RegisterStepTwoModal from '../screens/loginModel/register/RegisterStepTwo
 import LostPasswordModal from '../screens/loginModel/lostPassword/index';
 import CountryCodeModal from '../screens/loginModel/countryCode/index';
 
+import VideoModel from '../screens/videoModel/index';
+
 const Router = createBottomTabNavigator(
   {
     MainStack,
@@ -48,6 +50,9 @@ const RouterWithModal = createStackNavigator(
     },
     CountryCodeModal: {
       screen: CountryCodeModal
+    },
+    VideoModel: {
+      screen: VideoModel
     }
   },
   {

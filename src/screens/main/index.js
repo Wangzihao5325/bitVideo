@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
 import * as Colors from '../../global/Colors';
 
 import Header from './header';
@@ -11,6 +12,16 @@ export default class MainScreen extends PureComponent {
             header: null
         }
     };
+
+    static childContextTypes = {
+        mainNavigation: PropTypes.object,
+    }
+
+    getChildContext() {
+        return {
+            mainNavigation: this.props.navigation
+        }
+    }
 
     render() {
         return (

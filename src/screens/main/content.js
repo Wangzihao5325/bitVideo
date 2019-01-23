@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ScrollView, View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
@@ -48,6 +49,10 @@ class CarouselContainer extends PureComponent {
     }
 }
 class VideoContainer extends PureComponent {
+    static contextTypes = {
+        mainNavigation: PropTypes.object
+    }
+
     state = {
         data: []
     };
@@ -55,9 +60,15 @@ class VideoContainer extends PureComponent {
     static getDerivedStateFromProps(props, state) {
         let videoData = props.data.filter((item) => { return item.module === 'recommend_hot' });
         videoData = videoData[0].m_video_data;
+
         return {
             data: videoData
         }
+    }
+
+    movieAvaterOnPress = () => {
+        const { mainNavigation } = this.context;
+        mainNavigation.navigate('VideoModel');
     }
 
     render() {
@@ -68,7 +79,7 @@ class VideoContainer extends PureComponent {
                     horizontal={false}
                     numColumns={3}
                     data={this.state.data}
-                    renderItem={({ item }) => <MovieAvater imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
+                    renderItem={({ item }) => <MovieAvater onPress={this.movieAvaterOnPress} imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
                     columnWrapperStyle={{ marginTop: 20 }}
                 />
             </View>
