@@ -9,6 +9,8 @@ import Carousel from 'react-native-looped-carousel';
 import TitleHeader from '../../components/titleHeader/index';
 import MovieAvater from '../../components/imageBtn/MovieAvater';
 
+import Api from '../../socket/index';
+
 class CarouselContainer extends PureComponent {
     state = {
         size: { width: Sizes.DEVICE_WIDTH, height: 200 }
@@ -66,9 +68,14 @@ class VideoContainer extends PureComponent {
         }
     }
 
-    movieAvaterOnPress = () => {
-        const { mainNavigation } = this.context;
-        mainNavigation.navigate('VideoModel');
+    movieAvaterOnPress = (id) => {
+        console.log(id);
+        // const { mainNavigation } = this.context;
+        // mainNavigation.navigate('VideoModel');
+        Api.getVideoInfo(id, (e) => {
+            console.log(e);
+            console.log('12345678');
+        });
     }
 
     render() {
@@ -79,7 +86,7 @@ class VideoContainer extends PureComponent {
                     horizontal={false}
                     numColumns={3}
                     data={this.state.data}
-                    renderItem={({ item }) => <MovieAvater onPress={this.movieAvaterOnPress} imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
+                    renderItem={({ item }) => <MovieAvater onPress={() => this.movieAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
                     columnWrapperStyle={{ marginTop: 20 }}
                 />
             </View>

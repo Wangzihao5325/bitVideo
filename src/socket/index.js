@@ -9,7 +9,7 @@ class api {
             header = { Accept: 'application/json', Authorization: Variables.account.token }
         }
         let obj = { method: 'GET', headers: header }
-        fetch(fullUrl, obj).then((response) => response.json()).then(
+        fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit)).then(
             (reponseJson) => {
                 const result = reponseJson.result ? reponseJson.result : null;
                 const code = reponseJson.code ? reponseJson.code : null;
@@ -34,7 +34,7 @@ class api {
             header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data', Authorization: Variables.account.token }
         }
         let obj = { method: 'POST', headers: header, body: formData };
-        fetch(fullUrl, obj).then((reponse) => reponse.json()).then(
+        fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit)).then(
             (reponseJson) => {
                 const result = reponseJson.result ? reponseJson.result : null;
                 const code = reponseJson.code ? reponseJson.code : null;
@@ -126,6 +126,11 @@ class api {
 
     postGlobalTypeVideo(type, onSuccess, onError) {
         const url = `/api/video/index/viewmodule?global_type=${type}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
+    getVideoInfo(id, onSuccess, onError) {
+        const url = `/api/video/info?video_id=${id}`;
         this.getFetch(url, onSuccess, onError);
     }
 }
