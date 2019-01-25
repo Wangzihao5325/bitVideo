@@ -10,8 +10,6 @@ import TitleHeader from '../../components/titleHeader/index';
 import MovieAvater from '../../components/imageBtn/MovieAvater';
 import AdComponent from './ad';
 
-import Api from '../../socket/index';
-
 class CarouselContainer extends PureComponent {
     state = {
         size: { width: Sizes.DEVICE_WIDTH, height: 200 }

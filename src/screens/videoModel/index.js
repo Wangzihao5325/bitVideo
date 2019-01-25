@@ -11,6 +11,7 @@ export default class VideoModel extends PureComponent {
         console.log(videoId);
         if (videoId !== 'undefine_Id') {
             Api.getVideoInfo(videoId, (result, code, message) => {
+                console.log(result);
                 console.log(message);
                 console.log('12345678');
             });
