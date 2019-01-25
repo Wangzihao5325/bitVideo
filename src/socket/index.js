@@ -133,6 +133,7 @@ class api {
         const url = `/api/video/info?video_id=${id}`;
         this.getFetch(url, onSuccess, onError);
     }
+
 }
 
 export default new api();

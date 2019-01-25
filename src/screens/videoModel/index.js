@@ -5,7 +5,7 @@ import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 
 export default class VideoModel extends PureComponent {
     goBack = () => {
-        this.props.navigation.goBack()
+        this.props.navigation.goBack();
     }
     render() {
         return (
