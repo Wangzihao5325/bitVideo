@@ -6,7 +6,7 @@ export default class AdModule extends PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.container} source={{ uri: this.props.data.cover_path }} />
+                <Image style={styles.image} source={{ uri: this.props.data.cover_path }} />
                 <Text style={styles.titleText}>{this.props.data.title}</Text>
                 <Text style={styles.remarkText}>{this.props.data.remark}</Text>
             </View>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: Sizes.DEVICE_WIDTH,
-        height: 100,
+        height: 130,
     },
     titleText: {
         marginLeft: 15,
