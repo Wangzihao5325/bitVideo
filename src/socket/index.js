@@ -14,17 +14,24 @@ class api {
                 const result = reponseJson.result ? reponseJson.result : null;
                 const code = reponseJson.code ? reponseJson.code : null;
                 const message = reponseJson.message ? reponseJson.message : null;
-                if (message === 'success') {
-                    try {
-                        onSuccess(result, code, message);
-                    } catch (error) {
-                        console.log(error);
-                    }
-                } else {
+                try {
+                    onSuccess(result, code, message);
+                } catch (error) {
+                    // console.log(error);
                     onError ? onError(result, code, message) : console.log(responseJson);
                 }
             }
         )
+    }
+
+    getFetch112(url, onSuccess, onError) {
+        let fullUrl = Config.SERVICE_URL + url;
+        let header = { Accept: 'application/json' };
+        if (Variables.account.token) {
+            header = { Accept: 'application/json', Authorization: Variables.account.token }
+        }
+        let obj = { method: 'GET', headers: header }
+        fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit)).then((reponseJson) => console.log(reponseJson))
     }
 
     postFetch(url, formData, onSuccess, onError) {
@@ -131,7 +138,7 @@ class api {
 
     getVideoInfo(id, onSuccess, onError) {
         const url = `/api/video/info?video_id=${id}`;
-        this.getFetch(url, onSuccess, onError);
+        this.getFetch112(url, onSuccess, onError);
     }
 
 }

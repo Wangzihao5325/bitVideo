@@ -71,11 +71,7 @@ class VideoContainer extends PureComponent {
 
     movieAvaterOnPress = (id) => {
         const { mainNavigation } = this.context;
-        mainNavigation.navigate('VideoModel');
-        // Api.getVideoInfo(id, (e) => {
-        //     console.log(e);
-        //     console.log('12345678');
-        // });
+        mainNavigation.navigate('VideoModel', { videoId: id });
     }
 
     render() {
