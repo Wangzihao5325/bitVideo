@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         height: verHeight,
         width: verWidth - 2,
         marginHorizontal: 1,
+        borderRadius: 5
     },
     titleText: {
         color: 'rgb(33,33,33)',
@@ -67,5 +68,6 @@ const styles = StyleSheet.create({
         height: hoHeight,
         width: hoWidth - 2,
         marginHorizontal: 1,
+        borderRadius: 5
     }
 });

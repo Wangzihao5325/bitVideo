@@ -17,7 +17,7 @@ export default class AdModule extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         width: Sizes.DEVICE_WIDTH,
-        height: 160,
+        height: 175,
         display: 'flex',
         marginTop: 10
     },
@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
         height: 130,
     },
     titleText: {
-        marginLeft: 15,
+        marginLeft: 5,
         color: 'rgb(52,52,52)',
         fontSize: 14,
         marginTop: 5
     },
     remarkText: {
-        marginLeft: 15,
+        marginLeft: 5,
         color: 'rgb(162,162,162)',
         fontSize: 12,
         marginTop: 10

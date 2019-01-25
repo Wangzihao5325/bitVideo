@@ -62,7 +62,7 @@ class Content extends PureComponent {
                         modules.push(<BannerModule key={index} data={item.m_banner_data} />);
                         break;
                     case 'm_video':
-                        modules.push(<VideoModule key={index} limit={item.client_limit} clientStyle={item.client_style} data={item.m_video_data} />);
+                        modules.push(<VideoModule title={item.title} key={index} limit={item.client_limit} clientStyle={item.client_style} data={item.m_video_data} />);
                         break;
                     case 'm_ad':
                         modules.push(<AdModule key={index} data={item.m_ad_data[0]} />);

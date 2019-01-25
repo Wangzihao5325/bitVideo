@@ -13,7 +13,7 @@ export default class TitleHeader extends PureComponent {
                 <Image style={styles.headerImage} source={this.props.imageSource} />
                 <Text style={styles.headerText}>{this.props.title}</Text>
                 <View style={styles.headerFlexView}>
-                    <Text onPress={this.show_more} style={styles.more}>{this.props.btnTitle}</Text>
+                    {this.props.btnTitle && <Text onPress={this.show_more} style={styles.more}>{this.props.btnTitle}</Text>}
                 </View>
             </View>
         );
