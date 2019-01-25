@@ -17,7 +17,7 @@ class SUDOKU extends PureComponent {
     }
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, alignItems: 'center' }}>
                 <TitleHeader style={{ marginTop: 20 }} imageSource={require('../../image/main/global_movie.png')} title={this.props.title} />
                 <FlatList
                     horizontal={false}
