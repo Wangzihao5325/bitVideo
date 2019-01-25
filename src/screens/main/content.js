@@ -6,50 +6,50 @@ import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
 
-import TitleHeader from '../../components/titleHeader/index';
-import MovieAvater from '../../components/imageBtn/MovieAvater';
+// import TitleHeader from '../../components/titleHeader/index';
+// import MovieAvater from '../../components/imageBtn/MovieAvater';
 import AdModule from '../../components/modules/ad';
 import BannerModule from '../../components/modules/banner';
+import VideoModule from '../../components/modules/video';
 
+// class VideoContainer extends PureComponent {
+//     static contextTypes = {
+//         mainNavigation: PropTypes.object
+//     }
 
-class VideoContainer extends PureComponent {
-    static contextTypes = {
-        mainNavigation: PropTypes.object
-    }
+//     state = {
+//         data: []
+//     };
 
-    state = {
-        data: []
-    };
+//     static getDerivedStateFromProps(props, state) {
+//         let videoData = props.data.filter((item) => { return item.module === 'recommend_hot' });
+//         videoData = videoData[0].m_video_data;
 
-    static getDerivedStateFromProps(props, state) {
-        let videoData = props.data.filter((item) => { return item.module === 'recommend_hot' });
-        videoData = videoData[0].m_video_data;
+//         return {
+//             data: videoData
+//         }
+//     }
 
-        return {
-            data: videoData
-        }
-    }
+//     movieAvaterOnPress = (id) => {
+//         const { mainNavigation } = this.context;
+//         mainNavigation.navigate('VideoModel', { videoId: id });
+//     }
 
-    movieAvaterOnPress = (id) => {
-        const { mainNavigation } = this.context;
-        mainNavigation.navigate('VideoModel', { videoId: id });
-    }
+//     render() {
 
-    render() {
-
-        return (
-            <View>
-                <FlatList
-                    horizontal={false}
-                    numColumns={3}
-                    data={this.state.data}
-                    renderItem={({ item }) => <MovieAvater onPress={() => this.movieAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
-                    columnWrapperStyle={{ marginTop: 20 }}
-                />
-            </View>
-        );
-    }
-}
+//         return (
+//             <View>
+//                 <FlatList
+//                     horizontal={false}
+//                     numColumns={3}
+//                     data={this.state.data}
+//                     renderItem={({ item }) => <MovieAvater onPress={() => this.movieAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} intro={item.intro} />}
+//                     columnWrapperStyle={{ marginTop: 20 }}
+//                 />
+//             </View>
+//         );
+//     }
+// }
 class Content extends PureComponent {
     render() {
         console.log(this.props.data);
@@ -62,6 +62,7 @@ class Content extends PureComponent {
                         modules.push(<BannerModule key={index} data={item.m_banner_data} />);
                         break;
                     case 'm_video':
+                        modules.push(<VideoModule key={index} limit={item.client_limit} clientStyle={item.client_style} data={item.m_video_data} />);
                         break;
                     case 'm_ad':
                         modules.push(<AdModule key={index} data={item.m_ad_data[0]} />);
@@ -70,7 +71,7 @@ class Content extends PureComponent {
             })
         }
         return (
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ display: 'flex', alignItems: 'center' }}>
                 {modules}
             </ScrollView>
         );
