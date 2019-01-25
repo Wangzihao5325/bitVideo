@@ -8,6 +8,7 @@ import * as In18 from '../../global/In18';
 import Carousel from 'react-native-looped-carousel';
 import TitleHeader from '../../components/titleHeader/index';
 import MovieAvater from '../../components/imageBtn/MovieAvater';
+import AdComponent from './ad';
 
 import Api from '../../socket/index';
 
@@ -103,6 +104,7 @@ class Content extends PureComponent {
                     btnTitle={In18.MORE_TEXT}
                     showMore={() => { console.log('11223344') }} />
                 {this.props.data && <VideoContainer data={this.props.data} />}
+                {this.props.data && <AdComponent />}
             </ScrollView>
         );
     }
