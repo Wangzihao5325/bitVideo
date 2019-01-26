@@ -76,10 +76,14 @@ const HOT_MOVIE = '最新榜单专题推荐';
 
 //视频详情页面
 const INTRODUCE_TEXT = '简介';
-
+const TIMES_PLAY = "次播放";
+const VIDEO_COME_FROM = '影片来源';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
+
+//单位
+const TEN_THOUSAND = '万';
 
 export {
     MAIN_PAGE_TITLE,
@@ -153,6 +157,10 @@ export {
     HOT_MOVIE,
 
     INTRODUCE_TEXT,
+    TIMES_PLAY,
+    VIDEO_COME_FROM,
 
     COUNTRY_CODE,
+
+    TEN_THOUSAND,
 };

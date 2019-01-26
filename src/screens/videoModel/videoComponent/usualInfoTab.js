@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as Sizes from '../../../global/Sizes';
+import * as MathUtil from '../../../global/utils/MathUtil';
+import * as In18 from '../../../global/In18';
 
 import IconBtn from '../../../components/imageBtn/IconBtnWithTitle';
 
@@ -9,22 +11,25 @@ class UsualInfoTab extends PureComponent {
     render() {
         let types = [];
         if (this.props.typeArr && this.props.typeArr.length > 0) {
-            console.log('11111111');
             this.props.typeArr.forEach((item, index) => {
                 let typeText = item.type_label;
                 types.push(<Text key={index} style={styles.typeText}>{typeText}</Text>);
             });
         }
-        console.log(types);
+        let playCount = 0;
+        if (this.props.fullData) {
+            playCount = this.props.fullData.play_count;
+        }
+        playCount = MathUtil.playCountTransform(playCount);
         return (
             <View style={styles.container}>
                 <View style={{ flex: 2 }}>
                     <View style={styles.flexView1}>
-                        <Text style={styles.playTimesText} key={10000}>8.57万 次播放</Text>
+                        <Text style={styles.playTimesText} key={10000}>{`${playCount} ${In18.TIMES_PLAY}`}</Text>
                         {types.length > 0 && types}
                     </View>
                     <View style={styles.flexView2}>
-                        <Text style={styles.sourceTitleText}>影片来源</Text>
+                        <Text style={styles.sourceTitleText}>{In18.VIDEO_COME_FROM}</Text>
                     </View>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -38,7 +43,8 @@ class UsualInfoTab extends PureComponent {
 
 function mapState2Props(store) {
     return {
-        typeArr: store.videoDeatilInfo.type
+        typeArr: store.videoDeatilInfo.type,
+        fullData: store.videoDeatilInfo.fullData
     }
 }
 
