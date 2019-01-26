@@ -22,7 +22,7 @@ export default class IconBtn extends PureComponent {
                         style={styles.image}
                         source={this.props.source}
                     />
-                    <Text style={styles.title}>{this.props.title}</Text>
+                    <Text style={[styles.title, this.props.titleStyle]}>{this.props.title}</Text>
                 </View>
             </TouchableHighlight>
         );

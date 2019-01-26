@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-
 import * as Sizes from '../../../global/Sizes';
+
+import IconBtn from '../../../components/imageBtn/IconBtnWithTitle';
 
 class UsualInfoTab extends PureComponent {
     render() {
@@ -26,7 +27,10 @@ class UsualInfoTab extends PureComponent {
                         <Text style={styles.sourceTitleText}>影片来源</Text>
                     </View>
                 </View>
-                <View style={{ flex: 1 }}></View>
+                <View style={{ flex: 1, flexDirection: 'row' }}>
+                    <IconBtn titleStyle={{ fontSize: 12, color: 'rgb(32,32,32)' }} source={require('../../../image/videoDetail/feedBack.png')} title='反馈' onPress={() => console.log('123')} />
+                    <IconBtn titleStyle={{ fontSize: 12, color: 'rgb(32,32,32)' }} source={require('../../../image/videoDetail/video_share.png')} title='分享' onPress={() => console.log('123')} />
+                </View>
             </View>
         );
     }
