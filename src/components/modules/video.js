@@ -15,15 +15,38 @@ class TextBtn extends PureComponent {
 }
 class SUDOKU extends PureComponent {
     state = {
-        data: []
+        data: [],
+        page: 1,
+        totalPage: 1
     }
 
-    static getDerivedStateFromProps(props, state) {
-        let showData = props.data.slice(0, props.limit);
-        return {
-            data: showData
-        }
+    componentDidMount() {
+        let showData = this.props.data.slice(0, this.props.limit);
+        let totalPage = Math.ceil(this.props.data.length / this.props.limit);
+        this.setState({
+            data: showData,
+            page: 1,
+            totalPage: totalPage
+        });
     }
+
+    _moreVideo = () => {
+        console.log('more video');
+    }
+
+    _haveChange = () => {
+        let newPage = this.state.page + 1;
+        let newData = [];
+        if (newPage > this.state.totalPage) {
+            newPage = 1;
+        }
+        newData = this.props.data.slice((newPage - 1) * this.props.limit, newPage * this.props.limit);
+        this.setState({
+            page: newPage,
+            data: newData
+        });
+    }
+
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', paddingBottom: 3 }}>
@@ -36,8 +59,8 @@ class SUDOKU extends PureComponent {
                     columnWrapperStyle={{ marginTop: 20 }}
                 />
                 <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title='更多' btnPress={() => console.log('111')} /></View>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title='换一换' btnPress={() => console.log('222')} /></View>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title='更多' btnPress={this._moreVideo} /></View>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title='换一换' btnPress={this._haveChange} /></View>
                 </View>
             </View>
         );
