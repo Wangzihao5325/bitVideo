@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { ScrollView, View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import { setMainPageData, setPageInfo, addMainPageData } from '../../store/actions/mainPageDataAction';
 import store from '../../store/index';
 import { connect } from 'react-redux';
@@ -11,7 +12,13 @@ import BannerModule from '../../components/modules/banner';
 import VideoModule from '../../components/modules/video';
 
 class Item extends PureComponent {
+
+    static contextTypes = {
+        mainNavigation: PropTypes.object
+    }
+
     render() {
+        const { mainNavigation } = this.context;
         switch (this.props.item.client_module) {
             case 'm_banner':
                 if (this.props.item.m_banner_data.length > 0) {//有可能会出现 arr.length=0 的情况
@@ -19,7 +26,7 @@ class Item extends PureComponent {
                 }
             case 'm_video':
                 if (this.props.item.m_video_data.length > 0) {
-                    return (<VideoModule title={this.props.item.title} key={this.props.index} limit={this.props.item.client_limit} clientStyle={this.props.item.client_style} data={this.props.item.m_video_data} />);
+                    return (<VideoModule title={this.props.item.title} key={this.props.index} limit={this.props.item.client_limit} clientStyle={this.props.item.client_style} data={this.props.item.m_video_data} navi={mainNavigation} />);
                 }
             case 'm_ad':
                 if (this.props.item.m_ad_data.length > 0) {
