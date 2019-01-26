@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
+import store from '../../store/index';
+import { set_video_full_data } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 
 import Video from 'react-native-video';
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import VideoHeader from './videoComponent/videoHeader';
+import UsualInfoTab from './videoComponent/usualInfoTab';
 
 export default class VideoModel extends PureComponent {
     componentDidMount() {
@@ -15,9 +18,10 @@ export default class VideoModel extends PureComponent {
                 if (result) {
                     console.log(result);
                     console.log('we have a result');
+                    store.dispatch(set_video_full_data(result));
+                } else {
+                    console.log(message);
                 }
-                console.log(message);
-                console.log('12345678');
             });
         }
     }
@@ -44,6 +48,7 @@ export default class VideoModel extends PureComponent {
                     style={styles.bgVideo}
                 /> */}
                 <VideoHeader />
+                <UsualInfoTab />
             </SafeAreaView>
         );
     }
