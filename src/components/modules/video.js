@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, FlatList, View, Text, TouchableHighlight } from 'react-native';
+import * as In18 from '../../global/In18';
 
 import VideoAvater from '../imageBtn/VideoAvater';
 import TitleHeader from '../../components/titleHeader/index';
@@ -66,9 +67,20 @@ class SUDOKU extends PureComponent {
         );
     }
 }
-// class GUNDONG extends PureComponent {
-
-// }
+class GUNDONG extends PureComponent {
+    render() {
+        return (
+            <View style={{ flex: 1, alignItems: 'center', paddingBottom: 3 }}>
+                <TitleHeader style={{ marginTop: 20 }} imageSource={require('../../image/main/global_movie.png')} title={this.props.title} btnTitle={In18.MORE_TEXT} />
+                <FlatList
+                    horizontal={true}
+                    data={this.props.data}
+                    renderItem={({ item }) => <VideoAvater isVertical={this.props.isVertical} onPress={() => this.movieAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} />}
+                />
+            </View>
+        );
+    }
+}
 export default class VideoModule extends PureComponent {
     render() {
         if (this.props.clientStyle == 's_video_sudoku_3') {
@@ -78,10 +90,10 @@ export default class VideoModule extends PureComponent {
             return (<SUDOKU data={this.props.data} limit={this.props.limit} lineNum={2} isVertical={false} title={this.props.title} />);
         }
         if (this.props.clientStyle == 's_video_gundong_shu') {
-            // return (<GUNDONG data={this.props.data} isVertical={true} />);
+            return (<GUNDONG data={this.props.data} isVertical={true} />);
         }
         if (this.props.clientStyle == 's_video_gundong_heng') {
-            // return (<GUNDONG data={this.props.data} isVertical={false} />);
+            return (<GUNDONG data={this.props.data} isVertical={false} />);
         }
     }
 }
