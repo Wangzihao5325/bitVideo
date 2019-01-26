@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import Api from '../../socket/index';
 import store from '../../store/index';
-import { setMainPageData, setGlobalTypeData, setNowGlobalType } from '../../store/actions/mainPageDataAction';
+import { setMainPageData, setGlobalTypeData, setPageInfo, setNowGlobalType } from '../../store/actions/mainPageDataAction';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
 
@@ -26,12 +26,12 @@ class Header extends PureComponent {
             });
             this.setState({ globalType: typeArr });
             let defalutType = result[0].key;
-            store.dispatch(setNowGlobalType(defalutType));
-            Api.postGlobalTypeVideo(defalutType, (e) => {
+            // store.dispatch(setNowGlobalType(defalutType));设置data时会自动设置type
+            Api.postGlobalTypeVideo(defalutType, null, (e) => {
                 console.log(e);
                 if (e.data) {
                     store.dispatch(setMainPageData(e.data));
-
+                    store.dispatch(setPageInfo(e.current_page, e.last_page));
                 }
             });
         });
@@ -52,10 +52,11 @@ class Header extends PureComponent {
             });
             if (reg.length > 0) {
                 let typeKey = reg[0].key;
-                Api.postGlobalTypeVideo(typeKey, (e) => {
+                Api.postGlobalTypeVideo(typeKey, null, (e) => {
                     console.log(e);
                     if (e.data) {
                         store.dispatch(setMainPageData(e.data));
+                        store.dispatch(setPageInfo(e.current_page, e.last_page));
                     }
                 });
             }

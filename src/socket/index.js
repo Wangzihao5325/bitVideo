@@ -121,8 +121,19 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
-    postGlobalTypeVideo(type, onSuccess, onError) {
-        const url = `/api/video/index/viewmodule?global_type=${type}`;
+    postGlobalTypeVideo(type, page, onSuccess, onError) {
+        let url = `/api/video/index/viewmodule?global_type=${type}`;
+        if (page) {
+            url = `/api/video/index/viewmodule?global_type=${type}&page=${page}`;
+        }
+        this.getFetch(url, onSuccess, onError);
+    }
+
+    postGlobalTypeVideo111(type, page, onSuccess, onError) {
+        let url = `/api/video/index/viewmodule?global_type=${type}`;
+        if (page) {
+            url = `/api/video/index/viewmodule?global_type=${type}&page=${page}`;
+        }
         this.getFetch(url, onSuccess, onError);
     }
 
