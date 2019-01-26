@@ -10,8 +10,6 @@ import VideoHeader from './videoComponent/videoHeader';
 export default class VideoModel extends PureComponent {
     componentDidMount() {
         const videoId = this.props.navigation.getParam('videoId', 'undefine_Id');
-        console.log('kkkkkkkkkkk');
-        console.log(videoId);
         if (videoId !== 'undefine_Id') {
             Api.getVideoInfo(videoId, (result, code, message) => {
                 if (result) {
