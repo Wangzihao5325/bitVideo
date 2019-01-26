@@ -20,8 +20,6 @@ const reducer = (state = initialState, action) => {
         case Types.ADD_MAIN_PAGE_DATA:
             {
                 let newData = _.concat(state.data, action.data);
-                console.log('qwqwqwqwqwqwqw');
-                console.log(newData);
                 return {
                     ...state,
                     data: newData,

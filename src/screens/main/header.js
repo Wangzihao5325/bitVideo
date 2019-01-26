@@ -28,7 +28,6 @@ class Header extends PureComponent {
             let defalutType = result[0].key;
             // store.dispatch(setNowGlobalType(defalutType));设置data时会自动设置type
             Api.postGlobalTypeVideo(defalutType, null, (e) => {
-                console.log(e);
                 if (e.data) {
                     store.dispatch(setMainPageData(e.data));
                     store.dispatch(setPageInfo(e.current_page, e.last_page));
@@ -53,7 +52,6 @@ class Header extends PureComponent {
             if (reg.length > 0) {
                 let typeKey = reg[0].key;
                 Api.postGlobalTypeVideo(typeKey, null, (e) => {
-                    console.log(e);
                     if (e.data) {
                         store.dispatch(setMainPageData(e.data));
                         store.dispatch(setPageInfo(e.current_page, e.last_page));
