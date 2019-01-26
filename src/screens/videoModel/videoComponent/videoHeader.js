@@ -1,19 +1,24 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 
 import IconBtn from '../../../components/imageBtn/IconBtn';
 
-export default class VideoHeader extends PureComponent {
+class VideoHeader extends PureComponent {
     moreIntro = () => {
         console.log('show more intro');
     }
     render() {
+        let title = '';
+        if (this.props.fullData) {
+            title = this.props.fullData.title
+        }
         return (
             <View style={styles.container}>
                 <View style={styles.flexView2}>
-                    <Text style={styles.titleText}>无敌破坏王2：打闹互联网</Text>
+                    <Text style={styles.titleText}>{title}</Text>
                 </View>
                 <View style={styles.flexView1}>
                     <Text style={styles.introText}>{In18.INTRODUCE_TEXT}</Text>
@@ -23,6 +28,14 @@ export default class VideoHeader extends PureComponent {
         );
     }
 }
+function mapState2Props(store) {
+    return {
+        fullData: store.videoDeatilInfo.fullData
+    }
+}
+
+export default connect(mapState2Props)(VideoHeader);
+
 const styles = StyleSheet.create({
     container: {
         height: 22,

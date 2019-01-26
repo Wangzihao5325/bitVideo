@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import * as Sizes from '../../../global/Sizes';
 import * as MathUtil from '../../../global/utils/MathUtil';
 import * as In18 from '../../../global/In18';
 
