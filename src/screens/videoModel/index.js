@@ -9,6 +9,7 @@ import Video from 'react-native-video';
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import VideoHeader from './videoComponent/videoHeader';
 import UsualInfoTab from './videoComponent/usualInfoTab';
+import CommentTab from './videoComponent/commentTab';
 
 export default class VideoModel extends PureComponent {
     componentDidMount() {
@@ -49,6 +50,7 @@ export default class VideoModel extends PureComponent {
                 /> */}
                 <VideoHeader />
                 <UsualInfoTab />
+                <CommentTab />
             </SafeAreaView>
         );
     }

@@ -78,6 +78,7 @@ const HOT_MOVIE = '最新榜单专题推荐';
 const INTRODUCE_TEXT = '简介';
 const TIMES_PLAY = "次播放";
 const VIDEO_COME_FROM = '影片来源';
+const COMMENT_TEXT = '热评';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -159,6 +160,7 @@ export {
     INTRODUCE_TEXT,
     TIMES_PLAY,
     VIDEO_COME_FROM,
+    COMMENT_TEXT,
 
     COUNTRY_CODE,
 

@@ -10,5 +10,5 @@ const playCountTransform = function (num) {
 }
 
 export {
-    playCountTransform,
+    playCountTransform
 };
