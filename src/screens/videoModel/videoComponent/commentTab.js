@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as MathUtil from '../../../global/utils/MathUtil';
 import * as In18 from '../../../global/In18';
+
+import IconBtn from '../../../components/imageBtn/IconBtn';
 
 class CommentTab extends PureComponent {
     render() {
@@ -15,6 +17,12 @@ class CommentTab extends PureComponent {
             <View style={styles.container}>
                 <Image style={styles.commentImage} source={require('../../../image/videoDetail/comment.png')} />
                 <Text style={styles.commentText}>{`${commentSum}${In18.COMMENT_TEXT}`}</Text>
+                <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
+                    <Text style={styles.text2}>902人</Text>
+                    <IconBtn style={{ marginRight: 5 }} source={require('../../../image/videoDetail/hand_unClick.png')} height={22} width={22} />
+                    <Text style={styles.text1}>0.1万</Text>
+                    <IconBtn style={{ marginRight: 5 }} source={require('../../../image/videoDetail/hand_click.png')} height={22} width={22} imageStyle={{ transform: [{ rotate: '180deg' }] }} />
+                </View>
             </View>
         );
     }
@@ -29,7 +37,7 @@ export default connect(mapState2Props)(CommentTab);
 
 const styles = StyleSheet.create({
     container: {
-        height: 70,
+        height: 50,
         width: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -44,6 +52,17 @@ const styles = StyleSheet.create({
     },
     commentText: {
         fontSize: 12,
-        color: 'rgb(151,151,151)'
+        color: 'rgb(151,151,151)',
+        marginLeft: 18
+    },
+    text1: {
+        fontSize: 12,
+        color: 'rgb(151,151,151)',
+        marginRight: 18
+    },
+    text2: {
+        fontSize: 12,
+        color: 'rgb(151,151,151)',
+        marginRight: 15
     }
 });
