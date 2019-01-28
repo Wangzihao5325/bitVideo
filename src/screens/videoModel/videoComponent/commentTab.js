@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as MathUtil from '../../../global/utils/MathUtil';
 import * as In18 from '../../../global/In18';
+import Api from '../../../socket/index';
 
 import IconBtn from '../../../components/imageBtn/IconBtn';
 
@@ -43,11 +44,30 @@ class CommentTab extends PureComponent {
 
     negativePress = () => {
         console.log('negative!!!');
+        if (this.props.fullData) {
+            let id = this.props.fullData.id;
+            let action = 'negative';
+            let stateReg = this.state.isNegative ? 0 : 1;
+            Api.postRecommendOrNegative(id, action, stateReg, (e) => {
+                if (e) {
+                    console.log(e);
+                }
+            });
+        }
     }
 
     recommendPress = () => {
         console.log('recommend!!!');
-        
+        if (this.props.fullData) {
+            let id = this.props.fullData.id;
+            let action = 'recommend';
+            let stateReg = this.state.isNegative ? 0 : 1;
+            Api.postRecommendOrNegative(id, action, stateReg, (e) => {
+                if (e) {
+                    console.log(e);
+                }
+            });
+        }
     }
 
     render() {

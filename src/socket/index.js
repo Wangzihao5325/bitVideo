@@ -28,7 +28,7 @@ class api {
         let fullUrl = Config.SERVICE_URL + url;
         let header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data' };
         if (Variables.account.token) {
-            header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data', Authorization: Variables.account.token }
+            header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${Variables.account.token}` }
         }
         let obj = { method: 'POST', headers: header, body: formData };
         fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit)).then(
@@ -48,6 +48,16 @@ class api {
             }
         )
     }
+
+    // postFetchTest(url, formData, onSuccess, onError) {
+    //     let fullUrl = Config.SERVICE_URL + url;
+    //     let header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data' };
+    //     if (Variables.account.token) {
+    //         header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data', Authorization: Variables.account.token }
+    //     }
+    //     let obj = { method: 'POST', headers: header, body: formData };
+    //     fetch(fullUrl, obj).then((response) => console.log(response));
+    // }
 
     getGlobalType(onSuccess, onError) {
         const url = '/api/video/globaltype';
@@ -140,6 +150,15 @@ class api {
     getVideoInfo(id, onSuccess, onError) {
         const url = `/api/video/info?video_id=${id}`;
         this.getFetch(url, onSuccess, onError);
+    }
+
+    postRecommendOrNegative(id, action, status, onSuccess, onError) {
+        const url = '/api/video/user/appraise/add';
+        let formData = new FormData();
+        formData.append('video_id', id);
+        formData.append('action', action);
+        formData.append('status', status);
+        this.postFetch(url, formData, onSuccess, onError);
     }
 
 }
