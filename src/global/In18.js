@@ -85,6 +85,7 @@ const COUNTRY_CODE = '国家代码';
 
 //单位
 const TEN_THOUSAND = '万';
+const PEOPLE_TEXT = '人';
 
 export {
     MAIN_PAGE_TITLE,
@@ -165,4 +166,5 @@ export {
     COUNTRY_CODE,
 
     TEN_THOUSAND,
+    PEOPLE_TEXT,
 };
