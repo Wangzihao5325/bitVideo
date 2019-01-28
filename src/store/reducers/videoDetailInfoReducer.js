@@ -4,7 +4,8 @@ const initialState = {
     fullData: null,
     videoSource: null,
     author: null,
-    type: null
+    type: null,
+    recommendAndNegative: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,7 +16,13 @@ const reducer = (state = initialState, action) => {
                 fullData: action.data,
                 videoSource: action.source,
                 author: action.author,
-                type: action.videoType
+                type: action.videoType,
+                recommendAndNegative: action.recommendAndNegative
+            };
+        case Types.REFRESH_VIDEO_RECOMMEND_NEGATIVE_DATA:
+            return {
+                ...state,
+                recommendAndNegative: action.data
             };
         default: return state;
     }

@@ -20,6 +20,18 @@ export function set_video_full_data(fullData) {
     };
 }
 
+export function refresh_video_recommend_negative_data(recommend_sum, negative_sum, user_recommend, user_negative) {
+    let data = {
+        recommend_sum,
+        negative_sum,
+        user_recommend,
+        user_negative
+    };
+    return {
+        type: Types.REFRESH_VIDEO_RECOMMEND_NEGATIVE_DATA,
+        data: data
+    };
+}
 // export function test_min() {
 //     return { type: Types.TEST_DECREMENT };
 // }

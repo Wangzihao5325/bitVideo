@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
+import store from '../../../store/index';
+import { refresh_video_recommend_negative_data } from '../../../store/actions/videoDetailInfoAction';
 import * as MathUtil from '../../../global/utils/MathUtil';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
@@ -18,6 +20,7 @@ class CommentTab extends PureComponent {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
+        console.log('dddddddddddd');
         let commentSum = 0;
         let recommendSum = 0;
         let negativeSum = 0;
@@ -35,6 +38,7 @@ class CommentTab extends PureComponent {
         commentSum = MathUtil.playCountTransform(commentSum);
         recommendSum = MathUtil.commentCountTransform(recommendSum);
         negativeSum = MathUtil.commentCountTransform(negativeSum);
+        console.log(`recommendSum:${recommendSum},negativeSum:${negativeSum}`)
         return {
             commentSum,
             recommendSum,
@@ -53,6 +57,19 @@ class CommentTab extends PureComponent {
             Api.postRecommendOrNegative(id, action, stateReg, (e) => {
                 if (e) {
                     console.log(e);
+                    let newNegative = e.negative;
+                    let newRecommend = e.recommend;
+                    let newNegativeSum = this.props.recommendAndNegative.negative_sum;
+                    let newRecommendSum = this.props.recommendAndNegative.recommend_sum;
+                    if (stateReg === 0) {
+                        newNegativeSum = newNegativeSum - 1;
+                    } else {
+                        newNegativeSum = newNegativeSum + 1;
+                        if (this.state.isRecommend) {
+                            newRecommendSum = newRecommendSum - 1;
+                        }
+                    }
+                    store.dispatch(refresh_video_recommend_negative_data(newRecommendSum, newNegativeSum, newRecommend, newNegative));
                 }
             });
         }
@@ -63,10 +80,23 @@ class CommentTab extends PureComponent {
         if (this.props.fullData) {
             let id = this.props.fullData.id;
             let action = 'recommend';
-            let stateReg = this.state.isNegative ? 0 : 1;
+            let stateReg = this.state.isRecommend ? 0 : 1;
             Api.postRecommendOrNegative(id, action, stateReg, (e) => {
                 if (e) {
                     console.log(e);
+                    let newNegative = e.negative;
+                    let newRecommend = e.recommend;
+                    let newNegativeSum = this.props.recommendAndNegative.negative_sum;
+                    let newRecommendSum = this.props.recommendAndNegative.recommend_sum;
+                    if (stateReg === 0) {
+                        newRecommendSum = newRecommendSum - 1;
+                    } else {
+                        newRecommendSum = newRecommendSum + 1;
+                        if (this.state.isNegative) {
+                            newNegativeSum = newNegativeSum - 1;
+                        }
+                    }
+                    store.dispatch(refresh_video_recommend_negative_data(newRecommendSum, newNegativeSum, newRecommend, newNegative));
                 }
             });
         }
@@ -80,9 +110,9 @@ class CommentTab extends PureComponent {
                 <Image style={styles.commentImage} source={require('../../../image/videoDetail/comment.png')} />
                 <Text style={styles.commentText}>{`${this.state.commentSum}${In18.COMMENT_TEXT}`}</Text>
                 <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
-                    <Text style={styles.text2}>{this.state.recommendSum}</Text>
+                    <Text style={styles.text2}>{this.state.negativeSum}</Text>
                     <IconBtn onPress={this.negativePress} style={{ marginRight: 5 }} source={negativeImageSource} height={22} width={22} />
-                    <Text style={styles.text1}>{this.state.negativeSum}</Text>
+                    <Text style={styles.text1}>{this.state.recommendSum}</Text>
                     <IconBtn onPress={this.recommendPress} style={{ marginRight: 5 }} source={recommendImageSource} height={22} width={22} imageStyle={{ transform: [{ rotate: '180deg' }] }} />
                 </View>
             </View>
