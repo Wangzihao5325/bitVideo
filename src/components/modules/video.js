@@ -21,14 +21,24 @@ class SUDOKU extends PureComponent {
         totalPage: 1
     }
 
-    componentDidMount() {
-        let showData = this.props.data.slice(0, this.props.limit);
-        let totalPage = Math.ceil(this.props.data.length / this.props.limit);
-        this.setState({
-            data: showData,
-            page: 1,
-            totalPage: totalPage
-        });
+    static getDerivedStateFromProps(nextProps, prevState) {
+        let showData = [];
+        let totalPage = Math.ceil(nextProps.data.length / nextProps.limit);
+        if (prevState.page <= totalPage) {
+            showData = nextProps.data.slice((prevState.page - 1) * nextProps.limit, prevState.page * nextProps.limit);
+            return {
+                data: showData,
+                totalPage: totalPage
+            }
+        } else {
+            showData = nextProps.data.slice(0, nextProps.limit);
+            return {
+                data: showData,
+                totalPage: totalPage,
+                page: 1
+            }
+        }
+
     }
 
     _moreVideo = () => {
@@ -37,14 +47,11 @@ class SUDOKU extends PureComponent {
 
     _haveChange = () => {
         let newPage = this.state.page + 1;
-        let newData = [];
         if (newPage > this.state.totalPage) {
             newPage = 1;
         }
-        newData = this.props.data.slice((newPage - 1) * this.props.limit, newPage * this.props.limit);
         this.setState({
             page: newPage,
-            data: newData
         });
     }
 

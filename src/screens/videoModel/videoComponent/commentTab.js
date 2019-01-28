@@ -20,7 +20,6 @@ class CommentTab extends PureComponent {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        console.log('dddddddddddd');
         let commentSum = 0;
         let recommendSum = 0;
         let negativeSum = 0;
@@ -49,7 +48,6 @@ class CommentTab extends PureComponent {
     }
 
     negativePress = () => {
-        console.log('negative!!!');
         if (this.props.fullData) {
             let id = this.props.fullData.id;
             let action = 'negative';
@@ -76,7 +74,6 @@ class CommentTab extends PureComponent {
     }
 
     recommendPress = () => {
-        console.log('recommend!!!');
         if (this.props.fullData) {
             let id = this.props.fullData.id;
             let action = 'recommend';
