@@ -25,10 +25,12 @@ class CommentTab extends PureComponent {
         let isNegative = false;
         if (nextProps.fullData) {
             commentSum = nextProps.fullData.comment_sum;
-            recommendSum = nextProps.fullData.recommend_sum;
-            negativeSum = nextProps.fullData.negative_sum;
-            isRecommend = nextProps.fullData.user_recommend === 0 ? false : true;
-            isNegative = nextProps.fullData.user_negative === 0 ? false : true
+        }
+        if (nextProps.recommendAndNegative) {
+            recommendSum = nextProps.recommendAndNegative.recommend_sum;
+            negativeSum = nextProps.recommendAndNegative.negative_sum;
+            isRecommend = nextProps.recommendAndNegative.user_recommend === 0 ? false : true;
+            isNegative = nextProps.recommendAndNegative.user_negative === 0 ? false : true
         }
         commentSum = MathUtil.playCountTransform(commentSum);
         recommendSum = MathUtil.commentCountTransform(recommendSum);
@@ -89,7 +91,8 @@ class CommentTab extends PureComponent {
 }
 function mapState2Props(store) {
     return {
-        fullData: store.videoDeatilInfo.fullData
+        fullData: store.videoDeatilInfo.fullData,
+        recommendAndNegative: store.videoDeatilInfo.recommendAndNegative
     }
 }
 
