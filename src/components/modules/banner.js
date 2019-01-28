@@ -11,7 +11,7 @@ export default class BannerModule extends PureComponent {
 
     constructor(props) {
         super(props);
-        this.tabs = this.itemGenerator(props.data);
+        // this.tabs = this.itemGenerator(props.data);
     }
 
     _onLayoutDidChange = (e) => {
@@ -32,6 +32,7 @@ export default class BannerModule extends PureComponent {
     }
 
     render() {
+        let tabs = this.itemGenerator(this.props.data);
         return (
             <Carousel
                 delay={4000}
@@ -40,7 +41,7 @@ export default class BannerModule extends PureComponent {
                 pageInfo
             // onAnimateNextPage={(p) => console.log(p)}
             >
-                {this.tabs}
+                {tabs}
             </Carousel>
         );
     }
