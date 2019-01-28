@@ -37,7 +37,6 @@ class CommentTab extends PureComponent {
         commentSum = MathUtil.playCountTransform(commentSum);
         recommendSum = MathUtil.commentCountTransform(recommendSum);
         negativeSum = MathUtil.commentCountTransform(negativeSum);
-        console.log(`recommendSum:${recommendSum},negativeSum:${negativeSum}`)
         return {
             commentSum,
             recommendSum,
@@ -54,7 +53,6 @@ class CommentTab extends PureComponent {
             let stateReg = this.state.isNegative ? 0 : 1;
             Api.postRecommendOrNegative(id, action, stateReg, (e) => {
                 if (e) {
-                    console.log(e);
                     let newNegative = e.negative;
                     let newRecommend = e.recommend;
                     let newNegativeSum = this.props.recommendAndNegative.negative_sum;
@@ -80,7 +78,6 @@ class CommentTab extends PureComponent {
             let stateReg = this.state.isRecommend ? 0 : 1;
             Api.postRecommendOrNegative(id, action, stateReg, (e) => {
                 if (e) {
-                    console.log(e);
                     let newNegative = e.negative;
                     let newRecommend = e.recommend;
                     let newNegativeSum = this.props.recommendAndNegative.negative_sum;
