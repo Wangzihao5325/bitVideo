@@ -32,6 +32,13 @@ export function refresh_video_recommend_negative_data(recommend_sum, negative_su
         data: data
     };
 }
+
+export function set_episode_source(source) {
+    return {
+        type: Types.SET_EPISCODE_SOURCE,
+        data: source
+    }
+}
 // export function test_min() {
 //     return { type: Types.TEST_DECREMENT };
 // }

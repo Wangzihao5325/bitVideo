@@ -3,6 +3,7 @@ import * as Types from '../actionTypes';
 const initialState = {
     fullData: null,
     videoSource: [],
+    episodeSource: [],
     author: null,
     type: null,
     recommendAndNegative: null,
@@ -25,6 +26,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 recommendAndNegative: action.data
+            };
+        case Types.SET_EPISCODE_SOURCE:
+            return {
+                ...state,
+                episodeSource: action.data
             };
         default: return state;
     }
