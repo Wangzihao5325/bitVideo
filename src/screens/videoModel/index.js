@@ -10,6 +10,7 @@ import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import VideoHeader from './videoComponent/videoHeader';
 import UsualInfoTab from './videoComponent/usualInfoTab';
 import CommentTab from './videoComponent/commentTab';
+import SourceTab from './videoComponent/sourceTab';
 
 export default class VideoModel extends PureComponent {
     componentDidMount() {
@@ -51,6 +52,7 @@ export default class VideoModel extends PureComponent {
                 <VideoHeader />
                 <UsualInfoTab />
                 <CommentTab />
+                <SourceTab />
             </SafeAreaView>
         );
     }

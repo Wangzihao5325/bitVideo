@@ -2,10 +2,11 @@ import * as Types from '../actionTypes';
 
 const initialState = {
     fullData: null,
-    videoSource: null,
+    videoSource: [],
     author: null,
     type: null,
-    recommendAndNegative: null
+    recommendAndNegative: null,
+    id: 0,
 }
 
 const reducer = (state = initialState, action) => {
@@ -17,7 +18,8 @@ const reducer = (state = initialState, action) => {
                 videoSource: action.source,
                 author: action.author,
                 type: action.videoType,
-                recommendAndNegative: action.recommendAndNegative
+                recommendAndNegative: action.recommendAndNegative,
+                id: action.data.id
             };
         case Types.REFRESH_VIDEO_RECOMMEND_NEGATIVE_DATA:
             return {
