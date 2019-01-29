@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import store from '../../store/index';
 import { set_video_full_data } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
@@ -13,7 +14,7 @@ import CommentTab from './videoComponent/commentTab';
 import SourceTab from './videoComponent/sourceTab';
 import EpiscodeTab from './videoComponent/episcodeTab';
 
-export default class VideoModel extends PureComponent {
+class VideoModel extends PureComponent {
     componentDidMount() {
         const videoId = this.props.navigation.getParam('videoId', 'undefine_Id');
         if (videoId !== 'undefine_Id') {
@@ -37,18 +38,19 @@ export default class VideoModel extends PureComponent {
     videoError = () => {
         console.log('is on error');
     }
-
+    //'https://pp.605ziyuan.com/20180905/btValsHQ/index.m3u8'
     render() {
         return (
             <SafeAreaView>
                 <View style={{ flex: 1 }} />
-                {/* <Video
-                    source={{ uri: 'https://pp.605ziyuan.com/20180905/btValsHQ/index.m3u8' }}
-                    ref={(ref) => { this.player = ref }}
-                    onBuffer={this.onBuffer}
-                    onError={this.videoError}
-                    style={styles.bgVideo}
-                /> */}
+                {this.props.videoUrl &&
+                    <Video
+                        source={{ uri: this.props.videoUrl }}
+                        ref={(ref) => { this.player = ref }}
+                        onBuffer={this.onBuffer}
+                        onError={this.videoError}
+                        style={styles.bgVideo}
+                    />}
                 <VideoHeader />
                 <UsualInfoTab />
                 <CommentTab />
@@ -58,6 +60,14 @@ export default class VideoModel extends PureComponent {
         );
     }
 }
+function mapState2Props(store) {
+    return {
+        videoType: store.videoPlay.videoType,
+        videoUrl: store.videoPlay.videoUrl,
+    }
+}
+
+export default connect(mapState2Props)(VideoModel);
 
 const styles = StyleSheet.create({
     container: {

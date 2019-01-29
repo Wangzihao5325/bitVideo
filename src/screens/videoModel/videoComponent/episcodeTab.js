@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import store from '../../../store/index';
+import { set_video_url_and_type } from '../../../store/actions/videoPlayAction';
 import _ from 'lodash';
 import * as In18 from '../../../global/In18';
 
@@ -45,6 +47,16 @@ class EpiscodeTab extends PureComponent {
                 newItem.highlightIndex = 0;
                 return newItem
             });
+            if (nextProps.source.length > 0) {
+                let obj = nextProps.source[0];
+                if (obj.play_url_m3u8) {
+                    store.dispatch(set_video_url_and_type(obj.play_url_m3u8, 'm3u8'));
+                } else if (obj.play_url_mp4) {
+                    store.dispatch(set_video_url_and_type(obj.play_url_mp4, 'mp4'));
+                } else if (obj.play_url_h5) {
+                    store.dispatch(set_video_url_and_type(obj.play_url_h5, 'h5'));
+                }
+            }
             return {
                 episodeHighlightIndex: 0,
                 videoId: nextProps.videoId,
@@ -56,6 +68,16 @@ class EpiscodeTab extends PureComponent {
                 newItem.highlightIndex = prevState.episodeHighlightIndex;
                 return newItem
             });
+            if (nextProps.source.length > prevState.episodeHighlightIndex) {
+                let obj = nextProps.source[prevState.episodeHighlightIndex];
+                if (obj.play_url_m3u8) {
+                    store.dispatch(set_video_url_and_type(obj.play_url_m3u8, 'm3u8'));
+                } else if (obj.play_url_mp4) {
+                    store.dispatch(set_video_url_and_type(obj.play_url_mp4, 'mp4'));
+                } else if (obj.play_url_h5) {
+                    store.dispatch(set_video_url_and_type(obj.play_url_h5, 'h5'));
+                }
+            }
             return {
                 source: sourceWithHighlightIndex
             }
