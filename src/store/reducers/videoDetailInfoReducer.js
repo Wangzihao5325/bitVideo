@@ -4,6 +4,7 @@ const initialState = {
     fullData: null,
     videoSource: [],
     episodeSource: [],
+    totalEpisodeNum: 0,
     author: null,
     type: null,
     recommendAndNegative: null,
@@ -30,7 +31,8 @@ const reducer = (state = initialState, action) => {
         case Types.SET_EPISCODE_SOURCE:
             return {
                 ...state,
-                episodeSource: action.data
+                episodeSource: action.data,
+                totalEpisodeNum: action.episodeTotalNum
             };
         default: return state;
     }

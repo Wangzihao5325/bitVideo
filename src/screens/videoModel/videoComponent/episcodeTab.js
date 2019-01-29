@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, Text, View, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import * as In18 from '../../../global/In18';
+
+import IconBtn from '../../../components/imageBtn/IconBtn';
 
 class Btn extends PureComponent {
     state = {
@@ -65,9 +68,22 @@ class EpiscodeTab extends PureComponent {
         });
     }
 
+    moreIntro = () => {
+        console.log('go to select episode!');
+    }
+
     render() {
         return (
             <View style={{ marginTop: 10 }}>
+                <View style={styles.titleContainer}>
+                    <View style={styles.flexView2}>
+                        <Text style={styles.titleText}>{In18.CHOOSE_EPISODE}</Text>
+                    </View>
+                    <View style={styles.flexView1}>
+                        <Text style={styles.introText}>{`${In18.HOLE_TEXT}${this.props.totalEpisodeNum}${In18.EPISODE_TEXT}`}</Text>
+                        <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this.moreIntro} source={require('../../../image/usual/arrow_right_circle.png')} />
+                    </View>
+                </View>
                 {
                     this.state.source && <FlatList
                         showsHorizontalScrollIndicator={false}
@@ -92,6 +108,7 @@ function mapState2Props(store) {
     return {
         source: store.videoDeatilInfo.episodeSource,
         videoId: store.videoDeatilInfo.id,
+        totalEpisodeNum: store.videoDeatilInfo.totalEpisodeNum,
     }
 }
 
@@ -116,4 +133,32 @@ const styles = StyleSheet.create({
         color: 'rgb(32,32,32)',
         fontSize: 16
     },
+    titleContainer: {
+        height: 40,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    titleText: {
+        marginLeft: 10,
+        color: 'rgb(54,54,54)',
+        fontSize: 16,
+    },
+    flexView2: {
+        flex: 2,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    flexView1: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    introText: {
+        fontSize: 12,
+        color: 'rgb(100,100,100)',
+        marginRight: 10
+    }
 });

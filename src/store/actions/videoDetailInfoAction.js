@@ -33,10 +33,11 @@ export function refresh_video_recommend_negative_data(recommend_sum, negative_su
     };
 }
 
-export function set_episode_source(source) {
+export function set_episode_source(source, episodeTotalNum) {
     return {
         type: Types.SET_EPISCODE_SOURCE,
-        data: source
+        data: source,
+        episodeTotalNum: episodeTotalNum
     }
 }
 // export function test_min() {

@@ -79,6 +79,9 @@ const INTRODUCE_TEXT = '简介';
 const TIMES_PLAY = "次播放";
 const VIDEO_COME_FROM = '影片来源';
 const COMMENT_TEXT = '热评';
+const CHOOSE_EPISODE = '选集';
+const HOLE_TEXT = '全';
+const EPISODE_TEXT = '集';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -162,6 +165,9 @@ export {
     TIMES_PLAY,
     VIDEO_COME_FROM,
     COMMENT_TEXT,
+    CHOOSE_EPISODE,
+    HOLE_TEXT,
+    EPISODE_TEXT,
 
     COUNTRY_CODE,
 
