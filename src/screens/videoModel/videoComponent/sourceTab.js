@@ -1,9 +1,11 @@
-import React, { PureComponent, Component } from 'react';
+import React, { PureComponent } from 'react';
 import { StyleSheet, View, TouchableHighlight, Text, FlatList } from 'react-native';
 import { connect } from 'react-redux';
+import store from '../../../store/index';
+import { set_episode_source } from '../../../store/actions/videoDetailInfoAction';
 import _ from 'lodash';
 
-class Btn extends Component {
+class Btn extends PureComponent {
     state = {
         isHighLight: false
     }
@@ -41,6 +43,9 @@ class SourceTab extends PureComponent {
                 newItem.highlightIndex = 0;
                 return newItem
             });
+            if (nextProps.source.length > 0) {
+                store.dispatch(set_episode_source(nextProps.source[0].video_list));
+            }
             return {
                 sourceTypeHighlightIndex: 0,
                 videoId: nextProps.videoId,
@@ -52,6 +57,9 @@ class SourceTab extends PureComponent {
                 newItem.highlightIndex = prevState.sourceTypeHighlightIndex;
                 return newItem
             });
+            if (nextProps.source.length > prevState.sourceTypeHighlightIndex) {
+                store.dispatch(set_episode_source(nextProps.source[prevState.sourceTypeHighlightIndex].video_list));
+            }
             return {
                 source: sourceWithHighlightIndex
             }
@@ -69,6 +77,7 @@ class SourceTab extends PureComponent {
             <View>
                 {
                     this.state.source && <FlatList
+                        showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={this.state.source}
                         renderItem={

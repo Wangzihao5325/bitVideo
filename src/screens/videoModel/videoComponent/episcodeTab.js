@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, Text, View, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
-class Btn extends Component {
+class Btn extends PureComponent {
     state = {
         isHighLight: false
     }
@@ -25,19 +27,50 @@ class Btn extends Component {
     }
 }
 
-export default class EpiscodeTab extends PureComponent {
+class EpiscodeTab extends PureComponent {
 
     state = {
-        sourceTypeHighlightIndex: 0,
+        episodeHighlightIndex: 0,
         videoId: 0,
         source: [],
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.videoId !== prevState.videoId) {
+            let sourceWithHighlightIndex = nextProps.source.map((item) => {
+                let newItem = _.assign({}, item);
+                newItem.highlightIndex = 0;
+                return newItem
+            });
+            return {
+                episodeHighlightIndex: 0,
+                videoId: nextProps.videoId,
+                source: sourceWithHighlightIndex,
+            }
+        } else {
+            let sourceWithHighlightIndex = nextProps.source.map((item) => {
+                let newItem = _.assign({}, item);
+                newItem.highlightIndex = prevState.episodeHighlightIndex;
+                return newItem
+            });
+            return {
+                source: sourceWithHighlightIndex
+            }
+        }
+    }
+
+    itemOnPress = (index) => {
+        this.setState({
+            episodeHighlightIndex: index
+        });
+    }
+
     render() {
         return (
-            <View>
+            <View style={{ marginTop: 10 }}>
                 {
                     this.state.source && <FlatList
+                        showsHorizontalScrollIndicator={false}
                         horizontal={true}
                         data={this.state.source}
                         renderItem={
@@ -45,7 +78,7 @@ export default class EpiscodeTab extends PureComponent {
                                 key={index}
                                 index={index}
                                 highlightIndex={item.highlightIndex}
-                                title={item.title}
+                                title={item.play_series}
                                 onPress={this.itemOnPress}
                             />}
                     />
@@ -57,7 +90,7 @@ export default class EpiscodeTab extends PureComponent {
 
 function mapState2Props(store) {
     return {
-        source: store.videoDeatilInfo.videoSource,
+        source: store.videoDeatilInfo.episodeSource,
         videoId: store.videoDeatilInfo.id,
     }
 }

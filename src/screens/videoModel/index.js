@@ -11,6 +11,7 @@ import VideoHeader from './videoComponent/videoHeader';
 import UsualInfoTab from './videoComponent/usualInfoTab';
 import CommentTab from './videoComponent/commentTab';
 import SourceTab from './videoComponent/sourceTab';
+import EpiscodeTab from './videoComponent/episcodeTab';
 
 export default class VideoModel extends PureComponent {
     componentDidMount() {
@@ -19,7 +20,6 @@ export default class VideoModel extends PureComponent {
             Api.getVideoInfo(videoId, (result, code, message) => {
                 if (result) {
                     console.log(result);
-                    console.log('we have a result');
                     store.dispatch(set_video_full_data(result));
                 } else {
                     console.log(message);
@@ -53,6 +53,7 @@ export default class VideoModel extends PureComponent {
                 <UsualInfoTab />
                 <CommentTab />
                 <SourceTab />
+                <EpiscodeTab />
             </SafeAreaView>
         );
     }

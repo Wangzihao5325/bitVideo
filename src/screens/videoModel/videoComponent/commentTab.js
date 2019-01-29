@@ -129,8 +129,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        borderBottomColor: 'rgb(244,244,244)',
-        borderBottomWidth: 1,
+        // borderBottomColor: 'rgb(244,244,244)',
+        // borderBottomWidth: 1,
     },
     commentImage: {
         height: 20,
