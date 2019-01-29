@@ -41,6 +41,7 @@
 		2BBBD0A121CA5A2C009F16A8 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BBBD06C21CA5A2C009F16A8 /* SimpleLineIcons.ttf */; };
 		2BBBD0A221CA5A2C009F16A8 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BBBD06D21CA5A2C009F16A8 /* MaterialIcons.ttf */; };
 		2BBBD0AC21CA5C2C009F16A8 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBBD0A921CA5C11009F16A8 /* libRNVectorIcons.a */; };
+		2BD265632200511000DC6C0D /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BD265362200511000DC6C0D /* bundle */; };
 		2CADB3C6150148A9BD04A2E2 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF1C3924E444A95A436BBBE /* libRNDeviceInfo.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -440,6 +441,7 @@
 		2BBBD06C21CA5A2C009F16A8 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		2BBBD06D21CA5A2C009F16A8 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		2BBBD0A321CA5C11009F16A8 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		2BD265362200511000DC6C0D /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* BitVideos-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BitVideos-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* BitVideos-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BitVideos-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -608,6 +610,7 @@
 		13B07FAE1A68108700A75B9A /* BitVideos */ = {
 			isa = PBXGroup;
 			children = (
+				2BD265362200511000DC6C0D /* bundle */,
 				2BBBD05E21CA5A2C009F16A8 /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1365,6 +1368,7 @@
 				471C4FAD22804E8188CCD15E /* EvilIcons.ttf in Resources */,
 				D31166D865D849DCBA9D0F0F /* Feather.ttf in Resources */,
 				3A6FB540060F4BA4A7929B6E /* FontAwesome.ttf in Resources */,
+				2BD265632200511000DC6C0D /* bundle in Resources */,
 				48458A043F3B4F848A292BFB /* FontAwesome5_Brands.ttf in Resources */,
 				42D871A6051F4E7A8B9D3724 /* FontAwesome5_Regular.ttf in Resources */,
 				C43F93CDA19B4F0DAB660284 /* FontAwesome5_Solid.ttf in Resources */,
