@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         top: verHeight - 25,
         right: 5,
         color: 'rgb(243,109,0)',
-        fontSize: 18,
+        fontSize: 16,
         zIndex: 10
     },
     hoAbsStyle: {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         top: hoHeight - 25,
         right: 5,
         color: 'rgb(243,109,0)',
-        fontSize: 18,
+        fontSize: 16,
         zIndex: 10
     }
 });
