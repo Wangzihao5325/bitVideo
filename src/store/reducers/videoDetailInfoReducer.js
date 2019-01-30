@@ -10,7 +10,8 @@ const initialState = {
     type: null,
     recommendAndNegative: null,
     id: 0,
-    guessLike: []
+    guessLike: [],
+    commentList: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +42,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 guessLike: action.data,
+            };
+        case Types.SET_COMMENT_LIST_DATA:
+            return {
+                ...state,
+                commentList: action.data,
             };
         default: return state;
     }

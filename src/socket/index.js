@@ -156,6 +156,10 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getCommentList(videoId, onSuccess, onError) {
+        const url = `/api/video/comment/lists?video_id=${videoId}`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

@@ -48,6 +48,13 @@ export function set_guess_like_source(source) {
         data: source,
     }
 }
+
+export function set_comment_list_data(data) {
+    return {
+        type: Types.SET_COMMENT_LIST_DATA,
+        data: data,
+    }
+}
 // export function test_min() {
 //     return { type: Types.TEST_DECREMENT };
 // }
