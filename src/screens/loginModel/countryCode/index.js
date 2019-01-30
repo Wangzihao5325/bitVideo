@@ -82,7 +82,7 @@ export default class CountryCode extends PureComponent {
     }
     render() {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
                 <ModalHeader title={In18.COUNTRY_CODE} goBack={this.goBack} />
                 <SearchHeader search={this.search} />
                 <SectionList

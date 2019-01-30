@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import store from '../../store/index';
-import { set_video_full_data } from '../../store/actions/videoDetailInfoAction';
+import { set_video_full_data, set_guess_like_source } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
+import * as Sizes from '../../global/Sizes';
 
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import XSVideo from './videoComponent/video';
@@ -12,6 +13,7 @@ import CommentTab from './videoComponent/commentTab';
 import SourceTab from './videoComponent/sourceTab';
 import EpiscodeTab from './videoComponent/episcodeTab';
 import InputBottom from './videoComponent/inputBottom';
+import GuessLike from './videoComponent/guessLike';
 
 export default class VideoModel extends PureComponent {
 
@@ -33,6 +35,7 @@ export default class VideoModel extends PureComponent {
                 if (result) {
                     console.log('____this is guess like data_____!');
                     console.log(result);
+                    store.dispatch(set_guess_like_source(result.data));
                 }
             });
         }
@@ -45,18 +48,29 @@ export default class VideoModel extends PureComponent {
     //'https://pp.605ziyuan.com/20180905/btValsHQ/index.m3u8'
     render() {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
                 <ModalHeader title='' goBack={this.goBack} />
                 <XSVideo />
-                <ScrollView>
+                <ScrollView
+                    style={styles.scroll}
+                    showsVerticalScrollIndicator={false}
+                >
                     <VideoHeader />
                     <UsualInfoTab />
                     <CommentTab />
                     <SourceTab />
                     <EpiscodeTab />
+                    <GuessLike />
                 </ScrollView>
                 <InputBottom />
             </SafeAreaView>
         );
     }
 }
+const styles = StyleSheet.create({
+    scroll: {
+        // height: Sizes.DEVICE_HEIGHT - 38 - 300 - 50,
+        // width: Sizes.DEVICE_WIDTH
+        flex: 1
+    }
+});

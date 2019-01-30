@@ -48,7 +48,7 @@ export default class LostPassword extends PureComponent {
     }
     render() {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
                 <ModalHeader title={In18.CHANGE_PASSWORD} goBack={this.goBack} />
                 <MobileInput onTextChange={this.mobileTextChange} style={{ marginTop: 80 }} changeCode={this.gotoChangeCountryCode} />
                 <PasswordInputWithVercode getMessageCode={this.getMessageCode} onTextChange={this.codeTextChange} style={{ marginTop: 34 }} />

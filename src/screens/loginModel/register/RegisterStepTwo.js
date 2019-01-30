@@ -53,7 +53,7 @@ class RegisterStepTwoScreen extends PureComponent {
         mobile.splice(3, 4, '****');
         let securityMobile = mobile.join('');
         return (
-            <SafeAreaView >
+            <SafeAreaView style={{ flex: 1 }}>
                 <ModalHeader title={In18.INPUT_VER_CODE} goBack={this.goBack} />
                 <Text style={styles.titleText}>{In18.CLICK_TO_GET_VER_CODE}</Text>
                 <Text style={styles.mobileText}>{`${this.props.countryCode} `}<Text>{securityMobile}</Text></Text>

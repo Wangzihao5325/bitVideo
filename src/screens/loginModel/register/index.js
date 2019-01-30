@@ -104,7 +104,7 @@ export default class RegisterModal extends PureComponent {
             styleObj = { marginTop: 30 }
         }
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
                 <ModalHeader title={In18.REGISTER} goBack={this.goBack} />
                 <MobileInput style={{ marginTop: 81 }} onTextChange={this.mobileTextChange} changeCode={this.gotoChangeCountryCode} />
                 <Btn

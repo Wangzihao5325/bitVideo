@@ -161,7 +161,7 @@ export default class LoginModel extends PureComponent {
 
     render() {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{ flex: 1 }}>
                 <Header goBack={() => this.props.navigation.goBack()} />
                 <MainTitle />
                 <InputField />
