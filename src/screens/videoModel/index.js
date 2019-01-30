@@ -14,6 +14,7 @@ import SourceTab from './videoComponent/sourceTab';
 import EpiscodeTab from './videoComponent/episcodeTab';
 import InputBottom from './videoComponent/inputBottom';
 import GuessLike from './videoComponent/guessLike';
+import AmazingComment from './videoComponent/amazingComment';
 
 export default class VideoModel extends PureComponent {
 
@@ -69,6 +70,7 @@ export default class VideoModel extends PureComponent {
                     <SourceTab />
                     <EpiscodeTab />
                     <GuessLike />
+                    <AmazingComment />
                 </ScrollView>
                 <InputBottom />
             </SafeAreaView>

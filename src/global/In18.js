@@ -87,6 +87,8 @@ const HOLE_TEXT = '全';
 const EPISODE_TEXT = '集';
 const DEFALUT_SOURCE = '暂无视频源';
 const GUESS_LIKE = '猜你喜欢';
+const AMAZING_COMMNET = '精彩评论';
+const NO_COMMNET_TEXT = '~~暂无数据';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -180,6 +182,8 @@ export {
     EPISODE_TEXT,
     DEFALUT_SOURCE,
     GUESS_LIKE,
+    AMAZING_COMMNET,
+    NO_COMMNET_TEXT,
 
     COUNTRY_CODE,
 
