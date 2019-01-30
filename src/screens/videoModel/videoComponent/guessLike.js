@@ -23,13 +23,13 @@ class GuessLike extends PureComponent {
         Api.getGuessLike(id, (result, code, message) => {
             if (result) {
                 store.dispatch(set_guess_like_source(result.data));
+            } else {
+                console.log(message);
             }
         });
     }
 
     render() {
-        console.log('____this is reducer data_____!!!');
-        console.log(this.props.data);
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
