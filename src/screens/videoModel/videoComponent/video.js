@@ -17,24 +17,27 @@ class XSVideo extends PureComponent {
     }
 
     render() {
-        if (this.props.videoUrl) {
-            return (
-                <View style={styles.flexView}>
-                    <Video
-                        source={{ uri: this.props.videoUrl }}
-                        ref={(ref) => { this.player = ref }}
-                        onBuffer={this.onBuffer}
-                        onError={this.videoError}
-                        style={styles.bgVideo}
-                        controls={true}
-                    />
-                </View>
-            );
-        } else {
-            return (
-                <View style={styles.bgVideoTest} />
-            );
-        }
+        return (
+            <View style={styles.bgVideo} />
+        );
+        // if (this.props.videoUrl) {
+        //     return (
+        //         <View style={styles.flexView}>
+        //             <Video
+        //                 source={{ uri: this.props.videoUrl }}
+        //                 ref={(ref) => { this.player = ref }}
+        //                 onBuffer={this.onBuffer}
+        //                 onError={this.videoError}
+        //                 style={styles.bgVideo}
+        //                 controls={true}
+        //             />
+        //         </View>
+        //     );
+        // } else {
+        //     return (
+        //         <View style={styles.bgVideoTest} />
+        //     );
+        // }
     }
 }
 
@@ -57,9 +60,4 @@ const styles = StyleSheet.create({
         height: 200,
         width: Sizes.DEVICE_WIDTH,
     },
-    bgVideoTest: {
-        height: 200,
-        width: Sizes.DEVICE_WIDTH,
-        backgroundColor: 'yellow'
-    }
 });

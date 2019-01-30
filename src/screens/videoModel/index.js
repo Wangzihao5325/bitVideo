@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import store from '../../store/index';
 import { set_video_full_data } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
@@ -11,6 +11,7 @@ import UsualInfoTab from './videoComponent/usualInfoTab';
 import CommentTab from './videoComponent/commentTab';
 import SourceTab from './videoComponent/sourceTab';
 import EpiscodeTab from './videoComponent/episcodeTab';
+import InputBottom from './videoComponent/inputBottom';
 
 export default class VideoModel extends PureComponent {
 
@@ -38,11 +39,14 @@ export default class VideoModel extends PureComponent {
             <SafeAreaView>
                 <ModalHeader title='' goBack={this.goBack} />
                 <XSVideo />
-                <VideoHeader />
-                <UsualInfoTab />
-                <CommentTab />
-                <SourceTab />
-                <EpiscodeTab />
+                <ScrollView>
+                    <VideoHeader />
+                    <UsualInfoTab />
+                    <CommentTab />
+                    <SourceTab />
+                    <EpiscodeTab />
+                </ScrollView>
+                <InputBottom />
             </SafeAreaView>
         );
     }
