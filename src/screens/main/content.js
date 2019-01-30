@@ -22,7 +22,7 @@ class Item extends PureComponent {
         switch (this.props.item.client_module) {
             case 'm_banner':
                 if (this.props.item.m_banner_data.length > 0) {//有可能会出现 arr.length=0 的情况
-                    return (<BannerModule key={this.props.index} data={this.props.item.m_banner_data} />);
+                    return (<BannerModule key={this.props.index} data={this.props.item.m_banner_data} navi={mainNavigation} />);
                 }
             case 'm_video':
                 if (this.props.item.m_video_data.length > 0) {

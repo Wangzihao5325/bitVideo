@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableHighlight } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 
 import Carousel from 'react-native-looped-carousel';
@@ -19,12 +19,20 @@ export default class BannerModule extends PureComponent {
         this.setState({ size: { width: layout.width, height: layout.height } });
     }
 
+    _bannerPress = (id) => {
+        if (this.props.navi) {
+            this.props.navi.navigate('VideoModel', { videoId: id });
+        }
+    }
+
     itemGenerator = (dataArr) => {
         let items = [];
         dataArr.forEach((item, index) => {
             items.push(
                 <View key={index} style={[this.state.size, { display: 'flex' }]}>
-                    <Image style={{ flex: 1, borderRadius: 5 }} defaultSource={require('../../image/usual/banner_load_failed.png')} source={{ uri: item.cover_path }}></Image>
+                    <TouchableHighlight style={{ flex: 1 }} onPress={() => this._bannerPress(item.id)}>
+                        <Image style={{ flex: 1, borderRadius: 5 }} defaultSource={require('../../image/usual/banner_load_failed.png')} source={{ uri: item.cover_path }}></Image>
+                    </TouchableHighlight>
                 </View>
             );
         });
