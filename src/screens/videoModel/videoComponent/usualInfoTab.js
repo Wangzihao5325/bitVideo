@@ -7,6 +7,7 @@ import * as In18 from '../../../global/In18';
 import IconBtn from '../../../components/imageBtn/IconBtnWithTitle';
 
 class UsualInfoTab extends PureComponent {
+    //to do 后续优化，视频不变的部分与影片来源部分进行分离
     render() {
         let types = [];
         if (this.props.typeArr && this.props.typeArr.length > 0) {
@@ -20,6 +21,10 @@ class UsualInfoTab extends PureComponent {
             playCount = this.props.fullData.play_count;
         }
         playCount = MathUtil.playCountTransform(playCount);
+        let sourceText = In18.DEFALUT_SOURCE;
+        if (this.props.videoSourceName) {
+            sourceText = this.props.videoSourceName;
+        }
         return (
             <View style={styles.container}>
                 <View style={{ flex: 2 }}>
@@ -28,7 +33,8 @@ class UsualInfoTab extends PureComponent {
                         {types.length > 0 && types}
                     </View>
                     <View style={styles.flexView2}>
-                        <Text style={styles.sourceTitleText}>{In18.VIDEO_COME_FROM}</Text>
+                        <Text style={styles.sourceTitleText}>{`${In18.VIDEO_COME_FROM}:`}</Text>
+                        <Text style={styles.sourceTitleText}>{sourceText}</Text>
                     </View>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -43,7 +49,8 @@ class UsualInfoTab extends PureComponent {
 function mapState2Props(store) {
     return {
         typeArr: store.videoDeatilInfo.type,
-        fullData: store.videoDeatilInfo.fullData
+        fullData: store.videoDeatilInfo.fullData,
+        videoSourceName: store.videoDeatilInfo.videoSourceName
     }
 }
 

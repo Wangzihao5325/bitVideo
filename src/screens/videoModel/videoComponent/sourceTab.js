@@ -44,7 +44,8 @@ class SourceTab extends PureComponent {
                 return newItem
             });
             if (nextProps.source.length > 0) {
-                store.dispatch(set_episode_source(nextProps.source[0].video_list, nextProps.source[0].video_total));
+                let regObj = nextProps.source[0];
+                store.dispatch(set_episode_source(regObj.video_list, regObj.video_total, regObj.title));
             }
             return {
                 sourceTypeHighlightIndex: 0,
@@ -58,7 +59,8 @@ class SourceTab extends PureComponent {
                 return newItem
             });
             if (nextProps.source.length > prevState.sourceTypeHighlightIndex) {
-                store.dispatch(set_episode_source(nextProps.source[prevState.sourceTypeHighlightIndex].video_list, nextProps.source[prevState.sourceTypeHighlightIndex].video_total));
+                let regObj = nextProps.source[prevState.sourceTypeHighlightIndex];
+                store.dispatch(set_episode_source(regObj.video_list, regObj.video_total, regObj.title));
             }
             return {
                 source: sourceWithHighlightIndex

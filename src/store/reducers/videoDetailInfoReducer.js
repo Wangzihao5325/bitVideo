@@ -3,6 +3,7 @@ import * as Types from '../actionTypes';
 const initialState = {
     fullData: null,
     videoSource: [],
+    videoSourceName: null,
     episodeSource: [],
     totalEpisodeNum: 0,
     author: null,
@@ -32,7 +33,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 episodeSource: action.data,
-                totalEpisodeNum: action.episodeTotalNum
+                totalEpisodeNum: action.episodeTotalNum,
+                videoSourceName: action.videoSourceName
             };
         default: return state;
     }
