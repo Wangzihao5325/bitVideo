@@ -90,6 +90,9 @@ const COUNTRY_CODE = '国家代码';
 const TEN_THOUSAND = '万';
 const PEOPLE_TEXT = '人';
 
+//defalut
+const NO_INTRO = '暂无简介';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -173,4 +176,6 @@ export {
 
     TEN_THOUSAND,
     PEOPLE_TEXT,
+
+    NO_INTRO,
 };

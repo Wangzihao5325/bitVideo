@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, Image, View, Text, TouchableHighlight } from 'react-native';
 import * as Sizes from '../../global/Sizes';
+import * as In18 from '../../global/In18';
 
 const verWidth = (Sizes.DEVICE_WIDTH - 6) / 3;
 const verHeight = 1.5 * verWidth;
@@ -22,12 +23,13 @@ export default class VideoAvater extends PureComponent {
     render() {
         let btnStyle = this.props.isVertical ? styles.verBtn : styles.hoBtn;
         let imageStyle = this.props.isVertical ? styles.verImage : styles.hoImage;
+        let introText = this.props.info === '' ? `${In18.NO_INTRO}` : this.props.info;
         return (
             <TouchableHighlight style={btnStyle} underlayColor='transparent' onPress={this.btnOnPress}>
                 <View style={styles.flexView} >
-                    <Image style={imageStyle} source={this.props.imageSource} />
+                    <Image style={imageStyle} defaultSource={require('../../image/usual/image_load_failed.png')} source={this.props.imageSource} />
                     <Text style={styles.titleText} ellipsizeMode='tail' numberOfLines={1}>{this.props.title}</Text>
-                    <Text style={styles.infoText} ellipsizeMode='tail' numberOfLines={1}>{this.props.info}</Text>
+                    <Text style={styles.infoText} ellipsizeMode='tail' numberOfLines={1}>{introText}</Text>
                 </View>
             </TouchableHighlight>
         );
@@ -58,7 +60,8 @@ const styles = StyleSheet.create({
         color: 'rgb(162,162,162)',
         fontSize: 12,
         marginTop: 5,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginHorizontal: 5
     },
     hoBtn: {
         width: hoWidth,
