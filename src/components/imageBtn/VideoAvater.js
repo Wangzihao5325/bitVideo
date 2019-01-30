@@ -24,12 +24,14 @@ export default class VideoAvater extends PureComponent {
         let btnStyle = this.props.isVertical ? styles.verBtn : styles.hoBtn;
         let imageStyle = this.props.isVertical ? styles.verImage : styles.hoImage;
         let introText = this.props.info === '' ? `${In18.NO_INTRO}` : this.props.info;
+        let scoreStyle = this.props.isVertical ? styles.verAbsStyle : styles.hoAbsStyle;
         return (
             <TouchableHighlight style={btnStyle} underlayColor='transparent' onPress={this.btnOnPress}>
                 <View style={styles.flexView} >
-                    <Image style={imageStyle} defaultSource={require('../../image/usual/image_load_failed.png')} source={this.props.imageSource} />
-                    <Text style={styles.titleText} ellipsizeMode='tail' numberOfLines={1}>{this.props.title}</Text>
-                    <Text style={styles.infoText} ellipsizeMode='tail' numberOfLines={1}>{introText}</Text>
+                    {this.props.score && <Text style={scoreStyle}>{this.props.score}</Text>}
+                    <Image style={[imageStyle, { zIndex: 1 }]} defaultSource={require('../../image/usual/image_load_failed.png')} source={this.props.imageSource} />
+                    <Text style={[styles.titleText, { zIndex: 10 }]} ellipsizeMode='tail' numberOfLines={1}>{this.props.title}</Text>
+                    <Text style={[styles.infoText, { zIndex: 10 }]} ellipsizeMode='tail' numberOfLines={1}>{introText}</Text>
                 </View>
             </TouchableHighlight>
         );
@@ -72,5 +74,21 @@ const styles = StyleSheet.create({
         width: hoWidth - 2,
         marginHorizontal: 1,
         borderRadius: 5
+    },
+    verAbsStyle: {
+        position: 'absolute',
+        top: verHeight - 25,
+        right: 5,
+        color: 'rgb(243,109,0)',
+        fontSize: 18,
+        zIndex: 10
+    },
+    hoAbsStyle: {
+        position: 'absolute',
+        top: hoHeight - 25,
+        right: 5,
+        color: 'rgb(243,109,0)',
+        fontSize: 18,
+        zIndex: 10
     }
 });

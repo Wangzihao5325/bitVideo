@@ -69,7 +69,7 @@ class SUDOKU extends PureComponent {
                     horizontal={false}
                     numColumns={this.props.lineNum}
                     data={this.state.data}
-                    renderItem={({ item }) => <VideoAvater isVertical={this.props.isVertical} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} />}
+                    renderItem={({ item }) => <VideoAvater isVertical={this.props.isVertical} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
                     columnWrapperStyle={{ marginTop: 20 }}
                 />
                 <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
@@ -95,7 +95,7 @@ class GUNDONG extends PureComponent {
                 <FlatList
                     horizontal={true}
                     data={this.props.data}
-                    renderItem={({ item }) => <VideoAvater isVertical={this.props.isVertical} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} />}
+                    renderItem={({ item }) => <VideoAvater isVertical={this.props.isVertical} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score}/>}
                 />
             </View>
         );
