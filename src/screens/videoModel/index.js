@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import store from '../../store/index';
 import { set_video_full_data, set_guess_like_source, set_comment_list_data } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
@@ -72,7 +72,9 @@ export default class VideoModel extends PureComponent {
                     <GuessLike />
                     <AmazingComment />
                 </ScrollView>
-                <InputBottom />
+                <KeyboardAvoidingView behavior='position'>
+                    <InputBottom />
+                </KeyboardAvoidingView>
             </SafeAreaView>
         );
     }

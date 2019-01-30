@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
+
 export default class InputBottom extends PureComponent {
+    getKeyBoard = () => {
+        console.log('getkeyboard');
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -15,7 +19,8 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'white'
     },
     input: {
         height: 30,
