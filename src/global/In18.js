@@ -86,6 +86,7 @@ const CHOOSE_EPISODE = '选集';
 const HOLE_TEXT = '全';
 const EPISODE_TEXT = '集';
 const DEFALUT_SOURCE = '暂无视频源';
+const GUESS_LIKE = '猜你喜欢';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -178,6 +179,7 @@ export {
     HOLE_TEXT,
     EPISODE_TEXT,
     DEFALUT_SOURCE,
+    GUESS_LIKE,
 
     COUNTRY_CODE,
 

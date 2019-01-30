@@ -1,13 +1,30 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { connect } from 'react-redux';
+import * as In18 from '../../../global/In18';
+import Api from '../../../socket/index';
+import store from '../../../store/index';
+import { set_video_full_data, set_guess_like_source } from '../../../store/actions/videoDetailInfoAction';
 
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
 class GuessLike extends PureComponent {
 
     _videoAvaterOnPress = (id) => {
-        console.log(`go to ${id}`);
+        //获取video信息
+        Api.getVideoInfo(id, (result, code, message) => {
+            if (result) {
+                store.dispatch(set_video_full_data(result));
+            } else {
+                console.log(message);
+            }
+        });
+        //根据video id 获取猜你喜欢信息
+        Api.getGuessLike(id, (result, code, message) => {
+            if (result) {
+                store.dispatch(set_guess_like_source(result.data));
+            }
+        });
     }
 
     render() {
@@ -16,7 +33,7 @@ class GuessLike extends PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>猜你喜欢</Text>
+                    <Text style={styles.headerText}>{In18.GUESS_LIKE}</Text>
                 </View>
                 {this.props.data &&
                     <FlatList
