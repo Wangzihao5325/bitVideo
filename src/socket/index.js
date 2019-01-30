@@ -151,6 +151,11 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
+    getGuessLike(videoId, onSuccess, onError) {
+        const url = `/api/video/guess/like?video_id=${videoId}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();
