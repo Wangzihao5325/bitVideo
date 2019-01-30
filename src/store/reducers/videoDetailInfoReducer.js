@@ -10,6 +10,7 @@ const initialState = {
     type: null,
     recommendAndNegative: null,
     id: 0,
+    guessLike: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,11 @@ const reducer = (state = initialState, action) => {
                 episodeSource: action.data,
                 totalEpisodeNum: action.episodeTotalNum,
                 videoSourceName: action.videoSourceName
+            };
+        case Types.SET_GUESS_LIKE_SOURCE:
+            return {
+                ...state,
+                guessLike: action.data,
             };
         default: return state;
     }

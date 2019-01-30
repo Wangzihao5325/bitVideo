@@ -4,6 +4,8 @@ export default class GuessLike extends PureComponent {
     render() {
         return (
             <View>
+                <FlatList
+                />
             </View>
         );
     }

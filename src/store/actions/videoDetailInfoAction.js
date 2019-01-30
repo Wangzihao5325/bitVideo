@@ -41,6 +41,13 @@ export function set_episode_source(source, episodeTotalNum, videoSourceName) {
         videoSourceName: videoSourceName
     }
 }
+
+export function set_guess_like_source(source) {
+    return {
+        type: Types.SET_GUESS_LIKE_SOURCE,
+        data: source,
+    }
+}
 // export function test_min() {
 //     return { type: Types.TEST_DECREMENT };
 // }
