@@ -27,6 +27,9 @@ const PASSWORD_LOGIN = '密码登陆';
 const WELCOME_BACK = 'Welcome Back';
 const SIGN_IN_TO_CONTAINE = 'sign in to continue';
 
+//首页搜索栏
+const SEARCH_TITLE = '搜索你想看的影片';
+
 //帮助反馈页面
 const HELP_SUBMIT = '帮助反馈';
 const PLEASE_INPUT_SUGGEST = '请输入意见或建议';
@@ -122,6 +125,8 @@ export {
     PASSWORD_LOGIN,
     WELCOME_BACK,
     SIGN_IN_TO_CONTAINE,
+
+    SEARCH_TITLE,
 
     HELP_SUBMIT,
     PLEASE_INPUT_SUGGEST,

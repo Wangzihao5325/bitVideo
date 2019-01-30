@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { TouchableHighlight, View, Image, Text, StyleSheet } from 'react-native';
+import * as In18 from '../../global/In18';
+
 export default class SearchBarBtn extends PureComponent {
     goToSearch = () => {
 
@@ -9,7 +11,7 @@ export default class SearchBarBtn extends PureComponent {
             <TouchableHighlight style={[styles.btn, this.props.style]} onPress={this.goToSearch} underlayColor='transparent'>
                 <View style={styles.flexView}>
                     <Image style={styles.image} source={require('../../image/usual/search.png')} />
-                    <Text style={styles.text}>我和你的倾城时光</Text>
+                    <Text style={styles.text}>{In18.SEARCH_TITLE}</Text>
                 </View>
             </TouchableHighlight>
         );
