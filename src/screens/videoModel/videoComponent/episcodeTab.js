@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: 'rgb(54,54,54)',
         fontSize: 16,
+        fontWeight: 'bold'
     },
     flexView2: {
         flex: 2,
