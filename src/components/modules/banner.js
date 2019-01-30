@@ -24,7 +24,7 @@ export default class BannerModule extends PureComponent {
         dataArr.forEach((item, index) => {
             items.push(
                 <View key={index} style={[this.state.size, { display: 'flex' }]}>
-                    <Image style={{ flex: 1, borderRadius: 5 }} source={{ uri: item.cover_path }}></Image>
+                    <Image style={{ flex: 1, borderRadius: 5 }} defaultSource={require('../../image/usual/banner_load_failed.png')} source={{ uri: item.cover_path }}></Image>
                 </View>
             );
         });
