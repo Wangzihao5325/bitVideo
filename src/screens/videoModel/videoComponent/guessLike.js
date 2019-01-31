@@ -28,7 +28,7 @@ class GuessLike extends PureComponent {
             }
         });
         //根据video id 获取评论
-        Api.getCommentList(videoId, (result, code, message) => {
+        Api.getCommentList(id, (result, code, message) => {
             if (result) {
                 store.dispatch(set_comment_list_data(result.data));
             }
