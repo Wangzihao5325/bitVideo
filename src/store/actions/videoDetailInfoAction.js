@@ -55,6 +55,13 @@ export function set_comment_list_data(data) {
         data: data,
     }
 }
+
+export function video_detail_data_reset() {
+    return {
+        type: Types.VIDEO_DETAIL_DATA_RESET,
+    }
+}
+
 // export function test_min() {
 //     return { type: Types.TEST_DECREMENT };
 // }

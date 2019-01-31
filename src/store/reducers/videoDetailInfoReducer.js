@@ -50,6 +50,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 commentList: action.data,
             };
+        case Types.VIDEO_DETAIL_DATA_RESET:
+            return {
+                ...initialState
+            };
         default: return state;
     }
 };

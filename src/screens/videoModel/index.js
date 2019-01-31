@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import store from '../../store/index';
-import { set_video_full_data, set_guess_like_source, set_comment_list_data } from '../../store/actions/videoDetailInfoAction';
+import { set_video_full_data, set_guess_like_source, set_comment_list_data, video_detail_data_reset } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 
@@ -48,6 +48,10 @@ export default class VideoModel extends PureComponent {
                 }
             });
         }
+    }
+
+    componentWillUnmount() {
+        store.dispatch(video_detail_data_reset());
     }
 
     goBack = () => {
