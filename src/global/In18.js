@@ -89,6 +89,10 @@ const DEFALUT_SOURCE = '暂无视频源';
 const GUESS_LIKE = '猜你喜欢';
 const AMAZING_COMMNET = '精彩评论';
 const NO_COMMNET_TEXT = '~~暂无数据';
+const COMMENT_PLACEHOLDER = '我来说两句..';
+const SEND_TEXT = '发送';
+const SHARE_TEXT = '分享';
+const COLLECTION_TEXT = '收藏';
 
 //国家代码
 const COUNTRY_CODE = '国家代码';
@@ -184,6 +188,10 @@ export {
     GUESS_LIKE,
     AMAZING_COMMNET,
     NO_COMMNET_TEXT,
+    COMMENT_PLACEHOLDER,
+    SEND_TEXT,
+    SHARE_TEXT,
+    COLLECTION_TEXT,
 
     COUNTRY_CODE,
 

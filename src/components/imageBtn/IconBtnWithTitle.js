@@ -13,13 +13,13 @@ export default class IconBtn extends PureComponent {
     render() {
         return (
             <TouchableHighlight
-                style={styles.container}
+                style={[styles.container, this.props.containerStyle]}
                 onPress={this.btnOnPress}
                 underlayColor='transparent'
             >
-                <View style={styles.flexView}>
+                <View style={[styles.flexView,this.props.flexStyle]}>
                     <Image
-                        style={styles.image}
+                        style={[styles.image, this.props.imageStyle]}
                         source={this.props.source}
                     />
                     <Text style={[styles.title, this.props.titleStyle]}>{this.props.title}</Text>
