@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
 import store from '../../../store/index';
-import { set_video_full_data, set_guess_like_source } from '../../../store/actions/videoDetailInfoAction';
+import { set_video_full_data, set_guess_like_source, set_comment_list_data } from '../../../store/actions/videoDetailInfoAction';
 
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
@@ -25,6 +25,12 @@ class GuessLike extends PureComponent {
                 store.dispatch(set_guess_like_source(result.data));
             } else {
                 console.log(message);
+            }
+        });
+        //根据video id 获取评论
+        Api.getCommentList(videoId, (result, code, message) => {
+            if (result) {
+                store.dispatch(set_comment_list_data(result.data));
             }
         });
     }
