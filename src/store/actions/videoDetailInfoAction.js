@@ -62,6 +62,13 @@ export function video_detail_data_reset() {
     }
 }
 
+export function video_detail_add_myself_comment(data) {
+    return {
+        type: Types.VIDEO_DETAIL_ADD_MYSELF_COMMENT,
+        data: data
+    }
+}
+
 // export function test_min() {
 //     return { type: Types.TEST_DECREMENT };
 // }

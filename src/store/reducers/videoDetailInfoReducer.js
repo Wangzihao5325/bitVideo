@@ -1,4 +1,5 @@
 import * as Types from '../actionTypes';
+import _ from 'lodash';
 
 const initialState = {
     fullData: null,
@@ -54,6 +55,15 @@ const reducer = (state = initialState, action) => {
             return {
                 ...initialState
             };
+        case Types.VIDEO_DETAIL_ADD_MYSELF_COMMENT:
+            {
+                let oldList = state.commentList;
+                let newList = _.concat([action.data], oldList);
+                return {
+                    ...state,
+                    commentList: newList
+                };
+            }
         default: return state;
     }
 };

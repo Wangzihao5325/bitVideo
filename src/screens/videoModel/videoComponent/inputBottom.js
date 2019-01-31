@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, TextInput, Keyboard, Text } from 'react-native';
 import { connect } from 'react-redux';
+import store from '../../../store/index';
+import { video_detail_add_myself_comment } from '../../../store/actions/videoDetailInfoAction';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
@@ -52,9 +54,10 @@ class InputBottom extends PureComponent {
                 reg.input,
                 (result, code, message) => {
                     if (result) {
-                        this.input.blur();
                         console.log('_____this is comment return_____!!')
                         console.log(result);
+                        store.dispatch(video_detail_add_myself_comment(result));
+                        this.input.blur();
                     }
                 });
         } else {
