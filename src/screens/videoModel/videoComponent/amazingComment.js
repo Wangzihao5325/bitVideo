@@ -1,14 +1,43 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import * as In18 from '../../../global/In18';
+import * as Sizes from '../../../global/Sizes';
+import { FlatList } from 'react-native-gesture-handler';
 class Item extends PureComponent {
     render() {
-
+        return (
+            <View style={styles.itemContainer}>
+                <View style={styles.itemAvaterFlexView}>
+                    <Image style={styles.itemAvaterImage} defaultSource={require('../../../image/usual/default_avater.png')} source={this.props.source} />
+                </View>
+                <View style={styles.itemAvaterFlexView2}>
+                    <Text style={styles.itemNameText}>{this.props.name}</Text>
+                    <Text style={styles.itemNameText}>{this.props.time}</Text>
+                    <Text ellipsizeMode='tail' numberOfLines={2} style={styles.itemContentText}>{this.props.content}</Text>
+                </View>
+            </View>
+        );
     }
 }
 class CommentList extends PureComponent {
-
+    render() {
+        let height = 300;
+        if (this.props.data && this.props.data.length === 1) {
+            height = 100;
+        } else if (this.props.data.length === 2) {
+            height = 200;
+        }
+        return (
+            <View style={[styles.commemtListContainer, { height: height }]}>
+                <FlatList
+                    style={{ flex: 1 }}
+                    data={this.props.data}
+                    renderItem={({ item }) => <Item source={{ uri: item.cover_path }} name={item.name} time={item.updated_at} content={item.content} />}
+                />
+            </View>
+        );
+    }
 }
 class NoDataContent extends PureComponent {
     render() {
@@ -28,6 +57,7 @@ class AmazingComment extends PureComponent {
             <View style={styles.container}>
                 <View style={styles.header}><Text style={styles.headerText}>{In18.AMAZING_COMMNET}</Text></View>
                 {!stateReg && <NoDataContent />}
+                {stateReg && <CommentList data={this.props.commentList} />}
             </View>
         );
     }
@@ -69,5 +99,48 @@ const styles = StyleSheet.create({
     noDataText: {
         color: 'rgb(153,153,153)',
         fontSize: 14
+    },
+    itemContainer: {
+        height: 100,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    itemAvaterFlexView: {
+        width: 55,
+        height: 100
+    },
+    itemAvaterFlexView2: {
+        flex: 1
+    },
+    itemAvaterImage: {
+        height: 40,
+        width: 40,
+        borderRadius: 20,
+        marginLeft: 15
+    },
+    itemNameText: {
+        fontSize: 14,
+        color: 'rgb(100,100,100)',
+        marginLeft: 10,
+        marginTop: 9
+    },
+    itemTimeText: {
+        fontSize: 12,
+        color: 'rgb(151,151,151)',
+        marginLeft: 10,
+        marginTop: 2
+    },
+    itemContentText: {
+        marginLeft: 10,
+        height: 34,
+        width: Sizes.DEVICE_WIDTH - 65 - 19,
+        fontSize: 12,
+        color: 'rgb(54,54,54)',
+        marginTop: 10
+    },
+    commemtListContainer: {
+        height: 300,
+        width: '100%'
     }
 });
