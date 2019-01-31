@@ -160,6 +160,15 @@ class api {
         const url = `/api/video/comment/lists?video_id=${videoId}`;
         this.getFetch(url, onSuccess, onError);
     }
+
+    postAddComment(videoId, type, content, onSuccess, onError) {
+        const url = '/api/video/user/comment/add';
+        let formData = new FormData();
+        formData.append('video_id', videoId);
+        formData.append('global_type', type);
+        formData.append('content', content);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();

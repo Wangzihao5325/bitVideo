@@ -10,6 +10,7 @@ const initialState = {
     type: null,
     recommendAndNegative: null,
     id: 0,
+    globalType: null,
     guessLike: [],
     commentList: [],
 }
@@ -24,7 +25,8 @@ const reducer = (state = initialState, action) => {
                 author: action.author,
                 type: action.videoType,
                 recommendAndNegative: action.recommendAndNegative,
-                id: action.data.id
+                id: action.data.id,
+                globalType: action.data.global_type
             };
         case Types.REFRESH_VIDEO_RECOMMEND_NEGATIVE_DATA:
             return {

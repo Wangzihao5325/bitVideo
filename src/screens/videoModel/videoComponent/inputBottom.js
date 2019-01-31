@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, TextInput, Keyboard, Text } from 'react-native';
+import { connect } from 'react-redux';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
+import Api from '../../../socket/index';
 
 import IconBtn from '../../../components/imageBtn/IconBtnWithTitle';
 
-export default class InputBottom extends PureComponent {
+const reg = { input: '' };
+class InputBottom extends PureComponent {
     state = {
         isKeyboardShow: false
     }
@@ -18,6 +21,7 @@ export default class InputBottom extends PureComponent {
     componentWillUnmount() {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
+        reg.input = '';
     }
 
     _keyboardDidShow = () => {
@@ -30,15 +34,40 @@ export default class InputBottom extends PureComponent {
         this.setState({
             isKeyboardShow: false
         });
+        if (this.input) {
+            this.input.clear();
+            reg.input = '';
+        }
+    }
+
+    textChange = (e) => {
+        reg.input = e;
+    }
+
+    sendComment = () => {
+        if (reg.input && reg.input !== '') {
+            Api.postAddComment(
+                this.props.id,
+                this.props.globalType,
+                reg.input,
+                (result, code, message) => {
+                    if (result) {
+                        console.log('_____this is comment return_____!!')
+                        console.log(result);
+                    }
+                });
+        } else {
+            console.log('请输入内容！')
+        }
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <TextInput style={styles.input} placeholder={In18.COMMENT_PLACEHOLDER} />
+                <TextInput onChangeText={this.textChange} ref={(ref) => this.input = ref} style={styles.input} placeholder={In18.COMMENT_PLACEHOLDER} />
                 {this.state.isKeyboardShow &&
                     <View style={styles.keyboardView}>
-                        <Text style={styles.sendText}>{In18.SEND_TEXT}</Text>
+                        <Text onPress={this.sendComment} style={styles.sendText}>{In18.SEND_TEXT}</Text>
                     </View>
                 }
                 {!this.state.isKeyboardShow &&
@@ -51,6 +80,15 @@ export default class InputBottom extends PureComponent {
         );
     }
 }
+function mapState2Props(store) {
+    return {
+        id: store.videoDeatilInfo.id,
+        globalType: store.videoDeatilInfo.globalType
+    }
+}
+
+export default connect(mapState2Props)(InputBottom);
+
 const styles = StyleSheet.create({
     container: {
         height: 40,
