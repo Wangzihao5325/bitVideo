@@ -6,14 +6,18 @@ import * as Sizes from '../../../global/Sizes';
 import { FlatList } from 'react-native-gesture-handler';
 class Item extends PureComponent {
     render() {
+        let defaultSource = require('../../../image/usual/default_avater.png');
+        if (this.props.source && this.props.source !== '') {
+            defaultSource = { uri: this.props.source };
+        }
         return (
             <View style={styles.itemContainer}>
                 <View style={styles.itemAvaterFlexView}>
-                    <Image style={styles.itemAvaterImage} defaultSource={require('../../../image/usual/default_avater.png')} source={this.props.source} />
+                    <Image style={styles.itemAvaterImage} defaultSource={require('../../../image/usual/default_avater.png')} source={defaultSource} />
                 </View>
                 <View style={styles.itemAvaterFlexView2}>
-                    <Text style={styles.itemNameText}>{this.props.name}</Text>
-                    <Text style={styles.itemNameText}>{this.props.time}</Text>
+                    <Text style={styles.itemNameText}>{this.props.name ? this.props.name : ''}</Text>
+                    <Text style={styles.itemNameText}>{this.props.time ? this.props.time : ''}</Text>
                     <Text ellipsizeMode='tail' numberOfLines={2} style={styles.itemContentText}>{this.props.content}</Text>
                 </View>
             </View>
@@ -33,7 +37,7 @@ class CommentList extends PureComponent {
                 <FlatList
                     style={{ flex: 1 }}
                     data={this.props.data}
-                    renderItem={({ item }) => <Item source={{ uri: item.cover_path }} name={item.name} time={item.updated_at} content={item.content} />}
+                    renderItem={({ item }) => <Item source={item.cover_path} name={item.name} time={item.updated_at} content={item.content} />}
                 />
             </View>
         );
