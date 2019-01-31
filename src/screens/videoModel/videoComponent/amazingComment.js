@@ -2,7 +2,14 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as In18 from '../../../global/In18';
+class Item extends PureComponent {
+    render() {
 
+    }
+}
+class CommentList extends PureComponent {
+
+}
 class NoDataContent extends PureComponent {
     render() {
         return (

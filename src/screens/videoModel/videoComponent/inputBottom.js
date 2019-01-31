@@ -52,6 +52,7 @@ class InputBottom extends PureComponent {
                 reg.input,
                 (result, code, message) => {
                     if (result) {
+                        this.input.blur();
                         console.log('_____this is comment return_____!!')
                         console.log(result);
                     }
