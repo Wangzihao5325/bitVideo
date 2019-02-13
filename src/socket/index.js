@@ -169,6 +169,11 @@ class api {
         formData.append('content', content);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    getSearchRecommendVideo(onSuccess, onError) {
+        const url = '/api/video/lists?exponent_bd=desc';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();
