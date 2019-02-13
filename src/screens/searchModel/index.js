@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight, FlatList, AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 import Api from '../../socket/index';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
 const testData = ['火王', '期盼说', '金兰', '天线宝宝'];
+const reg = { searchInput: '' };
 class SearchHeader extends PureComponent {
 
     static contextTypes = {
@@ -17,12 +18,27 @@ class SearchHeader extends PureComponent {
         searchNavigation.goBack();
     }
 
+    _textChange = (e) => {
+        reg.searchInput = e;
+    }
+
+    _endEdit = () => {
+        if (reg.searchInput && reg.searchInput.length > 0) {
+            Api.getSearchVideoByName(reg.searchInput, (e) => {
+                if (e) {
+                    console.log('this is search!');
+                    console.log(e);
+                }
+            });
+        }
+    }
+
     render() {
         return (
             <View style={styles.headerContainer}>
                 <View style={styles.inputContainer}>
                     <Image style={styles.headerImage} source={require('../../image/usual/search.png')} />
-                    <TextInput style={styles.headerTextInput} placeholder='搜索你想看的影片' placeholderTextColor='rgb(151,151,151)' />
+                    <TextInput onChangeText={this._textChange} onEndEditing={this._endEdit} clearButtonMode='while-editing' returnKeyType='search' style={styles.headerTextInput} placeholder='搜索你想看的影片' placeholderTextColor='rgb(151,151,151)' />
                 </View>
                 <Text style={styles.backText} onPress={this.goBack}>取消</Text>
             </View>

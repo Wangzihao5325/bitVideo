@@ -174,6 +174,11 @@ class api {
         const url = '/api/video/lists?exponent_bd=desc';
         this.getFetch(url, onSuccess, onError);
     }
+
+    getSearchVideoByName(name, onSuccess, onError) {
+        const url = `/api/video/lists?video_title=${name}`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();
