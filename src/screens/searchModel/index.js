@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight, FlatList, AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 import Api from '../../socket/index';
+import { connect } from 'react-redux';
+import store from '../../store/index';
+import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear } from '../../store/actions/searchHistoryAction';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -24,6 +27,7 @@ class SearchHeader extends PureComponent {
 
     _endEdit = () => {
         if (reg.searchInput && reg.searchInput.length > 0) {
+            store_dispath_search_history_add(reg.searchInput);
             Api.getSearchVideoByName(reg.searchInput, (e) => {
                 if (e) {
                     console.log('this is search!');
@@ -60,7 +64,7 @@ class HistoryListItem extends PureComponent {
 
 class SearchHistory extends PureComponent {
     _clearHistory = () => {
-        console.log('clear history');
+        store.dispatch(search_history_clear());
     }
     render() {
         return (
@@ -72,7 +76,7 @@ class SearchHistory extends PureComponent {
                 <FlatList
                     horizontal={false}
                     numColumns={3}
-                    data={testData}
+                    data={this.props.data}
                     renderItem={({ item }) => <HistoryListItem title={item} />}
                 />
             </View>
@@ -169,7 +173,7 @@ class SearchRecommend extends PureComponent {
     }
 }
 
-export default class SearchModel extends PureComponent {
+class SearchModel extends PureComponent {
 
     static childContextTypes = {
         searchNavigation: PropTypes.object,
@@ -181,16 +185,30 @@ export default class SearchModel extends PureComponent {
         }
     }
 
+    componentDidMount() {
+        store_dispath_search_history_get();
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <SearchHeader />
-                <SearchHistory />
+                {this.props.isShow && <SearchHistory data={this.props.data} />}
                 <SearchRecommend />
             </SafeAreaView>
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        isShow: store.searchHistory.isShow,
+        data: store.searchHistory.data,
+    }
+}
+
+export default connect(mapState2Props)(SearchModel);
+
 const styles = StyleSheet.create({
     headerContainer: {
         height: 44,
