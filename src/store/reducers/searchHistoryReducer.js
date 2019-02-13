@@ -2,7 +2,9 @@ import * as Types from '../actionTypes';
 
 const initialState = {
     data: [],
-    isShow: false
+    isShow: false,
+    isResult: false,
+    resultData: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +26,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 data: action.data,
                 isShow: action.isShow
+            };
+        case Types.GET_SEARCH_RESULT_DATA:
+            return {
+                ...state,
+                resultData: action.result,
+                isResult: action.isResult
             };
         default: return state;
     }

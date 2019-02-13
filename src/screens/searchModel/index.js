@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Api from '../../socket/index';
 import { connect } from 'react-redux';
 import store from '../../store/index';
-import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear } from '../../store/actions/searchHistoryAction';
+import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data } from '../../store/actions/searchHistoryAction';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -28,9 +28,8 @@ class SearchHeader extends PureComponent {
         if (reg.searchInput && reg.searchInput.length > 0) {
             store_dispath_search_history_add(reg.searchInput);
             Api.getSearchVideoByName(reg.searchInput, (e) => {
-                if (e) {
-                    console.log('this is search!');
-                    console.log(e);
+                if (e.data) {
+                    store.dispatch(get_search_result_data(e.data));
                 }
             });
         }
@@ -172,6 +171,32 @@ class SearchRecommend extends PureComponent {
     }
 }
 
+class ResultItem extends PureComponent {
+    render() {
+        return (
+            <TouchableHighlight style={styles.resultItemContainer}>
+                <View style={styles.resultItemContainer} >
+                    <Image style={styles.resultItemImage} source={this.props.source} />
+                    <View style={{ flex: 1 }}>
+                        <Text style={styles.resultItemTitle}>{this.props.title}</Text>
+                        <Text numberOfLines={2} ellipsizeMode='tail' style={styles.resultItemIntro}>{this.props.intro}</Text>
+                    </View>
+                </View>
+            </TouchableHighlight>
+        );
+    }
+}
+class ResultList extends PureComponent {
+    render() {
+        return (
+            <FlatList
+                data={this.props.data}
+                renderItem={({ item }) => <ResultItem title={item.title} intro={item.intro} source={{ uri: item.cover_path }} />}
+            />
+        );
+    }
+}
+
 class SearchModel extends PureComponent {
 
     static childContextTypes = {
@@ -196,8 +221,9 @@ class SearchModel extends PureComponent {
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <SearchHeader />
-                {this.props.isShow && <SearchHistory data={this.props.data} />}
-                <SearchRecommend />
+                {!this.props.isResult && this.props.isShow && <SearchHistory data={this.props.data} />}
+                {!this.props.isResult && <SearchRecommend />}
+                {this.props.isResult && this.props.searchresult.length > 0 && < ResultList data={this.props.searchresult} />}
             </SafeAreaView>
         );
     }
@@ -207,6 +233,8 @@ function mapState2Props(store) {
     return {
         isShow: store.searchHistory.isShow,
         data: store.searchHistory.data,
+        isResult: store.searchHistory.isResult,
+        searchresult: store.searchHistory.resultData
     }
 }
 
@@ -315,5 +343,31 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row'
+    },
+    resultItemContainer: {
+        height: 134,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    resultItemImage: {
+        width: 88,
+        height: 114,
+        marginLeft: 14
+    },
+    resultItemTitle: {
+        fontSize: 16,
+        color: 'rgb(54,54,54)',
+        marginLeft: 20,
+        fontWeight: 'bold',
+        marginTop: 20
+    },
+    resultItemIntro: {
+        fontSize: 12,
+        color: 'rgb(151,151,151)',
+        marginTop: 8,
+        marginRight: 20,
+        height: 50
     }
 });

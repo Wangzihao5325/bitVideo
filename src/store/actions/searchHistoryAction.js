@@ -33,3 +33,7 @@ export function search_history_clear() {
     AsyncStorage.removeItem('SearchHistory');
     return { type: Types.CLEAR_SEARCH_HISTORY, data: [], isShow: false };
 }
+
+export function get_search_result_data(data) {
+    return { type: Types.GET_SEARCH_RESULT_DATA, result: data, isResult: true };
+}
