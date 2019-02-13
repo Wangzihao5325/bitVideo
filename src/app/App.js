@@ -13,6 +13,7 @@ import LostPasswordModal from '../screens/loginModel/lostPassword/index';
 import CountryCodeModal from '../screens/loginModel/countryCode/index';
 
 import VideoModel from '../screens/videoModel/index';
+import SearchModel from '../screens/searchModel/index';
 
 const Router = createBottomTabNavigator(
   {
@@ -53,6 +54,9 @@ const RouterWithModal = createStackNavigator(
     },
     VideoModel: {
       screen: VideoModel
+    },
+    SearchModel: {
+      screen: SearchModel
     }
   },
   {

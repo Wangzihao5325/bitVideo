@@ -4,7 +4,9 @@ import * as In18 from '../../global/In18';
 
 export default class SearchBarBtn extends PureComponent {
     goToSearch = () => {
-
+        if (this.props.btnPress) {
+            this.props.btnPress();
+        }
     }
     render() {
         return (
