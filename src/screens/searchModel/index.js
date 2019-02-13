@@ -8,7 +8,6 @@ import { store_dispath_search_history_add, store_dispath_search_history_get, sea
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
-const testData = ['火王', '期盼说', '金兰', '天线宝宝'];
 const reg = { searchInput: '' };
 class SearchHeader extends PureComponent {
 
@@ -187,6 +186,10 @@ class SearchModel extends PureComponent {
 
     componentDidMount() {
         store_dispath_search_history_get();
+    }
+
+    componentWillUnmount() {
+        reg.searchInput = '';
     }
 
     render() {
