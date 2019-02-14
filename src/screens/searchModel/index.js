@@ -49,10 +49,17 @@ class SearchHeader extends PureComponent {
 }
 
 class HistoryListItem extends PureComponent {
+    _searchByHistory = () => {
+        Api.getSearchVideoByName(this.props.title, (e) => {
+            if (e.data) {
+                store.dispatch(get_search_result_data(e.data));
+            }
+        });
+    }
     render() {
         return (
             <View style={styles.itemContainer}>
-                <TouchableHighlight style={styles.itemBackgroundView}>
+                <TouchableHighlight style={styles.itemBackgroundView} onPress={this._searchByHistory} underlayColor='transparent'>
                     <Text numberOfLines={1} ellipsizeMode='tail' style={styles.itemTitle}>{this.props.title}</Text>
                 </TouchableHighlight>
             </View>
@@ -172,11 +179,21 @@ class SearchRecommend extends PureComponent {
 }
 
 class ResultItem extends PureComponent {
+
+    static contextTypes = {
+        searchNavigation: PropTypes.object
+    }
+
+    _goToSeeMovie = () => {
+        const { searchNavigation } = this.context;
+        searchNavigation.navigate('VideoModel', { videoId: this.props.id });
+    }
+
     render() {
         return (
-            <TouchableHighlight style={styles.resultItemContainer}>
-                <View style={styles.resultItemContainer} >
-                    <Image style={styles.resultItemImage} source={this.props.source} />
+            <TouchableHighlight style={styles.resultItemContainer} onPress={this._goToSeeMovie}>
+                <View style={[styles.resultItemContainer, styles.borderBottom]} >
+                    <Image style={styles.resultItemImage} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} />
                     <View style={{ flex: 1 }}>
                         <Text style={styles.resultItemTitle}>{this.props.title}</Text>
                         <Text numberOfLines={2} ellipsizeMode='tail' style={styles.resultItemIntro}>{this.props.intro}</Text>
@@ -190,8 +207,9 @@ class ResultList extends PureComponent {
     render() {
         return (
             <FlatList
+                showsVerticalScrollIndicator={false}
                 data={this.props.data}
-                renderItem={({ item }) => <ResultItem title={item.title} intro={item.intro} source={{ uri: item.cover_path }} />}
+                renderItem={({ item }) => <ResultItem title={item.title} intro={item.intro} source={{ uri: item.cover_path }} id={item.id} />}
             />
         );
     }
@@ -351,6 +369,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
+    borderBottom: {
+        borderBottomColor: 'rgba(153,153,153,0.2)',
+        borderBottomWidth: 1
+    },
     resultItemImage: {
         width: 88,
         height: 114,
@@ -361,13 +383,14 @@ const styles = StyleSheet.create({
         color: 'rgb(54,54,54)',
         marginLeft: 20,
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 1
     },
     resultItemIntro: {
         fontSize: 12,
         color: 'rgb(151,151,151)',
         marginTop: 8,
         marginRight: 20,
-        height: 50
+        height: 50,
+        marginLeft: 10
     }
 });
