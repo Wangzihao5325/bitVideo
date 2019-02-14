@@ -37,3 +37,7 @@ export function search_history_clear() {
 export function get_search_result_data(data) {
     return { type: Types.GET_SEARCH_RESULT_DATA, result: data, isResult: true };
 }
+
+export function reset_search_result_data() {
+    return { type: Types.RESET_SEARCH_RESULT_DATA };
+}

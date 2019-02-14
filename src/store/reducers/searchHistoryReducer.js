@@ -33,6 +33,12 @@ const reducer = (state = initialState, action) => {
                 resultData: action.result,
                 isResult: action.isResult
             };
+        case Types.RESET_SEARCH_RESULT_DATA:
+            return {
+                ...state,
+                isResult: false,
+                resultData: [],
+            };
         default: return state;
     }
 };

@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight, FlatList, AsyncStorage } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, TextInput, TouchableHighlight, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import Api from '../../socket/index';
 import { connect } from 'react-redux';
 import store from '../../store/index';
-import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data } from '../../store/actions/searchHistoryAction';
+import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data, reset_search_result_data } from '../../store/actions/searchHistoryAction';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -232,7 +232,9 @@ class SearchModel extends PureComponent {
     }
 
     componentWillUnmount() {
+        //数据清除，只清除搜索结果，不清除历史数据
         reg.searchInput = '';
+        store.dispatch(reset_search_result_data());
     }
 
     render() {
