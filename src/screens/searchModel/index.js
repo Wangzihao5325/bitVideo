@@ -22,6 +22,9 @@ class SearchHeader extends PureComponent {
 
     _textChange = (e) => {
         reg.searchInput = e;
+        if (!e || e == '') {
+            store.dispatch(reset_search_result_data());
+        }
     }
 
     _endEdit = () => {
@@ -40,7 +43,7 @@ class SearchHeader extends PureComponent {
             <View style={styles.headerContainer}>
                 <View style={styles.inputContainer}>
                     <Image style={styles.headerImage} source={require('../../image/usual/search.png')} />
-                    <TextInput onChangeText={this._textChange} onEndEditing={this._endEdit} clearButtonMode='while-editing' returnKeyType='search' style={styles.headerTextInput} placeholder='搜索你想看的影片' placeholderTextColor='rgb(151,151,151)' />
+                    <TextInput onChangeText={this._textChange} onEndEditing={this._endEdit} clearButtonMode='always' returnKeyType='search' style={styles.headerTextInput} placeholder='搜索你想看的影片' placeholderTextColor='rgb(151,151,151)' />
                 </View>
                 <Text style={styles.backText} onPress={this.goBack}>取消</Text>
             </View>
@@ -244,6 +247,7 @@ class SearchModel extends PureComponent {
                 {!this.props.isResult && this.props.isShow && <SearchHistory data={this.props.data} />}
                 {!this.props.isResult && <SearchRecommend />}
                 {this.props.isResult && this.props.searchresult.length > 0 && < ResultList data={this.props.searchresult} />}
+                {this.props.isResult && this.props.searchresult.length == 0 && <Text style={{ alignSelf: 'center', marginTop: 40 }}>暂无搜索结果～</Text>}
             </SafeAreaView>
         );
     }
@@ -287,7 +291,7 @@ const styles = StyleSheet.create({
     },
     headerTextInput: {
         height: 29,
-        width: 261 - 106,   //261-2*(27+16)-20
+        width: 261 - 53,   //261-2*(27+16)-20
         marginLeft: 10
     },
     backText: {
