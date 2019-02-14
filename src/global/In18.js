@@ -94,6 +94,12 @@ const SEND_TEXT = '发送';
 const SHARE_TEXT = '分享';
 const COLLECTION_TEXT = '收藏';
 
+//搜索页面
+const CANCEL_TEXT = '取消';
+const SEARCH_HISTORY = '搜索历史';
+const HOT_SEARCH = '热门搜索';
+const NO_SEARCH_RESULT = '暂无搜索结果～';
+
 //国家代码
 const COUNTRY_CODE = '国家代码';
 
@@ -192,6 +198,11 @@ export {
     SEND_TEXT,
     SHARE_TEXT,
     COLLECTION_TEXT,
+
+    CANCEL_TEXT,
+    SEARCH_HISTORY,
+    HOT_SEARCH,
+    NO_SEARCH_RESULT,
 
     COUNTRY_CODE,
 

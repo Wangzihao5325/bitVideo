@@ -5,6 +5,7 @@ import Api from '../../socket/index';
 import { connect } from 'react-redux';
 import store from '../../store/index';
 import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data, reset_search_result_data } from '../../store/actions/searchHistoryAction';
+import * as In18 from '../../global/In18';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -43,9 +44,9 @@ class SearchHeader extends PureComponent {
             <View style={styles.headerContainer}>
                 <View style={styles.inputContainer}>
                     <Image style={styles.headerImage} source={require('../../image/usual/search.png')} />
-                    <TextInput onChangeText={this._textChange} onEndEditing={this._endEdit} clearButtonMode='always' returnKeyType='search' style={styles.headerTextInput} placeholder='搜索你想看的影片' placeholderTextColor='rgb(151,151,151)' />
+                    <TextInput onChangeText={this._textChange} onEndEditing={this._endEdit} clearButtonMode='always' returnKeyType='search' style={styles.headerTextInput} placeholder={In18.SEARCH_TITLE} placeholderTextColor='rgb(151,151,151)' />
                 </View>
-                <Text style={styles.backText} onPress={this.goBack}>取消</Text>
+                <Text style={styles.backText} onPress={this.goBack}>{In18.CANCEL_TEXT}</Text>
             </View>
         );
     }
@@ -78,7 +79,7 @@ class SearchHistory extends PureComponent {
         return (
             <View>
                 <View style={styles.historyHeader}>
-                    <Text style={styles.headerTitle}>搜索历史</Text>
+                    <Text style={styles.headerTitle}>{In18.SEARCH_HISTORY}</Text>
                     <IconBtn style={{ marginRight: 21 }} height={22} width={22} source={require('../../image/search/clear.png')} onPress={this._clearHistory} />
                 </View>
                 <FlatList
@@ -167,7 +168,7 @@ class SearchRecommend extends PureComponent {
         return (
             <View>
                 <View style={styles.recommendHeader}>
-                    <Text style={styles.headerTitle}>热门搜索</Text>
+                    <Text style={styles.headerTitle}>{In18.HOT_SEARCH}</Text>
                 </View>
                 {this.state.data.length > 0 &&
                     <FlatList
@@ -247,7 +248,7 @@ class SearchModel extends PureComponent {
                 {!this.props.isResult && this.props.isShow && <SearchHistory data={this.props.data} />}
                 {!this.props.isResult && <SearchRecommend />}
                 {this.props.isResult && this.props.searchresult.length > 0 && < ResultList data={this.props.searchresult} />}
-                {this.props.isResult && this.props.searchresult.length == 0 && <Text style={{ alignSelf: 'center', marginTop: 40 }}>暂无搜索结果～</Text>}
+                {this.props.isResult && this.props.searchresult.length == 0 && <Text style={{ alignSelf: 'center', marginTop: 40 }}>{In18.NO_SEARCH_RESULT}</Text>}
             </SafeAreaView>
         );
     }
