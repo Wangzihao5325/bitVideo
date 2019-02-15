@@ -74,7 +74,7 @@ const AppContainer = createAppContainer(RouterWithModal);
 
 export default class App extends Component {
   componentDidMount() {
-    //to do ... 
+    //设备号注册
     let deviceId = DeviceInfo.getUniqueID();
     Api.postRegisterByDeviceId(deviceId, (e) => {
       if (e && e.api_token) {

@@ -18,7 +18,24 @@ const commentCountTransform = function (num) {
     }
 }
 
+const accountTypeTransform = function (num) {
+    let typeText = In18.VISITOR;
+    switch (num) {
+        case 0:
+            typeText = In18.NORMAL_USER;
+            break;
+        case 10:
+            typeText = In18.VISITOR;
+            break;
+        default:
+            typeText = In18.VISITOR;
+            break;
+    }
+    return typeText;
+}
+
 export {
     playCountTransform,
     commentCountTransform,
+    accountTypeTransform,
 };

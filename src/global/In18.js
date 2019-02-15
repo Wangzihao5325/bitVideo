@@ -110,6 +110,10 @@ const PEOPLE_TEXT = '人';
 //defalut
 const NO_INTRO = '暂无简介';
 
+//用户类别
+const VISITOR = '游客';
+const NORMAL_USER = '注册用户';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -210,4 +214,7 @@ export {
     PEOPLE_TEXT,
 
     NO_INTRO,
+
+    VISITOR,
+    NORMAL_USER,
 };

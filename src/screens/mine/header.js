@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableHighlight } from 'react-native';
 import * as In18 from '../../global/In18';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { accountTypeTransform } from '../../global/utils/MathUtil';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -43,21 +45,23 @@ class Avater extends PureComponent {
         mineNavigation: PropTypes.object
     }
 
-    login = () => {
-        const { mineNavigation } = this.context;
-        mineNavigation.navigate('MyModel');
-    }
+    // login = () => {
+    //     const { mineNavigation } = this.context;
+    //     mineNavigation.navigate('MyModel');
+    // }
 
     render() {
+        let typeText = accountTypeTransform(this.props.type);
         return (
             <View style={styles.avaterContainer}>
                 <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />
-                <Text style={styles.LoginText} onPress={this.login}><Text>{In18.LOGIN}</Text>/<Text>{In18.REGISTER}</Text></Text>
-                <View style={styles.rechargeContainer}>
-                    <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
-                        <Text style={styles.rechargeText}>{In18.RECHARGE}</Text>
-                    </ImageBackground>
+                <View style={styles.accountNameContainer}>
+                    <Text style={styles.accountNameText}>{this.props.name}</Text>
+                    <Text style={styles.accountTypeText}>{typeText}</Text>
                 </View>
+                <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
+                    <Text style={styles.rechargeText}>{In18.RECHARGE}</Text>
+                </ImageBackground>
             </View>
         );
     }
@@ -88,17 +92,27 @@ class CountList extends PureComponent {
         );
     }
 }
-export default class Header extends PureComponent {
+class Header extends PureComponent {
     render() {
         return (
             <View>
                 <TopBtns />
-                <Avater />
+                <Avater name={this.props.accountName} type={this.props.accountType} />
                 <CountList />
             </View>
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        accountName: store.account.name,
+        accountType: store.account.type
+    }
+}
+
+export default connect(mapState2Props)(Header);
+
 const styles = StyleSheet.create({
     topBtnsContainer: {
         height: CONTAINER_HEIGHT,
@@ -116,6 +130,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     avaterImage: {
         height: 63,
@@ -124,17 +139,20 @@ const styles = StyleSheet.create({
         marginTop: 7,
         marginLeft: 15
     },
-    LoginText: {
+    accountNameText: {
         color: 'white',
         fontSize: 18,
-        alignSelf: 'center',
-        marginLeft: 23,
-        marginTop: 15
+        marginLeft: 10,
+        marginTop: 25
     },
-    rechargeContainer: {
+    accountTypeText: {
+        color: 'white',
+        fontSize: 14,
+        marginLeft: 10,
+        marginTop: 6
+    },
+    accountNameContainer: {
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
     },
     imageBackground: {
         height: 30,
