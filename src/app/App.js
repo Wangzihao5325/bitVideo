@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Provider } from 'react-redux';
 import store from '../store/index';
+import { get_device_account_info } from '../store/actions/accountAction';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import { MainStack, SubjectStack, TaskStack, MineStack } from '../app/register_screens';
 import * as Colors from '../global/Colors';
@@ -79,6 +80,7 @@ export default class App extends Component {
       if (e && e.api_token) {
         Variables.account.token = e.api_token;
         Variables.account.deviceToken = e.api_token;
+        store.dispatch(get_device_account_info(e));
       }
     });
   }

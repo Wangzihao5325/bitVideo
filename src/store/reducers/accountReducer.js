@@ -1,20 +1,24 @@
 import * as Types from '../actionTypes';
 
 const initialState = {
-    num: 0
+    name: '',
+    id: 0,
+    sex: 1,
+    status: 1,
+    type: 10,
+    mobile: '',
+    inviteCode: '',
+    coverPath: null,
+    collectCount: 0,
+    historyCount: 0
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case Types.TEST_INCREMENT:
+        case Types.GET_DEVICE_ACCOUNT_INFO:
             return {
                 ...state,
-                num: state.num + 1
-            };
-        case Types.TEST_DECREMENT:
-            return {
-                ...state,
-                num: state.num - 1
+                ...action.obj
             };
         default: return state;
     }
