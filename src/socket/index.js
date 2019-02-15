@@ -191,6 +191,11 @@ class api {
         const url = '/api/user/userinfo';
         this.getFetch(url, onSuccess, onError);
     }
+
+    getUserWatchHistory(onSuccess, onError) {
+        const url = '/api/video/user/history/list';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();
