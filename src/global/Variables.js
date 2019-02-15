@@ -1,5 +1,6 @@
 export default {
     account: {
-        token: null
+        token: null,
+        deviceToken: null
     }
 }

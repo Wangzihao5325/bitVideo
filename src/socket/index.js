@@ -66,6 +66,13 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
+    postRegisterByDeviceId(id, onSuccess, onError) {
+        const url = '/api/register-device';
+        let formData = new FormData();
+        formData.append('device_code', id);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
     postRegister(mobile, verKey, code, devCode, password, inviteCode, onSuccess, onError) {
         const url = '/api/register';
         let formData = new FormData();
