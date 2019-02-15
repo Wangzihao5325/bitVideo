@@ -15,6 +15,10 @@ export function get_device_account_info(e) {
     return { type: Types.GET_DEVICE_ACCOUNT_INFO, obj: regObj };
 }
 
-// export function test_min() {
-//     return { type: Types.TEST_DECREMENT };
-// }
+export function get_user_info(e) {
+    let regObj = {};
+    regObj.viewCountDailyTotal = e.view_count_daily_total;
+    regObj.viewCountDailyUse = e.view_count_daily_use;
+    regObj.icons = e.coins;
+    return { type: Types.GET_USER_INFO, obj: regObj };
+}

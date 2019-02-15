@@ -186,6 +186,11 @@ class api {
         const url = `/api/video/lists?video_title=${name}`;
         this.getFetch(url, onSuccess, onError);
     }
+
+    getUserInfo(onSuccess, onError) {
+        const url = '/api/user/userinfo';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

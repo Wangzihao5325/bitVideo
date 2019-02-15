@@ -10,12 +10,20 @@ const initialState = {
     inviteCode: '',
     coverPath: null,
     collectCount: 0,
-    historyCount: 0
+    historyCount: 0,
+    viewCountDailyTotal: 0,
+    viewCountDailyUse: 0,
+    icons: 0,
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case Types.GET_DEVICE_ACCOUNT_INFO:
+            return {
+                ...state,
+                ...action.obj
+            };
+        case Types.GET_USER_INFO:
             return {
                 ...state,
                 ...action.obj

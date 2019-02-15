@@ -75,7 +75,7 @@ class CountList extends PureComponent {
             <View style={styles.countListContainer}>
                 <View style={styles.countListboard}>
                     <View style={styles.watchTimesBoard}>
-                        <Text style={styles.countListNumText}><Text>0</Text>/9</Text>
+                        <Text style={styles.countListNumText}><Text>{this.props.use}</Text>{`/${this.props.total}`}</Text>
                         <Text style={styles.countListText}>{In18.TODAY_WATCH_TIMES}</Text>
                     </View>
                     <View style={styles.separate} />
@@ -98,7 +98,7 @@ class Header extends PureComponent {
             <View>
                 <TopBtns />
                 <Avater name={this.props.accountName} type={this.props.accountType} />
-                <CountList />
+                <CountList total={this.props.viewCountTotal} use={this.props.viewCountUse} />
             </View>
         );
     }
@@ -107,7 +107,9 @@ class Header extends PureComponent {
 function mapState2Props(store) {
     return {
         accountName: store.account.name,
-        accountType: store.account.type
+        accountType: store.account.type,
+        viewCountTotal: store.account.viewCountDailyTotal,
+        viewCountUse: store.account.viewCountDailyUse,
     }
 }
 

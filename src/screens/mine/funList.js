@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
 import IconBtnWithTitle from '../../components/imageBtn/IconBtnWithTitle';
 
-export default class FunList extends PureComponent {
+class FunList extends PureComponent {
     static contextTypes = {
         mineNavigation: PropTypes.object
     }
@@ -30,13 +31,22 @@ export default class FunList extends PureComponent {
                 </View>
                 <View style={styles.moneyShowContainer}>
                     <View style={styles.flexView}>
-                        <Text style={styles.moneyText}>{In18.OVERPLUS}<Text>:</Text><Text>120</Text></Text>
+                        <Text style={styles.moneyText}>{In18.OVERPLUS}<Text>:</Text><Text>{this.props.icons}</Text></Text>
                     </View>
                 </View>
             </View>
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        icons: store.account.icons,
+    }
+}
+
+export default connect(mapState2Props)(FunList);
+
 const styles = StyleSheet.create({
     container: {
         height: 66 + 18,
