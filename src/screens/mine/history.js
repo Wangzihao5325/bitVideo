@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, Text, TouchableHighlight, FlatList } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import * as In18 from '../../global/In18';
+import Api from '../../socket/index';
+import store from '../../store/index';
+import { get_history_movie_list } from '../../store/actions/watchHistoryAction';
+import { connect } from 'react-redux';
 
 import watchHistory from '../../mock/watchHistory';
 
@@ -44,28 +49,59 @@ class Item extends PureComponent {
 }
 class Snap extends PureComponent {
     render() {
-        return (
-            <FlatList
-                style={styles.flatList}
-                showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-                horizontal={true}
-                data={watchHistory}
-                renderItem={({ item }) => <Item source={{ uri: item.cover_path }} title={item.title} />}
-            />
-        );
+        if (this.props.data && this.props.data.length > 0) {
+            return (
+                <FlatList
+                    style={styles.flatList}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    data={this.props.data}
+                    renderItem={({ item }) => <Item source={{ uri: item.cover_path }} title={item.title} />}
+                />
+            );
+        } else {
+            return (
+                <View style={[styles.flatList, { justifyContent: 'center', alignItems: 'center' }]} >
+                    <Text style={{ color: 'rgb(151,151,151)', fontSize: 16 }}>暂无观看记录~</Text>
+                </View>
+            );
+        }
     }
 }
-export default class History extends PureComponent {
+class History extends PureComponent {
+
+    _onDidFocus = () => {
+        Api.getUserWatchHistory((e) => {
+            console.log('history');
+            console.log(e);
+            if (e) {
+                store.dispatch(get_history_movie_list(e.data));
+            }
+        });
+    }
+
     render() {
         return (
             <View >
+                <NavigationEvents
+                    onDidFocus={this._onDidFocus}
+                />
                 <Header />
-                <Snap />
+                <Snap data={this.props.data} />
             </View>
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        data: store.watchHistory.historyMovies,
+    }
+}
+
+export default connect(mapState2Props)(History);
+
 const styles = StyleSheet.create({
     headerContainer: {
         height: 22,

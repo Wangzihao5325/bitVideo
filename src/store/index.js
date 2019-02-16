@@ -7,6 +7,7 @@ import videoDetailInfoReducer from './reducers/videoDetailInfoReducer';
 import videoPlayReducer from './reducers/videoPlayReducer';
 import searchHistoryReducer from './reducers/searchHistoryReducer';
 import accountReducer from './reducers/accountReducer';
+import watchHistoryReducer from './reducers/watchHistoryReducer';
 
 const rootReducer = combineReducers({
   test: testReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   videoDeatilInfo: videoDetailInfoReducer,
   videoPlay: videoPlayReducer,
   searchHistory: searchHistoryReducer,
-  account: accountReducer
+  account: accountReducer,
+  watchHistory: watchHistoryReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
