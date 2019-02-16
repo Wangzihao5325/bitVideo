@@ -204,6 +204,14 @@ class api {
         formData.append('contact', contact);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    postAddCollect(type, id, onSuccess, onError) {
+        const url = '/api/video/user/collect/add';
+        let formData = new FormData();
+        formData.append('global_type', type);
+        formData.append('video_id', id);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();

@@ -14,6 +14,7 @@ const initialState = {
     globalType: null,
     guessLike: [],
     commentList: [],
+    isCollect: false,
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,7 +28,8 @@ const reducer = (state = initialState, action) => {
                 type: action.videoType,
                 recommendAndNegative: action.recommendAndNegative,
                 id: action.data.id,
-                globalType: action.data.global_type
+                globalType: action.data.global_type,
+                isCollect: action.data.user_collect,
             };
         case Types.REFRESH_VIDEO_RECOMMEND_NEGATIVE_DATA:
             return {
@@ -64,6 +66,11 @@ const reducer = (state = initialState, action) => {
                     commentList: newList
                 };
             }
+        case Types.VIDEO_DETAIL_CHANGE_COLLECT_STATE:
+            return {
+                ...state,
+                isCollect: action.newState
+            };
         default: return state;
     }
 };

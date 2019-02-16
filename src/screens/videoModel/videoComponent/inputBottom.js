@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, TextInput, Keyboard, Text } from 'react-native';
 import { connect } from 'react-redux';
 import store from '../../../store/index';
-import { video_detail_add_myself_comment } from '../../../store/actions/videoDetailInfoAction';
+import { video_detail_add_myself_comment, change_video_collect_state } from '../../../store/actions/videoDetailInfoAction';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
@@ -54,8 +54,6 @@ class InputBottom extends PureComponent {
                 reg.input,
                 (result, code, message) => {
                     if (result) {
-                        console.log('_____this is comment return_____!!')
-                        console.log(result);
                         store.dispatch(video_detail_add_myself_comment(result));
                         this.input.blur();
                     }
@@ -65,7 +63,23 @@ class InputBottom extends PureComponent {
         }
     }
 
+    _collectVideo = () => {
+        if (this.props.collectState) {
+
+        } else {
+            Api.postAddCollect(
+                this.props.globalType,
+                this.props.id,
+                (result, code, message) => {
+                    if (message == 'success') {
+                        store.dispatch(change_video_collect_state(true));
+                    }
+                });
+        }
+    }
+
     render() {
+        let collectImageSource = this.props.collectState ? require('../../../image/usual/star_collect.png') : require('../../../image/usual/star.png');
         return (
             <View style={styles.container}>
                 <TextInput onChangeText={this.textChange} ref={(ref) => this.input = ref} style={styles.input} placeholder={In18.COMMENT_PLACEHOLDER} />
@@ -77,7 +91,7 @@ class InputBottom extends PureComponent {
                 {!this.state.isKeyboardShow &&
                     <View style={styles.noKeyboardView}>
                         <IconBtn flexStyle={{ justifyContent: 'center' }} containerStyle={styles.iconContainerStyle} imageStyle={styles.iconImageStyle} titleStyle={styles.iconTitleStyle} source={require('../../../image/videoDetail/video_share.png')} title={In18.SHARE_TEXT} />
-                        <IconBtn flexStyle={{ justifyContent: 'center' }} containerStyle={styles.iconContainerStyle} imageStyle={styles.iconImageStyle} titleStyle={styles.iconTitleStyle} source={require('../../../image/usual/star.png')} title={In18.COLLECTION_TEXT} />
+                        <IconBtn flexStyle={{ justifyContent: 'center' }} containerStyle={styles.iconContainerStyle} imageStyle={styles.iconImageStyle} titleStyle={styles.iconTitleStyle} source={collectImageSource} title={In18.COLLECTION_TEXT} onPress={this._collectVideo} />
                     </View>
                 }
             </View>
@@ -87,7 +101,8 @@ class InputBottom extends PureComponent {
 function mapState2Props(store) {
     return {
         id: store.videoDeatilInfo.id,
-        globalType: store.videoDeatilInfo.globalType
+        globalType: store.videoDeatilInfo.globalType,
+        collectState: store.videoDeatilInfo.isCollect,
     }
 }
 

@@ -69,6 +69,6 @@ export function video_detail_add_myself_comment(data) {
     }
 }
 
-// export function test_min() {
-//     return { type: Types.TEST_DECREMENT };
-// }
+export function change_video_collect_state(state) {
+    return { type: Types.VIDEO_DETAIL_CHANGE_COLLECT_STATE, newState: state };
+}
