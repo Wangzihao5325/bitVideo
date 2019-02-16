@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, Text, TouchableHighlight, FlatList } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
+import PropTypes from 'prop-types';
 import * as In18 from '../../global/In18';
 import Api from '../../socket/index';
 import store from '../../store/index';
@@ -31,8 +32,13 @@ class Header extends PureComponent {
     }
 }
 class Item extends PureComponent {
+    static contextTypes = {
+        mineNavigation: PropTypes.object
+    }
+
     watchHistoryPressing = () => {
-        console.log('go to see history movie');
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('VideoModel', { videoId: this.props.id });
     }
     render() {
         return (
@@ -57,7 +63,7 @@ class Snap extends PureComponent {
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                     data={this.props.data}
-                    renderItem={({ item }) => <Item source={{ uri: item.cover_path }} title={item.title} />}
+                    renderItem={({ item }) => <Item source={{ uri: item.cover_path }} title={item.title} id={item.id} />}
                 />
             );
         } else {
