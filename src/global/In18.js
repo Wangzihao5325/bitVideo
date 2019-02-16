@@ -114,6 +114,9 @@ const NO_INTRO = '暂无简介';
 const VISITOR = '游客';
 const NORMAL_USER = '注册用户';
 
+//观看历史
+const NO_WATCH_HISTORY = '暂无观看记录~';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -217,4 +220,6 @@ export {
 
     VISITOR,
     NORMAL_USER,
+
+    NO_WATCH_HISTORY,
 };

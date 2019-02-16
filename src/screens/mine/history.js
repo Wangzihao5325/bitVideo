@@ -69,7 +69,7 @@ class Snap extends PureComponent {
         } else {
             return (
                 <View style={[styles.flatList, { justifyContent: 'center', alignItems: 'center' }]} >
-                    <Text style={{ color: 'rgb(151,151,151)', fontSize: 16 }}>暂无观看记录~</Text>
+                    <Text style={{ color: 'rgb(151,151,151)', fontSize: 16 }}>{In18.NO_WATCH_HISTORY}</Text>
                 </View>
             );
         }
@@ -79,8 +79,6 @@ class History extends PureComponent {
 
     _onDidFocus = () => {
         Api.getUserWatchHistory((e) => {
-            console.log('history');
-            console.log(e);
             if (e) {
                 store.dispatch(get_history_movie_list(e.data));
             }

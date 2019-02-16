@@ -106,6 +106,7 @@ export default class bottomTaskList extends PureComponent {
     componentDidMount() {
         Api.getTaskList((e) => {
             if (e instanceof Array) {
+                console.log('task');
                 console.log(e);
                 let arr = e.reverse();
                 this.setState({
