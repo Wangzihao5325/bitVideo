@@ -65,7 +65,13 @@ class InputBottom extends PureComponent {
 
     _collectVideo = () => {
         if (this.props.collectState) {
-
+            Api.postCancelCollect(
+                this.props.id,
+                (result, code, message) => {
+                    if (message == 'success') {
+                        store.dispatch(change_video_collect_state(false));
+                    }
+                });
         } else {
             Api.postAddCollect(
                 this.props.globalType,

@@ -212,6 +212,13 @@ class api {
         formData.append('video_id', id);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    postCancelCollect(id, onSuccess, onError) {
+        const url = '/api/video/user/collect/cancel';
+        let formData = new FormData();
+        formData.append('video_id[]', id);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();

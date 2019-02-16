@@ -54,8 +54,6 @@ class NoDataContent extends PureComponent {
 }
 class AmazingComment extends PureComponent {
     render() {
-        console.log('_____this is reducer data_____!!!!!');
-        console.log(this.props.commentList);
         let stateReg = this.props.commentList.length > 0 ? true : false;
         return (
             <View style={styles.container}>

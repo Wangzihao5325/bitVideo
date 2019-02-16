@@ -24,8 +24,6 @@ export default class VideoModel extends PureComponent {
             //获取video信息
             Api.getVideoInfo(videoId, (result, code, message) => {
                 if (result) {
-                    console.log('____this is video data_____!');
-                    console.log(result);
                     store.dispatch(set_video_full_data(result));
                 } else {
                     console.log(message);
@@ -34,16 +32,12 @@ export default class VideoModel extends PureComponent {
             //根据video id 获取猜你喜欢信息
             Api.getGuessLike(videoId, (result, code, message) => {
                 if (result) {
-                    console.log('____this is guess like data_____!');
-                    console.log(result);
                     store.dispatch(set_guess_like_source(result.data));
                 }
             });
             //根据video id 获取评论
             Api.getCommentList(videoId, (result, code, message) => {
                 if (result) {
-                    console.log('____this is comment list data_____!');
-                    console.log(result);
                     store.dispatch(set_comment_list_data(result.data));
                 }
             });
