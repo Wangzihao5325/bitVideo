@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet, TextInput, TouchableHighlight, Text } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
+import Api from '../../../socket/index';
 
+const reg = { title: '', contact: '' };
 export default class HelpScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -13,8 +15,25 @@ export default class HelpScreen extends PureComponent {
         }
     };
 
+    componentWillUnmount() {
+        reg.title = '';
+        reg.contact = '';
+    }
+
     submit = () => {
-        console.log('goto submit');
+        Api.postFeedback(reg.title, reg.contact, (result, code, message) => {
+            if (message == 'success') {
+                this.props.navigation.pop();
+            }
+        });
+    }
+
+    _titleInputChange = (e) => {
+        reg.title = e;
+    }
+
+    _contentInputChange = (e) => {
+        reg.contact = e;
     }
 
     render() {
@@ -26,6 +45,7 @@ export default class HelpScreen extends PureComponent {
                         placeholder={In18.PLEASE_INPUT_SUGGEST}
                         multiline={true}
                         maxLength={150}
+                        onChangeText={this._titleInputChange}
                     />
                 </View>
                 <View style={styles.flexView2}>
@@ -33,6 +53,7 @@ export default class HelpScreen extends PureComponent {
                         style={styles.input2}
                         placeholder={In18.PLEASE_INPUT_CONTRACT}
                         maxLength={20}
+                        onChangeText={this._contentInputChange}
                     />
                 </View>
                 <TouchableHighlight

@@ -196,6 +196,14 @@ class api {
         const url = '/api/video/user/history/list';
         this.getFetch(url, onSuccess, onError);
     }
+
+    postFeedback(title, contact, onSuccess, onError) {
+        const url = '/api/feedback';
+        let formData = new FormData();
+        formData.append('title', title);
+        formData.append('contact', contact);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();
