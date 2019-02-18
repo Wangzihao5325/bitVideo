@@ -1,14 +1,37 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, View, FlatList } from 'react-native';
+import { StyleSheet, SafeAreaView, View, FlatList, Text } from 'react-native';
 import { connect } from 'react-redux';
 import store from '../../store/index';
-import { change_history_edit_state } from '../../store/actions/watchHistoryAction';
+import { change_history_edit_state, history_edit_select_all, history_clear_state } from '../../store/actions/watchHistoryAction';
 import * as In18 from '../../global/In18';
 
 import ModalHeader from '../../components/modal/ModalHeader';
 import VideoDetailInfoWithEdit from '../../components/imageBtn/VideoDetailInfoWithEdit';
 
+
+class BottomBtn extends PureComponent {
+    _selectAll = () => {
+        store.dispatch(history_edit_select_all());
+    }
+    render() {
+        return (
+            <View style={styles.bottomContainer}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: 'rgb(153,153,153)', fontSize: 14 }} onPress={this._selectAll}>全选</Text>
+                </View>
+                <View style={{ width: 1, height: 15, backgroundColor: 'rgb(191,191,191)' }} />
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: 'rgb(73,114,255)', fontSize: 14 }}>删除</Text>
+                </View>
+            </View>
+        );
+    }
+}
 class HistoryModel extends PureComponent {
+    componentWillUnmount() {
+        store.dispatch(history_clear_state());
+    }
+
     _editMode = () => {
         store.dispatch(change_history_edit_state());
     }
@@ -22,9 +45,11 @@ class HistoryModel extends PureComponent {
                 <ModalHeader goBack={this._goBack} title={In18.MY_WATCH_HISTORY} rightBtnMode='text' rightBtnTitle={btnText} rightBtnOnPress={this._editMode} />
                 {this.props.data.length > 0 &&
                     <FlatList
+                        style={styles.listStyle}
                         data={this.props.data}
                         renderItem={({ item }) => <VideoDetailInfoWithEdit isSelect={this.props.isSelectMode} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={this.props.navigation} id={item.id} />}
                     />}
+                {this.props.isSelectMode && <BottomBtn />}
             </SafeAreaView>
         );
     }
@@ -38,3 +63,18 @@ function mapState2Props(store) {
 }
 
 export default connect(mapState2Props)(HistoryModel);
+
+const styles = StyleSheet.create({
+    listStyle: {
+        flex: 1
+    },
+    bottomContainer: {
+        height: 40,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderTopColor: 'rgba(153,153,153,0.2)',
+        borderTopWidth: 1
+    }
+});

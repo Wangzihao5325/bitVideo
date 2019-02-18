@@ -2,7 +2,8 @@ import * as Types from '../actionTypes';
 
 const initialState = {
     historyMovies: [],
-    isEdit: false
+    isEdit: false,
+    selectAll: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +31,26 @@ const reducer = (state = initialState, action) => {
                     isEdit: newState
                 };
             }
+        case Types.HISTORY_EDIT_SELECT_ALL:
+            {
+                let selectAll = state.selectAll;
+                let newState = null;
+                if (selectAll) {
+                    newState = false;
+                } else {
+                    newState = true;
+                }
+                return {
+                    ...state,
+                    selectAll: newState
+                };
+            }
+        case Types.HISTORY_CLEAR_STATE:
+            return {
+                ...state,
+                isEdit: false,
+                selectAll: false
+            };
         default: return state;
     }
 };

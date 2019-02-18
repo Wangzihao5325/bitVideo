@@ -15,7 +15,21 @@ class Select extends PureComponent {
 
 class VideoDetailInfoWithEdit extends PureComponent {
     state = {
-        isSelectNow: false
+        isSelectNow: false,
+        selectAllKey: false,
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.selectAllKey == nextProps.selectAll) {
+            return {
+                ...prevState
+            }
+        } else {
+            return {
+                isSelectNow: nextProps.selectAll,
+                selectAllKey: nextProps.selectAll
+            }
+        }
     }
 
     _goToSeeMovie = () => {
@@ -53,6 +67,7 @@ class VideoDetailInfoWithEdit extends PureComponent {
 function mapState2Props(store) {
     return {
         isSelectMode: store.watchHistory.isEdit,
+        selectAll: store.watchHistory.selectAll
     }
 }
 

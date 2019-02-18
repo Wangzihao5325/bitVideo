@@ -11,3 +11,11 @@ export function clear_history_movie_list() {
 export function change_history_edit_state() {
     return { type: Types.CHANGE_HISTORY_EDIT_MODE };
 }
+
+export function history_edit_select_all() {
+    return { type: Types.HISTORY_EDIT_SELECT_ALL };
+}
+
+export function history_clear_state() {
+    return { type: Types.HISTORY_CLEAR_STATE };
+}
