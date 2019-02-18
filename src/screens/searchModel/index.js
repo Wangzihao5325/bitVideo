@@ -8,6 +8,7 @@ import { store_dispath_search_history_add, store_dispath_search_history_get, sea
 import * as In18 from '../../global/In18';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
+import VideoDetailInfo from '../../components/imageBtn/VideoDetailInfo';
 
 const reg = { searchInput: '' };
 class SearchHeader extends PureComponent {
@@ -182,6 +183,7 @@ class SearchRecommend extends PureComponent {
     }
 }
 
+/*
 class ResultItem extends PureComponent {
 
     static contextTypes = {
@@ -207,13 +209,18 @@ class ResultItem extends PureComponent {
         );
     }
 }
+*/
 class ResultList extends PureComponent {
+    static contextTypes = {
+        searchNavigation: PropTypes.object
+    }
     render() {
+        const { searchNavigation } = this.context;
         return (
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={this.props.data}
-                renderItem={({ item }) => <ResultItem title={item.title} intro={item.intro} source={{ uri: item.cover_path }} id={item.id} />}
+                renderItem={({ item }) => <VideoDetailInfo title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={searchNavigation} id={item.id} />}
             />
         );
     }
