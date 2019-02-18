@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, SafeAreaView, View, FlatList, Text } from 'react-native';
 import { connect } from 'react-redux';
 import store from '../../store/index';
-import { change_history_edit_state, history_edit_select_all, history_clear_state } from '../../store/actions/watchHistoryAction';
+import { change_history_edit_state, history_edit_select_all, history_clear_state, get_history_movie_list } from '../../store/actions/watchHistoryAction';
 import * as In18 from '../../global/In18';
 import Api from '../../socket/index';
 
@@ -16,14 +16,15 @@ class BottomBtn extends PureComponent {
     }
 
     _deleteWatchHistory = () => {
-        console.log('delete set');
-        console.log(this.props.deleteSet);
         let reg = [...this.props.deleteSet];
         if (reg.length > 0) {
             Api.postCancelHistory(reg, (result, code, message) => {
                 if (message == 'success') {
-                    console.log('1111122222');
-                    //重新获取
+                    Api.getUserWatchHistory((e) => {
+                        if (e) {
+                            store.dispatch(get_history_movie_list(e.data));
+                        }
+                    });
                 }
             });
         }

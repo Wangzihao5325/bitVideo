@@ -12,7 +12,10 @@ const reducer = (state = initialState, action) => {
         case Types.GET_HISTORY_MOVIE_LIST:
             return {
                 ...state,
-                historyMovies: action.data
+                historyMovies: action.data,
+                isEdit: false,
+                selectAll: false,
+                deleteSet: new Set(),
             };
         case Types.CLEAR_HISTORY_MOVIE_LIST:
             return {

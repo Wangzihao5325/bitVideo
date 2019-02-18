@@ -17,17 +17,19 @@ class VideoDetailInfoWithEdit extends PureComponent {
     state = {
         isSelectNow: false,
         selectAllKey: false,
+        id: null
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (prevState.selectAllKey == nextProps.selectAll) {
+        if (prevState.id == nextProps.id && prevState.selectAllKey == nextProps.selectAll) {
             return {
                 ...prevState
             }
         } else {
             return {
                 isSelectNow: nextProps.selectAll,
-                selectAllKey: nextProps.selectAll
+                selectAllKey: nextProps.selectAll,
+                id: nextProps.id
             }
         }
     }
