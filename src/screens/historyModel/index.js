@@ -74,6 +74,7 @@ class HistoryModel extends PureComponent {
                         data={this.props.data}
                         renderItem={({ item }) => <VideoDetailInfoWithEdit isSelect={this.props.isSelectMode} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={this.props.navigation} id={item.id} />}
                     />}
+                {this.props.data.length == 0 && <View style={styles.listStyle} />}
                 {this.props.isSelectMode && <BottomBtn deleteSet={this.props.deleteSet} />}
             </SafeAreaView>
         );
