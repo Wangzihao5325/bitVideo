@@ -11,8 +11,13 @@ import { connect } from 'react-redux';
 import watchHistory from '../../mock/watchHistory';
 
 class Header extends PureComponent {
+    static contextTypes = {
+        mineNavigation: PropTypes.object
+    }
+
     moreHistory = () => {
-        console.log('show more History');
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('HistoryModel');
     }
     render() {
         return (
@@ -56,6 +61,8 @@ class Item extends PureComponent {
 class Snap extends PureComponent {
     render() {
         if (this.props.data && this.props.data.length > 0) {
+            console.log('history!!')
+            console.log(this.props.data);
             return (
                 <FlatList
                     style={styles.flatList}

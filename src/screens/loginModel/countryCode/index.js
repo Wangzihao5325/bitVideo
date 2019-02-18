@@ -57,7 +57,7 @@ export default class CountryCode extends PureComponent {
         listData: CH_sections
     }
     goBack = () => {
-        this.props.navigation.goBack()
+        this.props.navigation.goBack();
     }
     search = (text) => {
         let listData = [];
