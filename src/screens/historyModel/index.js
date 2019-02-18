@@ -8,11 +8,12 @@ import * as In18 from '../../global/In18';
 import ModalHeader from '../../components/modal/ModalHeader';
 import VideoDetailInfoWithEdit from '../../components/imageBtn/VideoDetailInfoWithEdit';
 
-
 class BottomBtn extends PureComponent {
+
     _selectAll = () => {
         store.dispatch(history_edit_select_all());
     }
+
     render() {
         return (
             <View style={styles.bottomContainer}>
@@ -28,6 +29,7 @@ class BottomBtn extends PureComponent {
     }
 }
 class HistoryModel extends PureComponent {
+    
     componentWillUnmount() {
         store.dispatch(history_clear_state());
     }
