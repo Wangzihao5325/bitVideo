@@ -116,6 +116,8 @@ const NORMAL_USER = '注册用户';
 
 //观看历史
 const NO_WATCH_HISTORY = '暂无观看记录~';
+const EDIT_TEXT = '编辑';
+const MY_WATCH_HISTORY = '我的播放记录';
 
 export {
     MAIN_PAGE_TITLE,
@@ -222,4 +224,6 @@ export {
     NORMAL_USER,
 
     NO_WATCH_HISTORY,
+    EDIT_TEXT,
+    MY_WATCH_HISTORY,
 };

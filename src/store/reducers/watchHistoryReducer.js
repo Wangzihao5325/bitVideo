@@ -1,7 +1,8 @@
 import * as Types from '../actionTypes';
 
 const initialState = {
-    historyMovies: []
+    historyMovies: [],
+    isEdit: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,20 @@ const reducer = (state = initialState, action) => {
             return {
                 ...initialState
             };
+        case Types.CHANGE_HISTORY_EDIT_MODE:
+            {
+                let editState = state.isEdit;
+                let newState = null;
+                if (editState) {
+                    newState = false;
+                } else {
+                    newState = true;
+                }
+                return {
+                    ...state,
+                    isEdit: newState
+                };
+            }
         default: return state;
     }
 };

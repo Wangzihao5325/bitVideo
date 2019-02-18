@@ -1,16 +1,41 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, View, Image, Text } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class VideoDetailInfo extends PureComponent {
+class Select extends PureComponent {
+    render() {
+        let text = this.props.isSelect ? '已选' : '未选';
+        return (
+            <View style={styles.select}>
+                <Text>{text}</Text>
+            </View>
+        );
+    }
+}
+
+class VideoDetailInfoWithEdit extends PureComponent {
+    state = {
+        isSelectNow: false
+    }
 
     _goToSeeMovie = () => {
-        this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+        if (this.props.isSelectMode) {
+            this.setState((preState, props) => {
+                let newState = !preState.isSelectNow;
+                return {
+                    isSelectNow: newState
+                }
+            });
+        } else {
+            this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+        }
     }
 
     render() {
         return (
-            <TouchableHighlight style={styles.container} onPress={this._goToSeeMovie}>
+            <TouchableHighlight style={styles.container} onPress={this._goToSeeMovie} underlayColor='transparent'>
                 <View style={[styles.flexView, styles.borderBottom]}>
+                    {this.props.isSelectMode && <Select isSelect={this.state.isSelectNow} />}
                     <View style={styles.imageContainer}>
                         <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} />
                     </View>
@@ -24,6 +49,14 @@ export default class VideoDetailInfo extends PureComponent {
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        isSelectMode: store.watchHistory.isEdit,
+    }
+}
+
+export default connect(mapState2Props)(VideoDetailInfoWithEdit);
 
 const styles = StyleSheet.create({
     container: {

@@ -7,3 +7,7 @@ export function get_history_movie_list(data) {
 export function clear_history_movie_list() {
     return { type: Types.CLEAR_HISTORY_MOVIE_LIST };
 }
+
+export function change_history_edit_state() {
+    return { type: Types.CHANGE_HISTORY_EDIT_MODE };
+}
