@@ -3,7 +3,8 @@ import * as Types from '../actionTypes';
 const initialState = {
     historyMovies: [],
     isEdit: false,
-    selectAll: false
+    selectAll: false,
+    deleteSet: new Set(),
 }
 
 const reducer = (state = initialState, action) => {
@@ -37,8 +38,12 @@ const reducer = (state = initialState, action) => {
                 let newState = null;
                 if (selectAll) {
                     newState = false;
+                    state.deleteSet.clear();
                 } else {
                     newState = true;
+                    state.historyMovies.forEach((item) => {
+                        state.deleteSet.add(item.id);
+                    });
                 }
                 return {
                     ...state,
@@ -46,10 +51,12 @@ const reducer = (state = initialState, action) => {
                 };
             }
         case Types.HISTORY_CLEAR_STATE:
+
             return {
                 ...state,
                 isEdit: false,
-                selectAll: false
+                selectAll: false,
+                deleteSet: new Set()
             };
         default: return state;
     }

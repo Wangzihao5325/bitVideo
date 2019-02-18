@@ -35,6 +35,11 @@ class VideoDetailInfoWithEdit extends PureComponent {
     _goToSeeMovie = () => {
         if (this.props.isSelectMode) {
             this.setState((preState, props) => {
+                if (preState.isSelectNow) {
+                    this.props.deleteSet.delete(this.props.id);
+                } else {
+                    this.props.deleteSet.add(this.props.id);
+                }
                 let newState = !preState.isSelectNow;
                 return {
                     isSelectNow: newState
@@ -67,7 +72,8 @@ class VideoDetailInfoWithEdit extends PureComponent {
 function mapState2Props(store) {
     return {
         isSelectMode: store.watchHistory.isEdit,
-        selectAll: store.watchHistory.selectAll
+        selectAll: store.watchHistory.selectAll,
+        deleteSet: store.watchHistory.deleteSet,
     }
 }
 

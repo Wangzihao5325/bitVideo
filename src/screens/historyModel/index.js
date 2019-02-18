@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import store from '../../store/index';
 import { change_history_edit_state, history_edit_select_all, history_clear_state } from '../../store/actions/watchHistoryAction';
 import * as In18 from '../../global/In18';
+import Api from '../../socket/index';
 
 import ModalHeader from '../../components/modal/ModalHeader';
 import VideoDetailInfoWithEdit from '../../components/imageBtn/VideoDetailInfoWithEdit';
@@ -14,6 +15,20 @@ class BottomBtn extends PureComponent {
         store.dispatch(history_edit_select_all());
     }
 
+    _deleteWatchHistory = () => {
+        console.log('delete set');
+        console.log(this.props.deleteSet);
+        let reg = [...this.props.deleteSet];
+        if (reg.length > 0) {
+            Api.postCancelHistory(reg, (result, code, message) => {
+                if (message == 'success') {
+                    console.log('1111122222');
+                    //重新获取
+                }
+            });
+        }
+    }
+
     render() {
         return (
             <View style={styles.bottomContainer}>
@@ -22,14 +37,14 @@ class BottomBtn extends PureComponent {
                 </View>
                 <View style={{ width: 1, height: 15, backgroundColor: 'rgb(191,191,191)' }} />
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ color: 'rgb(73,114,255)', fontSize: 14 }}>删除</Text>
+                    <Text style={{ color: 'rgb(73,114,255)', fontSize: 14 }} onPress={this._deleteWatchHistory}>删除</Text>
                 </View>
             </View>
         );
     }
 }
 class HistoryModel extends PureComponent {
-    
+
     componentWillUnmount() {
         store.dispatch(history_clear_state());
     }
@@ -51,7 +66,7 @@ class HistoryModel extends PureComponent {
                         data={this.props.data}
                         renderItem={({ item }) => <VideoDetailInfoWithEdit isSelect={this.props.isSelectMode} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={this.props.navigation} id={item.id} />}
                     />}
-                {this.props.isSelectMode && <BottomBtn />}
+                {this.props.isSelectMode && <BottomBtn deleteSet={this.props.deleteSet} />}
             </SafeAreaView>
         );
     }
@@ -61,6 +76,7 @@ function mapState2Props(store) {
     return {
         data: store.watchHistory.historyMovies,
         isSelectMode: store.watchHistory.isEdit,
+        deleteSet: store.watchHistory.deleteSet,
     }
 }
 

@@ -219,6 +219,16 @@ class api {
         formData.append('video_id[]', id);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    postCancelHistory(idArr, onSuccess, onError) {
+        const url = '/api/video/user/history/cancel';
+        let formData = new FormData();
+        idArr.forEach((item) => {
+            formData.append('video_id[]', item);
+        });
+
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();
