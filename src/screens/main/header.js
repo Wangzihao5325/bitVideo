@@ -61,14 +61,17 @@ class Header extends PureComponent {
                 let typeKey = reg[0].key;
                 Api.postGlobalTypeVideo(typeKey, null, (e) => {
                     if (e.data) {
-                        console.log('classify data');
-                        console.log(e);
                         store.dispatch(setMainPageData(e.data));
                         store.dispatch(setPageInfo(e.current_page, e.last_page));
                     }
                 });
             }
         }
+    }
+
+    _watchHistory = () => {
+        const { mainNavigation } = this.context;
+        mainNavigation.navigate('HistoryModel');
     }
 
     render() {
@@ -83,7 +86,7 @@ class Header extends PureComponent {
                     <SearchBarBtn style={{ marginLeft: 15 }} btnPress={this._search} />
                     <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                         <IconBtn style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/star.png')} />
-                        <IconBtn style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/clock.png')} />
+                        <IconBtn onPress={this._watchHistory} style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/clock.png')} />
                     </View>
                 </View>
             </View>

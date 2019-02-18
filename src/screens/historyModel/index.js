@@ -45,6 +45,13 @@ class BottomBtn extends PureComponent {
     }
 }
 class HistoryModel extends PureComponent {
+    componentDidMount() {
+        Api.getUserWatchHistory((e) => {
+            if (e) {
+                store.dispatch(get_history_movie_list(e.data));
+            }
+        });
+    }
 
     componentWillUnmount() {
         store.dispatch(history_clear_state());
