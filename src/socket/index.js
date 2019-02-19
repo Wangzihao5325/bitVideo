@@ -253,6 +253,11 @@ class api {
         const url = `/api/video/user/collect/list`;
         this.getFetch(url, onSuccess, onError);
     }
+
+    getDailySignIn(onSuccess, onError) {
+        const url = '/api/user/task/dailysignin';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

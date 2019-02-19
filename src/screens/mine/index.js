@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     },
     imageBackground: {
         width: '100%',
-        height: 207,//780
+        height: 780,//780
     }
 });

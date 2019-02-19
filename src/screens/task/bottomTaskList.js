@@ -29,6 +29,18 @@ class UnUseBtn extends PureComponent {
     }
 }
 class Item extends PureComponent {
+    _btnPress = () => {
+        switch (this.props.item.key) {
+            case 'SAILY_SIGN_IN':
+                Api.getDailySignIn((result, code, message) => {
+                    if (message == 'success') {
+
+                    }
+                });
+                break;
+        }
+    }
+
     render() {
         let sourceUrl = require('../../image/task/check_in_task.png');
         let ableBtnTitle = In18.GO_TO_CHECK;
@@ -76,7 +88,7 @@ class Item extends PureComponent {
                                 </View>
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                                <UnUseBtn enable={!this.props.item.sign} enableTitle={ableBtnTitle} unableTitle={unableTitle} />
+                                <UnUseBtn btnPress={this._btnPress} enable={!this.props.item.sign} enableTitle={ableBtnTitle} unableTitle={unableTitle} />
                             </View>
                         </View>
                         <Text style={{ marginBottom: 14, fontSize: 10, color: 'rgb(151,151,151)' }}>{this.props.item.remark}</Text>
@@ -106,8 +118,6 @@ export default class bottomTaskList extends PureComponent {
     componentDidMount() {
         Api.getTaskList((e) => {
             if (e instanceof Array) {
-                console.log('task');
-                console.log(e);
                 let arr = e.reverse();
                 this.setState({
                     listData: arr
