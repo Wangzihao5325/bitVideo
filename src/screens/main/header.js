@@ -74,6 +74,11 @@ class Header extends PureComponent {
         mainNavigation.navigate('HistoryModel');
     }
 
+    _watchCollect = () => {
+        const { mainNavigation } = this.context;
+        mainNavigation.navigate('CollectModel');
+    }
+
     render() {
         return (
             <View style={styles.headerContainer}>
@@ -85,7 +90,7 @@ class Header extends PureComponent {
                 <View style={styles.searchContainer}>
                     <SearchBarBtn style={{ marginLeft: 15 }} btnPress={this._search} />
                     <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
-                        <IconBtn style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/star.png')} />
+                        <IconBtn onPress={this._watchCollect} style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/star.png')} />
                         <IconBtn onPress={this._watchHistory} style={{ marginRight: 15 }} height={26} width={26} source={require('../../image/usual/clock.png')} />
                     </View>
                 </View>

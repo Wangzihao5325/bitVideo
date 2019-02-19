@@ -24,7 +24,9 @@ export default class Bottom extends PureComponent {
     }
 
     myStar = () => {
-        console.log('my myStar');
+        // console.log('my myStar');
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('CollectModel');
     }
     getHelp = () => {
         const { mineNavigation } = this.context;

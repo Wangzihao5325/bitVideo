@@ -19,6 +19,7 @@ import CountryCodeModal from '../screens/loginModel/countryCode/index';
 import VideoModel from '../screens/videoModel/index';
 import SearchModel from '../screens/searchModel/index';
 import HistoryModel from '../screens/historyModel/index';
+import CollectModel from '../screens/collectModel/index';
 
 const Router = createBottomTabNavigator(
   {
@@ -65,6 +66,9 @@ const RouterWithModal = createStackNavigator(
     },
     HistoryModel: {
       screen: HistoryModel
+    },
+    CollectModel: {
+      screen: CollectModel
     }
   },
   {

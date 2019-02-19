@@ -220,6 +220,15 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
+    postCancelCollectArr(idArr, onSuccess, onError) {
+        const url = '/api/video/user/collect/cancel';
+        let formData = new FormData();
+        idArr.forEach((item) => {
+            formData.append('video_id[]', item);
+        });
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
     postCancelHistory(idArr, onSuccess, onError) {
         const url = '/api/video/user/history/cancel';
         let formData = new FormData();
@@ -237,6 +246,11 @@ class api {
 
     getIconHistoryList(onSuccess, onError) {
         const url = `/api/user/coins/history/list`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
+    getUserCollectList(onSuccess, onError) {
+        const url = `/api/video/user/collect/list`;
         this.getFetch(url, onSuccess, onError);
     }
 }

@@ -18,9 +18,9 @@ class BottomBtn extends PureComponent {
     _deleteWatchHistory = () => {
         let reg = [...this.props.deleteSet];
         if (reg.length > 0) {
-            Api.postCancelHistory(reg, (result, code, message) => {
+            Api.postCancelCollectArr(reg, (result, code, message) => {
                 if (message == 'success') {
-                    Api.getUserWatchHistory((e) => {
+                    Api.getUserCollectList((e) => {
                         if (e) {
                             store.dispatch(get_collect_movie_list(e.data));
                         }
@@ -46,7 +46,7 @@ class BottomBtn extends PureComponent {
 }
 class CollectModel extends PureComponent {
     componentDidMount() {
-        Api.getUserWatchHistory((e) => {
+        Api.getUserCollectList((e) => {
             if (e) {
                 store.dispatch(get_collect_movie_list(e.data));
             }
@@ -67,7 +67,7 @@ class CollectModel extends PureComponent {
         let btnText = this.props.isSelectMode ? In18.CANCEL_TEXT : In18.EDIT_TEXT;
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <ModalHeader goBack={this._goBack} title={In18.MY_WATCH_HISTORY} rightBtnMode='text' rightBtnTitle={btnText} rightBtnOnPress={this._editMode} />
+                <ModalHeader goBack={this._goBack} title={In18.MY_COLLECT} rightBtnMode='text' rightBtnTitle={btnText} rightBtnOnPress={this._editMode} />
                 {this.props.data.length > 0 &&
                     <FlatList
                         style={styles.listStyle}
@@ -83,7 +83,7 @@ class CollectModel extends PureComponent {
 
 function mapState2Props(store) {
     return {
-        data: store.userCollect.historyMovies,
+        data: store.userCollect.collectMovies,
         isSelectMode: store.userCollect.isEdit,
         deleteSet: store.userCollect.deleteSet,
     }
