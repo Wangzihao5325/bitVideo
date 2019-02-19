@@ -42,7 +42,8 @@ class SUDOKU extends PureComponent {
     }
 
     _moreVideo = () => {
-        console.log('more video');
+        //console.log('more video');
+        this.props.navi.navigate('ViewModuleMoreScreen', { moduleId: this.props.moduleId, title: this.props.title });
     }
 
     _haveChange = () => {
@@ -95,7 +96,7 @@ class GUNDONG extends PureComponent {
                 <FlatList
                     horizontal={true}
                     data={this.props.data}
-                    renderItem={({ item }) => <VideoAvater isVertical={this.props.isVertical} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score}/>}
+                    renderItem={({ item }) => <VideoAvater isVertical={this.props.isVertical} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
                 />
             </View>
         );
@@ -104,16 +105,16 @@ class GUNDONG extends PureComponent {
 export default class VideoModule extends PureComponent {
     render() {
         if (this.props.clientStyle == 's_video_sudoku_3') {
-            return (<SUDOKU data={this.props.data} limit={this.props.limit} lineNum={3} isVertical={true} title={this.props.title} navi={this.props.navi} />);
+            return (<SUDOKU moduleId={this.props.moduleId} data={this.props.data} limit={this.props.limit} lineNum={3} isVertical={true} title={this.props.title} navi={this.props.navi} />);
         }
         if (this.props.clientStyle == 's_video_sudoku_2') {
-            return (<SUDOKU data={this.props.data} limit={this.props.limit} lineNum={2} isVertical={false} title={this.props.title} navi={this.props.navi} />);
+            return (<SUDOKU moduleId={this.props.moduleId} data={this.props.data} limit={this.props.limit} lineNum={2} isVertical={false} title={this.props.title} navi={this.props.navi} />);
         }
         if (this.props.clientStyle == 's_video_gundong_shu') {
-            return (<GUNDONG data={this.props.data} isVertical={true} navi={this.props.navi} />);
+            return (<GUNDONG moduleId={this.props.moduleId} data={this.props.data} isVertical={true} navi={this.props.navi} />);
         }
         if (this.props.clientStyle == 's_video_gundong_heng') {
-            return (<GUNDONG data={this.props.data} isVertical={false} navi={this.props.navi} />);
+            return (<GUNDONG moduleId={this.props.moduleId} data={this.props.data} isVertical={false} navi={this.props.navi} />);
         }
     }
 }

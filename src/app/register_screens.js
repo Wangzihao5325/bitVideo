@@ -4,6 +4,8 @@ import * as In18 from '../global/In18';
 import { iconMake } from '../components/icons/Vector_icons';
 
 import MainScreen from '../screens/main/index';
+import ViewModuleMoreScreen from '../screens/main/childrenPage/ViewModuleMoreScreen';
+
 import SubjectScreen from '../screens/subject/index';
 import TaskScreen from '../screens/task/index';
 
@@ -14,7 +16,8 @@ const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
 let MainStack = createStackNavigator(
     {
-        MainScreen
+        MainScreen,
+        ViewModuleMoreScreen,
     },
     {
         navigationOptions: { gesturesEnabled: false }

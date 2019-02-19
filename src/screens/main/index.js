@@ -9,7 +9,8 @@ import Content from './content';
 export default class MainScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
-            header: null
+            header: null,
+            headerBackTitle: null
         }
     };
 

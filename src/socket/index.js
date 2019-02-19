@@ -229,6 +229,11 @@ class api {
 
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    getViewModuleMore(id, page, limit, onSuccess, onError) {
+        const url = `/api/video/index/viewmodulemore?id=${id}&page=${page}&limit=${limit}`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

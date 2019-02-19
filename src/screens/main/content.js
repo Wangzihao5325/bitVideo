@@ -26,7 +26,7 @@ class Item extends PureComponent {
                 }
             case 'm_video':
                 if (this.props.item.m_video_data.length > 0) {
-                    return (<VideoModule title={this.props.item.title} key={this.props.index} limit={this.props.item.client_limit} clientStyle={this.props.item.client_style} data={this.props.item.m_video_data} navi={mainNavigation} />);
+                    return (<VideoModule moduleId={this.props.item.id} title={this.props.item.title} key={this.props.index} limit={this.props.item.client_limit} clientStyle={this.props.item.client_style} data={this.props.item.m_video_data} navi={mainNavigation} />);
                 }
             case 'm_ad':
                 if (this.props.item.m_ad_data.length > 0) {
