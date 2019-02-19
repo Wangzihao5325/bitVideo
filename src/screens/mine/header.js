@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableHighlight } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
+import { get_user_info } from '../../store/actions/accountAction';
 import * as In18 from '../../global/In18';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { accountTypeTransform } from '../../global/utils/MathUtil';
+import Api from '../../socket/index';
+import store from '../../store/index';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 
@@ -93,9 +97,21 @@ class CountList extends PureComponent {
     }
 }
 class Header extends PureComponent {
+
+    _onDidFocus = () => {
+        Api.getUserInfo((e) => {
+            if (e) {
+                store.dispatch(get_user_info(e));
+            }
+        });
+    }
+
     render() {
         return (
             <View>
+                <NavigationEvents
+                    onDidFocus={this._onDidFocus}
+                />
                 <TopBtns />
                 <Avater name={this.props.accountName} type={this.props.accountType} />
                 <CountList total={this.props.viewCountTotal} use={this.props.viewCountUse} />
