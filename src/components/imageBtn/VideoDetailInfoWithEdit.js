@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 
 class Select extends PureComponent {
     render() {
-        let text = this.props.isSelect ? '已选' : '未选';
+        let source = this.props.isSelect ? require('../../image/usual/select.png') : require('../../image/usual/unSelect.png');
         return (
             <View style={styles.select}>
-                <Text>{text}</Text>
+                <Image style={{ height: 26, width: 26 }} source={source} />
             </View>
         );
     }
