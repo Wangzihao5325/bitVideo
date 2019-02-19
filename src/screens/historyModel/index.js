@@ -7,7 +7,7 @@ import * as In18 from '../../global/In18';
 import Api from '../../socket/index';
 
 import ModalHeader from '../../components/modal/ModalHeader';
-import VideoDetailInfoWithEdit from '../../components/imageBtn/VideoDetailInfoWithEdit';
+import { VideoDetailInfoWithEditByHistory } from '../../components/imageBtn/VideoDetailInfoWithEdit';
 
 class BottomBtn extends PureComponent {
 
@@ -72,7 +72,7 @@ class HistoryModel extends PureComponent {
                     <FlatList
                         style={styles.listStyle}
                         data={this.props.data}
-                        renderItem={({ item }) => <VideoDetailInfoWithEdit isSelect={this.props.isSelectMode} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={this.props.navigation} id={item.id} />}
+                        renderItem={({ item }) => <VideoDetailInfoWithEditByHistory isSelect={this.props.isSelectMode} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={this.props.navigation} id={item.id} />}
                     />}
                 {this.props.data.length == 0 && <View style={styles.listStyle} />}
                 {this.props.isSelectMode && <BottomBtn deleteSet={this.props.deleteSet} />}

@@ -71,7 +71,7 @@ class VideoDetailInfoWithEdit extends PureComponent {
     }
 }
 
-function mapState2Props(store) {
+function mapState2PropsHistory(store) {
     return {
         isSelectMode: store.watchHistory.isEdit,
         selectAll: store.watchHistory.selectAll,
@@ -79,7 +79,22 @@ function mapState2Props(store) {
     }
 }
 
-export default connect(mapState2Props)(VideoDetailInfoWithEdit);
+function mapState2PropsCollect(store) {
+    return {
+        isSelectMode: store.userCollect.isEdit,
+        selectAll: store.userCollect.selectAll,
+        deleteSet: store.userCollect.deleteSet,
+    }
+}
+
+const VideoDetailInfoWithEditByHistory = connect(mapState2PropsHistory)(VideoDetailInfoWithEdit);
+const VideoDetailInfoWithEditByCollect = connect(mapState2PropsCollect)(VideoDetailInfoWithEdit);
+
+export {
+    VideoDetailInfoWithEditByHistory,
+    VideoDetailInfoWithEditByCollect
+}
+// export default connect(mapState2Props)(VideoDetailInfoWithEdit);
 
 const styles = StyleSheet.create({
     container: {
