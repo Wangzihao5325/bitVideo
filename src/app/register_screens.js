@@ -11,6 +11,7 @@ import TaskScreen from '../screens/task/index';
 
 import MineScreen from '../screens/mine/index';
 import HelpScreen from '../screens/mine/help/index';
+import IconsListScreen from '../screens/mine/icons_list/index';
 
 const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
@@ -81,7 +82,8 @@ TaskStack.navigationOptions = ({ navigation }) => {
 let MineStack = createStackNavigator(
     {
         MineScreen,
-        HelpScreen
+        HelpScreen,
+        IconsListScreen,
     },
     {
         navigationOptions: { gesturesEnabled: false }

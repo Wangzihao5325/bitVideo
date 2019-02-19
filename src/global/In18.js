@@ -119,6 +119,9 @@ const NO_WATCH_HISTORY = '暂无观看记录~';
 const EDIT_TEXT = '编辑';
 const MY_WATCH_HISTORY = '我的播放记录';
 
+//爱逗币明细
+const ICON_LIST_TITLE = '爱逗币记录';
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -226,4 +229,5 @@ export {
     NO_WATCH_HISTORY,
     EDIT_TEXT,
     MY_WATCH_HISTORY,
+    ICON_LIST_TITLE,
 };

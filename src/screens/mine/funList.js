@@ -13,7 +13,8 @@ class FunList extends PureComponent {
     }
 
     goToMoney = () => {
-        console.log('go to money');
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('IconsListScreen');
     }
 
     goToGiftCenter = () => {
