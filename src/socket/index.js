@@ -234,6 +234,11 @@ class api {
         const url = `/api/video/index/viewmodulemore?id=${id}&page=${page}&limit=${limit}`;
         this.getFetch(url, onSuccess, onError);
     }
+
+    getIconHistoryList(onSuccess, onError) {
+        const url = `/api/user/coins/history/list`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

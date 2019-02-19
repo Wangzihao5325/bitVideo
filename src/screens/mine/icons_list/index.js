@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView,Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import * as In18 from '../../../global/In18';
+import Api from '../../../socket/index';
 
 export default class IconsListScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -11,10 +12,20 @@ export default class IconsListScreen extends PureComponent {
             },
         }
     };
+
+    componentDidMount() {
+        Api.getIconHistoryList((e) => {
+            if (e) {
+                console.log('gggggg');
+                console.log(e);
+            }
+        });
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
-            <Text>121</Text>
+                <Text>121</Text>
             </SafeAreaView>
         );
     }
