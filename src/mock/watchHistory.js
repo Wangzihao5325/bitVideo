@@ -9,7 +9,6 @@ export default watchHistory = [
         "director": null,
         "play_count": 101,
         "created_at": null,
-        
         "label_status": 0,
         "intro": "成功人士王大河遭人陷害，失去一切。在低迷",
         "status_label": "",
