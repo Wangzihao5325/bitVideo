@@ -52,7 +52,6 @@ export default class VideoModel extends PureComponent {
         this.props.navigation.goBack();
     }
 
-    //'https://pp.605ziyuan.com/20180905/btValsHQ/index.m3u8'
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>

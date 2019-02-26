@@ -5,6 +5,7 @@ import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 
 import IconBtn from '../../../components/imageBtn/IconBtn';
+import Orientation from 'react-native-orientation';
 
 class VideoHeader extends PureComponent {
     moreIntro = () => {
