@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 import store from '../../store/index';
 import { set_video_full_data, set_guess_like_source, set_comment_list_data, video_detail_data_reset } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
@@ -56,8 +56,8 @@ export default class VideoModel extends PureComponent {
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
-                <ModalHeader title='' goBack={this.goBack} />
-                <XSVideo />
+                {Platform.OS === 'ios' && <ModalHeader title='' goBack={this.goBack} />}
+                <XSVideo navi={this.props.navigation} />
                 <ScrollView
                     style={styles.scroll}
                     showsVerticalScrollIndicator={false}
