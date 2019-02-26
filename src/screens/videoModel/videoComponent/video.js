@@ -5,6 +5,7 @@ import * as Sizes from '../../../global/Sizes';
 
 import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
+import Orientation from 'react-native-orientation';
 
 //'https://pp.605ziyuan.com/20180905/btValsHQ/index.m3u8'
 class XSVideo extends PureComponent {
@@ -21,11 +22,17 @@ class XSVideo extends PureComponent {
     }
 
     _androidEnterFullScreen = () => {
+        Orientation.lockToLandscape();
         this.setState({ isFullScreen: true });
     }
 
     _androidExitFullScreen = () => {
+        Orientation.lockToPortrait();
         this.setState({ isFullScreen: false });
+    }
+
+    componentWillUnmount() {
+        Orientation.lockToPortrait();
     }
 
     render() {
