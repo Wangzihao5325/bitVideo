@@ -21,6 +21,8 @@ import SearchModel from '../screens/searchModel/index';
 import HistoryModel from '../screens/historyModel/index';
 import CollectModel from '../screens/collectModel/index';
 
+import SplashModel from '../components/splashModal/index';
+
 const Router = createBottomTabNavigator(
   {
     MainStack,
@@ -109,6 +111,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <StatusBar barStyle="default" />
+        <SplashModel isVisable={true} source={{ uri: 'http://oss-aidou.oss-cn-beijing.aliyuncs.com/startup/2019-01-26-18-30-44-5c4c36d4ce4a4.png' }} />
         <AppContainer />
       </Provider>
     );
