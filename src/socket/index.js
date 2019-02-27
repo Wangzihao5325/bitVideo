@@ -258,6 +258,12 @@ class api {
         const url = '/api/user/task/dailysignin';
         this.getFetch(url, onSuccess, onError);
     }
+
+    getSplashScreen(onSuccess, onError) {
+        const url = '/api/video/startup';
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();

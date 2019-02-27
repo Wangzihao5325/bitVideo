@@ -126,10 +126,10 @@ const MY_COLLECT = '我的收藏';
 const ICON_LIST_TITLE = '爱逗币记录';
 
 //share
-SHARE_MESSAGE = '快来爱逗视频看最新最全的电影吧！';
-SHARE_URL = 'https://baidu.com';
-SHARE_TITLE = 'title';
-SHARE_DIALOG_TITLE = '分享爱逗到';
+const SHARE_MESSAGE = '快来爱逗视频看最新最全的电影吧！';
+const SHARE_URL = 'https://baidu.com';
+const SHARE_TITLE = 'title';
+const SHARE_DIALOG_TITLE = '分享爱逗到';
 
 
 export {

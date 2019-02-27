@@ -82,6 +82,13 @@ const AppContainer = createAppContainer(RouterWithModal);
 
 export default class App extends Component {
   componentDidMount() {
+    //获取开屏动画
+    Api.getSplashScreen((result) => {
+      if (result) {
+        console.log('splash');
+        console.log(result);
+      }
+    });
     //设备号注册
     let deviceId = DeviceInfo.getUniqueID();
     Api.postRegisterByDeviceId(deviceId, (e) => {
