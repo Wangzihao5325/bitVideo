@@ -125,6 +125,13 @@ const MY_COLLECT = '我的收藏';
 //爱逗币明细
 const ICON_LIST_TITLE = '爱逗币记录';
 
+//share
+SHARE_MESSAGE = '快来爱逗视频看最新最全的电影吧！';
+SHARE_URL = 'https://baidu.com';
+SHARE_TITLE = 'title';
+SHARE_DIALOG_TITLE = '分享爱逗到';
+
+
 export {
     MAIN_PAGE_TITLE,
     SUBJECT_PAGE_TITLE,
@@ -236,4 +243,9 @@ export {
     MY_COLLECT,
 
     ICON_LIST_TITLE,
+
+    SHARE_MESSAGE,
+    SHARE_URL,
+    SHARE_TITLE,
+    SHARE_DIALOG_TITLE,
 };

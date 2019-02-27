@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Share } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
@@ -17,6 +17,34 @@ class FunList extends PureComponent {
         mineNavigation.navigate('IconsListScreen');
     }
 
+    goToInviteCode = () => {
+
+    }
+
+    goToInviteFriend = () => {
+        Share.share({
+            message: In18.SHARE_MESSAGE,
+            url: In18.SHARE_URL,
+            title: In18.SHARE_TITLE
+        }, {
+                dialogTitle: In18.SHARE_DIALOG_TITLE
+            })
+            .then(this._shareResult)
+            .catch((e) => { console.log(e) });
+    }
+
+    _shareResult = (result) => {
+        if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+                console.log('shared with action type');
+            } else {
+                console.log(done);
+            }
+        } else if (result.action === Share.dismissedAction) {
+            console.log('dismiss');
+        }
+    }
+
     goToGiftCenter = () => {
         // const { mineNavigation } = this.context;
         // mineNavigation.navigate('TaskScreen');
@@ -27,7 +55,7 @@ class FunList extends PureComponent {
                 <View style={styles.funListContainer}>
                     <IconBtnWithTitle source={require('../../image/mine/idol_money.png')} title={In18.IDOL_MONEY} onPress={this.goToMoney} />
                     <IconBtnWithTitle source={require('../../image/mine/share_code.png')} title={In18.SHARE_CODE} onPress={this.goToMoney} />
-                    <IconBtnWithTitle source={require('../../image/mine/invite_people.png')} title={In18.INVITE_PEOPLE} onPress={this.goToMoney} />
+                    <IconBtnWithTitle source={require('../../image/mine/invite_people.png')} title={In18.INVITE_PEOPLE} onPress={this.goToInviteFriend} />
                     <IconBtnWithTitle source={require('../../image/mine/task_center.png')} title={In18.GIFT_CENTER} onPress={this.goToGiftCenter} />
                 </View>
                 <View style={styles.moneyShowContainer}>
