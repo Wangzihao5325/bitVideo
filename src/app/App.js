@@ -83,12 +83,17 @@ const RouterWithModal = createStackNavigator(
 const AppContainer = createAppContainer(RouterWithModal);
 
 export default class App extends Component {
+  state = {
+    uri: ''
+  };
+
   componentDidMount() {
     //获取开屏动画
     Api.getSplashScreen((result) => {
       if (result) {
-        console.log('splash');
-        console.log(result);
+        this.setState({
+          uri: result.ad_path
+        });
       }
     });
     //设备号注册
@@ -111,7 +116,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <StatusBar barStyle="default" />
-        <SplashModel isVisable={true} source={{ uri: 'http://oss-aidou.oss-cn-beijing.aliyuncs.com/startup/2019-01-26-18-30-44-5c4c36d4ce4a4.png' }} />
+        <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
       </Provider>
     );
