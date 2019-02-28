@@ -1,8 +1,44 @@
 import * as Config from '../global/Config';
 import Variables from '../global/Variables';
+let CryptoJS = require('crypto-js');
+
+const isSecurty = true;
+const keyStr = 'bUYJ3nTV6VBasdJF';
+var KEY = CryptoJS.enc.Utf8.parse(keyStr);
+
+const headerGenerator = (isPost) => {
+    let header = { Accept: 'application/json' };
+    if (isPost) {
+        header = { Accept: 'application/json' };
+    }
+    if (Variables.account.token) {
+        header.Authorization = `Bearer ${Variables.account.token}`;
+    }
+    return header;
+}
+
+const formdataToObj = (formdata) => {
+    var objData = {};
+    formdata._parts.forEach((value) => objData[value[0]] = value[1]);
+    return objData;
+}
 
 class api {
     getFetch(url, onSuccess, onError) {
+        if (isSecurty) {
+            //加密处理
+            this.getWithSecurty();
+        } else {
+            //不加密处理
+            this.getWithUnsecurty(url, onSuccess, onError);
+        }
+    }
+
+    getWithSecurty() {
+
+    }
+
+    getWithUnsecurty(url, onSuccess, onError) {
         let fullUrl = Config.SERVICE_URL + url;
         let header = { Accept: 'application/json' };
         if (Variables.account.token) {
@@ -25,28 +61,75 @@ class api {
     }
 
     postFetch(url, formData, onSuccess, onError) {
+        if (isSecurty) {
+            //加密处理
+            this.postWithSecurty(url, formData, onSuccess, onError);
+        } else {
+            //不加密处理
+            this.postWithUnsecurty(url, formData, onSuccess, onError);
+        }
+    }
+
+    postWithSecurty(unsecurtyURL, unsecurtyFormdata, onSuccess, onError) {
+        //数据加密
+        let paramsRegObj = {
+            uri: unsecurtyURL,
+            method: 'POST',
+            headers: headerGenerator(true),
+            params: formdataToObj(unsecurtyFormdata),
+        }
+
+        let paramsStr = JSON.stringify(paramsRegObj);
+
+        let encryptedData = CryptoJS.AES.encrypt(paramsStr, KEY, {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        });
+
+        let securtyReg = encodeURI(encryptedData.toString());
+        //normal post
+        const url = '/api/accept';
+        let formData = new FormData();
+        formData.append('data', securtyReg);
+        this.postWithUnsecurty(url, formData, (result, code, message) => {
+            //解密
+            let resultDecipher = null;
+            if (result) {
+                let decodeUrl = decodeURIComponent(result);
+                let bytes = CryptoJS.AES.decrypt(decodeUrl, KEY, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7, iv: '', });
+                resultDecipher = JSON.parse(CryptoJS.enc.Utf8.stringify(bytes));
+            }
+            if (onSuccess) {
+                onSuccess(resultDecipher, code, message);
+            }
+        }, onError);
+    }
+
+    postWithUnsecurty(url, formData, onSuccess, onError) {
         let fullUrl = Config.SERVICE_URL + url;
         let header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data' };
         if (Variables.account.token) {
             header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${Variables.account.token}` }
         }
         let obj = { method: 'POST', headers: header, body: formData };
-        fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit)).then(
-            (reponseJson) => {
-                const result = reponseJson.result ? reponseJson.result : null;
-                const code = reponseJson.code ? reponseJson.code : null;
-                const message = reponseJson.message ? reponseJson.message : null;
-                if (message === 'success') {
-                    try {
-                        onSuccess(result, code, message);
-                    } catch (error) {
-                        console.log(error);
+
+        fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit))
+            .then(
+                (reponseJson) => {
+                    const result = reponseJson.result ? reponseJson.result : null;
+                    const code = reponseJson.code ? reponseJson.code : null;
+                    const message = reponseJson.message ? reponseJson.message : null;
+                    if (message === 'success') {
+                        try {
+                            onSuccess(result, code, message);
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    } else {
+                        onError ? onError(result, code, message) : console.log(responseJson);
                     }
-                } else {
-                    onError ? onError(result, code, message) : console.log(responseJson);
                 }
-            }
-        )
+            )
     }
 
     getGlobalType(onSuccess, onError) {
