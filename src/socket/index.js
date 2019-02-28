@@ -2,6 +2,7 @@ import * as Config from '../global/Config';
 import Variables from '../global/Variables';
 let CryptoJS = require('crypto-js');
 
+const SECURTY_URL = '/api/accept';
 const isSecurty = true;
 const keyStr = 'bUYJ3nTV6VBasdJF';
 var KEY = CryptoJS.enc.Utf8.parse(keyStr);
@@ -12,7 +13,7 @@ const headerGenerator = (isPost) => {
         header = { Accept: 'application/json' };
     }
     if (Variables.account.token) {
-        header.Authorization = `Bearer ${Variables.account.token}`;
+        header['Authorization'] = `Bearer ${Variables.account.token}`;
     }
     return header;
 }
@@ -27,15 +28,57 @@ class api {
     getFetch(url, onSuccess, onError) {
         if (isSecurty) {
             //加密处理
-            this.getWithSecurty();
+            this.getWithSecurty(url, onSuccess, onError);
         } else {
             //不加密处理
             this.getWithUnsecurty(url, onSuccess, onError);
         }
     }
 
-    getWithSecurty() {
+    getWithSecurty(url, onSuccess, onError) {
+        //解析url拆分参数
+        let params = {};
+        let index = url.indexOf('?');
+        if (index >= 0) {
+            let arr = url.split('?');
+            let paramArr = arr[1].split('&');
+            paramArr.forEach((item) => {
+                let keyValue = item.split('=');
+                params[keyValue[0]] = keyValue[1];
+            });
+        }
 
+        let paramsRegObj = {
+            uri: url.split('?')[0],
+            method: 'GET',
+            headers: headerGenerator(false),
+            params: params
+        }
+        let paramsStr = JSON.stringify(paramsRegObj);
+
+        //加密
+        let encryptedData = CryptoJS.AES.encrypt(paramsStr, KEY, {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        });
+
+        let securtyReg = encodeURI(encryptedData.toString());
+
+        //normal post
+        let formData = new FormData();
+        formData.append('data', securtyReg);
+        this.postWithUnsecurty(SECURTY_URL, formData, (result, code, message) => {
+            //解密
+            let resultDecipher = null;
+            if (result) {
+                let decodeUrl = decodeURIComponent(result);
+                let bytes = CryptoJS.AES.decrypt(decodeUrl, KEY, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7, iv: '', });
+                resultDecipher = JSON.parse(CryptoJS.enc.Utf8.stringify(bytes));
+            }
+            if (onSuccess) {
+                onSuccess(resultDecipher, code, message);
+            }
+        }, onError);
     }
 
     getWithUnsecurty(url, onSuccess, onError) {
@@ -88,10 +131,9 @@ class api {
 
         let securtyReg = encodeURI(encryptedData.toString());
         //normal post
-        const url = '/api/accept';
         let formData = new FormData();
         formData.append('data', securtyReg);
-        this.postWithUnsecurty(url, formData, (result, code, message) => {
+        this.postWithUnsecurty(SECURTY_URL, formData, (result, code, message) => {
             //解密
             let resultDecipher = null;
             if (result) {

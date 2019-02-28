@@ -88,29 +88,27 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    // //获取开屏动画
-    // Api.getSplashScreen((result) => {
-    //   if (result) {
-    //     this.setState({
-    //       uri: result.ad_path
-    //     });
-    //   }
-    // });
+    //获取开屏动画
+    Api.getSplashScreen((result) => {
+      if (result) {
+        this.setState({
+          uri: result.ad_path
+        });
+      }
+    });
     //设备号注册
     let deviceId = DeviceInfo.getUniqueID();
     Api.postRegisterByDeviceId(deviceId, (e) => {
-      console.log('mnmnmnmn');
-      console.log(e);
       if (e && e.api_token) {
         Variables.account.token = e.api_token;
         Variables.account.deviceToken = e.api_token;
         store.dispatch(get_device_account_info(e));
-        // //获取个人信息
-        // Api.getUserInfo((e) => {
-        //   if (e) {
-        //     store.dispatch(get_user_info(e));
-        //   }
-        // });
+        //获取个人信息
+        Api.getUserInfo((e) => {
+          if (e) {
+            store.dispatch(get_user_info(e));
+          }
+        });
       }
     });
   }
