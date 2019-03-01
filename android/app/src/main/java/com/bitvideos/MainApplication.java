@@ -3,12 +3,13 @@ package com.bitvideos;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.github.yamill.orientation.OrientationPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.airship.customwebview.CustomWebViewPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.github.yamill.orientation.OrientationPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.airship.customwebview.CustomWebViewPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,12 +30,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new OrientationPackage(),
-            new RNDeviceInfo(),
-            new CustomWebViewPackage(),
+            new RNFetchBlobPackage(),
             new ReactVideoPackage(),
             new VectorIconsPackage(),
+            new OrientationPackage(),
             new RNGestureHandlerPackage(),
+            new RNDeviceInfo(),
+            new CustomWebViewPackage(),
               new CustomToastPackage()
       );
     }
