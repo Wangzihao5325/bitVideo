@@ -107,11 +107,12 @@ public class AESImageUtils extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public  void decryptFromJSBase64(String baseStr,Promise promise) {
-        String result = "";
         byte[] bytes = EncryptUtils.decryptBase64AES(baseStr.getBytes(), key.getBytes(), transformation, null);
         if (null != bytes) {
             WritableMap map = Arguments.createMap();
-            map.putString("'result'", Base64.encodeToString(bytes, Base64.NO_WRAP));
+            String deResult = Base64.encodeToString(bytes, Base64.NO_WRAP);
+            map.putString("result",deResult );
+ //           map.putString("'result'","11223344444" );
             promise.resolve(map);
         }
     }

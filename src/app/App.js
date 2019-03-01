@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View, Image } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Provider } from 'react-redux';
 import store from '../store/index';
@@ -22,6 +22,9 @@ import HistoryModel from '../screens/historyModel/index';
 import CollectModel from '../screens/collectModel/index';
 
 import SplashModel from '../components/splashModal/index';
+
+import AESImageUtils from '../native/AESImageUtils';
+import RNFetchBlob from 'rn-fetch-blob';
 
 const Router = createBottomTabNavigator(
   {
@@ -84,41 +87,71 @@ const AppContainer = createAppContainer(RouterWithModal);
 
 export default class App extends Component {
   state = {
-    uri: ''
+    uri: '',
+    base64Url: ''
   };
 
   componentDidMount() {
-    //获取开屏动画
-    Api.getSplashScreen((result) => {
-      if (result) {
-        this.setState({
-          uri: result.ad_path
-        });
-      }
-    });
-    //设备号注册
-    let deviceId = DeviceInfo.getUniqueID();
-    Api.postRegisterByDeviceId(deviceId, (e) => {
-      if (e && e.api_token) {
-        Variables.account.token = e.api_token;
-        Variables.account.deviceToken = e.api_token;
-        store.dispatch(get_device_account_info(e));
-        //获取个人信息
-        Api.getUserInfo((e) => {
-          if (e) {
-            store.dispatch(get_user_info(e));
+
+    RNFetchBlob
+      .config({ fileCache: true })
+      .fetch('GET', 'http://oss-aidou.oss-cn-beijing.aliyuncs.com/video_cover/2019-01-15-17-17-49-5c3da53d7e9ad.ceb')
+      .then((res) => {
+        let exampleFilePath = res.path();
+        console.log('The file saved to ', exampleFilePath);
+        const fs = RNFetchBlob.fs;
+        fs.readFile(exampleFilePath, 'base64')//utf8//base64
+          .then(data => {
+            AESImageUtils.decryptFromJSBase64(data).then((e) => {
+              //console.log(e);
+              let {result} = e;
+              console.log(e);
+              if (e.result) {
+                console.log(e.result);
+                this.setState({
+                  base64Url: 'data:image/png;base64,' + e.result
+                });
+              }
+            });
+          });
+      });
+    /*
+        //获取开屏动画
+        Api.getSplashScreen((result) => {
+          if (result) {
+            this.setState({
+              uri: result.ad_path
+            });
           }
         });
-      }
-    });
+        //设备号注册
+        let deviceId = DeviceInfo.getUniqueID();
+        Api.postRegisterByDeviceId(deviceId, (e) => {
+          if (e && e.api_token) {
+            Variables.account.token = e.api_token;
+            Variables.account.deviceToken = e.api_token;
+            store.dispatch(get_device_account_info(e));
+            //获取个人信息
+            Api.getUserInfo((e) => {
+              if (e) {
+                store.dispatch(get_user_info(e));
+              }
+            });
+          }
+        });
+    */
   }
   render() {
     return (
-      <Provider store={store}>
+      <View style={{ flex: 1 }}>
+        {this.state.base64Url !== '' && <Image style={{ height: 200, width: 200 }} source={{ uri: this.state.base64Url }} />}
+        { /* <Provider store={store}>
         <StatusBar barStyle="default" />
         <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
-      </Provider>
+        </Provider>*/
+        }
+      </View>
     );
   }
 }
