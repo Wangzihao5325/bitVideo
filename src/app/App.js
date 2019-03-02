@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image } from 'react-native';
+import { StatusBar, View, Image, Text } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Provider } from 'react-redux';
 import store from '../store/index';
@@ -23,8 +23,9 @@ import CollectModel from '../screens/collectModel/index';
 
 import SplashModel from '../components/splashModal/index';
 
-import AESImageUtils from '../native/AESImageUtils';
-import RNFetchBlob from 'rn-fetch-blob';
+import SecurtyImage from '../components/securtyImage';
+
+const path = 'http://oss-aidou.oss-cn-beijing.aliyuncs.com/video_cover/2019-01-15-17-17-49-5c3da53d7e9ad.ceb';
 
 const Router = createBottomTabNavigator(
   {
@@ -88,33 +89,10 @@ const AppContainer = createAppContainer(RouterWithModal);
 export default class App extends Component {
   state = {
     uri: '',
-    base64Url: ''
+    source: { uri: path }
   };
 
   componentDidMount() {
-
-    RNFetchBlob
-      .config({ fileCache: true })
-      .fetch('GET', 'http://oss-aidou.oss-cn-beijing.aliyuncs.com/video_cover/2019-01-15-17-17-49-5c3da53d7e9ad.ceb')
-      .then((res) => {
-        let exampleFilePath = res.path();
-        console.log('The file saved to ', exampleFilePath);
-        const fs = RNFetchBlob.fs;
-        fs.readFile(exampleFilePath, 'base64')//utf8//base64
-          .then(data => {
-            AESImageUtils.decryptFromJSBase64(data).then((e) => {
-              //console.log(e);
-              let {result} = e;
-              console.log(e);
-              if (e.result) {
-                console.log(e.result);
-                this.setState({
-                  base64Url: 'data:image/png;base64,' + e.result
-                });
-              }
-            });
-          });
-      });
     /*
         //获取开屏动画
         Api.getSplashScreen((result) => {
@@ -141,10 +119,13 @@ export default class App extends Component {
         });
     */
   }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {this.state.base64Url !== '' && <Image style={{ height: 200, width: 200 }} source={{ uri: this.state.base64Url }} />}
+        <SecurtyImage source={this.state.source} />
+        <Text onPress={() => this.setState({ source: { uri: path } })}>112233444</Text>
+        <Text onPress={() => this.setState({ source: require('../image/main/app_icon.png') })}>vvcccvbb</Text>
         { /* <Provider store={store}>
         <StatusBar barStyle="default" />
         <SplashModel source={{ uri: this.state.uri }} />
