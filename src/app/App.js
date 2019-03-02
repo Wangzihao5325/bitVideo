@@ -23,10 +23,6 @@ import CollectModel from '../screens/collectModel/index';
 
 import SplashModel from '../components/splashModal/index';
 
-import SecurtyImage from '../components/securtyImage';
-
-const path = 'http://oss-aidou.oss-cn-beijing.aliyuncs.com/video_cover/2019-01-15-17-17-49-5c3da53d7e9ad.ceb';
-
 const Router = createBottomTabNavigator(
   {
     MainStack,
