@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, Image, View, Text, TouchableHighlight } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
+import SecurtyImage from '../securtyImage/index';
 
 const verWidth = (Sizes.DEVICE_WIDTH - 6) / 3;
 const verHeight = 1.5 * verWidth;
@@ -29,7 +30,8 @@ export default class VideoAvater extends PureComponent {
             <TouchableHighlight style={btnStyle} underlayColor='transparent' onPress={this.btnOnPress}>
                 <View style={styles.flexView} >
                     {this.props.score && <Text style={scoreStyle}>{this.props.score}</Text>}
-                    <Image style={[imageStyle, { zIndex: 1 }]} defaultSource={require('../../image/usual/image_load_failed.png')} source={this.props.imageSource} />
+                    {/* <Image style={[imageStyle, { zIndex: 1 }]} defaultSource={require('../../image/usual/image_load_failed.png')} source={this.props.imageSource} /> */}
+                    <SecurtyImage style={[imageStyle, { zIndex: 1 }]} source={this.props.imageSource} />
                     <Text style={[styles.titleText, { zIndex: 10 }]} ellipsizeMode='tail' numberOfLines={1}>{this.props.title}</Text>
                     <Text style={[styles.infoText, { zIndex: 10 }]} ellipsizeMode='tail' numberOfLines={1}>{introText}</Text>
                 </View>

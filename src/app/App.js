@@ -88,51 +88,42 @@ const AppContainer = createAppContainer(RouterWithModal);
 
 export default class App extends Component {
   state = {
-    uri: '',
-    source: { uri: path }
+    uri: ''
   };
 
   componentDidMount() {
-    /*
-        //获取开屏动画
-        Api.getSplashScreen((result) => {
-          if (result) {
-            this.setState({
-              uri: result.ad_path
-            });
+    //获取开屏动画
+    Api.getSplashScreen((result) => {
+      if (result) {
+        this.setState({
+          uri: result.ad_path
+        });
+      }
+    });
+    //设备号注册
+    let deviceId = DeviceInfo.getUniqueID();
+    Api.postRegisterByDeviceId(deviceId, (e) => {
+      if (e && e.api_token) {
+        Variables.account.token = e.api_token;
+        Variables.account.deviceToken = e.api_token;
+        store.dispatch(get_device_account_info(e));
+        //获取个人信息
+        Api.getUserInfo((e) => {
+          if (e) {
+            store.dispatch(get_user_info(e));
           }
         });
-        //设备号注册
-        let deviceId = DeviceInfo.getUniqueID();
-        Api.postRegisterByDeviceId(deviceId, (e) => {
-          if (e && e.api_token) {
-            Variables.account.token = e.api_token;
-            Variables.account.deviceToken = e.api_token;
-            store.dispatch(get_device_account_info(e));
-            //获取个人信息
-            Api.getUserInfo((e) => {
-              if (e) {
-                store.dispatch(get_user_info(e));
-              }
-            });
-          }
-        });
-    */
+      }
+    });
   }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <SecurtyImage source={this.state.source} />
-        <Text onPress={() => this.setState({ source: { uri: path } })}>112233444</Text>
-        <Text onPress={() => this.setState({ source: require('../image/main/app_icon.png') })}>vvcccvbb</Text>
-        { /* <Provider store={store}>
+      <Provider store={store}>
         <StatusBar barStyle="default" />
         <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
-        </Provider>*/
-        }
-      </View>
+      </Provider>
     );
   }
 }

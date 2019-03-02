@@ -66,13 +66,13 @@ export default class SecurtyImage extends PureComponent {
 
     render() {
         return (
-            <View style={{ height: 100, width: 100 }}>
-                {this.state.source && <Image style={{ height: 100, width: 100 }} source={this.state.source} />}
+            <View style={this.props.style}>
+                {this.state.source &&
+                    <Image
+                        style={this.props.style}
+                        defaultSource={require('../../image/usual/image_load_failed.png')}
+                        source={this.state.source} />}
             </View>
         );
     }
 }
-
-const styles = StyleSheet.create({
-
-});
