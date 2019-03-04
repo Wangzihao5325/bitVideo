@@ -10,19 +10,19 @@ export default class SecurtyImage extends PureComponent {
         isLoading: false,
     }
 
-    componentDidMount() {
-        this.listener = DeviceEventEmitter.addListener('bitImage', (message) => {
-            //收到监听加载bitmap
-            this.setState({ source: { uri: 'data:image/png;base64,' + message } });
+    // componentDidMount() {
+    //     this.listener = DeviceEventEmitter.addListener('bitImage', (message) => {
+    //         //收到监听加载bitmap
+    //         this.setState({ source: { uri: 'data:image/png;base64,' + message } });
 
-        })
-    }
+    //     })
+    // }
 
-    componentWillUnmount() {
-        if (this.listener) {
-            this.listener.remove;
-        }
-    }
+    // componentWillUnmount() {
+    //     if (this.listener) {
+    //         this.listener.remove;
+    //     }
+    // }
 
     static getDerivedStateFromProps(nextProps, preState) {
         switch (typeof nextProps.source) {
@@ -39,21 +39,21 @@ export default class SecurtyImage extends PureComponent {
                     let regArr = nextProps.source.uri.split('.');
                     let typeStr = regArr[regArr.length - 1];
                     if (typeStr === 'ceb') {
-                        RNFetchBlob
-                            .config({ fileCache: true })
-                            .fetch('GET', nextProps.source.uri)
-                            .then((res) => {
-                                let filePath = res.path();
-                                let fs = RNFetchBlob.fs;
-                                fs.readFile(filePath, 'base64')//utf8//base64
-                                    .then(data => {
-                                        AESImageUtils.decryptFromJSBase64(data).then((e) => {
-                                            if (e.result) {
-                                                DeviceEventEmitter.emit('bitImage', e.result);
-                                            }
-                                        });
-                                    });
-                            });
+                        // RNFetchBlob
+                        //     .config({ fileCache: true })
+                        //     .fetch('GET', nextProps.source.uri)
+                        //     .then((res) => {
+                        //         let filePath = res.path();
+                        //         let fs = RNFetchBlob.fs;
+                        //         fs.readFile(filePath, 'base64')//utf8//base64
+                        //             .then(data => {
+                        //                 AESImageUtils.decryptFromJSBase64(data).then((e) => {
+                        //                     if (e.result) {
+                        //                         DeviceEventEmitter.emit('bitImage', e.result);
+                        //                     }
+                        //                 });
+                        //             });
+                        //     });
                         return preState
                     } else {
                         return { source: nextProps.source }

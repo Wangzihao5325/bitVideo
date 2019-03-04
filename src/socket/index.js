@@ -3,7 +3,7 @@ import Variables from '../global/Variables';
 let CryptoJS = require('crypto-js');
 
 const SECURTY_URL = '/api/accept';
-const isSecurty = true;
+const isSecurty = false;
 const keyStr = 'bUYJ3nTV6VBasdJF';
 var KEY = CryptoJS.enc.Utf8.parse(keyStr);
 

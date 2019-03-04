@@ -14,7 +14,7 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* BitVideosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BitVideosTests.m */; };
 		037F2B45D971454B82007D57 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F751E213284744B5901FF6 /* libRNDeviceInfo-tvOS.a */; };
-		0419F5B822293C8F00C99E07 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0419F5B722293C8F00C99E07 /* bundle */; };
+		041DE5FD222CD30100BEDE5D /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 041DE5FC222CD30100BEDE5D /* bundle */; };
 		04236E512223932900E7E260 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04236E422223932900E7E260 /* Octicons.ttf */; };
 		04236E522223932900E7E260 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04236E432223932900E7E260 /* Feather.ttf */; };
 		04236E532223932900E7E260 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04236E442223932900E7E260 /* Entypo.ttf */; };
@@ -430,7 +430,7 @@
 		00E356EE1AD99517003FC87E /* BitVideosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitVideosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* BitVideosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BitVideosTests.m; sourceTree = "<group>"; };
-		0419F5B722293C8F00C99E07 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
+		041DE5FC222CD30100BEDE5D /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		04236E422223932900E7E260 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		04236E432223932900E7E260 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
 		04236E442223932900E7E260 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
@@ -680,13 +680,13 @@
 		13B07FAE1A68108700A75B9A /* BitVideos */ = {
 			isa = PBXGroup;
 			children = (
+				041DE5FC222CD30100BEDE5D /* bundle */,
 				04609064222A4380004FEB91 /* NSData+Encrypto.h */,
 				04609065222A4381004FEB91 /* NSData+Encrypto.m */,
 				04609062222A4380004FEB91 /* NSString+Encrypto.h */,
 				04609063222A4380004FEB91 /* NSString+Encrypto.m */,
 				04609031222A4079004FEB91 /* AESImageUtils.h */,
 				04609032222A4079004FEB91 /* AESImageUtils.m */,
-				0419F5B722293C8F00C99E07 /* bundle */,
 				04236E412223932900E7E260 /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1447,7 +1447,7 @@
 				48458A043F3B4F848A292BFB /* FontAwesome5_Brands.ttf in Resources */,
 				42D871A6051F4E7A8B9D3724 /* FontAwesome5_Regular.ttf in Resources */,
 				C43F93CDA19B4F0DAB660284 /* FontAwesome5_Solid.ttf in Resources */,
-				0419F5B822293C8F00C99E07 /* bundle in Resources */,
+				041DE5FD222CD30100BEDE5D /* bundle in Resources */,
 				2E5FE0C5966E496D9F92E152 /* Foundation.ttf in Resources */,
 				04236E5C2223932900E7E260 /* Zocial.ttf in Resources */,
 				74C1B98A03BD46E9A9145B24 /* Ionicons.ttf in Resources */,
