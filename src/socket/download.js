@@ -1,15 +1,15 @@
 import RNFetchBlob from 'rn-fetch-blob';
 import TsLoadRegObj from '../dataModel/TsLoadRegObj';
 const dirs = RNFetchBlob.fs.dirs;
-
+/*
 const url1 = 'https://t.bwzybf.com/2018/12/07/4uvPFAGxlZMdPiVL/playlist.m3u8';
 const url2 = 'https://pp.ziyuan605.com/20181130/kynLRJf5/index.m3u8';
 const url3 = 'https://156zy.suyunbo.tv/2018/12/12/oF3VHRQVaQE9QnDa/playlist.m3u8';
-
+*/
 class M3u8Download {
 
-    download = (url, callback) => {
-        let m3u8Path = dirs.DocumentDir + '/testFile/' + 'index.m3u8';
+    download = (url, folder, callback) => {
+        let m3u8Path = dirs.DocumentDir + `/${folder}/` + 'index.m3u8';
         RNFetchBlob
             .config({ path: m3u8Path })
             .fetch('GET', url)
@@ -20,7 +20,7 @@ class M3u8Download {
                 fs.readFile(filePath, 'utf8')
                     .then((data) => {
                         let downloadList = this.praseM3u8Data(data);
-                        this.tsBatchDownload(downloadList, url, callback);
+                        this.tsBatchDownload(downloadList, url, folder, callback);
                     });
             })
     }
@@ -47,7 +47,7 @@ class M3u8Download {
     }
 
     //
-    tsBatchDownload = (downloadList, url, callback) => {
+    tsBatchDownload = (downloadList, url, folder, callback) => {
         if (downloadList.length > 0) {
             if (downloadList.length === 1) {
                 if (downloadList[0].isM3u8) {
@@ -55,11 +55,11 @@ class M3u8Download {
                 }
             }
             //download !!!
-            this.downloadByList(downloadList, url, callback);
+            this.downloadByList(downloadList, url, folder, callback);
         }
     }
 
-    downloadByList = (list, url, callback) => {
+    downloadByList = (list, url, folder, callback) => {
         //查找有效路径
         let totalTsNum = list.length;//应该下载的所有ts的长度用来计算下载进度
         let paths = this.urlSplit(url);
@@ -80,7 +80,7 @@ class M3u8Download {
                                 let shiftTs = list.shift();
                                 reg.push(shiftTs);
                                 let tsFullUrl = truePath + '/' + shiftTs.originPath;
-                                let tsLocalPath = dirs.DocumentDir + '/testFile/' + shiftTs.originPath;
+                                let tsLocalPath = dirs.DocumentDir + `/${folder}/` + shiftTs.originPath;
                                 RNFetchBlob
                                     .config({ path: tsLocalPath })
                                     .fetch('GET', tsFullUrl)
