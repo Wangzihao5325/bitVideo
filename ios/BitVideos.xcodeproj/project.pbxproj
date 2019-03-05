@@ -77,6 +77,7 @@
 		C6A141D3EC1042D18C05B69A /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFA37124B0CE4F56A0021727 /* MaterialCommunityIcons.ttf */; };
 		CF838FC6579543B6950F7E18 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1A77C236164ADB94771C8F /* libRNFetchBlob.a */; };
 		D31166D865D849DCBA9D0F0F /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 541BCF2322384765AB920832 /* Feather.ttf */; };
+		D6E6125C10334054A29C9107 /* libFPStaticServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD41E186FE6B4D9F905126A3 /* libFPStaticServer.a */; };
 		E5E531A4DDA74990AFEF5B1D /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 997B30CA7E2D40BE883BCDF3 /* libRCTOrientation.a */; };
 		F06CD59C7D744C4184550444 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FBBF4CF10F049EEAF8DE03A /* Entypo.ttf */; };
 /* End PBXBuildFile section */
@@ -130,6 +131,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = A15C300E1CD25C330074CB35;
 			remoteInfo = RNFetchBlob;
+		};
+		044CD51A222E5FBE00D2B5C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABED16C6D7A84716B4D4143A /* FPStaticServer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = FPStaticServer;
 		};
 		0499D22F2224F7FC00A9A1CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -485,9 +493,11 @@
 		A1309FC8E0C9423D89CCDDA6 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		A4D977E382FC4CDA9BDD5C40 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		AA8ECCD50DE94667B00656A2 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
+		ABED16C6D7A84716B4D4143A /* FPStaticServer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = FPStaticServer.xcodeproj; path = "../node_modules/react-native-static-server/ios/FPStaticServer.xcodeproj"; sourceTree = "<group>"; };
 		AC1A77C236164ADB94771C8F /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B611D3C7585C4FB5AE66FFC1 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		BD41E186FE6B4D9F905126A3 /* libFPStaticServer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libFPStaticServer.a; sourceTree = "<group>"; };
 		BFA37124B0CE4F56A0021727 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		C5F751E213284744B5901FF6 /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; };
 		CCB4F22EC5134F70B6EFE385 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -529,6 +539,7 @@
 				2CADB3C6150148A9BD04A2E2 /* libRNDeviceInfo.a in Frameworks */,
 				E5E531A4DDA74990AFEF5B1D /* libRCTOrientation.a in Frameworks */,
 				CF838FC6579543B6950F7E18 /* libRNFetchBlob.a in Frameworks */,
+				D6E6125C10334054A29C9107 /* libFPStaticServer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +660,14 @@
 			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
+		044CD517222E5FBE00D2B5C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				044CD51B222E5FBE00D2B5C6 /* libFPStaticServer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0499D22C2224F7FC00A9A1CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,6 +759,7 @@
 				C5F751E213284744B5901FF6 /* libRNDeviceInfo-tvOS.a */,
 				997B30CA7E2D40BE883BCDF3 /* libRCTOrientation.a */,
 				AC1A77C236164ADB94771C8F /* libRNFetchBlob.a */,
+				BD41E186FE6B4D9F905126A3 /* libFPStaticServer.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -817,6 +837,7 @@
 				AA8ECCD50DE94667B00656A2 /* RNDeviceInfo.xcodeproj */,
 				1AD288621F6D47CA8B74A58E /* RCTOrientation.xcodeproj */,
 				4FF6FC99B92D4C4D9D78D5E3 /* RNFetchBlob.xcodeproj */,
+				ABED16C6D7A84716B4D4143A /* FPStaticServer.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1006,6 +1027,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 044CD517222E5FBE00D2B5C6 /* Products */;
+					ProjectRef = ABED16C6D7A84716B4D4143A /* FPStaticServer.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -1129,6 +1154,13 @@
 			fileType = archive.ar;
 			path = libRNFetchBlob.a;
 			remoteRef = 040CED7022294D2F0055DBB9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		044CD51B222E5FBE00D2B5C6 /* libFPStaticServer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFPStaticServer.a;
+			remoteRef = 044CD51A222E5FBE00D2B5C6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0499D2302224F7FC00A9A1CD /* libRCTOrientation.a */ = {
@@ -1592,12 +1624,14 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = BitVideosTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1630,12 +1664,14 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = BitVideosTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1669,6 +1705,7 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = BitVideos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1697,6 +1734,7 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = BitVideos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1732,11 +1770,13 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = "BitVideos-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1778,11 +1818,13 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = "BitVideos-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1823,11 +1865,13 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = "BitVideos-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1868,11 +1912,13 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 					"$(SRCROOT)/../node_modules/rn-fetch-blob/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-static-server/ios/**",
 				);
 				INFOPLIST_FILE = "BitVideos-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
