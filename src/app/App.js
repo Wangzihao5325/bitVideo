@@ -23,13 +23,13 @@ import CollectModel from '../screens/collectModel/index';
 
 import SplashModel from '../components/splashModal/index';
 
-import M3u8Download from '../socket/download';
-import Video from 'react-native-video';
-import StaticServer from 'react-native-static-server';
-import RNFetchBlob from 'rn-fetch-blob';
-const dirs = RNFetchBlob.fs.dirs;
-let fullPath = dirs.DocumentDir;
-/*
+// import M3u8Download from '../socket/download';
+// import Video from 'react-native-video';
+// import StaticServer from 'react-native-static-server';
+// import RNFetchBlob from 'rn-fetch-blob';
+// const dirs = RNFetchBlob.fs.dirs;
+// let fullPath = dirs.DocumentDir;
+
 const Router = createBottomTabNavigator(
   {
     MainStack,
@@ -88,28 +88,27 @@ const RouterWithModal = createStackNavigator(
 
 // const AppContainer = createAppContainer(Router);
 const AppContainer = createAppContainer(RouterWithModal);
-*/
+
 export default class App extends Component {
   state = {
-    uri: '',
-    localUrl: ''
+    uri: ''
   };
 
   componentDidMount() {
-    
-    //static server demo
-    console.log(fullPath);
-    let localM3u8Path = fullPath + '/testDoc';
-    let server = new StaticServer(8080, localM3u8Path);
 
-    // Start the server
-    server.start().then((url) => {
-      console.log("Serving at URL", url);
-      this.setState({
-        localUrl: url + '/index.m3u8'
-      });
-    });
-    
+    //static server demo
+    // console.log(fullPath);
+    // let localM3u8Path = fullPath + '/testDoc';
+    // let server = new StaticServer(8080, localM3u8Path);
+
+    // // Start the server
+    // server.start().then((url) => {
+    //   console.log("Serving at URL", url);
+    //   this.setState({
+    //     localUrl: url + '/index.m3u8'
+    //   });
+    // });
+
 
     //m3u8下载 demo
     // console.log(fullPath);
@@ -121,7 +120,7 @@ export default class App extends Component {
 
 
 
-    /*
+
     //获取开屏动画
     Api.getSplashScreen((result) => {
       if (result) {
@@ -145,24 +144,16 @@ export default class App extends Component {
         });
       }
     });
-    */
+
   }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        {this.state.localUrl !== '' &&
-          <Video
-            source={{ uri: this.state.localUrl }}
-            style={{ height: 200, width: 200, backgroundColor: 'black' }}
-            controls={true}
-          />}
-        {/* <Provider store={store}>
+      <Provider store={store}>
         <StatusBar barStyle="default" />
         <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
-      </Provider> */}
-      </View>
+      </Provider>
     );
   }
 }
