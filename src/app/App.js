@@ -23,6 +23,8 @@ import CollectModel from '../screens/collectModel/index';
 
 import SplashModel from '../components/splashModal/index';
 
+import M3u8Download from '../socket/download';
+/*
 const Router = createBottomTabNavigator(
   {
     MainStack,
@@ -81,13 +83,21 @@ const RouterWithModal = createStackNavigator(
 
 // const AppContainer = createAppContainer(Router);
 const AppContainer = createAppContainer(RouterWithModal);
-
+*/
 export default class App extends Component {
   state = {
     uri: ''
   };
 
   componentDidMount() {
+
+    M3u8Download.download('https://t.bwzybf.com/2018/12/07/4uvPFAGxlZMdPiVL/playlist.m3u8', (state, rate) => {
+      console.log('____________')
+      console.log(state);
+      console.log(rate);
+    });
+
+    /*
     //获取开屏动画
     Api.getSplashScreen((result) => {
       if (result) {
@@ -111,15 +121,18 @@ export default class App extends Component {
         });
       }
     });
+    */
   }
 
   render() {
     return (
-      <Provider store={store}>
+      <View style={{ flex: 1 }}>
+        {/* <Provider store={store}>
         <StatusBar barStyle="default" />
         <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
-      </Provider>
+      </Provider> */}
+      </View>
     );
   }
 }
