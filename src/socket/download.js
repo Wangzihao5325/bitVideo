@@ -9,8 +9,9 @@ const url3 = 'https://156zy.suyunbo.tv/2018/12/12/oF3VHRQVaQE9QnDa/playlist.m3u8
 class M3u8Download {
 
     download = (url, callback) => {
+        let m3u8Path = dirs.DocumentDir + '/testFile/' + 'index.m3u8';
         RNFetchBlob
-            .config({ fileCache: true })
+            .config({ path: m3u8Path })
             .fetch('GET', url)
             .then((res) => {
                 // 下载并读取m3u8文件
@@ -19,8 +20,6 @@ class M3u8Download {
                 fs.readFile(filePath, 'utf8')
                     .then((data) => {
                         let downloadList = this.praseM3u8Data(data);
-                        console.log('list done!');
-                        console.log(dirs);
                         this.tsBatchDownload(downloadList, url, callback);
                     });
             })

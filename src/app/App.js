@@ -24,6 +24,10 @@ import CollectModel from '../screens/collectModel/index';
 import SplashModel from '../components/splashModal/index';
 
 import M3u8Download from '../socket/download';
+import Video from 'react-native-video';
+import RNFetchBlob from 'rn-fetch-blob';
+const dirs = RNFetchBlob.fs.dirs;
+let fullPath = dirs.DocumentDir + '/testFile/' + 'index.m3u8';
 /*
 const Router = createBottomTabNavigator(
   {
@@ -90,12 +94,12 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-
-    M3u8Download.download('https://t.bwzybf.com/2018/12/07/4uvPFAGxlZMdPiVL/playlist.m3u8', (state, rate) => {
-      console.log('____________')
-      console.log(state);
-      console.log(rate);
-    });
+    //m3u8下载 demo
+    // M3u8Download.download('https://t.bwzybf.com/2018/12/07/4uvPFAGxlZMdPiVL/playlist.m3u8', (state, rate) => {
+    //   console.log('____________')
+    //   console.log(state);
+    //   console.log(rate);
+    // });
 
     /*
     //获取开屏动画
@@ -132,6 +136,11 @@ export default class App extends Component {
         <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
       </Provider> */}
+        <Video
+          source={{ uri: fullPath }}
+          style={{ height: 200, width: 200, backgroundColor: 'black' }}
+          controls={true}
+        />
       </View>
     );
   }
