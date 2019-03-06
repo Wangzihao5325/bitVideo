@@ -6,7 +6,7 @@ import VectorIconBtn from '../../../components/imageBtn/VectorIconBtn';
 export default class ModalHeader extends PureComponent {
     render() {
         return (
-            <View style={styles.headerContainer}>
+            <View style={[styles.headerContainer, this.props.style]}>
                 <View style={styles.headerFlexContainer}>
                     <VectorIconBtn
                         size={21}

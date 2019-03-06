@@ -4649,6 +4649,13 @@ react-native-android-fullscreen-webview-video@^1.0.3:
   resolved "https://registry.yarnpkg.com/react-native-android-fullscreen-webview-video/-/react-native-android-fullscreen-webview-video-1.0.3.tgz#305a7249b42e406caed1401b47ac5a3d53049134"
   integrity sha512-Py3Zwc2e+FyNGq1EWGO7jA0R3p2R1c092fT2CIm7HvHUBDCQv1TAl7J6XIJ3g6E2JT3dZ0LV20PkgvCVxT23aw==
 
+react-native-animatable@^1.2.4:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.1.tgz#f004a7e9de6838d0fbf210d642593cff7affd9ef"
+  integrity sha512-NoE6OAgCrhggWBRV6rBJup5vLAGoTjx168Tku1RZmjUGIdYRAyGesP/MoqvxiNJjhTAgwYx2LT63VTT1xO8g4Q==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-device-info@^0.24.3:
   version "0.24.3"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.24.3.tgz#f15eff8d09fe418eaf5e7c89ddaabbc5ed718fd7"
@@ -4683,6 +4690,14 @@ react-native-looped-carousel@^0.1.13:
   dependencies:
     lodash.isequal "^4.5.0"
     prop-types "^15.6.1"
+
+react-native-modal@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-9.0.0.tgz#0bfd0770361a2e5c6e0072bfdb0f1277f9662dba"
+  integrity sha512-j4xeIK9noHU/ksp2Ndc8NI1qJvjApToqGvqLEu2wtYeaISanbhtd0S3V4hZkSlCa3DZtegl6aaMZBLeH1q6xfA==
+  dependencies:
+    prop-types "^15.6.2"
+    react-native-animatable "^1.2.4"
 
 react-native-orientation@^3.1.3:
   version "3.1.3"

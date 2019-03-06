@@ -8,7 +8,9 @@ import IconBtn from '../../../components/imageBtn/IconBtn';
 
 class VideoHeader extends PureComponent {
     moreIntro = () => {
-        console.log('show more intro');
+        if (typeof this.props.toIntro === 'function') {
+            this.props.toIntro();
+        }
     }
     render() {
         let title = '';
