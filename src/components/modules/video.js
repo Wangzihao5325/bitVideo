@@ -75,8 +75,8 @@ class SUDOKU extends PureComponent {
                     columnWrapperStyle={{ marginTop: 10 }}
                 />
                 <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title='更多' btnPress={this._moreVideo} /></View>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title='换一换' btnPress={this._haveChange} /></View>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title={In18.MORE_TEXT} btnPress={this._moreVideo} /></View>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><TextBtn title={In18.CHANGE_VIDEOS} btnPress={this._haveChange} /></View>
                 </View>
             </View>
         );

@@ -29,6 +29,8 @@ const SIGN_IN_TO_CONTAINE = 'sign in to continue';
 
 //首页搜索栏
 const SEARCH_TITLE = '搜索你想看的影片';
+//首页模块
+const CHANGE_VIDEOS = '换一换';
 
 //帮助反馈页面
 const HELP_SUBMIT = '帮助反馈';
@@ -163,6 +165,8 @@ export {
     SIGN_IN_TO_CONTAINE,
 
     SEARCH_TITLE,
+
+    CHANGE_VIDEOS,
 
     HELP_SUBMIT,
     PLEASE_INPUT_SUGGEST,
