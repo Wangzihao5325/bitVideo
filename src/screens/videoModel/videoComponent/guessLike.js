@@ -5,6 +5,7 @@ import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
 import store from '../../../store/index';
 import { set_video_full_data, set_guess_like_source, set_comment_list_data } from '../../../store/actions/videoDetailInfoAction';
+import * as Sizes from '../../../global/Sizes';
 
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     FlatList: {
-        marginTop: 5,
-        marginBottom: 10
+        height: Sizes.IMAGE_AVATER_VER_HEIGHT + 50,
+        width: Sizes.DEVICE_WIDTH
     }
 });
