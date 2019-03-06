@@ -116,7 +116,7 @@ export default connect(mapState2Props)(InputBottom);
 
 const styles = StyleSheet.create({
     container: {
-        height: 40,
+        height: 42,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     input: {
-        height: 30,
+        height: 38,
         width: Sizes.DEVICE_WIDTH - 80,
         borderColor: 'rgb(242,242,242)',
         borderWidth: 1,

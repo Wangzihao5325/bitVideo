@@ -91,7 +91,7 @@ export default class VideoModel extends PureComponent {
                     <GuessLike />
                     <AmazingComment />
                 </ScrollView>
-                <KeyboardAvoidingView behavior='position'>
+                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
                     <InputBottom />
                 </KeyboardAvoidingView>
                 <Modal
@@ -108,8 +108,6 @@ export default class VideoModel extends PureComponent {
 }
 const styles = StyleSheet.create({
     scroll: {
-        // height: Sizes.DEVICE_HEIGHT - 38 - 300 - 50,
-        // width: Sizes.DEVICE_WIDTH
         flex: 1
     },
     modalIosX: {
