@@ -183,33 +183,6 @@ class SearchRecommend extends PureComponent {
     }
 }
 
-/*
-class ResultItem extends PureComponent {
-
-    static contextTypes = {
-        searchNavigation: PropTypes.object
-    }
-
-    _goToSeeMovie = () => {
-        const { searchNavigation } = this.context;
-        searchNavigation.navigate('VideoModel', { videoId: this.props.id });
-    }
-
-    render() {
-        return (
-            <TouchableHighlight style={styles.resultItemContainer} onPress={this._goToSeeMovie}>
-                <View style={[styles.resultItemContainer, styles.borderBottom]} >
-                    <Image style={styles.resultItemImage} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} />
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.resultItemTitle}>{this.props.title}</Text>
-                        <Text numberOfLines={2} ellipsizeMode='tail' style={styles.resultItemIntro}>{this.props.intro}</Text>
-                    </View>
-                </View>
-            </TouchableHighlight>
-        );
-    }
-}
-*/
 class ResultList extends PureComponent {
     static contextTypes = {
         searchNavigation: PropTypes.object
@@ -282,12 +255,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2
     },
     inputContainer: {
-        height: 29,
+        height: 38,
         width: 261,
         borderRadius: 14,
         backgroundColor: 'rgb(247,247,247)',
         marginLeft: 29,
-        marginTop: 9,
+        marginTop: 3,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
@@ -298,7 +271,7 @@ const styles = StyleSheet.create({
         marginLeft: 27
     },
     headerTextInput: {
-        height: 29,
+        height: 38,
         width: 261 - 53,   //261-2*(27+16)-20
         marginLeft: 10
     },
