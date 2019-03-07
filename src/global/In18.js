@@ -8,6 +8,7 @@ const ALL_TEXT = '全部';
 const MORE_TEXT = '更多';
 
 const DEFALUT_GLOBALE_TYPE = ['推荐1', '搞笑1', '电视剧1', '动漫1', '综艺1'];
+const DEFALUT_SHORT_VIDEO_TYPE = ['推荐1', '穿搭', '新时代', '搞笑1', '娱乐1'];
 const DEFALUT_RECOMMEND_SEARCH = '雷人糗事';
 
 const LOGIN = '登录';
@@ -146,6 +147,7 @@ export {
     MORE_TEXT,
 
     DEFALUT_GLOBALE_TYPE,
+    DEFALUT_SHORT_VIDEO_TYPE,
     DEFALUT_RECOMMEND_SEARCH,
 
     LOGIN,

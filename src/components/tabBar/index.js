@@ -76,7 +76,7 @@ export default class TabBar extends PureComponent {
     render() {
         let items = this.itemsGenerator(this.props.tabNames);
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.props.style]}>
                 <ScrollView
                     horizontal={true}
                     alwaysBounceHorizontal={false}

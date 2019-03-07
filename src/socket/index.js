@@ -389,6 +389,16 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getShortVideoType(onSuccess, onError) {
+        const url = '/api/video/short/type';
+        this.getFetch(url, onSuccess, onError);
+    }
+
+    getShortVideoListById(typeId, limit, page, onSuccess, onError) {
+        const url = `/api/video/short/list?type_id=${typeId}&limit=${limit}&page=${page}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();
