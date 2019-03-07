@@ -6,10 +6,11 @@ import { iconMake } from '../components/icons/Vector_icons';
 import MainScreen from '../screens/main/index';
 import ViewModuleMoreScreen from '../screens/main/childrenPage/ViewModuleMoreScreen';
 
+import ShortVideoScreen from '../screens/shortVideo/index';
 import SubjectScreen from '../screens/subject/index';
 import TaskScreen from '../screens/task/index';
-
 import MineScreen from '../screens/mine/index';
+
 import HelpScreen from '../screens/mine/help/index';
 import IconsListScreen from '../screens/mine/icons_list/index';
 
@@ -32,6 +33,27 @@ MainStack.navigationOptions = ({ navigation }) => {
     return {
         tabBarLabel: In18.MAIN_PAGE_TITLE,
         tabBarIcon: iconMake(TAB_ICON_KEY_STR[0]),
+        tabBarVisible
+    }
+};
+
+// 热点（短视频）router
+let ShortVideoStack = createStackNavigator(
+    {
+        ShortVideoScreen
+    },
+    {
+        navigationOptions: { gesturesEnabled: false }
+    }
+);
+ShortVideoStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+        tabBarVisible = false;
+    }
+    return {
+        tabBarLabel: In18.SHORT_VIDEO_TITLE,
+        tabBarIcon: iconMake(TAB_ICON_KEY_STR[1]),
         tabBarVisible
     }
 };
@@ -103,6 +125,7 @@ MineStack.navigationOptions = ({ navigation }) => {
 
 export {
     MainStack,
+    ShortVideoStack,
     SubjectStack,
     TaskStack,
     MineStack,

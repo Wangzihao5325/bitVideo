@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from '../store/index';
 import { get_device_account_info, get_user_info } from '../store/actions/accountAction';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
-import { MainStack, SubjectStack, TaskStack, MineStack } from '../app/register_screens';
+import { MainStack, ShortVideoStack, SubjectStack, TaskStack, MineStack } from '../app/register_screens';
 import * as Colors from '../global/Colors';
 import Api from '../socket/index';
 import Variables from '../global/Variables';
@@ -33,6 +33,7 @@ import SplashModel from '../components/splashModal/index';
 const Router = createBottomTabNavigator(
   {
     MainStack,
+    ShortVideoStack,
     SubjectStack,
     TaskStack,
     MineStack,
