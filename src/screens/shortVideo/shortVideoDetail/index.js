@@ -18,8 +18,7 @@ export default class ShortVideoDetail extends PureComponent {
     }
 
     componentDidMount() {
-        const shortVideoUrl = this.props.navigation.getParam('ShortVideoDetail', '');
-        console.log(shortVideoUrl);
+        const shortVideoUrl = this.props.navigation.getParam('ShortVideoUrl', '');
         this.setState({
             url: shortVideoUrl
         });
@@ -33,7 +32,7 @@ export default class ShortVideoDetail extends PureComponent {
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 {Platform.OS === 'ios' && <ModalHeader title='' goBack={this.goBack} />}
-                <RootPlayer navi={this.props.navigation} videoUrl={'http://youku.com-www-163.com/20180506/576_bf997390/index.m3u8'} />
+                <RootPlayer navi={this.props.navigation} videoUrl={this.state.url} />
             </SafeAreaView>
         );
     }

@@ -33,8 +33,10 @@ const Footer = (props) => {
 const Cover = (props) => {
     return (
         <View style={styles.coverContainer}>
-            <Image style={styles.coverContainer} source={{ uri: `${props.source}` }} />
-            <TouchableHighlight style={styles.coverBtn} onPress={props.playPress}>
+            <TouchableHighlight style={styles.coverContainer} onPress={props.coverPress} underlayColor='transparent'>
+                <Image style={styles.coverContainer} source={{ uri: `${props.source}` }} />
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.coverBtn} onPress={props.playPress} underlayColor='transparent'>
                 <Icon name='play' size={30} color='#909090' />
             </TouchableHighlight>
         </View>
@@ -68,7 +70,7 @@ export default class ShortVideoItem extends PureComponent {
                 <View style={{ flex: 1 }} >
                     {this.props.nowPlaying === this.props.index ?
                         <RootPlayer videoUrl={this.props.videoUrl} disableBack={true} /> :
-                        <Cover playPress={this._toPlay} source={this.props.coverUrl} />
+                        <Cover coverPress={this._toDetail} playPress={this._toPlay} source={this.props.coverUrl} />
                     }
                 </View>
                 <Footer times={this.props.playTimes} toDetail={this._toDetail} toShare={this._toShare} />
