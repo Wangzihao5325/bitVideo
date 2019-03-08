@@ -7,7 +7,12 @@ import VideoPlayer from 'react-native-video-controls';
 import Orientation from 'react-native-orientation';
 
 //'https://pp.605ziyuan.com/20180905/btValsHQ/index.m3u8'
-export default class ShortVideoPlayer extends PureComponent {
+export default class RootPlayer extends PureComponent {
+    static defaultProps = {
+        disableBack: false,
+        navi: false
+    }
+
     state = {
         isFullScreen: false
     }
@@ -52,13 +57,14 @@ export default class ShortVideoPlayer extends PureComponent {
                     {
                         Platform.OS === 'android' &&
                         <VideoPlayer
+                            navigator={this.props.navi}
                             source={{ uri: this.props.videoUrl }}
                             ref={(ref) => { this.player = ref }}
                             onBuffer={this.onBuffer}
                             onError={this.videoError}
                             onEnterFullscreen={this._androidEnterFullScreen}
                             onExitFullscreen={this._androidExitFullScreen}
-                            disableBack={true}
+                            disableBack={this.props.disableBack}
                         />
                     }
                 </View>

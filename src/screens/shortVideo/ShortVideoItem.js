@@ -5,6 +5,7 @@ import * as In18 from '../../global/In18';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ShortVideoPlayer from './ShortVideoPlayer';
+import RootPlayer from '../../components/player/RootPlayer';
 
 const Header = (props) => {
     return (
@@ -63,7 +64,7 @@ export default class ShortVideoItem extends PureComponent {
                 <Header text={this.props.title} toDetail={this._toDetail} />
                 <View style={{ flex: 1 }} >
                     {this.props.nowPlaying === this.props.index ?
-                        <ShortVideoPlayer videoUrl={this.props.videoUrl} /> :
+                        <RootPlayer videoUrl={this.props.videoUrl} disableBack={true} /> :
                         <Cover playPress={this._toPlay} source={this.props.coverUrl} />
                     }
                 </View>
