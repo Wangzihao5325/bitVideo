@@ -143,6 +143,7 @@ export default class ShortVideo extends PureComponent {
                 <View style={{ flex: 1 }}>
                     {this.state.shortVideoList &&
                         <FlatList
+                            showsVerticalScrollIndicator={false}
                             onRefresh={this._flatListRefresh}
                             refreshing={false}
                             onEndReached={this._getNextPageData}

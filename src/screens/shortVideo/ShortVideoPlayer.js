@@ -58,7 +58,7 @@ export default class ShortVideoPlayer extends PureComponent {
                             onError={this.videoError}
                             onEnterFullscreen={this._androidEnterFullScreen}
                             onExitFullscreen={this._androidExitFullScreen}
-                            disableBack={this.props.disableBack ? true : false}
+                            disableBack={true}
                         />
                     }
                 </View>

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, Image, Platform } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
@@ -56,7 +56,7 @@ export default class ShortVideoItem extends PureComponent {
             this.props.playPress();
         }
     }
-
+    //http://youku.com-www-163.com/20180506/576_bf997390/index.m3u8  //this.props.videoUrl
     render() {
         return (
             <View style={styles.container}>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     headerText: {
-        fontSize: 16,
+        fontSize: Platform.OS === 'ios' ? 16 : 15,
         color: 'gray',
         marginHorizontal: 10,
         lineHeight: 16
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     footerText: {
-        fontSize: 12,
+        fontSize: Platform.OS === 'ios' ? 12 : 11,
         lineHeight: 12,
         marginHorizontal: 10,
         color: 'gray',
