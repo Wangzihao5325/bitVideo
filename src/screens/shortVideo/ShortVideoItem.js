@@ -4,7 +4,6 @@ import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ShortVideoPlayer from './ShortVideoPlayer';
 import RootPlayer from '../../components/player/RootPlayer';
 
 const Header = (props) => {
