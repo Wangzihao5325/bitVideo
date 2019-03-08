@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView } from 'react-native';
 import * as In18 from '../../global/In18';
-
-import IdolTabList from './IdolTabList';
-import HotSubject from './HotSubject';
-import TopRecommendVideos from './TopRecommendVideos';
-import TitleHeader from '../../components/titleHeader/index';
+import Api from '../../socket/index';
 
 export default class SubjectScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -14,25 +10,18 @@ export default class SubjectScreen extends PureComponent {
         }
     };
 
+    componentDidMount() {
+        Api.getNewSubjectList(1, 10, (e, message, code) => {
+            console.log(e);
+            console.log(message);
+            console.log(code);
+        });
+    }
+
     render() {
         return (
-            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-                <Text style={styles.titleText}>{In18.FAVOURITE_IDOL}</Text>
-                <IdolTabList />
-                <TitleHeader
-                    imageSource={require('../../image/subject/hot_subject.png')}
-                    title={In18.HOT_SUBJECT}
-                    btnTitle={In18.MORE_TEXT}
-                    showMore={() => { console.log('11223344') }} />
-                <HotSubject />
-                <TitleHeader
-                    imageSource={require('../../image/subject/newest_movie.png')}
-                    title={In18.HOT_MOVIE}
-                    btnTitle={In18.MORE_TEXT}
-                    showMore={() => { console.log('11223344') }} />
-                <TopRecommendVideos />
-                <View style={{ height: 30, width: '100%' }} />
-            </ScrollView>
+            <SafeAreaView style={{ flex: 1 }}>
+            </SafeAreaView>
         );
     }
 }
