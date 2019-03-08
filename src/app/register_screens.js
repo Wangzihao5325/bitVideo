@@ -7,6 +7,8 @@ import MainScreen from '../screens/main/index';
 import ViewModuleMoreScreen from '../screens/main/childrenPage/ViewModuleMoreScreen';
 
 import ShortVideoScreen from '../screens/shortVideo/index';
+import ShortVideoDetail from '../screens/shortVideo/shortVideoDetail/index';
+
 import SubjectScreen from '../screens/subject/index';
 import TaskScreen from '../screens/task/index';
 import MineScreen from '../screens/mine/index';
@@ -40,7 +42,8 @@ MainStack.navigationOptions = ({ navigation }) => {
 // 热点（短视频）router
 let ShortVideoStack = createStackNavigator(
     {
-        ShortVideoScreen
+        ShortVideoScreen,
+        ShortVideoDetail
     },
     {
         navigationOptions: { gesturesEnabled: false }

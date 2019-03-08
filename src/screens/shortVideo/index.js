@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native';
+import { StyleSheet, SafeAreaView, View, FlatList, Share } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import Api from '../../socket/index';
 import * as In18 from '../../global/In18';
@@ -133,6 +133,36 @@ export default class ShortVideo extends PureComponent {
         });
     }
 
+    //进入短视频详情
+    _toDetail = (url) => {
+        this.props.navigation.navigate('ShortVideoDetail', { ShortVideoUrl: url });
+    }
+
+    //分享
+    _toShare = (url) => {
+        Share.share({
+            message: In18.SHARE_MESSAGE,
+            url: url,
+            title: In18.SHARE_TITLE
+        }, {
+                dialogTitle: In18.SHARE_DIALOG_TITLE
+            })
+            .then(this._shareResult)
+            .catch((e) => { console.log(e) });
+    }
+
+    _shareResult = (result) => {
+        if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+                console.log('shared with action type');
+            } else {
+                console.log(done);
+            }
+        } else if (result.action === Share.dismissedAction) {
+            console.log('dismiss');
+        }
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
@@ -153,6 +183,8 @@ export default class ShortVideo extends PureComponent {
                             renderItem={
                                 ({ item, index }) =>
                                     <ShortVideoItem
+                                        share={this._toShare}
+                                        detail={this._toDetail}
                                         playPress={() => this._palyPress(index)}
                                         nowPlaying={this.state.playingIndex}
                                         index={index}

@@ -44,15 +44,19 @@ const Cover = (props) => {
 export default class ShortVideoItem extends PureComponent {
 
     _toShare = () => {
-        console.log('go to share');
+        if (typeof this.props.share === 'function') {
+            this.props.share(this.props.videoUrl);
+        }
     }
 
     _toDetail = () => {
-        console.log('go to detail');
+        if (typeof this.props.detail === 'function') {
+            this.props.detail(this.props.videoUrl);
+        }
     }
 
     _toPlay = () => {
-        if (this.props.playPress) {
+        if (typeof this.props.playPress === 'function') {
             this.props.playPress();
         }
     }
