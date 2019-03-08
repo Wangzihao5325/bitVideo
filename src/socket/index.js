@@ -399,6 +399,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getShortVideoGuessLike(id, onSuccess, onError) {
+        const url = `/api/video/short/guesslike?video_id=${id}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();

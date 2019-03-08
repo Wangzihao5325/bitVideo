@@ -134,8 +134,8 @@ export default class ShortVideo extends PureComponent {
     }
 
     //进入短视频详情
-    _toDetail = (url) => {
-        this.props.navigation.navigate('ShortVideoDetail', { ShortVideoUrl: `${url}` });
+    _toDetail = (url, id, title, times) => {
+        this.props.navigation.navigate('ShortVideoDetail', { ShortVideoUrl: `${url}`, id: id, title: title, times: times });
     }
 
     //分享
@@ -192,6 +192,7 @@ export default class ShortVideo extends PureComponent {
                                         videoUrl={item.play_url}
                                         coverUrl={item.cover_path}
                                         playTimes={item.play_count_real}
+                                        videoId={item.id}
                                     />
                             }
                         />}

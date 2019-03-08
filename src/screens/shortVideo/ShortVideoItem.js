@@ -53,7 +53,7 @@ export default class ShortVideoItem extends PureComponent {
 
     _toDetail = () => {
         if (typeof this.props.detail === 'function') {
-            this.props.detail(this.props.videoUrl);
+            this.props.detail(this.props.videoUrl, this.props.videoId, this.props.title, this.props.playTimes);
         }
     }
 
