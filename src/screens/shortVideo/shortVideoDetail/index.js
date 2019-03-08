@@ -63,7 +63,14 @@ export default class ShortVideoDetail extends PureComponent {
                     <FlatList
                         style={{ flex: 1 }}
                         data={this.state.guessLikeList}
-                        renderItem={({ item }) => <GuessLikeItem title={item.title} times={item.play_count} uri={item.cover_path} id={item.id} playUrl={item.play_url} />}
+                        renderItem={
+                            ({ item }) => <GuessLikeItem
+                                title={item.title}
+                                times={item.play_count}
+                                uri={item.cover_path}
+                                id={item.id}
+                                playUrl={item.play_url} />
+                        }
                     />
                 }
             </SafeAreaView>
