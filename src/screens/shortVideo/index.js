@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import Api from '../../socket/index';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
@@ -20,6 +21,11 @@ export default class ShortVideo extends PureComponent {
     state = {
         type: In18.DEFALUT_SHORT_VIDEO_TYPE,
         shortVideoList: null,
+        playingIndex: -1,
+        nowPage: -1,
+        lastPage: -1,
+        lastUrl: '',
+        nowTypeKey: -1,
     };
 
     componentDidMount() {
@@ -35,12 +41,17 @@ export default class ShortVideo extends PureComponent {
                 Api.getShortVideoListById(defalutKey, 10, 1, (e) => {
                     if (e.data.length > 0) {
                         this.setState({
-                            headerBackTitle: e.data
+                            shortVideoList: e.data,
+                            playingIndex: -1,
+                            nowPage: e.current_page,
+                            lastPage: e.last_page,
+                            nowTypeKey: defalutKey,
+                            lastUrl: e.last_page_url,
                         });
                     } else {
                         //mock数据
                         this.setState({
-                            headerBackTitle: shortVideoList
+                            shortVideoList: shortVideoList
                         });
                     }
                 });
@@ -49,21 +60,108 @@ export default class ShortVideo extends PureComponent {
     }
 
     _classifyChanged = (classify) => {
-        console.log('type changed');
+        let classifyId = reg.typeMap2Id[classify];
+        Api.getShortVideoListById(classifyId, 10, 1, (e) => {
+            if (e.data.length > 0) {
+                this.setState({
+                    shortVideoList: e.data,
+                    playingIndex: -1,
+                    nowPage: e.current_page,
+                    lastPage: e.last_page,
+                    nowTypeKey: classifyId,
+                    lastUrl: e.last_page_url,
+                });
+            }
+        });
+    }
+
+    _flatListRefresh = () => {
+        this.setState({
+            playingIndex: -1
+        });
+        Api.getShortVideoListById(this.state.nowTypeKey, 10, 1, (e) => {
+            if (e.data.length > 0) {
+                this.setState({
+                    shortVideoList: e.data,
+                    playingIndex: -1,
+                    nowPage: e.current_page,
+                    lastPage: e.last_page,
+                    lastUrl: e.last_page_url,
+                });
+            } else {
+                //mock数据
+                this.setState({
+                    shortVideoList: shortVideoList
+                });
+            }
+        });
+    }
+
+    _getNextPageData = () => {
+        if (this.state.nowPage !== this.state.lastPage) {
+            this.setState({
+                playingIndex: -1
+            });
+            Api.getShortVideoListById(this.state.nowTypeKey, 10, this.state.lastPage, (e) => {
+                if (e.data.length > 0) {
+                    this.setState({
+                        shortVideoList: e.data,
+                        playingIndex: -1,
+                        nowPage: e.current_page,
+                        lastPage: e.last_page,
+                        lastUrl: e.last_page_url,
+                    });
+                } else {
+                    //mock数据
+                    this.setState({
+                        shortVideoList: shortVideoList
+                    });
+                }
+            });
+        }
+    }
+
+    _palyPress = (index) => {
+        this.setState({
+            playingIndex: index
+        });
+    }
+
+    _willBlur = () => {
+        this.setState({
+            playingIndex: -1
+        });
     }
 
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
+                <NavigationEvents
+                    onWillBlur={this._willBlur}
+                />
                 <TabBar style={{ width: Sizes.DEVICE_WIDTH }} tabNames={this.state.type} tabTap={this._classifyChanged} />
                 <View style={{ flex: 1 }}>
-                    {false && this.state.shortVideoList && <FlatList
-                        data={this.state.shortVideoList}
-                        renderItem={({ item }) => {
-
-                        }}
-                    />}
-                    <ShortVideoItem title='测试一哈哈' />
+                    {this.state.shortVideoList &&
+                        <FlatList
+                            onRefresh={this._flatListRefresh}
+                            refreshing={false}
+                            onEndReached={this._getNextPageData}
+                            onEndReachedThreshold={0.1}
+                            data={this.state.shortVideoList}
+                            extraData={this.state}
+                            renderItem={
+                                ({ item, index }) =>
+                                    <ShortVideoItem
+                                        playPress={() => this._palyPress(index)}
+                                        nowPlaying={this.state.playingIndex}
+                                        index={index}
+                                        title={item.title}
+                                        videoUrl={item.play_url}
+                                        coverUrl={item.cover_path}
+                                        playTimes={item.play_count_real}
+                                    />
+                            }
+                        />}
                 </View>
             </SafeAreaView>
         );

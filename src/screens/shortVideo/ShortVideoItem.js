@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, TouchableHighlight, Image } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import XSVideo from '../videoModel/videoComponent/video';
+import ShortVideoPlayer from './ShortVideoPlayer';
 
 const Header = (props) => {
     return (
@@ -30,8 +30,15 @@ const Footer = (props) => {
     );
 }
 
-class VideoMoudle extends PureComponent {
-
+const Cover = (props) => {
+    return (
+        <View style={styles.coverContainer}>
+            <Image style={styles.coverContainer} source={{ uri: `${props.source}` }} />
+            <TouchableHighlight style={styles.coverBtn} onPress={props.playPress}>
+                <Icon name='play' size={30} color='#909090' />
+            </TouchableHighlight>
+        </View>
+    );
 }
 
 export default class ShortVideoItem extends PureComponent {
@@ -44,12 +51,23 @@ export default class ShortVideoItem extends PureComponent {
         console.log('go to detail');
     }
 
+    _toPlay = () => {
+        if (this.props.playPress) {
+            this.props.playPress();
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Header text={this.props.title} toDetail={this._toDetail} />
-                <View style={{ flex: 1 }} />
-                <Footer times='0' toDetail={this._toDetail} toShare={this._toShare} />
+                <View style={{ flex: 1 }} >
+                    {this.props.nowPlaying === this.props.index ?
+                        <ShortVideoPlayer videoUrl={this.props.videoUrl} /> :
+                        <Cover playPress={this._toPlay} source={this.props.coverUrl} />
+                    }
+                </View>
+                <Footer times={this.props.playTimes} toDetail={this._toDetail} toShare={this._toShare} />
             </View>
         );
     }
@@ -88,6 +106,17 @@ const styles = StyleSheet.create({
         width: 22,
         top: 2,
         right: 20
+    },
+    coverContainer: {
+        height: 200,
+        width: Sizes.DEVICE_WIDTH
+    },
+    coverBtn: {
+        position: 'absolute',
+        height: 30,
+        width: 30,
+        top: 85,
+        left: (Sizes.DEVICE_WIDTH - 30) / 2
     },
     container: {
         height: 268,
