@@ -405,7 +405,7 @@ class api {
     }
 
     getNewSubjectList(page, limit, onSuccess, onError) {
-        const url = `/video/special/list?page=${page}&limit=${limit}`;
+        const url = `/api/video/special/list?page=${page}&limit=${limit}`;
         this.getFetch(url, onSuccess, onError);
     }
 
