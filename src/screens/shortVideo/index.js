@@ -104,12 +104,15 @@ export default class ShortVideo extends PureComponent {
             });
             Api.getShortVideoListById(this.state.nowTypeKey, 10, this.state.lastPage, (e) => {
                 if (e.data.length > 0) {
-                    this.setState({
-                        shortVideoList: e.data,
-                        playingIndex: -1,
-                        nowPage: e.current_page,
-                        lastPage: e.last_page,
-                        lastUrl: e.last_page_url,
+                    this.setState((preState, props) => {
+                        let newList = preState.shortVideoList.concat(e.data);
+                        return {
+                            shortVideoList: newList,
+                            playingIndex: -1,
+                            nowPage: e.current_page,
+                            lastPage: e.last_page,
+                            lastUrl: e.last_page_url,
+                        }
                     });
                 } else {
                     //mock数据
