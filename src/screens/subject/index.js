@@ -6,7 +6,9 @@ import * as Sizes from '../../global/Sizes';
 
 class Item extends PureComponent {
     _itemPress = () => {
-        console.log('11223345');
+        if (typeof this.props.onPress === 'function') {
+            this.props.onPress(this.props.id);
+        }
     }
 
     render() {
@@ -26,6 +28,7 @@ export default class SubjectScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             title: In18.SUBJECT_PAGE_TITLE,  //header标题
+            headerBackTitle: null
         }
     };
 
@@ -93,6 +96,10 @@ export default class SubjectScreen extends PureComponent {
         }
     }
 
+    _itemOnPress = (id) => {
+        this.props.navigation.navigate('SubjectDetailScreen', { subjectId: id });
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1 }}>
@@ -104,7 +111,7 @@ export default class SubjectScreen extends PureComponent {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ alignSelf: 'center' }}
                     data={this.state.listData}
-                    renderItem={({ item }) => <Item title={item.title} id={item.id} url={item.cover_img} />}
+                    renderItem={({ item }) => <Item onPress={this._itemOnPress} title={item.title} id={item.id} url={item.cover_img} />}
                     ItemSeparatorComponent={() => <View style={{ height: 10, width: Sizes.DEVICE_WIDTH - 20 }} />}
                 />
             </SafeAreaView>

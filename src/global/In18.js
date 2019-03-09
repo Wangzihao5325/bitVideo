@@ -1,7 +1,12 @@
 const MAIN_PAGE_TITLE = '首页';
+
 const SUBJECT_PAGE_TITLE = '专题';
+const SUBJECT_PAGE_DETAIL_TITLE = '专题详情';
+
 const SHORT_VIDEO_TITLE = '热点';
+
 const TASK_PAGE_TITLE = '任务';
+
 const MINE_PAGE_TITLE = '我的';
 
 const ALL_TEXT = '全部';
@@ -138,7 +143,10 @@ const SHARE_DIALOG_TITLE = '分享爱逗到';
 
 export {
     MAIN_PAGE_TITLE,
+
     SUBJECT_PAGE_TITLE,
+    SUBJECT_PAGE_DETAIL_TITLE,
+
     SHORT_VIDEO_TITLE,
     TASK_PAGE_TITLE,
     MINE_PAGE_TITLE,
