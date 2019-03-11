@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, View, StyleSheet, Image, Text } from 'react-native';
+import { SafeAreaView, View, StyleSheet, Image, Text, FlatList } from 'react-native';
 import * as In18 from '../../global/In18';
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
+
+import VideoAvater from '../../components/imageBtn/VideoAvater';
 
 class Header extends PureComponent {
     render() {
@@ -28,7 +30,8 @@ export default class SubjectDetailScreen extends PureComponent {
 
     state = {
         introImage: '',
-        intro: ''
+        intro: '',
+        dataList: [],
     }
 
     componentDidMount() {
@@ -44,14 +47,29 @@ export default class SubjectDetailScreen extends PureComponent {
         if (subjectId !== 'undefined_id') {
             Api.getNewSubjectDetail(subjectId, 1, 15, (e) => {
                 console.log(e);
+                this.setState({
+                    dataList: e.data
+                });
             })
         }
+    }
+
+    _videoAvaterOnPress = (id) => {
+        //this.props.navigation.navigate('VideoModel', { videoId: id });
     }
 
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: 'rgb(250,250,250)' }}>
                 {this.state.introImage !== '' && <Header source={this.state.introImage} text={this.state.intro} />}
+                <FlatList
+                    contentContainerStyle={{ alignItems: 'center' }}
+                    horizontal={false}
+                    numColumns={3}
+                    data={this.state.dataList}
+                    columnWrapperStyle={{ marginTop: 10 }}
+                    renderItem={({ item }) => <VideoAvater isVertical={true} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
+                />
             </SafeAreaView>
         );
     }
