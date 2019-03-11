@@ -7,7 +7,7 @@ import * as Sizes from '../../global/Sizes';
 class Item extends PureComponent {
     _itemPress = () => {
         if (typeof this.props.onPress === 'function') {
-            this.props.onPress(this.props.id);
+            this.props.onPress(this.props.id, this.props.introImage, this.props.intro, this.props.title);
         }
     }
 
@@ -45,6 +45,7 @@ export default class SubjectScreen extends PureComponent {
         });
         Api.getNewSubjectList(1, 10, (e, message, code) => {
             if (e.data.length > 0) {
+                console.log(e);
                 this.setState({
                     listData: e.data,
                     nowPage: e.current_page,
@@ -96,8 +97,8 @@ export default class SubjectScreen extends PureComponent {
         }
     }
 
-    _itemOnPress = (id) => {
-        this.props.navigation.navigate('SubjectDetailScreen', { subjectId: id });
+    _itemOnPress = (id, introImage, intro, title) => {
+        this.props.navigation.navigate('SubjectDetailScreen', { subjectId: id, introImage: introImage, intro: intro, title: title });
     }
 
     render() {
@@ -111,7 +112,7 @@ export default class SubjectScreen extends PureComponent {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ alignSelf: 'center' }}
                     data={this.state.listData}
-                    renderItem={({ item }) => <Item onPress={this._itemOnPress} title={item.title} id={item.id} url={item.cover_img} />}
+                    renderItem={({ item }) => <Item onPress={this._itemOnPress} title={item.title} id={item.id} url={item.cover_img} introImage={item.intro_img} intro={item.intro} />}
                     ItemSeparatorComponent={() => <View style={{ height: 10, width: Sizes.DEVICE_WIDTH - 20 }} />}
                 />
             </SafeAreaView>

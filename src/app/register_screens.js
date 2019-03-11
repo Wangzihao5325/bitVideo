@@ -45,7 +45,7 @@ MainStack.navigationOptions = ({ navigation }) => {
 let ShortVideoStack = createStackNavigator(
     {
         ShortVideoScreen,
-        ShortVideoDetail
+        ShortVideoDetail,
     },
     {
         navigationOptions: { gesturesEnabled: false }

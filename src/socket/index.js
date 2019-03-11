@@ -409,6 +409,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getNewSubjectDetail(id, page, limit, onSuccess, onError) {
+        const url = `/api/video/special/info?special_id=${id}&page=${page}&limit=${limit}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();
