@@ -90,11 +90,15 @@ class GUNDONG extends PureComponent {
         }
     }
 
+    _showMore = () => {
+        this.props.navi.navigate('ViewModuleMoreScreen', { moduleId: this.props.moduleId, title: this.props.title });
+    }
+
     render() {
         let flatlistStyle = this.props.isVertical ? { height: Sizes.IMAGE_AVATER_VER_HEIGHT + 50, width: Sizes.DEVICE_WIDTH } : {};
         return (
             <View style={{ alignItems: 'center' }}>
-                <TitleHeader style={{ marginTop: 10, marginBottom: 10 }} imageSource={require('../../image/main/global_movie.png')} title={this.props.title} btnTitle={In18.MORE_TEXT} />
+                <TitleHeader showMore={this._showMore} style={{ marginTop: 10, marginBottom: 10 }} imageSource={require('../../image/main/global_movie.png')} title={this.props.title} btnTitle={In18.MORE_TEXT} />
                 <FlatList
                     style={flatlistStyle}
                     horizontal={true}

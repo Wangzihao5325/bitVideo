@@ -54,7 +54,7 @@ export default class SubjectDetailScreen extends PureComponent {
                 this.setState({
                     dataList: e.data,
                     nowPage: e.current_page,
-                    lastPage: last_page
+                    lastPage: e.last_page
                 });
             });
         }
@@ -69,7 +69,7 @@ export default class SubjectDetailScreen extends PureComponent {
             this.setState({
                 dataList: e.data,
                 nowPage: e.current_page,
-                lastPage: last_page
+                lastPage: e.last_page
             });
         });
     }
@@ -77,14 +77,16 @@ export default class SubjectDetailScreen extends PureComponent {
     _onEndReached = () => {
         if (this.state.nowPage < this.state.lastPage) {
             Api.getNewSubjectDetail(this.state.id, this.state.nowPage + 1, 15, (e) => {
-                this.setState((preState) => {
-                    let newDataList = preState.dataList.concat(e.data);
-                    return {
-                        dataList: newDataList,
-                        nowPage: e.current_page,
-                        lastPage: last_page
-                    }
-                });
+                if (e) {
+                    this.setState((preState) => {
+                        let newDataList = preState.dataList.concat(e.data);
+                        return {
+                            dataList: newDataList,
+                            nowPage: e.current_page,
+                            lastPage: e.last_page
+                        }
+                    });
+                }
             });
         }
     }
