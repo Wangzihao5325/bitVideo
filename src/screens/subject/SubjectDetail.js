@@ -50,7 +50,6 @@ export default class SubjectDetailScreen extends PureComponent {
         }
         if (subjectId !== 'undefined_id') {
             Api.getNewSubjectDetail(subjectId, 1, 15, (e) => {
-                console.log(e);
                 this.setState({
                     dataList: e.data,
                     nowPage: e.current_page,

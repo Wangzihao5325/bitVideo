@@ -19,6 +19,8 @@ export default class IconBtn extends PureComponent {
                 underlayColor='transparent'
             >
                 <Image
+                    style={styles.container}
+                    resizeMode='contain'
                     style={[styles.container, this.props.imageStyle]}
                     source={this.props.source}
                 />
