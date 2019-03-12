@@ -32,6 +32,9 @@ export default class SubjectDetailScreen extends PureComponent {
         introImage: '',
         intro: '',
         dataList: [],
+        nowPage: -1,
+        lastPage: -1,
+        id: -1,
     }
 
     componentDidMount() {
@@ -41,15 +44,19 @@ export default class SubjectDetailScreen extends PureComponent {
         if (introImage !== 'undefined_url' && intro !== 'undefined_text') {
             this.setState({
                 introImage: introImage,
-                intro: intro
+                intro: intro,
+                id: subjectId
             });
         }
         if (subjectId !== 'undefined_id') {
             Api.getNewSubjectDetail(subjectId, 1, 15, (e) => {
+                console.log(e);
                 this.setState({
-                    dataList: e.data
+                    dataList: e.data,
+                    nowPage: e.current_page,
+                    lastPage: last_page
                 });
-            })
+            });
         }
     }
 
@@ -57,11 +64,40 @@ export default class SubjectDetailScreen extends PureComponent {
         this.props.navigation.navigate('VideoModel', { videoId: id });
     }
 
+    _onRefresh = () => {
+        Api.getNewSubjectDetail(this.state.id, 1, 15, (e) => {
+            this.setState({
+                dataList: e.data,
+                nowPage: e.current_page,
+                lastPage: last_page
+            });
+        });
+    }
+
+    _onEndReached = () => {
+        if (this.state.nowPage < this.state.lastPage) {
+            Api.getNewSubjectDetail(this.state.id, this.state.nowPage + 1, 15, (e) => {
+                this.setState((preState) => {
+                    let newDataList = preState.dataList.concat(e.data);
+                    return {
+                        dataList: newDataList,
+                        nowPage: e.current_page,
+                        lastPage: last_page
+                    }
+                });
+            });
+        }
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: 'rgb(250,250,250)' }}>
                 {this.state.introImage !== '' && <Header source={this.state.introImage} text={this.state.intro} />}
                 <FlatList
+                    onRefresh={this._onRefresh}
+                    refreshing={false}
+                    onEndReached={this._onEndReached}
+                    onEndReachedThreshold={0.1}
                     contentContainerStyle={{ alignItems: 'center' }}
                     horizontal={false}
                     numColumns={3}
