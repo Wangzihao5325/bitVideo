@@ -7,15 +7,6 @@ import * as MathUtils from '../../global/utils/MathUtil';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RootPlayer from '../../components/player/RootPlayer';
 
-const Header = (props) => {
-    return (
-        <TouchableHighlight style={styles.headerContainer} onPress={props.toDetail} underlayColor='transparent'>
-            <View style={styles.headerContainer}>
-                <Text style={styles.headerText} numberOfLines={2} ellipsizeMode='tail'>{props.text}</Text>
-            </View>
-        </TouchableHighlight>
-    );
-}
 const Footer = (props) => {
     return (
         <View style={styles.footerContainer}>
@@ -69,11 +60,9 @@ export default class ShortVideoItem extends PureComponent {
                 <View style={{ flex: 1 }} >
                     {this.props.nowPlaying === this.props.index ?
                         <RootPlayer videoUrl={this.props.videoUrl} disableBack={true} /> :
-                        <Cover title={this.props.title} coverPress={this._toDetail} playPress={this._toPlay} source={this.props.coverUrl} />
+                        <Cover title={this.props.title} coverPress={this._toPlay} playPress={this._toPlay} source={this.props.coverUrl} />
                     }
                 </View>
-                {/* <Header text={this.props.title} toDetail={this._toDetail} />
-                <Footer times={this.props.playTimes} toDetail={this._toDetail} toShare={this._toShare} /> */}
                 <Footer times={this.props.playTimes} toDetail={this._toDetail} toShare={this._toShare} />
             </View>
         );
@@ -81,20 +70,8 @@ export default class ShortVideoItem extends PureComponent {
 }
 
 const styles = StyleSheet.create({
-    headerContainer: {
-        height: 42,
-        width: Sizes.DEVICE_WIDTH,
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    headerText: {
-        fontSize: Platform.OS === 'ios' ? 16 : 15,
-        color: 'gray',
-        marginHorizontal: 10,
-        lineHeight: 16
-    },
     footerContainer: {
-        height: 68,//26
+        height: 48,//26
         width: Sizes.DEVICE_WIDTH,
     },
     footerTextContainer: {
@@ -111,8 +88,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: 22,
         width: 22,
-        top: 2,
-        right: 20
+        top: 13,
+        right: 15
     },
     coverContainer: {
         height: 200,
@@ -137,7 +114,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     container: {
-        height: 268,
+        height: 248,
         width: Sizes.DEVICE_WIDTH,
         borderBottomColor: '#909090',
         borderBottomWidth: StyleSheet.hairlineWidth,

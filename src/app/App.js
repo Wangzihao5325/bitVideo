@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, Text } from 'react-native';
+import { StatusBar, Platform, View, Image, Text } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Provider } from 'react-redux';
 import store from '../store/index';
@@ -151,7 +151,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <StatusBar translucent={true} barStyle='light-content' />
+        {Platform.OS === 'ios' && <StatusBar translucent={true} barStyle='light-content' />}
         <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
       </Provider>
