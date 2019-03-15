@@ -4,6 +4,7 @@ import { NavigationEvents } from 'react-navigation';
 import Api from '../../socket/index';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
+import * as Colors from '../../global/Colors';
 
 import TabBar from '../../components/tabBar/index';
 
@@ -168,39 +169,41 @@ export default class ShortVideo extends PureComponent {
 
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <NavigationEvents
-                    onWillBlur={this._willBlur}
-                />
-                <TabBar style={{ width: Sizes.DEVICE_WIDTH }} tabNames={this.state.type} tabTap={this._classifyChanged} />
-                <View style={{ flex: 1 }}>
-                    {this.state.shortVideoList &&
-                        <FlatList
-                            showsVerticalScrollIndicator={false}
-                            onRefresh={this._flatListRefresh}
-                            refreshing={false}
-                            onEndReached={this._getNextPageData}
-                            onEndReachedThreshold={0.1}
-                            data={this.state.shortVideoList}
-                            extraData={this.state}
-                            renderItem={
-                                ({ item, index }) =>
-                                    <ShortVideoItem
-                                        share={this._toShare}
-                                        detail={this._toDetail}
-                                        playPress={() => this._palyPress(index)}
-                                        nowPlaying={this.state.playingIndex}
-                                        index={index}
-                                        title={item.title}
-                                        videoUrl={item.play_url}
-                                        coverUrl={item.cover_path}
-                                        playTimes={item.play_count_real}
-                                        videoId={item.id}
-                                    />
-                            }
-                        />}
-                </View>
-            </SafeAreaView>
+            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <SafeAreaView style={{ flex: 1 }}>
+                    <NavigationEvents
+                        onWillBlur={this._willBlur}
+                    />
+                    <TabBar style={{ width: Sizes.DEVICE_WIDTH }} tabNames={this.state.type} tabTap={this._classifyChanged} />
+                    <View style={{ flex: 1 }}>
+                        {this.state.shortVideoList &&
+                            <FlatList
+                                showsVerticalScrollIndicator={false}
+                                onRefresh={this._flatListRefresh}
+                                refreshing={false}
+                                onEndReached={this._getNextPageData}
+                                onEndReachedThreshold={0.1}
+                                data={this.state.shortVideoList}
+                                extraData={this.state}
+                                renderItem={
+                                    ({ item, index }) =>
+                                        <ShortVideoItem
+                                            share={this._toShare}
+                                            detail={this._toDetail}
+                                            playPress={() => this._palyPress(index)}
+                                            nowPlaying={this.state.playingIndex}
+                                            index={index}
+                                            title={item.title}
+                                            videoUrl={item.play_url}
+                                            coverUrl={item.cover_path}
+                                            playTimes={item.play_count_real}
+                                            videoId={item.id}
+                                        />
+                                }
+                            />}
+                    </View>
+                </SafeAreaView>
+            </View>
         );
     }
 }

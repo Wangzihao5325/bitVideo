@@ -5,9 +5,9 @@ import PropsTypes from 'prop-types';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const THEME_COLOR = 'transparent';
 const CONTAINER_BORDER_COLOR = '#909090';
-const NORMAL_TEXT_COLOR = '#909090';
-const ITEM_HIGHLIGHT_COLOR = 'rgb(0,122,204)';
-const ITEM_MARGIN_HOR = 5;
+const NORMAL_TEXT_COLOR = 'white';
+const ITEM_HIGHLIGHT_COLOR = 'rgb(254,163,91)';
+const ITEM_MARGIN_HOR = 10;
 const ITEM_MARGIN_VER = 2;
 
 class Item extends PureComponent {
@@ -106,7 +106,8 @@ const styles = StyleSheet.create({
         marginHorizontal: ITEM_MARGIN_HOR
     },
     itemText: {
-        color: NORMAL_TEXT_COLOR
+        color: NORMAL_TEXT_COLOR,
+        fontSize: 18
     },
     itemContainerHighlight: {
         marginBottom: ITEM_MARGIN_VER - 2,
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
     },
     itemTextHighlight: {
         color: ITEM_HIGHLIGHT_COLOR,
-        fontSize: 18
+        fontSize: 20,
+        fontWeight: 'bold'
     },
 });

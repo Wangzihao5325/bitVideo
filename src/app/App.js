@@ -151,7 +151,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <StatusBar barStyle="default" />
+        <StatusBar translucent={true} barStyle='light-content' />
         <SplashModel source={{ uri: this.state.uri }} />
         <AppContainer />
       </Provider>
