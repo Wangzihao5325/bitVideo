@@ -18,9 +18,12 @@ import InputBottom from './videoComponent/inputBottom';
 import GuessLike from './videoComponent/guessLike';
 import AmazingComment from './videoComponent/amazingComment';
 
+// import IntroHalfModal from './HalfModal';
+
 export default class VideoModel extends PureComponent {
     state = {
-        detailInfoIsVisable: false
+        detailInfoIsVisable: false,
+        chooseEpiscodeIsVisable: false,
     }
 
     componentDidMount() {
@@ -29,6 +32,7 @@ export default class VideoModel extends PureComponent {
             //获取video信息
             Api.getVideoInfo(videoId, (result, code, message) => {
                 if (result) {
+                    console.log(result);
                     store.dispatch(set_video_full_data(result));
                 } else {
                     console.log(message);
@@ -61,8 +65,8 @@ export default class VideoModel extends PureComponent {
         this.setState({ detailInfoIsVisable: true });
     }
 
-    _introModelClose = () => {
-        this.setState({ detailInfoIsVisable: false });
+    _chooseEpiscodeModelOpen = () => {
+        this.setState({ chooseEpiscodeIsVisable: true });
     }
 
     render() {
@@ -87,21 +91,29 @@ export default class VideoModel extends PureComponent {
                     <UsualInfoTab />
                     <CommentTab />
                     <SourceTab />
-                    <EpiscodeTab />
+                    <EpiscodeTab toChooseEpiscode={this._chooseEpiscodeModelOpen} />
                     <GuessLike />
                     <AmazingComment />
                 </ScrollView>
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
                     <InputBottom />
                 </KeyboardAvoidingView>
-                <Modal
+                {/* <Modal
                     backdropColor='transparent'
                     isVisible={this.state.detailInfoIsVisable}
                     onBackdropPress={() => this.setState({ detailInfoIsVisable: false })}
                     style={styles.bottomModal}
                 >
-                    <View style={[semiModalStyle, { backgroundColor: 'white' }]}><Text>half model</Text></View>
-                </Modal>
+                    <View style={[semiModalStyle, { backgroundColor: 'white' }]}><Text>half model1</Text></View>
+                </Modal> */}
+                {/* <Modal
+                    backdropColor='transparent'
+                    isVisible={this.state.chooseEpiscodeIsVisable}
+                    onBackdropPress={() => this.setState({ chooseEpiscodeIsVisable: false })}
+                    style={styles.bottomModal}
+                >
+                    <View style={[semiModalStyle, { backgroundColor: 'white' }]}><Text>half model2</Text></View>
+                </Modal> */}
             </SafeAreaView>
         );
     }

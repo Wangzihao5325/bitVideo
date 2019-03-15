@@ -94,6 +94,12 @@ class EpiscodeTab extends PureComponent {
         console.log('go to select episode!');
     }
 
+    _chooseEpiscode = () => {
+        if (typeof this.props.toChooseEpiscode === 'function') {
+            this.props.toChooseEpiscode();
+        }
+    }
+
     render() {
         return (
             <View style={{ marginTop: 10 }}>
@@ -103,7 +109,7 @@ class EpiscodeTab extends PureComponent {
                     </View>
                     <View style={styles.flexView1}>
                         <Text style={styles.introText}>{`${In18.HOLE_TEXT}${this.props.totalEpisodeNum}${In18.EPISODE_TEXT}`}</Text>
-                        <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this.moreIntro} source={require('../../../image/usual/arrow_right_circle.png')} />
+                        <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this._chooseEpiscode} source={require('../../../image/usual/arrow_right_circle.png')} />
                     </View>
                 </View>
                 {
