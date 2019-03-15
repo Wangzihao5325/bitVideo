@@ -175,7 +175,7 @@ export default class ShortVideo extends PureComponent {
                         onWillBlur={this._willBlur}
                     />
                     <TabBar style={{ width: Sizes.DEVICE_WIDTH }} tabNames={this.state.type} tabTap={this._classifyChanged} />
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, marginTop: 10 }}>
                         {this.state.shortVideoList &&
                             <FlatList
                                 showsVerticalScrollIndicator={false}

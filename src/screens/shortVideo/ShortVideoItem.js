@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight, Image, Platform } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
+import * as MathUtils from '../../global/utils/MathUtil';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RootPlayer from '../../components/player/RootPlayer';
@@ -18,11 +19,9 @@ const Header = (props) => {
 const Footer = (props) => {
     return (
         <View style={styles.footerContainer}>
-            <TouchableHighlight style={styles.footerTextContainer} underlayColor='transparent' onPress={props.toDetail}>
-                <View style={styles.footerTextContainer}>
-                    <Text style={styles.footerText}>{`${props.times}${In18.TIMES_PLAY}`}</Text>
-                </View>
-            </TouchableHighlight>
+            <View style={styles.footerTextContainer}>
+                <Text style={styles.footerText}>{`${MathUtils.playCountTransform(props.times)}${In18.TIMES_PLAY}`}</Text>
+            </View>
             <TouchableHighlight style={styles.footerShareBtn} underlayColor='transparent' onPress={props.toShare}>
                 <Icon name='share-alt' size={22} color='#909090' />
             </TouchableHighlight>
@@ -39,6 +38,7 @@ const Cover = (props) => {
             <TouchableHighlight style={styles.coverBtn} onPress={props.playPress} underlayColor='transparent'>
                 <Icon name='play' size={30} color='#909090' />
             </TouchableHighlight>
+            <Text style={styles.coverTitle}>{props.title}</Text>
         </View>
     );
 }
@@ -66,13 +66,14 @@ export default class ShortVideoItem extends PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                <Header text={this.props.title} toDetail={this._toDetail} />
                 <View style={{ flex: 1 }} >
                     {this.props.nowPlaying === this.props.index ?
                         <RootPlayer videoUrl={this.props.videoUrl} disableBack={true} /> :
-                        <Cover coverPress={this._toDetail} playPress={this._toPlay} source={this.props.coverUrl} />
+                        <Cover title={this.props.title} coverPress={this._toDetail} playPress={this._toPlay} source={this.props.coverUrl} />
                     }
                 </View>
+                {/* <Header text={this.props.title} toDetail={this._toDetail} />
+                <Footer times={this.props.playTimes} toDetail={this._toDetail} toShare={this._toShare} /> */}
                 <Footer times={this.props.playTimes} toDetail={this._toDetail} toShare={this._toShare} />
             </View>
         );
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
         lineHeight: 16
     },
     footerContainer: {
-        height: 26,
+        height: 68,//26
         width: Sizes.DEVICE_WIDTH,
     },
     footerTextContainer: {
@@ -101,10 +102,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     footerText: {
-        fontSize: Platform.OS === 'ios' ? 12 : 11,
-        lineHeight: 12,
-        marginHorizontal: 10,
-        color: 'gray',
+        fontSize: 14,
+        color: 'rgb(254,163,91)',
+        marginLeft: 15,
+        fontWeight: '500'
     },
     footerShareBtn: {
         position: 'absolute',
@@ -123,6 +124,17 @@ const styles = StyleSheet.create({
         width: 30,
         top: 85,
         left: (Sizes.DEVICE_WIDTH - 30) / 2
+    },
+    coverTitle: {
+        position: 'absolute',
+        top: 7,
+        width: 0,
+        height: 36,
+        width: Sizes.DEVICE_WIDTH,
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     container: {
         height: 268,
