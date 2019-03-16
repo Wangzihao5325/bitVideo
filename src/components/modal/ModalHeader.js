@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import * as Colors from '../../global/Colors';
 
 import VectorIconBtn from '../imageBtn/VectorIconBtn';
 import IconBtn from '../imageBtn/IconBtn';
@@ -23,7 +24,7 @@ export default class ModalHeader extends PureComponent {
                     style={{ marginLeft: 15 }}
                     size={21}
                     name='chevron-left'
-                    color='rgb(73,114,255)'
+                    color={Colors.HEADER_TITLE_COLOR}
                     onPress={this.props.goBack}
                 />
                 <Text style={styles.headerTitle}>{this.props.title}</Text>
@@ -37,21 +38,22 @@ export default class ModalHeader extends PureComponent {
 }
 const styles = StyleSheet.create({
     headerContainer: {
-        marginTop: 13,
-        height: 25,
+        height: 38,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderBottomColor: 'rgba(153,153,153,0.2)',
+        borderBottomWidth: StyleSheet.hairlineWidth,
     },
     headerTitle: {
         fontSize: 18,
-        color: 'rgb(32,32,32)'
+        color: Colors.HEADER_TITLE_COLOR,
     },
     RightBtnText: {
         fontSize: 18,
-        color: 'rgb(32,32,32)',
+        color: Colors.HEADER_TITLE_COLOR,
     },
     marginStyle: {
         marginRight: 15,

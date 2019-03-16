@@ -1,9 +1,9 @@
 const MAIN_PAGE_TITLE = '首页';
 
-const SUBJECT_PAGE_TITLE = '专题';
+const SUBJECT_PAGE_TITLE = '发现';
 const SUBJECT_PAGE_DETAIL_TITLE = '专题详情';
 
-const SHORT_VIDEO_TITLE = '热点';
+const SHORT_VIDEO_TITLE = '火辣';
 
 const TASK_PAGE_TITLE = '任务';
 
@@ -140,6 +140,10 @@ const SHARE_URL = 'https://baidu.com';
 const SHARE_TITLE = 'title';
 const SHARE_DIALOG_TITLE = '分享爱逗到';
 
+//播放历史
+const SELECT_ALL = '全选';
+const DELETE = '删除';
+
 
 export {
     MAIN_PAGE_TITLE,
@@ -264,4 +268,7 @@ export {
     SHARE_URL,
     SHARE_TITLE,
     SHARE_DIALOG_TITLE,
+
+    SELECT_ALL,
+    DELETE,
 };

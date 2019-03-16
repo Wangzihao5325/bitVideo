@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
+import * as Colors from '../../global/Colors';
 
 class Select extends PureComponent {
     render() {
@@ -115,21 +116,22 @@ const styles = StyleSheet.create({
     imageStyle: {
         height: 114,
         width: 88,
-        marginLeft: 14
+        marginLeft: 14,
+        borderRadius: 5
     },
     infoContainer: {
         flex: 1
     },
     titleText: {
         fontSize: 16,
-        color: 'rgb(54,54,54)',
+        color: Colors.DEFAULT_TEXT_COLOR,
         marginLeft: 10,
         fontWeight: 'bold',
-        marginTop: 16
+        marginTop: 16,
     },
     introText: {
         fontSize: 12,
-        color: 'rgb(151,151,151)',
+        color: Colors.DEFAULT_TEXT_COLOR,
         marginTop: 15,
         marginRight: 20,
         height: 30,
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
     },
     directorText: {
         fontSize: 12,
-        color: 'rgb(151,151,151)',
+        color: Colors.DEFAULT_TEXT_COLOR,
         marginTop: 8,
         marginLeft: 10
     },

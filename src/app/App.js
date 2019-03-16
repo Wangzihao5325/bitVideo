@@ -33,8 +33,8 @@ import SplashModel from '../components/splashModal/index';
 const Router = createBottomTabNavigator(
   {
     MainStack,
-    ShortVideoStack,
     SubjectStack,
+    ShortVideoStack,
     //TaskStack,
     MineStack,
   },
