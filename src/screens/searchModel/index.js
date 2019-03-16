@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import store from '../../store/index';
 import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data, reset_search_result_data } from '../../store/actions/searchHistoryAction';
 import * as In18 from '../../global/In18';
+import * as Colors from '../../global/Colors';
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 import VideoDetailInfo from '../../components/imageBtn/VideoDetailInfo';
@@ -45,7 +46,7 @@ class SearchHeader extends PureComponent {
             <View style={styles.headerContainer}>
                 <View style={styles.inputContainer}>
                     <Image style={styles.headerImage} source={require('../../image/usual/search.png')} />
-                    <TextInput onChangeText={this._textChange} onEndEditing={this._endEdit} clearButtonMode='always' returnKeyType='search' style={styles.headerTextInput} placeholder={In18.SEARCH_TITLE} placeholderTextColor='rgb(151,151,151)' />
+                    <TextInput onChangeText={this._textChange} onEndEditing={this._endEdit} clearButtonMode='always' returnKeyType='search' style={styles.headerTextInput} placeholder={In18.SEARCH_TITLE} placeholderTextColor='rgb(178,178,178)' />
                 </View>
                 <Text style={styles.backText} onPress={this.goBack}>{In18.CANCEL_TEXT}</Text>
             </View>
@@ -112,8 +113,8 @@ class RecommendIndex extends PureComponent {
                 indexTextStyle = { color: 'white' };
                 break;
             default:
-                indexStyle = { backgroundColor: 'white', borderColor: 'rgb(73,114,255)', borderWidth: 1 };
-                indexTextStyle = { color: 'rgb(73,114,255)' };
+                indexStyle = { backgroundColor: Colors.SCREEN_BGCOLOR, borderColor: 'rgb(255,178,117)', borderWidth: 1 };
+                indexTextStyle = { color: 'rgb(255,178,117)' };
                 break;
         }
         return (
@@ -223,13 +224,15 @@ class SearchModel extends PureComponent {
 
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <SearchHeader />
-                {!this.props.isResult && this.props.isShow && <SearchHistory data={this.props.data} />}
-                {!this.props.isResult && <SearchRecommend />}
-                {this.props.isResult && this.props.searchresult.length > 0 && < ResultList data={this.props.searchresult} />}
-                {this.props.isResult && this.props.searchresult.length == 0 && <Text style={{ alignSelf: 'center', marginTop: 40 }}>{In18.NO_SEARCH_RESULT}</Text>}
-            </SafeAreaView>
+            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <SafeAreaView style={{ flex: 1 }}>
+                    <SearchHeader />
+                    {!this.props.isResult && this.props.isShow && <SearchHistory data={this.props.data} />}
+                    {!this.props.isResult && <SearchRecommend />}
+                    {this.props.isResult && this.props.searchresult.length > 0 && < ResultList data={this.props.searchresult} />}
+                    {this.props.isResult && this.props.searchresult.length == 0 && <Text style={{ alignSelf: 'center', marginTop: 40 }}>{In18.NO_SEARCH_RESULT}</Text>}
+                </SafeAreaView>
+            </View>
         );
     }
 }
@@ -251,14 +254,12 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderBottomColor: 'rgba(248,248,248,0.82)',
-        borderBottomWidth: 2
     },
     inputContainer: {
         height: 38,
         width: 261,
         borderRadius: 14,
-        backgroundColor: 'rgb(247,247,247)',
+        backgroundColor: 'rgb(51,57,62)',
         marginLeft: 29,
         marginTop: 3,
         display: 'flex',
@@ -266,18 +267,20 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     headerImage: {
-        height: 16,
-        width: 16,
+        height: 20,
+        width: 20,
         marginLeft: 27
     },
     headerTextInput: {
         height: 38,
         width: 261 - 53,   //261-2*(27+16)-20
-        marginLeft: 10
+        marginLeft: 10,
+        fontSize: 14,
+        color: 'rgb(178,178,178)'
     },
     backText: {
         fontSize: 17,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(178,178,178)',
         fontWeight: 'bold',
         marginRight: 19,
         marginTop: 13
@@ -293,7 +296,7 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 17,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(178,178,178)',
         marginLeft: 15,
         fontWeight: 'bold',
     },
@@ -308,14 +311,14 @@ const styles = StyleSheet.create({
         height: 27,
         width: 100,
         borderRadius: 13,
-        backgroundColor: 'rgb(247,247,247)',
+        backgroundColor: 'rgb(51,57,62)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },
     itemTitle: {
         fontSize: 14,
-        color: 'rgb(100,100,100)',
+        color: Colors.NAVI_ACTIVE_TINT_COLOR,
 
     },
     itemText: {
