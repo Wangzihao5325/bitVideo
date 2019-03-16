@@ -19,7 +19,7 @@ class Item extends PureComponent {
 
     render() {
         const { mainNavigation } = this.context;
-        switch (this.props.item.client_module) {
+        switch (this.props.item.client_module) {//m_global_type
             case 'm_banner':
                 if (this.props.item.m_banner_data.length > 0) {//有可能会出现 arr.length=0 的情况
                     return (<BannerModule key={this.props.index} data={this.props.item.m_banner_data} navi={mainNavigation} />);

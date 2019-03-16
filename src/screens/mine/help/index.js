@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput, TouchableHighlight, Text } from 'react-nat
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
+import * as Colors from '../../../global/Colors';
 
 const reg = { title: '', contact: '' };
 export default class HelpScreen extends PureComponent {
@@ -10,8 +11,10 @@ export default class HelpScreen extends PureComponent {
         return {
             title: In18.HELP_SUBMIT,  //header标题
             headerStyle: {
-                borderBottomColor: 'white',
+                borderBottomColor: Colors.SCREEN_BGCOLOR,
+                backgroundColor: Colors.SCREEN_BGCOLOR
             },
+            headerTintColor: Colors.NAVI_ACTIVE_TINT_COLOR,
         }
     };
 
@@ -43,6 +46,7 @@ export default class HelpScreen extends PureComponent {
                     <TextInput
                         style={styles.mainInput}
                         placeholder={In18.PLEASE_INPUT_SUGGEST}
+                        placeholderTextColor='rgb(37,19,4)'
                         multiline={true}
                         maxLength={150}
                         onChangeText={this._titleInputChange}
@@ -52,6 +56,7 @@ export default class HelpScreen extends PureComponent {
                     <TextInput
                         style={styles.input2}
                         placeholder={In18.PLEASE_INPUT_CONTRACT}
+                        placeholderTextColor='rgb(37,19,4)'
                         maxLength={20}
                         onChangeText={this._contentInputChange}
                     />
@@ -70,7 +75,8 @@ export default class HelpScreen extends PureComponent {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: Colors.SCREEN_BGCOLOR
     },
     flexView: {
         marginTop: 40,
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: 'rgb(255,216,169)',
         borderRadius: 5,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: 'rgb(255,216,169)',
         borderRadius: 5,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
