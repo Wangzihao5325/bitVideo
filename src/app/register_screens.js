@@ -12,7 +12,7 @@ import ShortVideoDetail from '../screens/shortVideo/shortVideoDetail/index';
 import SubjectScreen from '../screens/subject/index';
 import SubjectDetailScreen from '../screens/subject/SubjectDetail';
 
-import TaskScreen from '../screens/task/index';
+//import TaskScreen from '../screens/task/index';
 import MineScreen from '../screens/mine/index';
 
 import HelpScreen from '../screens/mine/help/index';
@@ -86,6 +86,7 @@ SubjectStack.navigationOptions = ({ navigation }) => {
 };
 
 // 任务router
+/*
 let TaskStack = createStackNavigator(
     {
         TaskScreen
@@ -105,7 +106,7 @@ TaskStack.navigationOptions = ({ navigation }) => {
         tabBarVisible
     }
 };
-
+*/
 // 我的router
 let MineStack = createStackNavigator(
     {
@@ -133,6 +134,6 @@ export {
     MainStack,
     ShortVideoStack,
     SubjectStack,
-    TaskStack,
+    //TaskStack,
     MineStack,
 };
