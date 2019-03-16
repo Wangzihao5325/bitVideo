@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, View, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { ScrollView, View, StyleSheet, ImageBackground, SafeAreaView, Platform } from 'react-native';
 import PropTypes from 'prop-types';
+import * as Colors from '../../global/Colors';
+import { isXDevice } from '../../global/utils/PixelUtil';
 
 import Header from './header';
 import FunList from './funList';
-import History from './history';
+//import History from './history';
 import Bottom from './bottom';
 
 export default class MineScreen extends PureComponent {
@@ -26,31 +28,35 @@ export default class MineScreen extends PureComponent {
     }
 
     render() {
+        let isX = isXDevice();
+        let bgImageStyle = { width: '100%', height: 207 - 20 };
+        if (isX) {
+            bgImageStyle = { width: '100%', height: 207 };
+        }
+        if (Platform.OS === 'android') {
+            bgImageStyle = { width: '100%', height: 207 - 44 };
+        }
         return (
-            <ScrollView style={{ height: 1000, width: '100%' }} showsVerticalScrollIndicator={false} alwaysBounceVertical={false}>
+            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <ImageBackground
-                    style={styles.imageBackground}
+                    style={bgImageStyle}
                     source={require('../../image/mine/mine_background.png')}
                 >
                     <SafeAreaView style={styles.container}>
                         <View style={{ flex: 1 }}>
                             <Header />
                             <FunList />
-                            <History />
+                            {/* <History /> */}
                             <Bottom />
                         </View>
                     </SafeAreaView>
                 </ImageBackground>
-            </ScrollView>
+            </View>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    imageBackground: {
-        width: '100%',
-        height: 780,//780 207
     }
 });

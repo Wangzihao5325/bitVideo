@@ -18,7 +18,7 @@ const DEFALUT_RECOMMEND_SEARCH = '雷人糗事';
 
 const LOGIN = '登录';
 const REGISTER = '注册';
-const RECHARGE = '充值爱逗币';
+const RECHARGE = 'VIP等级兑换';
 const TODAY_WATCH_TIMES = '今日观影次数';
 const SHARE_TIMES = '推广得观影次数';
 const IDOL_MONEY = '爱逗币';

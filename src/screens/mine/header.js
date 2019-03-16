@@ -32,11 +32,6 @@ class TopBtns extends PureComponent {
                 <IconBtn
                     height={ICON_SIZE}
                     width={ICON_SIZE}
-                    onPress={this.customPress}
-                    source={require('../../image/mine/mine_custom.png')} />
-                <IconBtn
-                    height={ICON_SIZE}
-                    width={ICON_SIZE}
                     onPress={this.settingPress}
                     source={require('../../image/mine/mine_settings.png')} />
             </View>
@@ -137,7 +132,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'transparent',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'row-reverse',
         justifyContent: 'space-between',
         paddingLeft: 20,
         paddingRight: 18,
@@ -196,7 +191,7 @@ const styles = StyleSheet.create({
         height: 83,
         marginTop: 31,
         marginHorizontal: 27,
-        backgroundColor: 'white',
+        backgroundColor: 'rgb(245,187,128)',//white
         borderRadius: 5,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
@@ -209,7 +204,7 @@ const styles = StyleSheet.create({
     },
     countListNumText: {
         fontSize: 20,
-        color: 'rgb(73,114,255)'
+        color: 'white'
     },
     countListText: {
         fontSize: 14,
@@ -219,7 +214,7 @@ const styles = StyleSheet.create({
     separate: {
         height: 20,
         width: 2,
-        backgroundColor: 'rgb(220,216,217)',
+        backgroundColor: 'rgb(192,109,47)',
         alignSelf: 'center'
     }
 });
