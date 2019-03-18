@@ -123,7 +123,11 @@ export default class App extends Component {
 
 
     //获取开屏动画
-    Api.getSplashScreen((result) => {
+    Api.getSplashScreen((result, message, code) => {
+      // console.log('123123123');
+      // console.log(result);
+      // console.log(message);
+      // console.log(code);
       if (result) {
         this.setState({
           uri: result.ad_path

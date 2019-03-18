@@ -43,7 +43,7 @@ export default class SecurtyImage extends PureComponent {
                     });
                 this.setState({ lastSource: uri });
             } else {
-                this.setState({ trueSource: this.props.source, lastSource: uri });
+                this.setState({ source: this.props.source, lastSource: uri });
             }
         }
     }

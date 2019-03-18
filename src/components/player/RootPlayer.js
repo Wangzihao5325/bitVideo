@@ -40,7 +40,7 @@ export default class RootPlayer extends PureComponent {
     }
 
     render() {
-        if (this.props.videoUrl) {
+        if (false && this.props.videoUrl) {
             return (
                 <View style={this.state.isFullScreen ? styles.fullScreenFlexView : styles.flexView}>
                     {
@@ -71,7 +71,7 @@ export default class RootPlayer extends PureComponent {
             );
         } else {
             return (
-                <View style={styles.bgVideoTest} />
+                <View style={styles.bgVideo} />
             );
         }
     }
