@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     titleText: {
-        color: 'rgb(33,33,33)',
+        color: 'rgb(187,186,186)',
         fontSize: 16,
         marginTop: 6,
         alignSelf: 'center'

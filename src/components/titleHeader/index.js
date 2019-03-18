@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         marginTop: 20,
+        alignItems: 'center'
     },
     headerImage: {
         height: 18,
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 18,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(187,186,186)',
         marginLeft: 6
     },
     headerFlexView: {
@@ -45,6 +46,6 @@ const styles = StyleSheet.create({
     more: {
         marginRight: 38,
         fontSize: 14,
-        color: 'rgb(120,120,120)'
+        color: 'rgb(187,186,186)'
     }
 });

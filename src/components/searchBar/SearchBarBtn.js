@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     btn: {
         height: 34,
         width: 255,
-        backgroundColor: 'rgb(239,244,247)',
+        backgroundColor: 'rgb(51,57,62)',
         borderRadius: 17,
         display: 'flex'
     },
@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     text: {
         marginLeft: 15,
         fontSize: 14,
-        color: 'rgb(187,186,186)'
+        color: 'rgb(136,136,136)'
     }
 });

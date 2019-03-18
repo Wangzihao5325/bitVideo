@@ -45,7 +45,7 @@ class Item extends PureComponent {
 
 class Content extends PureComponent {
     _flatListRefresh = () => {
-        Api.postGlobalTypeVideo(this.props.nowType, null, (e) => {
+        Api.postGlobalTypeVideo('recommend', null, (e) => {
             if (e.data) {
                 store.dispatch(setMainPageData(e.data));
                 store.dispatch(setPageInfo(e.current_page, e.last_page));
@@ -56,7 +56,7 @@ class Content extends PureComponent {
         if (this.props.nowPage >= this.props.totalPage) {
             return;
         }
-        Api.postGlobalTypeVideo111(this.props.nowType, this.props.nowPage + 1, (e) => {
+        Api.postGlobalTypeVideo('recommend', this.props.nowPage + 1, (e, code, message) => {
             if (e.data) {
                 store.dispatch(addMainPageData(e.data));
                 store.dispatch(setPageInfo(e.current_page, e.last_page));
@@ -81,7 +81,6 @@ class Content extends PureComponent {
 function mapState2Props(store) {
     return {
         data: store.mainPageData.data,
-        nowType: store.mainPageData.nowType,
         totalPage: store.mainPageData.totalPage,
         nowPage: store.mainPageData.nowPage
     }

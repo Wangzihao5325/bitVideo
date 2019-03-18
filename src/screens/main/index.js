@@ -26,22 +26,23 @@ export default class MainScreen extends PureComponent {
 
     render() {
         return (
-            <SafeAreaView style={styles.safeArea}>
-                <View style={styles.container}>
-                    <Header />
-                    <Content />
-                </View>
-            </SafeAreaView>
+            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <SafeAreaView style={styles.safeArea}>
+                    <View style={styles.container}>
+                        <Header />
+                        <Content />
+                    </View>
+                </SafeAreaView>
+            </View>
         );
     }
 }
 const styles = StyleSheet.create({
     safeArea: {
-        flex: 1,
-        backgroundColor: Colors.SAFE_AREA_BGCOLOR
+        flex: 1
     },
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: Colors.SCREEN_BGCOLOR
     },
 });
