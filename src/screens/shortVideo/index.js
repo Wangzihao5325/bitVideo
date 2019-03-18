@@ -30,8 +30,8 @@ export default class ShortVideo extends PureComponent {
     };
 
     componentDidMount() {
-        Api.getShortVideoType((e) => {
-            if (Array.isArray(e)) {
+        Api.getShortVideoType((e, code, message) => {
+            if (Array.isArray(e) && e.length > 0) {
                 e.forEach((item) => {
                     reg.typeMap2Id[item.title] = item.id;
                     reg.type.push(item.title);
