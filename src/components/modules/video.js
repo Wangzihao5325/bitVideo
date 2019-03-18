@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, FlatList, View, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, FlatList, View, Text, TouchableHighlight, ImageBackground } from 'react-native';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
 
@@ -10,7 +10,9 @@ class TextBtn extends PureComponent {
     render() {
         return (
             <TouchableHighlight style={styles.btn} underlayColor='transparent' onPress={this.props.btnPress}>
-                <Text style={styles.btnText}>{this.props.title}</Text>
+                <ImageBackground style={styles.btn} source={require('../../image/main/btn_bg.png')}>
+                    <Text style={styles.btnText}>{this.props.title}</Text>
+                </ImageBackground>
             </TouchableHighlight>
         );
     }
@@ -66,7 +68,7 @@ class SUDOKU extends PureComponent {
     render() {
         return (
             <View style={{ alignItems: 'center' }} >
-                <TitleHeader style={{ marginTop: 10 }} imageSource={require('../../image/main/global_movie.png')} title={this.props.title} />
+                <TitleHeader style={{ marginTop: 10 }} imageSource={require('../../image/main/module_header.png')} title={this.props.title} />
                 <FlatList
                     horizontal={false}
                     numColumns={this.props.lineNum}
@@ -98,7 +100,7 @@ class GUNDONG extends PureComponent {
         let flatlistStyle = this.props.isVertical ? { height: Sizes.IMAGE_AVATER_VER_HEIGHT + 50, width: Sizes.DEVICE_WIDTH } : {};
         return (
             <View style={{ alignItems: 'center' }}>
-                <TitleHeader showMore={this._showMore} style={{ marginTop: 10, marginBottom: 10 }} imageSource={require('../../image/main/global_movie.png')} title={this.props.title} btnTitle={In18.MORE_TEXT} />
+                <TitleHeader showMore={this._showMore} style={{ marginTop: 10, marginBottom: 10 }} imageSource={require('../../image/main/module_header.png')} title={this.props.title} btnTitle={In18.MORE_TEXT} />
                 <FlatList
                     style={flatlistStyle}
                     horizontal={true}
@@ -133,10 +135,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgb(239,244,247)'
     },
     btnText: {
-        color: 'rgb(187,186,186)',
-        fontSize: 14
+        color: 'rgb(255,255,255)',
+        fontSize: 14,
     }
 });

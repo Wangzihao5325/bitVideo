@@ -10,7 +10,7 @@ export default class TitleHeader extends PureComponent {
     render() {
         return (
             <View style={[styles.titleHeaderContainer, this.props.style]}>
-                <Image style={styles.headerImage} source={this.props.imageSource} />
+                <Image resizeMode='contain' style={styles.headerImage} source={this.props.imageSource} />
                 <Text style={styles.headerText}>{this.props.title}</Text>
                 <View style={styles.headerFlexView}>
                     {this.props.btnTitle && <Text onPress={this.show_more} style={styles.more}>{this.props.btnTitle}</Text>}
