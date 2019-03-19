@@ -15,12 +15,12 @@ class VideoHeader extends PureComponent {
     render() {
         let title = '';
         if (this.props.fullData) {
-            title = this.props.fullData.title
+            title = this.props.fullData.title;
         }
         return (
             <View style={styles.container}>
                 <View style={styles.flexView2}>
-                    <Text style={styles.titleText}>{title}</Text>
+                    <Text style={styles.titleText} numberOfLines={1} ellipsizeMode='tail'>{title}</Text>
                 </View>
                 <View style={styles.flexView1}>
                     <Text style={styles.introText}>{In18.INTRODUCE_TEXT}</Text>
@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
     titleText: {
         marginLeft: 37,
         fontSize: 16,
-        color: 'rgb(54,54,54)'
+        color: 'rgb(178,178,178)'
     },
     introText: {
         fontSize: 14,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(178,178,178)',
         marginRight: 10
     }
 });

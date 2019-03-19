@@ -37,10 +37,10 @@ class UsualInfoTab extends PureComponent {
                         <Text style={styles.sourceTitleText}>{sourceText}</Text>
                     </View>
                 </View>
-                <View style={{ flex: 1, flexDirection: 'row' }}>
+                {/* <View style={{ flex: 1, flexDirection: 'row' }}>
                     <IconBtn titleStyle={{ fontSize: 12, color: 'rgb(32,32,32)' }} source={require('../../../image/videoDetail/feedBack.png')} title='反馈' onPress={() => console.log('123')} />
                     <IconBtn titleStyle={{ fontSize: 12, color: 'rgb(32,32,32)' }} source={require('../../../image/videoDetail/video_share.png')} title='分享' onPress={() => console.log('123')} />
-                </View>
+                </View> */}
             </View>
         );
     }
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         marginTop: 10,
-        borderBottomColor: 'rgb(244,244,244)',
+        borderBottomColor: 'rgb(133,148,156)',
         borderBottomWidth: 1
     },
     flexView1: {
@@ -81,17 +81,17 @@ const styles = StyleSheet.create({
     },
     typeText: {
         fontSize: 12,
-        color: 'rgb(100,100,100)',
+        color: 'rgb(166,166,166)',
         marginLeft: 17
     },
     playTimesText: {
         fontSize: 12,
-        color: 'rgb(100,100,100)',
+        color: 'rgb(166,166,166)',
         marginLeft: 15
     },
     sourceTitleText: {
         fontSize: 12,
-        color: 'rgb(32,32,32)',
+        color: 'rgb(166,166,166)',
         marginLeft: 15
     }
 });

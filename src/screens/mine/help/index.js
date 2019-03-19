@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, TextInput, TouchableHighlight, Text } from 'react-native';
+import { View, StyleSheet, TextInput, TouchableHighlight, Text, ImageBackground } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
@@ -61,13 +61,15 @@ export default class HelpScreen extends PureComponent {
                         onChangeText={this._contentInputChange}
                     />
                 </View>
-                <TouchableHighlight
-                    style={styles.btn}
-                    underlayColor='#909090'
-                    onPress={this.submit}
-                >
-                    <Text style={styles.btnText}>{In18.SUBMIT_SUGGEXT}</Text>
-                </TouchableHighlight>
+                <ImageBackground style={styles.btnBg} source={require('../../../image/mine/feedback_btn_bg.png')}>
+                    <TouchableHighlight
+                        style={styles.btn}
+                        underlayColor='#909090'
+                        onPress={this.submit}
+                    >
+                        <Text style={styles.btnText}>{In18.SUBMIT_SUGGEXT}</Text>
+                    </TouchableHighlight>
+                </ImageBackground>
             </View>
         );
     }
@@ -114,20 +116,22 @@ const styles = StyleSheet.create({
         height: 20,
         width: Sizes.DEVICE_WIDTH - 30 - 40,
     },
-    btn: {
+    btnBg: {
         height: 40,
         width: Sizes.DEVICE_WIDTH - 42 - 58,
         marginTop: 40,
         marginLeft: 42,
-        marginRight: 58,
-        borderRadius: 20,
-        backgroundColor: 'rgb(102,138,255)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },
+    btn: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     btnText: {
-        color: 'white',
+        color: 'rgb(50,30,13)',
         fontSize: 16
     }
 });

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import * as Colors from '../../../global/Colors';
 
 import VectorIconBtn from '../../../components/imageBtn/VectorIconBtn';
 
@@ -11,7 +12,7 @@ export default class ModalHeader extends PureComponent {
                     <VectorIconBtn
                         size={21}
                         name='chevron-left'
-                        color='rgb(73,114,255)'
+                        color={Colors.NAVI_ACTIVE_TINT_COLOR}
                         onPress={this.props.goBack}
                     />
                 </View>
@@ -25,11 +26,11 @@ export default class ModalHeader extends PureComponent {
 }
 const styles = StyleSheet.create({
     headerContainer: {
-        marginTop: 13,
-        height: 25,
+        height: 38,
         width: '100%',
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     headerFlexContainer: {
         height: 25,

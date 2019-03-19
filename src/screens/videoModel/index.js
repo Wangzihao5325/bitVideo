@@ -5,6 +5,7 @@ import { set_video_full_data, set_guess_like_source, set_comment_list_data, vide
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 import { isXDevice } from '../../global/utils/PixelUtil';
+import * as Colors from '../../global/Colors';
 
 import Modal from "react-native-modal";
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
@@ -80,25 +81,26 @@ export default class VideoModel extends PureComponent {
             semiModalStyle = styles.modalAndroidNormal;
         }
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                {Platform.OS === 'ios' && <ModalHeader title='' goBack={this.goBack} />}
-                <XSVideo navi={this.props.navigation} />
-                <ScrollView
-                    style={styles.scroll}
-                    showsVerticalScrollIndicator={false}
-                >
-                    <VideoHeader toIntro={this._introModelOpen} />
-                    <UsualInfoTab />
-                    <CommentTab />
-                    <SourceTab />
-                    <EpiscodeTab toChooseEpiscode={this._chooseEpiscodeModelOpen} />
-                    <GuessLike />
-                    <AmazingComment />
-                </ScrollView>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
-                    <InputBottom />
-                </KeyboardAvoidingView>
-                {/* <Modal
+            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <SafeAreaView style={{ flex: 1 }}>
+                    {Platform.OS === 'ios' && <ModalHeader title='' goBack={this.goBack} />}
+                    <XSVideo navi={this.props.navigation} />
+                    <ScrollView
+                        style={styles.scroll}
+                        showsVerticalScrollIndicator={false}
+                    >
+                        <VideoHeader toIntro={this._introModelOpen} />
+                        <UsualInfoTab />
+                        <CommentTab />
+                        <SourceTab />
+                        <EpiscodeTab toChooseEpiscode={this._chooseEpiscodeModelOpen} />
+                        <GuessLike />
+                        <AmazingComment />
+                    </ScrollView>
+                    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
+                        <InputBottom />
+                    </KeyboardAvoidingView>
+                    {/* <Modal
                     backdropColor='transparent'
                     isVisible={this.state.detailInfoIsVisable}
                     onBackdropPress={() => this.setState({ detailInfoIsVisable: false })}
@@ -106,7 +108,7 @@ export default class VideoModel extends PureComponent {
                 >
                     <View style={[semiModalStyle, { backgroundColor: 'white' }]}><Text>half model1</Text></View>
                 </Modal> */}
-                {/* <Modal
+                    {/* <Modal
                     backdropColor='transparent'
                     isVisible={this.state.chooseEpiscodeIsVisable}
                     onBackdropPress={() => this.setState({ chooseEpiscodeIsVisable: false })}
@@ -114,7 +116,8 @@ export default class VideoModel extends PureComponent {
                 >
                     <View style={[semiModalStyle, { backgroundColor: 'white' }]}><Text>half model2</Text></View>
                 </Modal> */}
-            </SafeAreaView>
+                </SafeAreaView>
+            </View>
         );
     }
 }
