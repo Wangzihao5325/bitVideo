@@ -11,7 +11,6 @@ import ShortVideoScreen from '../screens/shortVideo/index';
 import ShortVideoDetail from '../screens/shortVideo/shortVideoDetail/index';
 
 import SubjectScreen from '../screens/subject/index';
-import SubjectDetailScreen from '../screens/subject/SubjectDetail';
 
 //import TaskScreen from '../screens/task/index';
 import MineScreen from '../screens/mine/index';
@@ -69,7 +68,6 @@ ShortVideoStack.navigationOptions = ({ navigation }) => {
 let SubjectStack = createStackNavigator(
     {
         SubjectScreen,
-        SubjectDetailScreen
     },
     {
         navigationOptions: { gesturesEnabled: false }

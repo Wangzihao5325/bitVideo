@@ -38,7 +38,7 @@ class GetPage extends PureComponent {
             <View style={{ flex: 1, backgroundColor: 'red' }} >
                 <FlatList
                     data={this.state.data}
-                    renderItem={}
+                    // renderItem={}
                 />
             </View>
         );

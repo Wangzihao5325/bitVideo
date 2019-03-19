@@ -5,7 +5,7 @@ import PropsTypes from 'prop-types';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const THEME_COLOR = 'transparent';
 const CONTAINER_BORDER_COLOR = '#909090';
-const NORMAL_TEXT_COLOR = 'white';
+const NORMAL_TEXT_COLOR = 'rgb(178,178,178)';
 const ITEM_HIGHLIGHT_COLOR = 'rgb(254,163,91)';
 const ITEM_MARGIN_HOR = 10;
 const ITEM_MARGIN_VER = 2;
@@ -92,7 +92,7 @@ export default class TabBar extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        width: DEVICE_WIDTH - 60 - 35,
+        width: DEVICE_WIDTH,
         // borderBottomColor: CONTAINER_BORDER_COLOR,//底部浅灰色分割线
         // borderBottomWidth: StyleSheet.hairlineWidth,
         backgroundColor: THEME_COLOR
@@ -107,17 +107,20 @@ const styles = StyleSheet.create({
     },
     itemText: {
         color: NORMAL_TEXT_COLOR,
-        fontSize: 18
+        fontSize: 14,
+        marginHorizontal: ITEM_MARGIN_HOR
     },
     itemContainerHighlight: {
-        marginBottom: ITEM_MARGIN_VER - 2,
-        borderBottomColor: ITEM_HIGHLIGHT_COLOR,
-        borderBottomWidth: 2,
-        borderStyle: 'solid',
+        // marginBottom: ITEM_MARGIN_VER - 2,
+        // borderBottomColor: ITEM_HIGHLIGHT_COLOR,
+        // borderBottomWidth: 2,
+        // borderStyle: 'solid',
+        backgroundColor: 'rgb(51,57,62)',
+        borderRadius: 15
     },
     itemTextHighlight: {
         color: ITEM_HIGHLIGHT_COLOR,
-        fontSize: 20,
+        fontSize: 14,
         fontWeight: 'bold'
     },
 });
