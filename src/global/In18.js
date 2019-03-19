@@ -144,6 +144,10 @@ const SHARE_DIALOG_TITLE = '分享爱逗到';
 const SELECT_ALL = '全选';
 const DELETE = '删除';
 
+//积分页面
+const GET_RECORD = '获取记录';
+const EXPENSES_RECORD = '消费记录';
+
 
 export {
     MAIN_PAGE_TITLE,
@@ -271,4 +275,7 @@ export {
 
     SELECT_ALL,
     DELETE,
+
+    GET_RECORD,
+    EXPENSES_RECORD,
 };

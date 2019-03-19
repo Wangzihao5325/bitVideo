@@ -369,8 +369,8 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
-    getIconHistoryList(onSuccess, onError) {
-        const url = `/api/user/coins/history/list`;
+    getIconHistoryList(type, onSuccess, onError) {
+        const url = `/api/user/coins/history/list?action=${type}`;
         this.getFetch(url, onSuccess, onError);
     }
 
