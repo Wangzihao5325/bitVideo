@@ -77,9 +77,12 @@ class CollectModel extends PureComponent {
     }
     render() {
         let btnText = this.props.isSelectMode ? In18.CANCEL_TEXT : In18.EDIT_TEXT;
+        let bottomBg = this.props.isSelectMode ? { backgroundColor: 'rgb(51,57,62)' } : { backgroundColor: Colors.SCREEN_BGCOLOR };
         return (
-            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={{ position: 'absolute', top: 0, width: '100%', height: 100, backgroundColor: Colors.SCREEN_BGCOLOR }} />
+                <View style={[{ position: 'absolute', bottom: 0, width: '100%', height: 100 }, bottomBg]} />
+                <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                     <ModalHeader goBack={this._goBack} title={In18.MY_COLLECT} rightBtnMode='text' rightBtnTitle={btnText} rightBtnOnPress={this._editMode} />
                     {this.props.data.length > 0 &&
                         <FlatList
@@ -89,8 +92,8 @@ class CollectModel extends PureComponent {
                         />}
                     {this.props.data.length == 0 && <View style={styles.listStyle} />}
                     {this.props.isSelectMode && <BottomBtn deleteSet={this.props.deleteSet} />}
-                </SafeAreaView>
-            </View>
+                </View>
+            </SafeAreaView>
         );
     }
 }
@@ -116,6 +119,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderTopColor: 'rgba(153,153,153,0.2)',
-        borderTopWidth: 1
+        borderTopWidth: 1,
+        backgroundColor: 'rgb(51,57,62)'
     }
 });
