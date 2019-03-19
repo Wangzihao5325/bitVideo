@@ -20,67 +20,38 @@ export default class ShortVideo extends PureComponent {
     };
 
     state = {
-        type: In18.DEFALUT_SHORT_VIDEO_TYPE,
         shortVideoList: null,
         playingIndex: -1,
         nowPage: -1,
         lastPage: -1,
         lastUrl: '',
-        nowTypeKey: -1,
     };
 
     componentDidMount() {
-        Api.getShortVideoType((e, code, message) => {
-            if (Array.isArray(e) && e.length > 0) {
-                e.forEach((item) => {
-                    reg.typeMap2Id[item.title] = item.id;
-                    reg.type.push(item.title);
-                });
-
-                this.setState({ type: reg.type });
-                let defalutKey = reg.typeMap2Id[reg.type[0]];
-                Api.getShortVideoListById(defalutKey, 10, 1, (e) => {
-                    if (e.data.length > 0) {
-                        this.setState({
-                            shortVideoList: e.data,
-                            playingIndex: -1,
-                            nowPage: e.current_page,
-                            lastPage: e.last_page,
-                            nowTypeKey: defalutKey,
-                            lastUrl: e.last_page_url,
-                        });
-                    } else {
-                        //mock数据
-                        this.setState({
-                            shortVideoList: shortVideoList
-                        });
-                    }
-                });
-            }
-        });
-    }
-
-    _classifyChanged = (classify) => {
-        let classifyId = reg.typeMap2Id[classify];
-        Api.getShortVideoListById(classifyId, 10, 1, (e) => {
+        Api.getShortVideoListById(10, 1, (e) => {
+            console.log('12121212121wewewe');
+            console.log(e);
             if (e.data.length > 0) {
                 this.setState({
                     shortVideoList: e.data,
                     playingIndex: -1,
                     nowPage: e.current_page,
                     lastPage: e.last_page,
-                    nowTypeKey: classifyId,
                     lastUrl: e.last_page_url,
+                });
+            } else {
+                //mock数据
+                this.setState({
+                    shortVideoList: shortVideoList
                 });
             }
         });
     }
-
     _flatListRefresh = () => {
         this.setState({
             playingIndex: -1
         });
-        Api.getShortVideoListById(this.state.nowTypeKey, 10, 1, (e) => {
+        Api.getShortVideoListById(10, 1, (e) => {
             if (e.data.length > 0) {
                 this.setState({
                     shortVideoList: e.data,
@@ -103,7 +74,7 @@ export default class ShortVideo extends PureComponent {
             this.setState({
                 playingIndex: -1
             });
-            Api.getShortVideoListById(this.state.nowTypeKey, 10, this.state.lastPage, (e) => {
+            Api.getShortVideoListById(10, this.state.lastPage, (e) => {
                 if (e.data.length > 0) {
                     this.setState((preState, props) => {
                         let newList = preState.shortVideoList.concat(e.data);
@@ -174,7 +145,6 @@ export default class ShortVideo extends PureComponent {
                     <NavigationEvents
                         onWillBlur={this._willBlur}
                     />
-                    <TabBar style={{ width: Sizes.DEVICE_WIDTH }} tabNames={this.state.type} tabTap={this._classifyChanged} />
                     <View style={{ flex: 1, marginTop: 10 }}>
                         {this.state.shortVideoList &&
                             <FlatList
@@ -196,7 +166,7 @@ export default class ShortVideo extends PureComponent {
                                             title={item.title}
                                             videoUrl={item.play_url}
                                             coverUrl={item.cover_path}
-                                            playTimes={item.play_count_real}
+                                            playTimes={item.play_count}
                                             videoId={item.id}
                                         />
                                 }

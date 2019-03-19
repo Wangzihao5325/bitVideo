@@ -83,8 +83,11 @@ const DAILY_TASK = '日常任务';
 const FAVOURITE_IDOL = '人气明星';
 const SEE_RIGHT_NOW = '立即查看';
 const ACTOR_WORKS = '作品:';
+const HOT_TAG = '热门标签';
 const HOT_SUBJECT = '热门专题';
 const HOT_MOVIE = '最新榜单专题推荐';
+const RECOMMAND_SUBJECT = '专栏推荐';
+const ALL_SUBJECT = '全部榜单';
 
 //视频详情页面
 const INTRODUCE_TEXT = '简介';
@@ -226,8 +229,11 @@ export {
     FAVOURITE_IDOL,
     SEE_RIGHT_NOW,
     ACTOR_WORKS,
+    HOT_TAG,
     HOT_SUBJECT,
     HOT_MOVIE,
+    RECOMMAND_SUBJECT,
+    ALL_SUBJECT,
 
     INTRODUCE_TEXT,
     TIMES_PLAY,

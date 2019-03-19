@@ -394,8 +394,8 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
-    getShortVideoListById(typeId, limit, page, onSuccess, onError) {
-        const url = `/api/video/short/list?type_id=${typeId}&limit=${limit}&page=${page}`;
+    getShortVideoListById(limit, page, onSuccess, onError) {
+        const url = `/api/video/short/list?limit=${limit}&page=${page}`;
         this.getFetch(url, onSuccess, onError);
     }
 

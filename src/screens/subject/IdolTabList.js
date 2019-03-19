@@ -26,7 +26,7 @@ class Item extends PureComponent {
                             </View>
                         </View>
                         <View style={{ flex: 1, justifyContent: 'center' }}>
-                            <Text ellipsizeMode='tail' numberOfLines={1} style={{ marginLeft: 10, color: 'rgb(100,100,100)', fontSize: 14 }}>{intro}</Text>
+                            <Text ellipsizeMode='tail' numberOfLines={1} style={{ marginLeft: 10, color: 'rgb(144,144,144)', fontSize: 14 }}>{intro}</Text>
                         </View>
                     </View>
                     <View style={styles.itemFlexView}>
@@ -44,6 +44,7 @@ export default class IdolTabList extends PureComponent {
     };
     componentDidMount() {
         Api.getActerList((e) => {
+            console.log(e);
             if (e.data) {
                 this.setState({ data: e.data });
             }
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: 'rgb(255,178,117)',
         borderRadius: 5,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 1 },
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         width: 234 - 20,
         display: 'flex',
         borderBottomWidth: 2,
-        borderBottomColor: 'rgb(238,238,238)'
+        borderBottomColor: 'rgb(251,149,68)'
     },
     itemFlexView: {
         height: 46,
@@ -107,12 +108,12 @@ const styles = StyleSheet.create({
     },
     actorName: {
         fontSize: 16,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(32,32,32)',
         marginLeft: 19
     },
     actorFocus: {
         fontSize: 14,
-        color: 'rgb(151,151,151)',
+        color: 'rgb(96,96,96)',
         marginLeft: 19
     },
     tabBtn: {
@@ -120,13 +121,13 @@ const styles = StyleSheet.create({
         height: 27,
         width: 87,
         borderRadius: 13,
-        backgroundColor: 'rgb(73,114,255)',
+        backgroundColor: 'rgb(238,128,42)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },
     tabBtnText: {
-        color: 'white',
+        color: 'rgb(32,32,32)',
         fontSize: 12,
     },
     flatList: {
