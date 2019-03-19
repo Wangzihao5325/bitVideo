@@ -414,6 +414,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getTypeArrsByGlobalType(type, onSuccess, onError) {
+        const url = `/api/video/dict?global_type=${type}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();
