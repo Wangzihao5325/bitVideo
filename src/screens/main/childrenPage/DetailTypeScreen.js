@@ -4,6 +4,7 @@ import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
+import TabBar from '../../../components/tabBar/index';
 
 
 
@@ -43,6 +44,10 @@ export default class DetailTypeScreen extends PureComponent {
         this.props.navigation.navigate('SearchModel');
     }
 
+    _changeTab = (type) => {
+        console.log(type);
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
@@ -53,6 +58,9 @@ export default class DetailTypeScreen extends PureComponent {
                         rightBtnMode='icon'
                         rightBtnOnPress={this._search}
                         iconSource={require('../../../image/usual/search.png')} />
+                    <TabBar tabNames={['日本', 'AV', '港台电影', '国产']} tabTap={this._changeTab} />
+                    <TabBar tabNames={['全部类型', '无码', '内衣', '偷拍']} tabTap={this._changeTab} />
+                    <TabBar tabNames={['最近播放', '最新更新', '港台电影', '最多喜欢']} tabTap={this._changeTab} />
                 </View>
             </SafeAreaView>
         );
