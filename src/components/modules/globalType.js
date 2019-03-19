@@ -3,14 +3,12 @@ import { View, StyleSheet, FlatList, Text, TouchableHighlight } from 'react-nati
 
 import SecurtyImage from '../../components/securtyImage/index';
 
-import typeDatas from '../../mock/globalType';
-
 class Item extends PureComponent {
     render() {
         return (
             <TouchableHighlight style={styles.itemContainer}>
                 <View style={styles.itemFlexView}>
-                    <SecurtyImage style={styles.image} uri={this.props.uri} />
+                    <SecurtyImage style={styles.image} source={{ uri: this.props.uri }} />
                     <Text style={styles.titleText}>{this.props.title}</Text>
                 </View>
             </TouchableHighlight>
@@ -20,12 +18,21 @@ class Item extends PureComponent {
 
 export default class GlobalTypeModule extends PureComponent {
     render() {
+        let defaultHeight = { height: 205 };
+        if (Array.isArray(this.props.data) && this.props.data.length > 0) {
+            let lines = Math.ceil(this.props.data.length / 4);
+            let heightNum = lines * 90;
+            defaultHeight = { height: heightNum };
+        }
         return (
-            <View style={styles.container}>
-                <FlatList
-                    data={typeDatas}
-                    renderItem={({ item }) => <Item title={item.title} uri={item.icon} />}
-                />
+            <View style={[styles.container, defaultHeight]}>
+                {Array.isArray(this.props.data) && this.props.data.length > 0 &&
+                    <FlatList
+                        style={{ flex: 1 }}
+                        numColumns={4}
+                        data={this.props.data}
+                        renderItem={({ item }) => <Item title={item.title} uri={item.icon} type={item.global_type} />}
+                    />}
             </View>
         );
     }
@@ -34,13 +41,15 @@ export default class GlobalTypeModule extends PureComponent {
 const styles = StyleSheet.create({
     itemContainer: {
         height: 90,
-        width: 88,
+        width: '25%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
     },
     itemFlexView: {
-        flex: 1
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     image: {
         height: 62,
