@@ -5,6 +5,7 @@ import { iconMake } from '../components/icons/Vector_icons';
 
 import MainScreen from '../screens/main/index';
 import ViewModuleMoreScreen from '../screens/main/childrenPage/ViewModuleMoreScreen';
+import DetailTypeScreen from '../screens/main/childrenPage/DetailTypeScreen';
 
 import ShortVideoScreen from '../screens/shortVideo/index';
 import ShortVideoDetail from '../screens/shortVideo/shortVideoDetail/index';
@@ -24,6 +25,7 @@ let MainStack = createStackNavigator(
     {
         MainScreen,
         ViewModuleMoreScreen,
+        DetailTypeScreen,
     },
     {
         navigationOptions: { gesturesEnabled: false }

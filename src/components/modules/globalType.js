@@ -4,9 +4,16 @@ import { View, StyleSheet, FlatList, Text, TouchableHighlight } from 'react-nati
 import SecurtyImage from '../../components/securtyImage/index';
 
 class Item extends PureComponent {
+
+    _itemOnPress = () => {
+        if (this.props.navi) {
+            this.props.navi.navigate('DetailTypeScreen', { type: this.props.type });
+        }
+    }
+
     render() {
         return (
-            <TouchableHighlight style={styles.itemContainer}>
+            <TouchableHighlight style={styles.itemContainer} onPress={this._itemOnPress}>
                 <View style={styles.itemFlexView}>
                     <SecurtyImage style={styles.image} source={{ uri: this.props.uri }} />
                     <Text style={styles.titleText}>{this.props.title}</Text>
@@ -31,7 +38,7 @@ export default class GlobalTypeModule extends PureComponent {
                         style={{ flex: 1 }}
                         numColumns={4}
                         data={this.props.data}
-                        renderItem={({ item }) => <Item title={item.title} uri={item.icon} type={item.global_type} />}
+                        renderItem={({ item }) => <Item title={item.title} uri={item.icon} type={item.global_type} navi={this.props.navi} />}
                     />}
             </View>
         );
