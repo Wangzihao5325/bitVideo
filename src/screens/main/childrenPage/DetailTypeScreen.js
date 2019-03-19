@@ -4,7 +4,7 @@ import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
-import TabBar from '../../../components/tabBar/index';
+import TabBar from '../../../components/tabBar/SelectTab';
 
 
 
