@@ -14,7 +14,8 @@ import SubjectScreen from '../screens/subject/index';
 
 //import TaskScreen from '../screens/task/index';
 import MineScreen from '../screens/mine/index';
-
+import MemberCenterScreen from '../screens/mine/memberCenter/index';
+import BugListScreen from '../screens/mine/memberCenter/BuyList';
 import HelpScreen from '../screens/mine/help/index';
 import IconsListScreen from '../screens/mine/icons_list/index';
 
@@ -113,6 +114,8 @@ let MineStack = createStackNavigator(
         MineScreen,
         HelpScreen,
         IconsListScreen,
+        MemberCenterScreen,
+        BugListScreen,
     },
     {
         navigationOptions: { gesturesEnabled: false }

@@ -32,6 +32,7 @@ const WATCH_HISTORY = '历史记录';
 const MY_STAR = '我的收藏';
 const MEMBER_CENTER = '会员中心';
 const I_WANT_SHARE = '我要推广';
+const BUY_HISTORY = '购买记录';
 
 const FAST_LOGIN = '快捷登陆';
 const PASSWORD_LOGIN = '密码登陆';
@@ -189,6 +190,7 @@ export {
     MY_STAR,
     MEMBER_CENTER,
     I_WANT_SHARE,
+    BUY_HISTORY,
 
     FAST_LOGIN,
     PASSWORD_LOGIN,

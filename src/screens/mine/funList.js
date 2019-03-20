@@ -11,6 +11,11 @@ export default class FunList extends PureComponent {
         mineNavigation: PropTypes.object
     }
 
+    _goToMemberCenter = () => {
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('MemberCenterScreen');
+    }
+
     goToMoney = () => {
         const { mineNavigation } = this.context;
         mineNavigation.navigate('IconsListScreen');
@@ -52,7 +57,7 @@ export default class FunList extends PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.funListContainer}>
-                    <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/member_center.png')} title={In18.MEMBER_CENTER} onPress={this.goToMoney} />
+                    <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/member_center.png')} title={In18.MEMBER_CENTER} onPress={this._goToMemberCenter} />
                     <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/gift_center.png')} title={In18.GIFT_CENTER} onPress={this.goToMoney} />
                     <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/invite_code.png')} title={In18.SHARE_CODE} onPress={this.goToInviteFriend} />
                     <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/i_want_share.png')} title={In18.I_WANT_SHARE} onPress={this.goToGiftCenter} />
