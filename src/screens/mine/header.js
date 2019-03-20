@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Image, Text, ImageBackground, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { get_user_info } from '../../store/actions/accountAction';
 import * as In18 from '../../global/In18';
@@ -66,27 +66,24 @@ class Avater extends PureComponent {
     }
 }
 class CountList extends PureComponent {
-    goToSpread = () => {
-        console.log('go to share');
-    }
+
     render() {
         return (
             <View style={styles.countListContainer}>
-                <View style={styles.countListboard}>
+                <ImageBackground style={styles.countListboard} imageStyle={{ borderRadius: 5 }} source={require('../../image/mine/board_bg.png')}>
+                    <View style={styles.watchTimesBoard}>
+                        <Text style={styles.countListNumText}><Text>{this.props.use}</Text>{`/${this.props.total}`}</Text>
+                        <Text style={styles.countListText}>{In18.LEFT_VIP_DAY}</Text>
+                    </View>
                     <View style={styles.watchTimesBoard}>
                         <Text style={styles.countListNumText}><Text>{this.props.use}</Text>{`/${this.props.total}`}</Text>
                         <Text style={styles.countListText}>{In18.TODAY_WATCH_TIMES}</Text>
                     </View>
-                    <View style={styles.separate} />
                     <View style={styles.watchTimesBoard}>
-                        <TouchableHighlight onPress={this.goToSpread} style={styles.watchTimesBoard} underlayColor='transparent'>
-                            <View style={styles.watchTimesBoard}>
-                                <Image source={require('../../image/mine/mine_share.png')} />
-                                <Text style={styles.countListText}>{In18.SHARE_TIMES}</Text>
-                            </View>
-                        </TouchableHighlight>
+                        <Text style={styles.countListNumText}><Text>{this.props.use}</Text>{`/${this.props.total}`}</Text>
+                        <Text style={styles.countListText}>{In18.LAST_DATE}</Text>
                     </View>
-                </View>
+                </ImageBackground>
             </View>
         );
     }
@@ -204,11 +201,11 @@ const styles = StyleSheet.create({
     },
     countListNumText: {
         fontSize: 20,
-        color: 'white'
+        color: 'rgb(34,34,34)'
     },
     countListText: {
         fontSize: 14,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(103,103,103)',
         marginTop: 7
     },
     separate: {

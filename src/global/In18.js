@@ -19,7 +19,9 @@ const DEFALUT_RECOMMEND_SEARCH = '雷人糗事';
 const LOGIN = '登录';
 const REGISTER = '注册';
 const RECHARGE = 'VIP等级兑换';
-const TODAY_WATCH_TIMES = '今日观影次数';
+const TODAY_WATCH_TIMES = '剩余次数';
+const LEFT_VIP_DAY = '剩余天数';
+const LAST_DATE = '到期时间';
 const SHARE_TIMES = '推广得观影次数';
 const IDOL_MONEY = '爱逗币';
 const SHARE_CODE = '邀请码';
@@ -42,7 +44,7 @@ const SEARCH_TITLE = '搜索你想看的影片';
 const CHANGE_VIDEOS = '换一换';
 
 //帮助反馈页面
-const HELP_SUBMIT = '帮助反馈';
+const HELP_SUBMIT = '在线反馈';
 const PLEASE_INPUT_SUGGEST = '请输入意见或建议';
 const PLEASE_INPUT_CONTRACT = '联系方式:邮箱、qq、手机号';
 const SUBMIT_SUGGEXT = '提交反馈';
@@ -175,6 +177,8 @@ export {
     REGISTER,
     RECHARGE,
     TODAY_WATCH_TIMES,
+    LEFT_VIP_DAY,
+    LAST_DATE,
     SHARE_TIMES,
     IDOL_MONEY,
     SHARE_CODE,
