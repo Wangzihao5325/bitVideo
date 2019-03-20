@@ -35,7 +35,7 @@ const Router = createBottomTabNavigator(
     MainStack,
     SubjectStack,
     ShortVideoStack,
-    //TaskStack,
+    TaskStack,
     MineStack,
   },
   {

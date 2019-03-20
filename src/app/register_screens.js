@@ -12,7 +12,7 @@ import ShortVideoDetail from '../screens/shortVideo/shortVideoDetail/index';
 
 import SubjectScreen from '../screens/subject/index';
 
-//import TaskScreen from '../screens/task/index';
+import TaskScreen from '../screens/task/index';
 import MineScreen from '../screens/mine/index';
 import MemberCenterScreen from '../screens/mine/memberCenter/index';
 import BugListScreen from '../screens/mine/memberCenter/BuyList';
@@ -88,7 +88,7 @@ SubjectStack.navigationOptions = ({ navigation }) => {
 };
 
 // 任务router
-/*
+
 let TaskStack = createStackNavigator(
     {
         TaskScreen
@@ -108,7 +108,7 @@ TaskStack.navigationOptions = ({ navigation }) => {
         tabBarVisible
     }
 };
-*/
+
 // 我的router
 let MineStack = createStackNavigator(
     {
@@ -139,6 +139,6 @@ export {
     MainStack,
     ShortVideoStack,
     SubjectStack,
-    //TaskStack,
+    TaskStack,
     MineStack,
 };

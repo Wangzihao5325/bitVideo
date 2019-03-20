@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ImageBackground, ScrollView, View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, ImageBackground, Platform, View, Text, StyleSheet } from 'react-native';
+import * as Colors from '../../global/Colors';
+import * as In18 from '../../global/In18';
+import { isXDevice } from '../../global/utils/PixelUtil';
 
-import Header from './header';
-import Middle from './middle';
-import BottomTaskList from './bottomTaskList';
+import ModalHeader from '../../components/modal/ModalHeader';
 
 export default class TaskScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -13,24 +14,32 @@ export default class TaskScreen extends PureComponent {
         }
     };
 
+    _inviteDetails = () => {
+
+    }
+
     render() {
+        let isX = isXDevice();
+        let bgImageStyle = { width: '100%', height: 207 - 20 };
+        if (isX) {
+            bgImageStyle = { width: '100%', height: 207 };
+        }
+        if (Platform.OS === 'android') {
+            bgImageStyle = { width: '100%', height: 207 - 44 };
+        }
         return (
-            <ScrollView
-                style={{ height: 1136, width: '100%' }}
-                bounces={false}
-                showsVerticalScrollIndicator={false}
-            >
+            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <ImageBackground
-                    style={styles.imageBackground}
-                    source={require('../../image/task/task_background.png')}
+                    style={bgImageStyle}
+                    source={require('../../image/mine/mine_background.png')}
                 >
-                    <SafeAreaView style={styles.container}>
-                        <Header />
-                        <Middle />
-                        <BottomTaskList />
+                    <SafeAreaView style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}>
+                            <ModalHeader textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.TASK_CENTER} rightBtnMode='text' rightBtnTitle='邀请记录' rightBtnOnPress={this._inviteDetails} />
+                        </View>
                     </SafeAreaView>
                 </ImageBackground>
-            </ScrollView>
+            </View>
         );
     }
 }
