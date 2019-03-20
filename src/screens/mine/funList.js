@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, Share } from 'react-native';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
 import IconBtnWithTitle from '../../components/imageBtn/IconBtnWithTitle';
 
-class FunList extends PureComponent {
+export default class FunList extends PureComponent {
     static contextTypes = {
         mineNavigation: PropTypes.object
     }
@@ -53,42 +52,31 @@ class FunList extends PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.funListContainer}>
-                    <IconBtnWithTitle source={require('../../image/mine/idol_money.png')} title={In18.IDOL_MONEY} onPress={this.goToMoney} />
-                    <IconBtnWithTitle source={require('../../image/mine/share_code.png')} title={In18.SHARE_CODE} onPress={this.goToMoney} />
-                    <IconBtnWithTitle source={require('../../image/mine/invite_people.png')} title={In18.INVITE_PEOPLE} onPress={this.goToInviteFriend} />
-                    <IconBtnWithTitle source={require('../../image/mine/task_center.png')} title={In18.GIFT_CENTER} onPress={this.goToGiftCenter} />
-                </View>
-                <View style={styles.moneyShowContainer}>
-                    <View style={styles.flexView}>
-                        <Text style={styles.moneyText}>{In18.OVERPLUS}<Text>:</Text><Text>{this.props.icons}</Text></Text>
-                    </View>
+                    <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/member_center.png')} title={In18.MEMBER_CENTER} onPress={this.goToMoney} />
+                    <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/gift_center.png')} title={In18.GIFT_CENTER} onPress={this.goToMoney} />
+                    <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/invite_code.png')} title={In18.SHARE_CODE} onPress={this.goToInviteFriend} />
+                    <IconBtnWithTitle titleStyle={{ color: 'rgb(178,178,178)' }} containerStyle={{ height: 67 }} imageStyle={{ height: 44, width: 44 }} source={require('../../image/mine/i_want_share.png')} title={In18.I_WANT_SHARE} onPress={this.goToGiftCenter} />
                 </View>
             </View>
         );
     }
 }
 
-function mapState2Props(store) {
-    return {
-        icons: store.account.icons,
-    }
-}
-
-export default connect(mapState2Props)(FunList);
-
 const styles = StyleSheet.create({
     container: {
-        height: 66 + 18,
-        width: '100%'
+        height: 66 + 18 + 20,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     funListContainer: {
-        height: 66,
+        height: 66 + 18,
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
         paddingHorizontal: 36,
         justifyContent: 'space-between',
-        alignItems: 'flex-end'
+        alignItems: 'center'
     },
     moneyShowContainer: {
         flex: 1,

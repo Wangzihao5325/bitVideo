@@ -26,8 +26,7 @@ class Header extends PureComponent {
                 <Text style={styles.headerText}>{In18.WATCH_HISTORY}</Text>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
                     <TouchableHighlight style={styles.headerBtn} onPress={this.moreHistory} underlayColor='transparent'>
-                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.btnText}>{In18.MORE_TEXT}</Text>
+                        <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                             <Image style={styles.btnImage} source={require('../../image/mine/more_history.png')} />
                         </View>
                     </TouchableHighlight>
@@ -84,6 +83,8 @@ class History extends PureComponent {
 
     _onDidFocus = () => {
         Api.getUserWatchHistory((e) => {
+            console.log('qwqwqwqw');
+            console.log(e);
             if (e) {
                 store.dispatch(get_history_movie_list(e.data));
             }
@@ -117,8 +118,7 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 35
+        alignItems: 'center'
     },
     headerImage: {
         height: 20,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 16,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(167,167,168)',
         marginLeft: 24
     },
     headerBtn: {

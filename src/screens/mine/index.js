@@ -6,7 +6,7 @@ import { isXDevice } from '../../global/utils/PixelUtil';
 
 import Header from './header';
 import FunList from './funList';
-//import History from './history';
+import History from './history';
 import Bottom from './bottom';
 
 export default class MineScreen extends PureComponent {
@@ -46,7 +46,7 @@ export default class MineScreen extends PureComponent {
                         <View style={{ flex: 1 }}>
                             <Header />
                             <FunList />
-                            {/* <History /> */}
+                            <History />
                             <Bottom />
                         </View>
                     </SafeAreaView>

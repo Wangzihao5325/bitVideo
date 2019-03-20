@@ -29,8 +29,6 @@ export default class ShortVideo extends PureComponent {
 
     componentDidMount() {
         Api.getShortVideoListById(10, 1, (e) => {
-            console.log('12121212121wewewe');
-            console.log(e);
             if (e.data.length > 0) {
                 this.setState({
                     shortVideoList: e.data,
