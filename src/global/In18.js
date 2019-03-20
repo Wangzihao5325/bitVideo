@@ -31,6 +31,7 @@ const OVERPLUS = '剩余';
 const WATCH_HISTORY = '历史记录';
 const MY_STAR = '我的收藏';
 const MEMBER_CENTER = '会员中心';
+const PAY_MAKE_SURE = '确认订单';
 const I_WANT_SHARE = '我要推广';
 const BUY_HISTORY = '购买记录';
 
@@ -193,6 +194,7 @@ export {
     WATCH_HISTORY,
     MY_STAR,
     MEMBER_CENTER,
+    PAY_MAKE_SURE,
     I_WANT_SHARE,
     BUY_HISTORY,
 

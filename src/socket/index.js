@@ -424,6 +424,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getUserOrderList(onSuccess, onError) {
+        const url = '/api/user/order/list';
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();

@@ -1,26 +1,28 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, Text, Image } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, Image, FlatList } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import * as In18 from '../../../global/In18';
 import * as Sizes from '../../../global/Sizes';
+import Api from '../../../socket/index';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 
 const Item = function (props) {
+    let imageSource = props.item.pay_status_label === '未支付' ? require('../../../image/mine/pay_failed.png') : require('../../../image/mine/pay_success.png');
     return (
         <View style={styles.itemContainer}>
             <View style={styles.bottomLine}></View>
             <View style={{ flex: 3 }}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>月卡</Text>
-                    <Image style={styles.itemImage} source={require('../../../image/mine/pay_success.png')} />
+                    <Text style={styles.titleText}>{props.item.vc_title}</Text>
+                    <Image style={styles.itemImage} source={imageSource} />
                 </View>
-                <Text style={[styles.introText, { marginTop: 16 }]}>使用天数:168天</Text>
-                <Text style={styles.introText}>订单编号:12345678</Text>
-                <Text style={styles.introText}>交易时间:2019.03.02</Text>
+                <Text style={[styles.introText, { marginTop: 16 }]}>{`使用天数:${props.item.vc_daily_until}天`}</Text>
+                <Text style={styles.introText}>{`订单编号:${props.item.order_no}`}</Text>
+                <Text style={styles.introText}>{`交易时间:${props.item.created_at}`}</Text>
             </View>
             <View style={{ flex: 2, flexDirection: 'row-reverse' }}>
-                <Text style={styles.priceText}>$169.00</Text>
+                <Text style={styles.priceText}>{`¥${props.item.price_current}`}</Text>
             </View>
         </View>
     );
@@ -34,6 +36,20 @@ export default class BugListScreen extends PureComponent {
         }
     };
 
+    state = {
+        data: null
+    };
+
+    componentDidMount() {
+        Api.getUserOrderList((e) => {
+            if (e.data && e.data.length > 0) {
+                this.setState({
+                    data: e.data
+                });
+            }
+        });
+    }
+
     _goBack = () => {
         this.props.navigation.pop();
     }
@@ -43,7 +59,14 @@ export default class BugListScreen extends PureComponent {
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <View style={{ flex: 1 }}>
                     <ModalHeader backBtnColor='rgb(255,255,255)' textStyle={{ fontSize: 15, color: 'white' }} goBack={this._goBack} title={In18.BUY_HISTORY} rightBtnMode='none' />
-                    <Item />
+                    {/* <Item /> */}
+                    {this.state.data &&
+                        <FlatList
+                            style={{ flex: 1 }}
+                            data={this.state.data}
+                            renderItem={({ item }) => <Item item={item} />}
+                        />
+                    }
                 </View>
             </SafeAreaView>
         );
