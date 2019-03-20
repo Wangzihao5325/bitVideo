@@ -34,6 +34,11 @@ class TopBtns extends PureComponent {
                     width={ICON_SIZE}
                     onPress={this.settingPress}
                     source={require('../../image/mine/mine_settings.png')} />
+                <IconBtn
+                    height={ICON_SIZE}
+                    width={ICON_SIZE}
+                    onPress={this.settingPress}
+                    source={require('../../image/mine/message.png')} />
             </View>
         );
     }
@@ -130,7 +135,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         display: 'flex',
         flexDirection: 'row-reverse',
-        justifyContent: 'space-between',
         paddingLeft: 20,
         paddingRight: 18,
     },
