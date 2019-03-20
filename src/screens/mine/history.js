@@ -83,8 +83,6 @@ class History extends PureComponent {
 
     _onDidFocus = () => {
         Api.getUserWatchHistory((e) => {
-            console.log('qwqwqwqw');
-            console.log(e);
             if (e) {
                 store.dispatch(get_history_movie_list(e.data));
             }

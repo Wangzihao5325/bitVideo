@@ -8,10 +8,10 @@ class Item extends PureComponent {
         return (
             <TouchableHighlight style={styles.itemContainer} onPress={this.props.onPress} underlayColor='transparent'>
                 <View style={styles.flexView}>
-                    <Image style={styles.itemImage} source={this.props.source} />
+                    <Image resizeMode='contain' style={styles.itemImage} source={this.props.source} />
                     <Text style={styles.itemTitle} >{this.props.title}</Text>
                     <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
-                        <Image style={styles.arrowImage} source={require('../../image/mine/right_arrow.png')} />
+                        <Image style={styles.arrowImage} source={require('../../image/mine/more_history.png')} />
                     </View>
                 </View>
             </TouchableHighlight>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
     itemTitle: {
         fontSize: 16,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(167,167,168)',
         marginLeft: 23
     },
     arrowImage: {
