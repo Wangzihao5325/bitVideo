@@ -156,6 +156,10 @@ const DELETE = '删除';
 const GET_RECORD = '获取记录';
 const EXPENSES_RECORD = '消费记录';
 
+//买卡页面
+const BUY_CARD_SOGOGAN = '赶快开通会员卡享受无限次观看';
+const BUY_RIGHT_NOW = '立即购买';
+
 
 export {
     MAIN_PAGE_TITLE,
@@ -294,4 +298,7 @@ export {
 
     GET_RECORD,
     EXPENSES_RECORD,
+
+    BUY_CARD_SOGOGAN,
+    BUY_RIGHT_NOW,
 };

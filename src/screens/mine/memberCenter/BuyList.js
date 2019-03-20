@@ -52,7 +52,7 @@ export default class BugListScreen extends PureComponent {
 
 const styles = StyleSheet.create({
     itemContainer: {
-        height: 135,
+        height: 135 + 10,
         width: '100%',
         display: 'flex',
         flexDirection: 'row'
@@ -65,8 +65,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     titleContainer: {
-        flex: 1,
-        height: 30,
         marginTop: 19,
         flexDirection: 'row'
     },

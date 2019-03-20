@@ -419,6 +419,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getVIPCardList(onSuccess, onError) {
+        const url = '/api/vip_card';
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();
