@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ImageBackground, Platform, View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, Image, Platform, View, Text, StyleSheet, ScrollView } from 'react-native';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
 import { isXDevice } from '../../global/utils/PixelUtil';
 
 import ModalHeader from '../../components/modal/ModalHeader';
+import Toptab from './TopTab';
+import BottomTaskList from './bottomTaskList';
 
 export default class TaskScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -18,6 +20,14 @@ export default class TaskScreen extends PureComponent {
 
     }
 
+    _toIcons = () => {
+        console.log('123');
+    }
+
+    _toGift = () => {
+        console.log('321');
+    }
+
     render() {
         let isX = isXDevice();
         let bgImageStyle = { width: '100%', height: 207 - 20 };
@@ -28,17 +38,22 @@ export default class TaskScreen extends PureComponent {
             bgImageStyle = { width: '100%', height: 207 - 44 };
         }
         return (
-            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                <ImageBackground
-                    style={bgImageStyle}
-                    source={require('../../image/mine/mine_background.png')}
-                >
-                    <SafeAreaView style={{ flex: 1 }}>
-                        <View style={{ flex: 1 }}>
-                            <ModalHeader textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.TASK_CENTER} rightBtnMode='text' rightBtnTitle='邀请记录' rightBtnOnPress={this._inviteDetails} />
-                        </View>
-                    </SafeAreaView>
-                </ImageBackground>
+            <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <Image
+                    style={[{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                    }, bgImageStyle]}
+                    source={require('../../image/task/task_background.png')}
+                />
+                <SafeAreaView style={{ flex: 1 }}>
+                    <View style={{ flex: 1 }}>
+                        <ModalHeader textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.TASK_CENTER} rightBtnMode='text' rightBtnTitle='邀请记录' rightBtnOnPress={this._inviteDetails} />
+                        <Toptab toIcons={this._toIcons} toGift={this._toGift} />
+                        <BottomTaskList />
+                    </View>
+                </SafeAreaView>
             </View>
         );
     }
