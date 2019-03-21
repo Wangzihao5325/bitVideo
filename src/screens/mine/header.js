@@ -102,9 +102,7 @@ class CountList extends PureComponent {
 class Header extends PureComponent {
 
     _onDidFocus = () => {
-        console.log('1212121212');
         Api.getUserInfo((e) => {
-            console.log(e);
             if (e) {
                 store.dispatch(get_user_info(e));
             }
