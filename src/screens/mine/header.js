@@ -58,7 +58,7 @@ class Avater extends PureComponent {
         let typeText = accountTypeTransform(this.props.type);
         return (
             <View style={styles.avaterContainer}>
-                <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />
+                <Image style={styles.avaterImage} source={{ uri: this.props.source }} defaultSource={require('../../image/mine/mine_defalut_avater.png')} />
                 <View style={styles.accountNameContainer}>
                     <Text style={styles.accountNameText}>{this.props.name}</Text>
                     <Text style={styles.accountTypeText}>{typeText}</Text>
@@ -71,21 +71,27 @@ class Avater extends PureComponent {
     }
 }
 class CountList extends PureComponent {
-
     render() {
+        let dateStr = '-';
+        if (this.props.vipEndDay.length > 0) {
+            let reg = this.props.vipEndDay.split(' ')[0];
+            let regArr = reg.split('-');
+            regArr.shift();
+            dateStr = regArr.join('/');
+        }
         return (
             <View style={styles.countListContainer}>
                 <ImageBackground style={styles.countListboard} imageStyle={{ borderRadius: 5 }} source={require('../../image/mine/board_bg.png')}>
                     <View style={styles.watchTimesBoard}>
-                        <Text style={styles.countListNumText}><Text>{this.props.use}</Text>{`/${this.props.total}`}</Text>
+                        <Text style={styles.countListNumText}>{this.props.vipHasDays}</Text>
                         <Text style={styles.countListText}>{In18.LEFT_VIP_DAY}</Text>
                     </View>
                     <View style={styles.watchTimesBoard}>
-                        <Text style={styles.countListNumText}><Text>{this.props.use}</Text>{`/${this.props.total}`}</Text>
+                        <Text style={styles.countListNumText}>{this.props.remainCount}</Text>
                         <Text style={styles.countListText}>{In18.TODAY_WATCH_TIMES}</Text>
                     </View>
                     <View style={styles.watchTimesBoard}>
-                        <Text style={styles.countListNumText}><Text>{this.props.use}</Text>{`/${this.props.total}`}</Text>
+                        <Text style={styles.countListNumText}>{dateStr}</Text>
                         <Text style={styles.countListText}>{In18.LAST_DATE}</Text>
                     </View>
                 </ImageBackground>
@@ -96,7 +102,9 @@ class CountList extends PureComponent {
 class Header extends PureComponent {
 
     _onDidFocus = () => {
+        console.log('1212121212');
         Api.getUserInfo((e) => {
+            console.log(e);
             if (e) {
                 store.dispatch(get_user_info(e));
             }
@@ -110,8 +118,8 @@ class Header extends PureComponent {
                     onDidFocus={this._onDidFocus}
                 />
                 <TopBtns />
-                <Avater name={this.props.accountName} type={this.props.accountType} />
-                <CountList total={this.props.viewCountTotal} use={this.props.viewCountUse} />
+                <Avater source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
+                <CountList vipEndDay={this.props.vipEndDay} vipHasDays={this.props.vipHasDays} remainCount={this.props.remainCount} total={this.props.viewCountTotal} use={this.props.viewCountUse} />
             </View>
         );
     }
@@ -123,6 +131,10 @@ function mapState2Props(store) {
         accountType: store.account.type,
         viewCountTotal: store.account.viewCountDailyTotal,
         viewCountUse: store.account.viewCountDailyUse,
+        remainCount: store.account.remainCount,
+        vipHasDays: store.account.vipHasDays,
+        vipEndDay: store.account.vipEndDay,
+        coverPath: store.account.coverPath,
     }
 }
 

@@ -14,6 +14,10 @@ const initialState = {
     viewCountDailyTotal: 0,
     viewCountDailyUse: 0,
     icons: 0,
+    vip: null,
+    vipEndDay: '',
+    vipHasDays: 0,
+    remainCount: ''
 }
 
 const reducer = (state = initialState, action) => {

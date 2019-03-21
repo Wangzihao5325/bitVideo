@@ -144,7 +144,10 @@ export default class App extends Component {
     });
     //设备号注册
     let deviceId = DeviceInfo.getUniqueID();
-    Api.postRegisterByDeviceId(deviceId, (e) => {
+    Api.postRegisterByDeviceId(deviceId, (e, code, message) => {
+      // console.log(e);
+      // console.log(code);
+      // console.log(message);
       if (e && e.api_token) {
         Variables.account.token = e.api_token;
         Variables.account.deviceToken = e.api_token;
