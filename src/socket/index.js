@@ -429,6 +429,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getUserExchangeList(onSuccess, onError) {
+        const url = '/api/user/convert/list';
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();

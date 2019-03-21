@@ -25,7 +25,7 @@ export default class TaskScreen extends PureComponent {
     }
 
     _toGift = () => {
-        console.log('321');
+        this.props.navigation.navigate('GiftCenterModel');
     }
 
     render() {
