@@ -49,7 +49,7 @@ export default class TaskScreen extends PureComponent {
                 />
                 <SafeAreaView style={{ flex: 1 }}>
                     <View style={{ flex: 1 }}>
-                        <ModalHeader textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.TASK_CENTER} rightBtnMode='text' rightBtnTitle='邀请记录' rightBtnOnPress={this._inviteDetails} />
+                        <ModalHeader isDisableBack={true} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.TASK_CENTER} rightBtnMode='text' rightBtnTitle='邀请记录' rightBtnOnPress={this._inviteDetails} />
                         <Toptab toIcons={this._toIcons} toGift={this._toGift} />
                         <BottomTaskList />
                     </View>

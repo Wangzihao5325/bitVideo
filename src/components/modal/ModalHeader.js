@@ -9,7 +9,7 @@ import IconBtn from '../imageBtn/IconBtn';
 export default class ModalHeader extends PureComponent {
 
     static propTypes = {
-        goBack: PropTypes.func.isRequired,
+        goBack: PropTypes.func,
         title: PropTypes.string.isRequired,
         rightBtnMode: PropTypes.string.isRequired,//'none','text','icon','icon_text'
         rightBtnOnPress: PropTypes.func,
@@ -22,13 +22,15 @@ export default class ModalHeader extends PureComponent {
         return (
             <View style={styles.headerContainer}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                    <VectorIconBtn
-                        style={{ marginLeft: 15 }}
-                        size={21}
-                        name='arrow-left'
-                        color={backBtnColor}
-                        onPress={this.props.goBack}
-                    />
+                    {!this.props.isDisableBack &&
+                        <VectorIconBtn
+                            style={{ marginLeft: 15 }}
+                            size={21}
+                            name='arrow-left'
+                            color={backBtnColor}
+                            onPress={this.props.goBack}
+                        />
+                    }
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={styles.headerTitle}>{this.props.title}</Text>
