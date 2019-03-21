@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, View, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as Colors from '../../global/Colors';
+import SecurtyImage from '../../components/securtyImage/index';
 
 class Select extends PureComponent {
     render() {
@@ -54,12 +55,14 @@ class VideoDetailInfoWithEdit extends PureComponent {
     }
 
     render() {
+        console.log(this.props.source);
         return (
             <TouchableHighlight style={styles.container} onPress={this._goToSeeMovie} underlayColor='transparent'>
                 <View style={[styles.flexView, styles.borderBottom]}>
                     {this.props.isSelectMode && <Select isSelect={this.state.isSelectNow} />}
                     <View style={styles.imageContainer}>
-                        <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} />
+                        <SecurtyImage imageStyle={{ height: 114, width: 88, borderRadius: 5 }} style={styles.imageStyle} source={this.props.source} />
+                        {/* <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} /> */}
                     </View>
                     <View style={styles.infoContainer}>
                         <Text style={styles.titleText}>{this.props.title}</Text>

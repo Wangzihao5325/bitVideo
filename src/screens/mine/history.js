@@ -7,6 +7,7 @@ import Api from '../../socket/index';
 import store from '../../store/index';
 import { get_history_movie_list } from '../../store/actions/watchHistoryAction';
 import { connect } from 'react-redux';
+import SecurtyImage from '../../components/securtyImage/index';
 
 import watchHistory from '../../mock/watchHistory';
 
@@ -48,7 +49,8 @@ class Item extends PureComponent {
         return (
             <TouchableHighlight style={styles.itemContainer} onPress={this.watchHistoryPressing} underlayColor='transparent'>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image style={styles.itemImage} source={this.props.source} />
+                    {/* <Image style={styles.itemImage} source={this.props.source} /> */}
+                    <SecurtyImage style={styles.itemImage} source={this.props.source} />
                     <View style={styles.itemTextContainer}>
                         <Text style={styles.itemTitle}>{this.props.title}</Text>
                     </View>
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     itemTitle: {
-        color: 'rgb(33,33,33)',
+        color: 'white',
         fontSize: 14
     },
     flatList: {
