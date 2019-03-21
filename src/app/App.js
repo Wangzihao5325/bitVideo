@@ -20,6 +20,7 @@ import VideoModel from '../screens/videoModel/index';
 import SearchModel from '../screens/searchModel/index';
 import HistoryModel from '../screens/historyModel/index';
 import CollectModel from '../screens/collectModel/index';
+import IconsListModel from '../screens/task/coinModel/index';
 
 import SplashModel from '../components/splashModal/index';
 
@@ -79,6 +80,9 @@ const RouterWithModal = createStackNavigator(
     },
     CollectModel: {
       screen: CollectModel
+    },
+    IconsListModel: {
+      screen: IconsListModel
     }
   },
   {

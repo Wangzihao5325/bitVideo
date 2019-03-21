@@ -77,8 +77,6 @@ export default class bottomTaskList extends PureComponent {
     };
     componentDidMount() {
         Api.getTaskList((e) => {
-            console.log('11222333');
-            console.log(e);
             if (e instanceof Array) {
                 let daily = e.filter((item) => {
                     return item.group == 'daily';

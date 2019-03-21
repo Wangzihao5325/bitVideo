@@ -21,7 +21,7 @@ export default class TaskScreen extends PureComponent {
     }
 
     _toIcons = () => {
-        console.log('123');
+        this.props.navigation.navigate('IconsListModel');;
     }
 
     _toGift = () => {
