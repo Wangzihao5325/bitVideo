@@ -22,6 +22,7 @@ import HistoryModel from '../screens/historyModel/index';
 import CollectModel from '../screens/collectModel/index';
 import IconsListModel from '../screens/task/coinModel/index';
 import GiftCenterModel from '../screens/task/giftCenterModel/index';
+import QrCodeModel from '../screens/task/qrCode/index';
 
 import SplashModel from '../components/splashModal/index';
 
@@ -87,6 +88,9 @@ const RouterWithModal = createStackNavigator(
     },
     GiftCenterModel: {
       screen: GiftCenterModel
+    },
+    QrCodeModel: {
+      screen: QrCodeModel
     }
   },
   {
