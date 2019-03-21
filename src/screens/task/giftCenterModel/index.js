@@ -47,7 +47,6 @@ class GiftCenterModel extends PureComponent {
 
     componentDidMount() {
         Api.getUserExchangeList((e) => {
-            console.log(e);
             if (Array.isArray(e) && e.length > 0) {
                 this.setState({
                     data: e

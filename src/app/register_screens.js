@@ -13,6 +13,8 @@ import ShortVideoDetail from '../screens/shortVideo/shortVideoDetail/index';
 import SubjectScreen from '../screens/subject/index';
 
 import TaskScreen from '../screens/task/index';
+import InviteListScreen from '../screens/task/inviteList/index';
+
 import MineScreen from '../screens/mine/index';
 import MemberCenterScreen from '../screens/mine/memberCenter/index';
 import BugListScreen from '../screens/mine/memberCenter/BuyList';
@@ -91,7 +93,8 @@ SubjectStack.navigationOptions = ({ navigation }) => {
 
 let TaskStack = createStackNavigator(
     {
-        TaskScreen
+        TaskScreen,
+        InviteListScreen
     },
     {
         navigationOptions: { gesturesEnabled: false }

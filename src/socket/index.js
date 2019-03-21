@@ -434,6 +434,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getInviteList(onSuccess, onError) {
+        const url = '/api/video/user/invitation/list';
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();

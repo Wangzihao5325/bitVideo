@@ -17,11 +17,11 @@ export default class TaskScreen extends PureComponent {
     };
 
     _inviteDetails = () => {
-
+        this.props.navigation.navigate('InviteListScreen');
     }
 
     _toIcons = () => {
-        this.props.navigation.navigate('IconsListModel');;
+        this.props.navigation.navigate('IconsListModel');
     }
 
     _toGift = () => {
