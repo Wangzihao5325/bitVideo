@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, View, StyleSheet, ImageBackground, SafeAreaView, Platform } from 'react-native';
+import { ScrollView, View, StyleSheet, Image, SafeAreaView, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Colors from '../../global/Colors';
 import { isXDevice } from '../../global/utils/PixelUtil';
@@ -38,19 +38,22 @@ export default class MineScreen extends PureComponent {
         }
         return (
             <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                <ImageBackground
-                    style={bgImageStyle}
+                <Image
+                    style={[{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                    }, bgImageStyle]}
                     source={require('../../image/mine/mine_background.png')}
-                >
-                    <SafeAreaView style={styles.container}>
-                        <View style={{ flex: 1 }}>
-                            <Header />
-                            <FunList />
-                            <History />
-                            <Bottom />
-                        </View>
-                    </SafeAreaView>
-                </ImageBackground>
+                />
+                <SafeAreaView style={styles.container}>
+                    <Header />
+                    <FunList />
+                    <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+                        <History />
+                        <Bottom />
+                    </ScrollView>
+                </SafeAreaView>
             </View>
         );
     }

@@ -58,7 +58,8 @@ class Avater extends PureComponent {
         let typeText = accountTypeTransform(this.props.type);
         return (
             <View style={styles.avaterContainer}>
-                <Image style={styles.avaterImage} source={{ uri: this.props.source }} defaultSource={require('../../image/mine/mine_defalut_avater.png')} />
+                {this.props.source && <Image style={styles.avaterImage} source={{ uri: this.props.source }} defaultSource={require('../../image/mine/mine_defalut_avater.png')} />}
+                {!this.props.source && <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />}
                 <View style={styles.accountNameContainer}>
                     <Text style={styles.accountNameText}>{this.props.name}</Text>
                     <Text style={styles.accountTypeText}>{typeText}</Text>
@@ -103,6 +104,7 @@ class Header extends PureComponent {
 
     _onDidFocus = () => {
         Api.getUserInfo((e) => {
+            console.log(e);
             if (e) {
                 store.dispatch(get_user_info(e));
             }

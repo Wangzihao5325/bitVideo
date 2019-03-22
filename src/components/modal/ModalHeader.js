@@ -33,7 +33,7 @@ export default class ModalHeader extends PureComponent {
                     }
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={styles.headerTitle}>{this.props.title}</Text>
+                    <Text style={[styles.headerTitle,this.props.titleStyle]}>{this.props.title}</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                     {this.props.rightBtnMode == 'none' && <View style={[{ height: 10, width: 10 }, styles.marginStyle]} />}
