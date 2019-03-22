@@ -6,8 +6,9 @@ import store from '../../../store/index';
 import * as In18 from '../../../global/In18';
 import { registerReg } from '../../../global/Reg';
 import Api from '../../../socket/index';
+import * as Colors from '../../../global/Colors';
 
-import ModalHeader from '../modalComponent/ModalHeader';
+import ModalHeader from '../../../components/modal/ModalHeader';
 import PasswordInputWithVerificationCode from '../../../components/input/PasswordInputWithVerificationCode';
 import PasswordInput from '../../../components/input/PasswordInput';
 
@@ -53,8 +54,8 @@ class RegisterStepTwoScreen extends PureComponent {
         mobile.splice(3, 4, '****');
         let securityMobile = mobile.join('');
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <ModalHeader title={In18.INPUT_VER_CODE} goBack={this.goBack} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <ModalHeader goBack={this.goBack} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.INPUT_VER_CODE} rightBtnMode='none' />
                 <Text style={styles.titleText}>{In18.CLICK_TO_GET_VER_CODE}</Text>
                 <Text style={styles.mobileText}>{`${this.props.countryCode} `}<Text>{securityMobile}</Text></Text>
                 <PasswordInputWithVerificationCode onTextChange={this.codeOnChange} getMessageCode={this.getMessageCode} style={{ marginTop: 48 }} />
@@ -79,11 +80,11 @@ const styles = StyleSheet.create({
         marginTop: 80,
         marginLeft: 31,
         fontSize: 16,
-        color: 'rgb(73,114,255)'
+        color: 'rgb(255,168,96)'
     },
     mobileText: {
         fontSize: 16,
-        color: 'rgb(54,54,54)',
+        color: 'white',
         alignSelf: 'center',
         marginTop: 36
     },
@@ -96,10 +97,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 23,
         marginTop: 48,
-        backgroundColor: 'rgb(73,114,255)'
+        backgroundColor: 'rgb(255,168,96)'
     },
     btnText: {
         fontSize: 16,
-        color: 'white'
+        color: 'rgb(22,24,36)'
     }
 });

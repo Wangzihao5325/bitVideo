@@ -20,7 +20,7 @@ export default class UnderlineInput extends PureComponent {
                         onChangeText={this.textOnChange}
                         style={styles.textInput}
                         placeholder={In18.PLEASE_INPUT_INVITE_CODE}
-                        placeholderTextColor='rgb(151,151,151)'
+                        placeholderTextColor='white'
                     />
                 </View>
             </View>
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
         marginLeft: 19,
         flex: 1,
         fontSize: 16,
-        color: 'rgb(54,54,54)'
+        color: 'white'
     }
 });

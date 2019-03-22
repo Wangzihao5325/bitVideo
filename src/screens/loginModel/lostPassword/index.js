@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView, TouchableHighlight, Text, StyleSheet } from 'react-native';
 import * as In18 from '../../../global/In18';
 import * as Sizes from '../../../global/Sizes';
+import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
 
-import ModalHeader from '../modalComponent/ModalHeader';
+import ModalHeader from '../../../components/modal/ModalHeader';
 import MobileInput from '../../../components/input/MobileInput';
 import PasswordInputWithVercode from '../../../components/input/PasswordInputWithVerificationCode';
 import PasswordInput from '../../../components/input/PasswordInput';
@@ -48,8 +49,8 @@ export default class LostPassword extends PureComponent {
     }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <ModalHeader title={In18.CHANGE_PASSWORD} goBack={this.goBack} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <ModalHeader goBack={this.goBack} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.CHANGE_PASSWORD} rightBtnMode='none' />
                 <MobileInput onTextChange={this.mobileTextChange} style={{ marginTop: 80 }} changeCode={this.gotoChangeCountryCode} />
                 <PasswordInputWithVercode getMessageCode={this.getMessageCode} onTextChange={this.codeTextChange} style={{ marginTop: 34 }} />
                 <PasswordInput onTextChange={this.passwordTextChange} style={{ marginTop: 30 }} placeHolder={In18.PLEASE_SET_PASSWORD} />
@@ -68,14 +69,14 @@ const styles = StyleSheet.create({
         width: Sizes.DEVICE_WIDTH - 32 - 38,
         marginLeft: 32,
         borderRadius: 23,
-        backgroundColor: 'rgb(73,114,255)',
+        backgroundColor: 'rgb(255,168,96)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 48
     },
     btnText: {
-        color: 'white',
+        color: 'rgb(22,24,36)',
         fontSize: 16
     }
 });

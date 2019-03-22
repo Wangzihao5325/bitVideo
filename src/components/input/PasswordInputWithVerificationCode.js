@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         marginLeft: 19,
         flex: 1,
         fontSize: 16,
-        color: 'rgb(54,54,54)'
+        color: 'white'
     },
     btn: {
         height: 29,

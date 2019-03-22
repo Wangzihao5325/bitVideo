@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
+import * as Colors from '../../../global/Colors';
 import * as In18 from '../../../global/In18';
 import { registerReg } from '../../../global/Reg';
 
-import ModalHeader from '../modalComponent/ModalHeader';
+import ModalHeader from '../../../components/modal/ModalHeader';
 import MobileInput from '../../../components/input/MobileInput';
 import UnderlineInput from '../../../components/input/UnderlineInput';
 
@@ -104,8 +105,8 @@ export default class RegisterModal extends PureComponent {
             styleObj = { marginTop: 30 }
         }
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <ModalHeader title={In18.REGISTER} goBack={this.goBack} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <ModalHeader goBack={this.goBack} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.REGISTER} rightBtnMode='none' />
                 <MobileInput style={{ marginTop: 81 }} onTextChange={this.mobileTextChange} changeCode={this.gotoChangeCountryCode} />
                 <Btn
                     onPress={this.showInviteCodeInput}
@@ -136,20 +137,20 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontSize: 16,
-        color: 'rgb(73,114,255)'
+        color: 'rgb(255,168,96)'
     },
     nextStep: {
         height: 46,
         width: Sizes.DEVICE_WIDTH - 33 - 33,
         marginLeft: 33,
         borderRadius: 23,
-        backgroundColor: 'rgb(73,114,255)',
+        backgroundColor: 'rgb(255,168,96)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
     },
     nextStepText: {
-        color: 'white',
+        color: 'rgb(22,24,36)',
         fontSize: 16
     },
     protocolAgreeLineContainer: {
@@ -163,9 +164,9 @@ const styles = StyleSheet.create({
     protocolAgreeLineText: {
         marginLeft: 14,
         fontSize: 12,
-        color: 'rgb(54,54,54)'
+        color: '#909090'
     },
     highlightText: {
-        color: 'rgb(73,114,255)'
+        color: 'rgb(255,168,96)'
     }
 });
