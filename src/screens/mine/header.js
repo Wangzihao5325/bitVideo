@@ -105,7 +105,6 @@ class Header extends PureComponent {
 
     _onDidFocus = () => {
         Api.getUserInfo((e) => {
-            console.log(e);
             if (e) {
                 store.dispatch(get_user_info(e));
             }

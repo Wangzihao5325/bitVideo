@@ -63,7 +63,7 @@ export default class PasswordInputWithVerificationCode extends PureComponent {
                         onChangeText={this.textOnChange}
                         style={styles.textInput}
                         placeholder={In18.PLEASE_INPUT_VER_CODE}
-                        placeholderTextColor='rgb(151,151,151)'
+                        placeholderTextColor='white'
                     />
                     <TouchableHighlight
                         disabled={this.state.disable}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 10,
-        color: 'white',
+        color: 'rgb(255,168,96)',
     },
     textInput: {
         marginLeft: 19,
@@ -110,9 +110,11 @@ const styles = StyleSheet.create({
         height: 29,
         width: 82,
         borderRadius: 14,
-        backgroundColor: 'rgb(73,114,255)',
+        backgroundColor: 'transparent',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderColor: 'rgb(255,168,96)',
+        borderWidth: 1
     },
 });

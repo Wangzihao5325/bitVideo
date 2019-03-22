@@ -30,7 +30,7 @@ class MobileInput extends PureComponent {
                         onChangeText={this.textOnchange}
                         style={styles.textInput}
                         placeholder={In18.PLEASE_INPUT_PHONE_NUMBER}
-                        placeholderTextColor='rgb(151,151,151)'
+                        placeholderTextColor='white'
                         keyboardType='number-pad'
                     />
                     <IconBtn
@@ -72,13 +72,13 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        color: 'rgb(73,114,255)',
+        color: 'rgb(255,168,96)',
         marginLeft: 19
     },
     textInput: {
         marginLeft: 6,
         flex: 1,
         fontSize: 16,
-        color: 'rgb(54,54,54)'
+        color: 'white'
     }
 });

@@ -3,6 +3,7 @@ import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight } from 'react-
 import PropTypes from 'prop-types';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
+import * as Colors from '../../global/Colors';
 import Api from '../../socket/index';
 import Variables from '../../global/Variables';
 
@@ -10,35 +11,9 @@ import VectorIconBtn from '../../components/imageBtn/VectorIconBtn';
 import MobileInput from '../../components/input/MobileInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
+import ModalHeader from '../../components/modal/ModalHeader';
 
 let reg = { mobile: '', password: '', code: '', verCode: '' };
-class Header extends PureComponent {
-
-    static contextTypes = {
-        modalNavigation: PropTypes.object
-    }
-
-    goToRegister = () => {
-        const { modalNavigation } = this.context;
-        modalNavigation.navigate('MyRegisterModal');
-    }
-
-    render() {
-        return (
-            <View style={styles.headerContainer}>
-                <View style={styles.headerFlexContainer}>
-                    <VectorIconBtn size={21} name='chevron-left' color='rgb(73,114,255)' onPress={this.props.goBack} />
-                </View>
-                <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitle}>{In18.PASSWORD_LOGIN}</Text>
-                </View>
-                <TouchableHighlight onPress={this.goToRegister} style={[styles.headerFlexContainer, { justifyContent: 'center' }]}>
-                    <Text style={styles.headerRegister}>{In18.REGISTER}</Text>
-                </TouchableHighlight>
-            </View>
-        );
-    }
-}
 
 class MainTitle extends PureComponent {
     render() {
@@ -159,46 +134,36 @@ export default class LoginModel extends PureComponent {
         }
     }
 
+    _goBack = () => {
+        this.props.navigation.goBack();
+    }
+
+    _goToRegister = () => {
+        this.props.navigation.navigate('MyRegisterModal');
+    }
+
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <Header goBack={() => this.props.navigation.goBack()} />
-                <MainTitle />
-                <InputField />
+            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <View style={{ flex: 1 }}>
+                    <ModalHeader
+                        goBack={this._goBack}
+                        textStyle={{ color: 'white' }}
+                        backBtnColor='rgb(255,255,255)'
+                        title={In18.PASSWORD_LOGIN}
+                        rightBtnMode='text'
+                        rightBtnTitle={In18.REGISTER}
+                        rightBtnOnPress={this._goToRegister}
+                    />
+                    <MainTitle />
+                    <InputField />
+                </View>
             </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    headerContainer: {
-        marginTop: 13,
-        height: 25,
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    headerFlexContainer: {
-        height: 25,
-        width: 35,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginHorizontal: 15
-    },
-    headerTitleContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    headerTitle: {
-        fontSize: 18,
-        color: 'rgb(32,32,32)'
-    },
-    headerRegister: {
-        color: 'rgb(32,32,32)',
-        fontSize: 18
-    },
     mainTitleContainer: {
         height: 72,
         width: '100%',
@@ -212,7 +177,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     H1Text: {
-        color: 'rgb(32,32,32)',
+        color: 'white',
         fontSize: 24
     },
     mainTitleH2: {
@@ -241,7 +206,7 @@ const styles = StyleSheet.create({
     lostPasswordText: {
         marginRight: 42.5,
         fontSize: 12,
-        color: 'rgb(73,114,255)'
+        color: 'rgb(255,168,96)'
     },
     loginBtn: {
         marginTop: 30,
@@ -252,10 +217,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 23,
-        backgroundColor: 'rgb(73,114,255)'
+        backgroundColor: 'rgb(255,168,96)'
     },
     loginBtnText: {
-        color: 'white',
+        color: 'rgb(22,24,36)',
         fontSize: 16
     },
     changeLoginWayContainer: {
@@ -269,6 +234,6 @@ const styles = StyleSheet.create({
     },
     changeLoginWayText: {
         fontSize: 16,
-        color: 'rgb(73,114,255)'
+        color: 'rgb(255,168,96)'
     }
 });

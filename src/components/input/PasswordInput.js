@@ -39,7 +39,7 @@ export default class PasswordInput extends PureComponent {
                         onChangeText={this.textOnChange}
                         style={styles.textInput}
                         placeholder={placeHolderText}
-                        placeholderTextColor='rgb(151,151,151)'
+                        placeholderTextColor='white'
                     />
                     <IconBtn
                         onPress={this.changeSecure}
