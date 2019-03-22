@@ -59,7 +59,7 @@ export default class InviteList extends PureComponent {
     }
 
     _goShare = () => {
-
+        this.props.navigation.navigate('QrCodeModel');
     }
 
     render() {

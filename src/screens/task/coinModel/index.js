@@ -12,8 +12,37 @@ import ModalHeader from '../../../components/modal/ModalHeader';
 
 class GetItem extends PureComponent {
     render() {
+        let dataStr = this.props.date.split(' ')[0];
         return (
-            <View style={{ height: 75, width: '100%' }}>
+            <View style={{ height: 67, width: '100%', flexDirection: 'row', display: 'flex' }}>
+                <View style={{ flex: 2, marginLeft: 24, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'rgb(246,246,246)' }}>
+                    <Text style={{ marginTop: 17, fontSize: 13, color: 'rgb(34,34,34)' }}>{this.props.title}</Text>
+                    <Text style={{ marginTop: 10, fontSize: 12, color: 'rgb(34,34,34)' }}>{dataStr}</Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginRight: 33, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'rgb(246,246,246)' }}>
+                    <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
+                        <Text style={{ color: 'rgb(253,206,0)', fontSize: 15 }}>{`+${this.props.coin}金币`}</Text>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+}
+
+class PutItem extends PureComponent {
+    render() {
+        let dataStr = this.props.date.split(' ')[0];
+        return (
+            <View style={{ height: 67, width: '100%', flexDirection: 'row', display: 'flex' }}>
+                <View style={{ flex: 2, marginLeft: 24, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'rgb(246,246,246)' }}>
+                    <Text style={{ marginTop: 17, fontSize: 13, color: 'rgb(34,34,34)' }}>{this.props.title}</Text>
+                    <Text style={{ marginTop: 10, fontSize: 12, color: 'rgb(34,34,34)' }}>{dataStr}</Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginRight: 33, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'rgb(246,246,246)' }}>
+                    <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
+                        <Text style={{ color: 'rgb(253,206,0)', fontSize: 15 }}>{`${this.props.coin}金币`}</Text>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -28,9 +57,7 @@ class GetPage extends PureComponent {
 
     componentDidMount() {
         Api.getIconHistoryList('get', (e) => {
-            console.log('wwwwww');
-            console.log(e);
-            if (e) {
+            if (e && e.data.length > 0) {
                 this.setState({
                     data: e.data,
                     currentPage: e.current_page,
@@ -42,27 +69,47 @@ class GetPage extends PureComponent {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: 'white' }} >
-                {/* <FlatList
-                    data={this.state.data}
-                // renderItem={}
-                /> */}
+                {this.state.data.length > 0 &&
+                    <FlatList
+                        style={{ flex: 1 }}
+                        data={this.state.data}
+                        renderItem={({ item }) => <GetItem title={item.event_label} coin={item.value} date={item.created_at} />}
+                    />
+                }
             </View>
         );
     }
 }
 
 class PutPage extends PureComponent {
+    state = {
+        data: [],
+        currentPage: -1,
+        lastPage: -1,
+    };
+
     componentDidMount() {
         Api.getIconHistoryList('put', (e) => {
-            if (e) {
-                console.log('put');
-                console.log(e);
+            if (e && e.data.length > 0) {
+                this.setState({
+                    data: e.data,
+                    currentPage: e.current_page,
+                    lastPage: e.last_page
+                });
             }
         });
     }
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: 'yellow' }} />
+            <View style={{ flex: 1, backgroundColor: 'white' }} >
+                {this.state.data.length > 0 &&
+                    <FlatList
+                        style={{ flex: 1 }}
+                        data={this.state.data}
+                        renderItem={({ item }) => <PutItem title={item.event_label} coin={item.value} date={item.created_at} />}
+                    />
+                }
+            </View>
         );
     }
 }
