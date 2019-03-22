@@ -4,9 +4,10 @@ import store from '../../../store/index';
 import { countryCodeChange } from '../../../store/actions/countryAction';
 import * as In18 from '../../../global/In18';
 import * as Sizes from '../../../global/Sizes';
+import * as Colors from '../../../global/Colors';
 import CH_sections from '../../../global/doc/Country_code_CH';
 
-import ModalHeader from '../modalComponent/ModalHeader';
+import ModalHeader from '../../../components/modal/ModalHeader';
 import IconBtn from '../../../components/imageBtn/IconBtn';
 
 class SectionHeader extends PureComponent {
@@ -46,7 +47,7 @@ class SearchHeader extends PureComponent {
             <View style={styles.searchHeaderContainer}>
                 <View style={styles.searchContent}>
                     <IconBtn height={18} width={18} source={require('../../../image/mine/search.png')} />
-                    <TextInput style={{ flex: 1, marginLeft: 8 }} onChangeText={this.props.search} placeholder='搜索' />
+                    <TextInput style={{ flex: 1, marginLeft: 8, color: 'white' }} onChangeText={this.props.search} placeholderTextColor='white' placeholder='搜索' />
                 </View>
             </View>
         );
@@ -82,8 +83,8 @@ export default class CountryCode extends PureComponent {
     }
     render() {
         return (
-            <SafeAreaView style={{ flex: 1 }}>
-                <ModalHeader title={In18.COUNTRY_CODE} goBack={this.goBack} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <ModalHeader goBack={this.goBack} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title={In18.COUNTRY_CODE} rightBtnMode='none' />
                 <SearchHeader search={this.search} />
                 <SectionList
                     style={{ height: Sizes.DEVICE_HEIGHT - 182, width: '100%' }}
@@ -106,22 +107,22 @@ const styles = StyleSheet.create({
         height: 1,
         width: Sizes.DEVICE_WIDTH - 27 - 27,
         marginLeft: 27,
-        backgroundColor: 'rgb(238,238,238)'
+        backgroundColor: 'rgb(81,94,101)'
     },
     itemText: {
         marginLeft: 33,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(177,177,177)',
         fontSize: 14
     },
     itemText2: {
         marginRight: 34,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(177,177,177)',
         fontSize: 14
     },
     sectionContainer: {
         height: 34,
         width: '100%',
-        backgroundColor: 'rgb(239,244,247)',
+        backgroundColor: 'rgb(51,57,62)',
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginLeft: 30,
         fontSize: 18,
-        color: 'rgb(100,100,100)'
+        color: 'white'
     },
     searchHeaderContainer: {
         height: 34,
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         flex: 1,
         borderRadius: 17,
-        backgroundColor: 'rgb(239,244,247)',
+        backgroundColor: 'rgb(51,57,62)',
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 17
