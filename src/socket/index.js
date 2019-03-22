@@ -439,6 +439,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getUseMsgList(type, onSuccess, onError) {
+        const url = `/api/user/msg/list?type=${type}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();
