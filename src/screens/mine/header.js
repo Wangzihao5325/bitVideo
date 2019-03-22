@@ -19,8 +19,9 @@ class TopBtns extends PureComponent {
         mineNavigation: PropTypes.object
     }
 
-    customPress = () => {
-        console.log('custom pressing');
+    goToMessage = () => {
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('MessageScreen');
     }
     settingPress = () => {
         const { mineNavigation } = this.context;
@@ -37,7 +38,7 @@ class TopBtns extends PureComponent {
                 <IconBtn
                     height={ICON_SIZE}
                     width={ICON_SIZE}
-                    onPress={this.settingPress}
+                    onPress={this.goToMessage}
                     source={require('../../image/mine/message.png')} />
             </View>
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import * as In18 from '../global/In18';
 import { iconMake } from '../components/icons/Vector_icons';
@@ -20,7 +21,7 @@ import MemberCenterScreen from '../screens/mine/memberCenter/index';
 import BugListScreen from '../screens/mine/memberCenter/BuyList';
 import BuyCardPayScreen from '../screens/mine/memberCenter/BuyCardPay';
 import HelpScreen from '../screens/mine/help/index';
-import IconsListScreen from '../screens/mine/icons_list/index';
+import MessageScreen from '../screens/mine/message/index';
 
 const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
@@ -41,7 +42,24 @@ MainStack.navigationOptions = ({ navigation }) => {
     }
     return {
         tabBarLabel: In18.MAIN_PAGE_TITLE,
-        tabBarIcon: iconMake(TAB_ICON_KEY_STR[0]),
+        tabBarIcon: ({ focused, tintColor }) => {
+            if (focused) {
+                return (
+                    <Image
+                        style={{ height: 24, width: 24 }}
+                        resizeMode='contain'
+                        source={require('../image/usual/main_focused.png')}
+                    />
+                );
+            }
+            return (
+                <Image
+                    style={{ height: 24, width: 24 }}
+                    resizeMode='contain'
+                    source={require('../image/usual/main_unfocused.png')}
+                />
+            )
+        },
         tabBarVisible
     }
 };
@@ -63,7 +81,24 @@ ShortVideoStack.navigationOptions = ({ navigation }) => {
     }
     return {
         tabBarLabel: In18.SHORT_VIDEO_TITLE,
-        tabBarIcon: iconMake(TAB_ICON_KEY_STR[1]),
+        tabBarIcon: ({ focused, tintColor }) => {
+            if (focused) {
+                return (
+                    <Image
+                        style={{ height: 24, width: 24 }}
+                        resizeMode='contain'
+                        source={require('../image/usual/short_focused.png')}
+                    />
+                );
+            }
+            return (
+                <Image
+                    style={{ height: 24, width: 24 }}
+                    resizeMode='contain'
+                    source={require('../image/usual/short_unfocused.png')}
+                />
+            )
+        },
         tabBarVisible
     }
 };
@@ -84,7 +119,24 @@ SubjectStack.navigationOptions = ({ navigation }) => {
     }
     return {
         tabBarLabel: In18.SUBJECT_PAGE_TITLE,
-        tabBarIcon: iconMake(TAB_ICON_KEY_STR[1]),
+        tabBarIcon: ({ focused, tintColor }) => {
+            if (focused) {
+                return (
+                    <Image
+                        style={{ height: 24, width: 24 }}
+                        resizeMode='contain'
+                        source={require('../image/usual/subject_focused.png')}
+                    />
+                );
+            }
+            return (
+                <Image
+                    style={{ height: 24, width: 24 }}
+                    resizeMode='contain'
+                    source={require('../image/usual/subject_unfocused.png')}
+                />
+            )
+        },
         tabBarVisible
     }
 };
@@ -107,20 +159,37 @@ TaskStack.navigationOptions = ({ navigation }) => {
     }
     return {
         tabBarLabel: In18.TASK_PAGE_TITLE,
-        tabBarIcon: iconMake(TAB_ICON_KEY_STR[2]),
+        tabBarIcon: ({ focused, tintColor }) => {
+            if (focused) {
+                return (
+                    <Image
+                        style={{ height: 24, width: 24 }}
+                        resizeMode='contain'
+                        source={require('../image/usual/task_focused.png')}
+                    />
+                );
+            }
+            return (
+                <Image
+                    style={{ height: 24, width: 24 }}
+                    resizeMode='contain'
+                    source={require('../image/usual/task_unfocused.png')}
+                />
+            )
+        },
         tabBarVisible
     }
 };
 
-// 我的router
+// 我的router //iconMake(TAB_ICON_KEY_STR[3])
 let MineStack = createStackNavigator(
     {
         MineScreen,
         HelpScreen,
-        IconsListScreen,
         MemberCenterScreen,
         BugListScreen,
-        BuyCardPayScreen
+        BuyCardPayScreen,
+        MessageScreen
     },
     {
         navigationOptions: { gesturesEnabled: false }
@@ -133,7 +202,24 @@ MineStack.navigationOptions = ({ navigation }) => {
     }
     return {
         tabBarLabel: In18.MINE_PAGE_TITLE,
-        tabBarIcon: iconMake(TAB_ICON_KEY_STR[3]),
+        tabBarIcon: ({ focused, tintColor }) => {
+            if (focused) {
+                return (
+                    <Image
+                        style={{ height: 24, width: 24 }}
+                        resizeMode='contain'
+                        source={require('../image/usual/mine_focused.png')}
+                    />
+                );
+            }
+            return (
+                <Image
+                    style={{ height: 24, width: 24 }}
+                    resizeMode='contain'
+                    source={require('../image/usual/mine_unfocused.png')}
+                />
+            )
+        },
         tabBarVisible
     }
 };
