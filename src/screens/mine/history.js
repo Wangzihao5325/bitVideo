@@ -52,7 +52,7 @@ class Item extends PureComponent {
                     {/* <Image style={styles.itemImage} source={this.props.source} /> */}
                     <SecurtyImage style={styles.itemImage} source={this.props.source} />
                     <View style={styles.itemTextContainer}>
-                        <Text style={styles.itemTitle}>{this.props.title}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.itemTitle}>{this.props.title}</Text>
                     </View>
                 </View>
             </TouchableHighlight>

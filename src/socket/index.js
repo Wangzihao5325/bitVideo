@@ -444,6 +444,16 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    postBindPhone(mobile, verKey, code, onSuccess, onError) {
+        const url = '/api/user/bind_mobile';
+        let formData = new FormData();
+        formData.append('mobile', mobile);
+        formData.append('verification_key', verKey);
+        formData.append('code', code);
+
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
 }
 
 export default new api();

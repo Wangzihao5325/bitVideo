@@ -35,26 +35,13 @@ class InputField extends PureComponent {
         modalNavigation: PropTypes.object
     }
 
-    lostPassword = () => {
-        const { modalNavigation } = this.context;
-        modalNavigation.navigate('LostPasswordModal');
-    }
-
     login = () => {
-        if (this.state.loginType) {
-            Api.postLogin(reg.mobile, 'P', reg.password, null, this.loginSuccess);
-        } else {
-            Api.postLogin(reg.mobile, 'C', reg.code, reg.verCode, this.loginSuccess);
-        }
-    }
-
-    loginSuccess = (e) => {
-        if (e.token) {
-            Variables.account.token = e.token;
-        }
-        // console.log(e);
-        const { modalNavigation } = this.context;
-        modalNavigation.pop();
+        Api.postBindPhone(reg.mobile, reg.verCode, reg.code, (e, code, message) => {
+            if (message == 'success') {
+                const { modalNavigation } = this.context;
+                modalNavigation.goBack();
+            }
+        });
     }
 
     changeLoginWay = () => {
@@ -92,10 +79,6 @@ class InputField extends PureComponent {
     }
 
     render() {
-        let loginTypeText = In18.FAST_LOGIN;
-        if (!this.state.loginType) {
-            loginTypeText = In18.PASSWORD_LOGIN;
-        }
         return (
             <View style={styles.inputFieldContainer}>
                 <MobileInput onTextChange={this.mobileTextChange} changeCode={this.gotoChangeCountryCode} />
