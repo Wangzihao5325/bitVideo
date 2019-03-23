@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet, Share } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
@@ -30,31 +30,7 @@ export default class FunList extends PureComponent {
         const { mineNavigation } = this.context;
         mineNavigation.navigate('QrCodeModel');
     }
-    /*
-        goToInviteFriend = () => {
-            Share.share({
-                message: In18.SHARE_MESSAGE,
-                url: In18.SHARE_URL,
-                title: In18.SHARE_TITLE
-            }, {
-                    dialogTitle: In18.SHARE_DIALOG_TITLE
-                })
-                .then(this._shareResult)
-                .catch((e) => { console.log(e) });
-        }
-    
-        _shareResult = (result) => {
-            if (result.action === Share.sharedAction) {
-                if (result.activityType) {
-                    console.log('shared with action type');
-                } else {
-                    console.log(done);
-                }
-            } else if (result.action === Share.dismissedAction) {
-                console.log('dismiss');
-            }
-        }
-    */
+
     render() {
         return (
             <View style={styles.container}>
