@@ -1,6 +1,7 @@
 import * as Types from '../actionTypes';
 
 const initialState = {
+    isLogin: false,
     name: '',
     id: 0,
     sex: 1,

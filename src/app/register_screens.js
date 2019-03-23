@@ -24,6 +24,7 @@ import HelpScreen from '../screens/mine/help/index';
 import MessageScreen from '../screens/mine/message/index';
 import MyMessageScreen from '../screens/mine/message/my/index';
 import AppMessageScreen from '../screens/mine/message/app/index';
+import SettingScreen from '../screens/mine/setting/index';
 
 const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
@@ -193,7 +194,8 @@ let MineStack = createStackNavigator(
         BuyCardPayScreen,
         MessageScreen,
         MyMessageScreen,
-        AppMessageScreen
+        AppMessageScreen,
+        SettingScreen
     },
     {
         navigationOptions: { gesturesEnabled: false }

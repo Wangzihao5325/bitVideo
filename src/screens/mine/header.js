@@ -25,7 +25,11 @@ class TopBtns extends PureComponent {
     }
     settingPress = () => {
         const { mineNavigation } = this.context;
-        mineNavigation.navigate('MyModel');
+        if (this.props.isLogin) {
+            mineNavigation.navigate('SettingScreen');
+        } else {
+            mineNavigation.navigate('MyModel');
+        }
     }
     render() {
         return (
@@ -117,7 +121,7 @@ class Header extends PureComponent {
                 <NavigationEvents
                     onDidFocus={this._onDidFocus}
                 />
-                <TopBtns />
+                <TopBtns isLogin={this.props.isLogin} />
                 <Avater source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
                 <CountList vipEndDay={this.props.vipEndDay} vipHasDays={this.props.vipHasDays} remainCount={this.props.remainCount} total={this.props.viewCountTotal} use={this.props.viewCountUse} />
             </View>
@@ -127,6 +131,7 @@ class Header extends PureComponent {
 
 function mapState2Props(store) {
     return {
+        isLogin: store.account.isLogin,
         accountName: store.account.name,
         accountType: store.account.type,
         viewCountTotal: store.account.viewCountDailyTotal,

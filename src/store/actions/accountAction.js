@@ -2,6 +2,7 @@ import * as Types from '../actionTypes';
 
 export function get_device_account_info(e) {
     let regObj = {};
+    regObj.isLogin = true;
     regObj.name = e.name;
     regObj.id = e.id;
     regObj.sex = e.sex;
