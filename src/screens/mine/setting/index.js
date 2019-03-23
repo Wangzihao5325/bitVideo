@@ -21,6 +21,10 @@ export default class SettingScreen extends PureComponent {
         ToastRoot.show('功能开发中，敬请期待');
     }
 
+    _toGesturePassword = () => {
+        this.props.navigation.navigate('SetGesturePasswordModel');
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
@@ -36,15 +40,17 @@ export default class SettingScreen extends PureComponent {
                     </View>
                 </View>
 
-                <View style={styles.container}>
-                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                        <Image style={{ height: 15, width: 12, marginLeft: 19 }} source={require('../../../image/mine/gesture_password.png')} />
-                        <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>密码锁</Text>
+                <TouchableHighlight onPress={this._toGesturePassword}>
+                    <View style={styles.container}>
+                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Image style={{ height: 15, width: 12, marginLeft: 19 }} source={require('../../../image/mine/gesture_password.png')} />
+                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>密码锁</Text>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
+                            <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
+                        </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
-                        <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
-                    </View>
-                </View>
+                </TouchableHighlight>
 
                 <View style={{ height: 10, width: '100%', backgroundColor: 'rgb(26,28,41)' }} />
 
