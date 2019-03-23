@@ -16,7 +16,34 @@ const Header = function (props) {
 class Item extends PureComponent {
 
     static contextTypes = {
-        mineNavigation: PropTypes.object
+        taskNavigation: PropTypes.object
+    }
+
+    _onPress = () => {
+        const { taskNavigation } = this.context;
+        switch (this.props.type) {
+            case 'SAVE_PHOTO':
+                taskNavigation.navigate('QrCodeModel');
+                break;
+            case 'BIND_MOBILE':
+                //taskNavigation.navigate('QrCodeModel');
+                break;
+            case 'DAILY_SHARED':
+                taskNavigation.navigate('QrCodeModel');
+                break;
+            case 'CLICK_AD':
+                taskNavigation.navigate('MainScreen');
+                break;
+            case 'INVITE_REGISTER':
+                taskNavigation.navigate('QrCodeModel');
+                break;
+            case 'LOOKED_VIDEO_SATISFY':
+                taskNavigation.navigate('MainScreen');
+                break;
+            case 'SAILY_SIGN_IN':
+                //taskNavigation.navigate('QrCodeModel');
+                break;
+        }
     }
 
     render() {
@@ -53,7 +80,7 @@ class Item extends PureComponent {
                     <Text style={{ color: 'rgb(255,197,10)', fontSize: 14, marginLeft: 15, marginTop: 11 }}>{`+${this.props.coins}`}<Text style={{ color: 'rgb(169,169,169)', fontSize: 14 }}>金币奖励</Text></Text>
                 </View>
                 <View style={{ flex: 1, alignItems: 'center' }}>
-                    <TouchableHighlight style={[styles.itemBtn, btnColor]}>
+                    <TouchableHighlight style={[styles.itemBtn, btnColor]} onPress={this._onPress}>
                         <Text style={[styles.btnText, btnTextColor]}>{btnText}</Text>
                     </TouchableHighlight>
                     <Text style={{ color: 'rgb(155,155,155)', fontSize: 11, marginTop: 5 }}>已完成<Text style={{ color: 'rgb(255,168,96)' }}>{this.props.has}</Text></Text>
@@ -65,7 +92,7 @@ class Item extends PureComponent {
 
 const ModuleGenerate = function (props) {
     let items = props.data.map((item, index) => {
-        return (<Item key={index} iconSource={item.icon} coins={item.coins} title={item.title} sign={item.sign} has={item.has} />)
+        return (<Item key={index} iconSource={item.icon} coins={item.coins} title={item.title} sign={item.sign} has={item.has} type={item.key} />)
     });
     let containerHeight = props.data.length * 75 + 45 + 5;
     return (
@@ -85,6 +112,7 @@ export default class bottomTaskList extends PureComponent {
     };
     componentDidMount() {
         Api.getTaskList((e) => {
+            console.log(e);
             if (e instanceof Array) {
                 let daily = e.filter((item) => {
                     return item.group == 'daily';
