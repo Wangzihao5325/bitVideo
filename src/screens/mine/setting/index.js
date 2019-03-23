@@ -40,7 +40,7 @@ export default class SettingScreen extends PureComponent {
                     </View>
                 </View>
 
-                <TouchableHighlight onPress={this._toGesturePassword}>
+                <TouchableHighlight onPress={this._toGesturePassword} underlayColor='transparent' >
                     <View style={styles.container}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ height: 15, width: 12, marginLeft: 19 }} source={require('../../../image/mine/gesture_password.png')} />
@@ -54,7 +54,7 @@ export default class SettingScreen extends PureComponent {
 
                 <View style={{ height: 10, width: '100%', backgroundColor: 'rgb(26,28,41)' }} />
 
-                <TouchableHighlight onPress={this._toast}>
+                <TouchableHighlight onPress={this._toast} underlayColor='transparent'>
                     <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/settings_clear_cache.png')} />
@@ -66,7 +66,7 @@ export default class SettingScreen extends PureComponent {
                     </View>
                 </TouchableHighlight>
 
-                <TouchableHighlight onPress={this._toast}>
+                <TouchableHighlight onPress={this._toast} underlayColor='transparent'>
                     <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ height: 15, width: 15, marginLeft: 19 }} source={require('../../../image/mine/settings_update.png')} />

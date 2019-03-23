@@ -3,6 +3,8 @@ import { SafeAreaView } from 'react-native';
 import PasswordGesture from 'react-native-gesture-password';
 import * as Colors from '../../global/Colors';
 
+import ModalHeader from '../../components/modal/ModalHeader';
+
 var Password1 = '';
 
 export default class SetGesturePassword extends PureComponent {
@@ -14,9 +16,13 @@ export default class SetGesturePassword extends PureComponent {
     };
 
     state = {
-        message: 'Please input your password.',
+        message: '请输入密码',
         status: 'normal'
     };
+
+    componentWillUnmount() {
+        Password1 = '';
+    }
 
     // Example for set password
     onEnd = (password) => {
@@ -25,14 +31,14 @@ export default class SetGesturePassword extends PureComponent {
             Password1 = password;
             this.setState({
                 status: 'normal',
-                message: 'Please input your password secondly.'
+                message: '请二次确认密码'
             });
         } else {
             // The second password
             if (password === Password1) {
                 this.setState({
                     status: 'right',
-                    message: 'Your password is set to ' + password
+                    message: '设置完成 密码锁开启'
                 });
 
                 Password1 = '';
@@ -40,8 +46,9 @@ export default class SetGesturePassword extends PureComponent {
             } else {
                 this.setState({
                     status: 'wrong',
-                    message: 'Not the same, try again.'
+                    message: '密码不一致,请重新设置密码'
                 });
+                Password1 = '';
             }
         }
     }
@@ -49,18 +56,23 @@ export default class SetGesturePassword extends PureComponent {
     onStart = () => {
         if (Password1 === '') {
             this.setState({
-                message: 'Please input your password.'
+                message: '请输入密码'
             });
         } else {
             this.setState({
-                message: 'Please input your password secondly.'
+                message: '请二次确认密码'
             });
         }
+    }
+
+    _goBack = () => {
+        this.props.navigation.goBack();
     }
 
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <ModalHeader goBack={this._goBack} titleStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title='设置密码' rightBtnMode='none' />
                 <PasswordGesture
                     ref='pg'
                     style={{ backgroundColor: Colors.SCREEN_BGCOLOR }}
