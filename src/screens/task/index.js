@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView, Image, Platform, View, Text, StyleSheet, ScrollView } from 'react-native';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
+import PropTypes from 'prop-types';
 import { isXDevice } from '../../global/utils/PixelUtil';
 
 import ModalHeader from '../../components/modal/ModalHeader';
@@ -15,6 +16,16 @@ export default class TaskScreen extends PureComponent {
             headerBackTitle: null
         }
     };
+
+    static childContextTypes = {
+        taskNavigation: PropTypes.object,
+    }
+
+    getChildContext() {
+        return {
+            taskNavigation: this.props.navigation
+        }
+    }
 
     _inviteDetails = () => {
         this.props.navigation.navigate('InviteListScreen');

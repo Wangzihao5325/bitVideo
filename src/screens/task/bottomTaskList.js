@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text, Image, ScrollView, TouchableHighlight, StyleSheet, ImageBackground } from 'react-native';
 import Api from '../../socket/index';
+import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 
@@ -12,57 +13,64 @@ const Header = function (props) {
     );
 }
 
-const Item = function (props) {
-    let btnText = '';
-    let btnColor = null;
-    let btnTextColor = { color: 'rgb(34,34,34)' };
-    switch (props.sign) {
-        case 0:
-            btnText = '去做任务';
-            btnColor = { backgroundColor: 'rgb(247,203,148)' };
-            btnTextColor = { color: 'rgb(34,34,34)' }
-            break;
-        case 1:
-            btnText = '继续完成';
-            btnColor = { backgroundColor: 'rgb(247,203,148)' };
-            btnTextColor = { color: 'rgb(34,34,34)' }
-            break;
-        case 2:
-            btnText = '领取奖励';
-            btnColor = { backgroundColor: 'rgb(33,45,49)' };
-            btnTextColor = { color: 'rgb(255,255,255)' }
-            break;
-        case 3:
-            btnText = '任务完成';
-            btnColor = { backgroundColor: 'rgb(33,45,49)' };
-            btnTextColor = { color: 'rgb(255,255,255)' }
-            break;
+class Item extends PureComponent {
+
+    static contextTypes = {
+        mineNavigation: PropTypes.object
     }
-    return (
-        <View style={styles.itemContainer}>
-            <Image style={styles.itemIcon} source={{ uri: props.iconSource }} />
-            <View style={{ flex: 2 }}>
-                <Text style={styles.itemTitle}>{props.title}</Text>
-                <Text style={{ color: 'rgb(255,197,10)', fontSize: 14, marginLeft: 15, marginTop: 11 }}>{`+${props.coins}`}<Text style={{ color: 'rgb(169,169,169)', fontSize: 14 }}>金币奖励</Text></Text>
+
+    render() {
+        let btnText = '';
+        let btnColor = null;
+        let btnTextColor = { color: 'rgb(34,34,34)' };
+        switch (this.props.sign) {
+            case 0:
+                btnText = '去做任务';
+                btnColor = { backgroundColor: 'rgb(247,203,148)' };
+                btnTextColor = { color: 'rgb(34,34,34)' }
+                break;
+            case 1:
+                btnText = '继续完成';
+                btnColor = { backgroundColor: 'rgb(247,203,148)' };
+                btnTextColor = { color: 'rgb(34,34,34)' }
+                break;
+            case 2:
+                btnText = '领取奖励';
+                btnColor = { backgroundColor: 'rgb(33,45,49)' };
+                btnTextColor = { color: 'rgb(255,255,255)' }
+                break;
+            case 3:
+                btnText = '任务完成';
+                btnColor = { backgroundColor: 'rgb(33,45,49)' };
+                btnTextColor = { color: 'rgb(255,255,255)' }
+                break;
+        }
+        return (
+            <View style={styles.itemContainer}>
+                <Image style={styles.itemIcon} source={{ uri: this.props.iconSource }} />
+                <View style={{ flex: 2 }}>
+                    <Text style={styles.itemTitle}>{this.props.title}</Text>
+                    <Text style={{ color: 'rgb(255,197,10)', fontSize: 14, marginLeft: 15, marginTop: 11 }}>{`+${this.props.coins}`}<Text style={{ color: 'rgb(169,169,169)', fontSize: 14 }}>金币奖励</Text></Text>
+                </View>
+                <View style={{ flex: 1, alignItems: 'center' }}>
+                    <TouchableHighlight style={[styles.itemBtn, btnColor]}>
+                        <Text style={[styles.btnText, btnTextColor]}>{btnText}</Text>
+                    </TouchableHighlight>
+                    <Text style={{ color: 'rgb(155,155,155)', fontSize: 11, marginTop: 5 }}>已完成<Text style={{ color: 'rgb(255,168,96)' }}>{this.props.has}</Text></Text>
+                </View>
             </View>
-            <View style={{ flex: 1, alignItems: 'center' }}>
-                <TouchableHighlight style={[styles.itemBtn, btnColor]}>
-                    <Text style={[styles.btnText, btnTextColor]}>{btnText}</Text>
-                </TouchableHighlight>
-                <Text style={{ color: 'rgb(155,155,155)', fontSize: 11, marginTop: 5 }}>已完成<Text style={{ color: 'rgb(255,168,96)' }}>{props.has}</Text></Text>
-            </View>
-        </View>
-    );
+        );
+    }
 }
 
-const ModuleGenerate = function (data, title) {
-    let items = data.map((item, index) => {
+const ModuleGenerate = function (props) {
+    let items = props.data.map((item, index) => {
         return (<Item key={index} iconSource={item.icon} coins={item.coins} title={item.title} sign={item.sign} has={item.has} />)
     });
-    let containerHeight = data.length * 75 + 45 + 5;
+    let containerHeight = props.data.length * 75 + 45 + 5;
     return (
         <View style={{ height: containerHeight, width: '100%' }}>
-            <Header title={title} />
+            <Header title={props.title} />
             {items}
             <View style={{ height: 5, width: '100%', backgroundColor: 'rgb(246,246,246)' }} />
         </View>
@@ -99,17 +107,17 @@ export default class bottomTaskList extends PureComponent {
         let modules = [];
         let height = 0;
         if (Array.isArray(this.state.extend) && this.state.extend.length > 0) {
-            let extendModule = ModuleGenerate(this.state.extend, '推广任务');
+            let extendModule = <ModuleGenerate key={'1'} data={this.state.extend} title='推广任务' />;
             modules.push(extendModule);
             height = height + this.state.extend.length * 75 + 45 + 5;
         }
         if (Array.isArray(this.state.welfare) && this.state.welfare.length > 0) {
-            let welfareModule = ModuleGenerate(this.state.welfare, '福利任务');
+            let welfareModule = <ModuleGenerate key={'2'} data={this.state.welfare} title='福利任务' />;
             modules.push(welfareModule);
             height = height + this.state.welfare.length * 75 + 45 + 5;
         }
         if (Array.isArray(this.state.daily) && this.state.daily.length > 0) {
-            let dailyModule = ModuleGenerate(this.state.daily, '日常任务');
+            let dailyModule = <ModuleGenerate key={'3'} data={this.state.daily} title='日常任务' />;
             modules.push(dailyModule);
             height = height + this.state.daily.length * 75 + 45 + 5;
         }
