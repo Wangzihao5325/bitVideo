@@ -25,20 +25,26 @@ export default class SettingScreen extends PureComponent {
         this.props.navigation.navigate('SetGesturePasswordModel');
     }
 
+    _toBindPhone = () => {
+        this.props.navigation.navigate('BindPhoneModel');
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <ModalHeader goBack={this._goBack} titleStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title='设置' rightBtnMode='none' />
 
-                <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
-                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                        <Image style={{ height: 17, width: 12, marginLeft: 19 }} source={require('../../../image/mine/settings_account.png')} />
-                        <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>账号与安全</Text>
+                <TouchableHighlight onPress={this._toBindPhone} underlayColor='transparent' >
+                    <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
+                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Image style={{ height: 17, width: 12, marginLeft: 19 }} source={require('../../../image/mine/settings_account.png')} />
+                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>账号与安全</Text>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
+                            <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
+                        </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
-                        <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
-                    </View>
-                </View>
+                </TouchableHighlight>
 
                 <TouchableHighlight onPress={this._toGesturePassword} underlayColor='transparent' >
                     <View style={styles.container}>

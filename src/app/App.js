@@ -25,6 +25,7 @@ import GiftCenterModel from '../screens/task/giftCenterModel/index';
 import QrCodeModel from '../screens/task/qrCode/index';
 import GesturePasswordModel from '../screens/gesturePassword/index';
 import SetGesturePasswordModel from '../screens/gesturePassword/SetPassword';
+import BindPhoneModel from '../screens/loginModel/BindPhone';
 
 import SplashModel from '../components/splashModal/index';
 
@@ -99,6 +100,9 @@ const RouterWithModal = createStackNavigator(
     },
     SetGesturePasswordModel: {
       screen: SetGesturePasswordModel
+    },
+    BindPhoneModel: {
+      screen: BindPhoneModel
     }
   },
   {
