@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView, View, StyleSheet, Image, Text, TouchableHighlight } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import ToastRoot from '../../../components/toast/index';
+import { lockReg } from '../../../global/Reg';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 
@@ -22,7 +23,11 @@ export default class SettingScreen extends PureComponent {
     }
 
     _toGesturePassword = () => {
-        this.props.navigation.navigate('SetGesturePasswordModel');
+        if (lockReg.isLock === 'true') {
+            this.props.navigation.navigate('GesturePasswordModel', { type: 'close' });
+        } else {
+            this.props.navigation.navigate('SetGesturePasswordModel');
+        }
     }
 
     _toBindPhone = () => {

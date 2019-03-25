@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, AsyncStorage } from 'react-native';
 import PasswordGesture from 'react-native-gesture-password';
 import * as Colors from '../../global/Colors';
 import { lockReg } from '../../global/Reg';
@@ -14,23 +14,39 @@ export default class GesturePassword extends PureComponent {
     };
 
     state = {
-        message: 'Please input your password.',
+        message: '请输入密码',
         status: 'normal',
-        password: lockReg.password
+        password: lockReg.password,
+        type: false
     };
+
+    componentDidMount() {
+        const type = this.props.navigation.getParam('type', '');
+        if (type === 'close') {
+            this.setState({
+                type: true
+            });
+        }
+    }
 
     onEnd = (password) => {
         if (password == this.state.password) {
             this.setState({
                 status: 'right',
-                message: 'Password is right, success.'
+                message: '解锁成功'
             });
+            if (this.state.type) {
+                lockReg.password = '';
+                lockReg.isLock = 'false';
+                AsyncStorage.setItem('Lock_Password', lockReg.password);
+                AsyncStorage.setItem('Lock_Islock', lockReg.isLock);
+            }
             this.props.navigation.goBack();
             // your codes to close this view
         } else {
             this.setState({
                 status: 'wrong',
-                message: 'Password is wrong, try again.'
+                message: '密码错误 请重试'
             });
         }
     }
@@ -38,16 +54,10 @@ export default class GesturePassword extends PureComponent {
     onStart = () => {
         this.setState({
             status: 'normal',
-            message: 'Please input your password.'
+            message: '请输入密码'
         });
     }
 
-    onReset = () => {
-        this.setState({
-            status: 'normal',
-            message: 'Please input your password (again).'
-        });
-    }
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>

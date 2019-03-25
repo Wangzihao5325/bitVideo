@@ -181,7 +181,7 @@ export default class App extends Component {
       });
 
       if (lockReg.isLock === 'true') {
-        NavigationService.navigate('GesturePasswordModel');
+        NavigationService.navigate('GesturePasswordModel', { type: 'normal' });
       }
     })();
 
@@ -192,7 +192,7 @@ export default class App extends Component {
           if (nowRouter === 'GesturePasswordModel') {
             //do nothing
           } else {
-            NavigationService.navigate('GesturePasswordModel');
+            NavigationService.navigate('GesturePasswordModel', { type: 'normal' });
           }
         }
       }

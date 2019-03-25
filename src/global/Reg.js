@@ -8,7 +8,7 @@ let registerReg = {
 }
 
 let lockReg = {
-    isLock: '',
+    isLock: 'false',
     password: ''
 }
 
