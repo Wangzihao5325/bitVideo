@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, Text, TouchableHighlight, ImageBackground, ScrollView, Share } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, TouchableHighlight, ImageBackground, ScrollView, Share, CameraRoll } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
@@ -8,6 +8,7 @@ import * as In18 from '../../../global/In18';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 import QRCode from 'react-native-qrcode';
+import { captureScreen } from "react-native-view-shot";
 
 class QrCode extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -62,6 +63,13 @@ class QrCode extends PureComponent {
         }
     }
 
+    _saveQrCode = () => {
+        captureScreen({ format: "jpg", quality: 1 }).then(uri => {
+            console.log(uri);
+            CameraRoll.saveToCameraRoll(uri, 'photo')
+        }, error => console.error("Oops, snapshot failed", error));
+    }
+
 
     render() {
         return (
@@ -75,9 +83,12 @@ class QrCode extends PureComponent {
                         >
                             <Text style={[styles.text, { marginTop: 40, fontWeight: 'bold' }]}>成功邀请好友安装APP</Text>
                             <Text style={[styles.text, { marginTop: 15, marginBottom: 30, fontWeight: 'bold' }]}>登录并绑定手机,赢取金币奖励</Text>
-                            <View style={{ height: 220, width: 220, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+                            <ScrollView
+                                style={{ height: 220, width: 220, backgroundColor: 'white' }}
+                                contentContainerStyle={{ padding: 10 }}
+                            >
                                 {this.state.qrCode}
-                            </View>
+                            </ScrollView>
                             <Text style={[styles.text, { marginTop: 15, fontSize: 15 }]}>扫描二维码 下载蝌蚪视频</Text>
                             <Text style={[styles.text, { marginTop: 35, fontSize: 15, color: 'rgb(255,206,145)' }]}>您的专属推广邀请码</Text>
                             <Text style={[styles.text, { marginTop: 10, fontSize: 30 }]}>{this.props.inviteCode}</Text>
@@ -85,7 +96,7 @@ class QrCode extends PureComponent {
                             <Text style={[styles.text, { marginTop: 10, fontSize: 15 }]}>官网：www.baidu.com</Text>
                             <View style={{ marginTop: 20, height: 42, width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                                 <View style={{ height: 40, width: 100, borderColor: 'rgb(255,206,145)', borderWidth: StyleSheet.hairlineWidth, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 16, color: 'rgb(255,206,145)' }}>保存二维码</Text>
+                                    <Text onPress={this._saveQrCode} style={{ fontSize: 16, color: 'rgb(255,206,145)' }}>保存二维码</Text>
                                 </View>
                                 <View style={{ height: 40, width: 100, borderColor: 'rgb(255,206,145)', borderWidth: StyleSheet.hairlineWidth, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <Text onPress={this._goToInviteFriend} style={{ fontSize: 16, color: 'rgb(255,206,145)' }}>邀请好友</Text>
