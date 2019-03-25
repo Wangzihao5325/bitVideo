@@ -7,6 +7,12 @@ let registerReg = {
     password: ''
 }
 
+let lockReg = {
+    isLock: '',
+    password: ''
+}
+
 export {
-    registerReg
+    registerReg,
+    lockReg
 };

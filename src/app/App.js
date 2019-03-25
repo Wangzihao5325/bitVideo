@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { StatusBar, Platform, View, Image, Text } from 'react-native';
+import { StatusBar, Platform, AsyncStorage, AppState } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Provider } from 'react-redux';
 import store from '../store/index';
 import { get_device_account_info, get_user_info } from '../store/actions/accountAction';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import NavigationService from './NavigationService';
 import { MainStack, ShortVideoStack, SubjectStack, TaskStack, MineStack } from '../app/register_screens';
 import * as Colors from '../global/Colors';
 import Api from '../socket/index';
 import Variables from '../global/Variables';
+import { lockReg } from '../global/Reg';
 
 import LoginModel from '../screens/loginModel/index';
 import RegisterModal from '../screens/loginModel/register/index';
@@ -143,40 +145,59 @@ export default class App extends Component {
     //   console.log(rate);
     // });
 
-
-
-
-    //获取开屏动画
-    Api.getSplashScreen((result, message, code) => {
-      // console.log('123123123');
-      // console.log(result);
-      // console.log(message);
-      // console.log(code);
-      if (result) {
-        this.setState({
-          uri: result.ad_path
-        });
+    (async function () {
+      let password = await AsyncStorage.getItem('Lock_Password');
+      let islock = await AsyncStorage.getItem('Lock_Islock');
+      if (password) {
+        lockReg.password = password;
       }
-    });
-    //设备号注册
-    let deviceId = DeviceInfo.getUniqueID();
-    Api.postRegisterByDeviceId(deviceId, (e, code, message) => {
-      // console.log(e);
-      // console.log(code);
-      // console.log(message);
-      if (e && e.api_token) {
-        Variables.account.token = e.api_token;
-        Variables.account.deviceToken = e.api_token;
-        store.dispatch(get_device_account_info(e));
-        //获取个人信息
-        Api.getUserInfo((e) => {
-          if (e) {
-            store.dispatch(get_user_info(e));
+      if (islock) {
+        lockReg.isLock = islock;
+      }
+
+      //获取开屏动画
+      Api.getSplashScreen((result, message, code) => {
+        if (result) {
+          this.setState({
+            uri: result.ad_path
+          });
+        }
+      });
+
+      //设备号注册
+      let deviceId = DeviceInfo.getUniqueID();
+      Api.postRegisterByDeviceId(deviceId, (e, code, message) => {
+        if (e && e.api_token) {
+          Variables.account.token = e.api_token;
+          Variables.account.deviceToken = e.api_token;
+          store.dispatch(get_device_account_info(e));
+          //获取个人信息
+          Api.getUserInfo((e) => {
+            if (e) {
+              store.dispatch(get_user_info(e));
+            }
+          });
+        }
+      });
+
+      if (lockReg.isLock === 'true') {
+        NavigationService.navigate('GesturePasswordModel');
+      }
+    })();
+
+    AppState.addEventListener('change', (appState) => {
+      if (appState === 'active') {
+        if (lockReg.isLock === 'true') {
+          let nowRouter = NavigationService.nowRouter();
+          if (nowRouter === 'GesturePasswordModel') {
+            //do nothing
+          } else {
+            NavigationService.navigate('GesturePasswordModel');
           }
-        });
+        }
       }
-    });
 
+    });
   }
 
   render() {
@@ -184,7 +205,9 @@ export default class App extends Component {
       <Provider store={store}>
         {Platform.OS === 'ios' && <StatusBar translucent={true} barStyle='light-content' />}
         <SplashModel source={{ uri: this.state.uri }} />
-        <AppContainer />
+        <AppContainer ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }} />
       </Provider>
     );
   }

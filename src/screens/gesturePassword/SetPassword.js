@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, AsyncStorage } from 'react-native';
 import PasswordGesture from 'react-native-gesture-password';
 import * as Colors from '../../global/Colors';
+import { lockReg } from '../../global/Reg';
 
 import ModalHeader from '../../components/modal/ModalHeader';
 
@@ -11,7 +12,8 @@ export default class SetGesturePassword extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null,
-            headerBackTitle: null
+            headerBackTitle: null,
+            // gesturesEnabled: false
         }
     };
 
@@ -40,8 +42,12 @@ export default class SetGesturePassword extends PureComponent {
                     status: 'right',
                     message: '设置完成 密码锁开启'
                 });
-
+                lockReg.password = password;
+                lockReg.isLock = 'true';
+                AsyncStorage.setItem('Lock_Password', lockReg.password);
+                AsyncStorage.setItem('Lock_Islock', lockReg.isLock);
                 Password1 = '';
+                this.props.navigation.goBack();
                 // your codes to close this view
             } else {
                 this.setState({

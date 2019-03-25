@@ -2,22 +2,25 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView } from 'react-native';
 import PasswordGesture from 'react-native-gesture-password';
 import * as Colors from '../../global/Colors';
+import { lockReg } from '../../global/Reg';
 
 export default class GesturePassword extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null,
-            headerBackTitle: null
+            headerBackTitle: null,
+            gesturesEnabled: false
         }
     };
 
     state = {
         message: 'Please input your password.',
-        status: 'normal'
+        status: 'normal',
+        password: lockReg.password
     };
 
     onEnd = (password) => {
-        if (password == '1236') {
+        if (password == this.state.password) {
             this.setState({
                 status: 'right',
                 message: 'Password is right, success.'
