@@ -17,6 +17,22 @@ class QrCode extends PureComponent {
         }
     };
 
+    state = {
+        qrCode: <View style={{ height: 200, width: 200, backgroundColor: 'white' }} />
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                qrCode: <QRCode
+                    value={'https://github.com'}
+                    size={200}
+                    bgColor='rgb(34,34,34)'
+                    fgColor='white' />
+            });
+        }, 0);
+    }
+
     _goBack = () => {
         this.props.navigation.goBack();
     }
@@ -60,11 +76,7 @@ class QrCode extends PureComponent {
                             <Text style={[styles.text, { marginTop: 40, fontWeight: 'bold' }]}>成功邀请好友安装APP</Text>
                             <Text style={[styles.text, { marginTop: 15, marginBottom: 30, fontWeight: 'bold' }]}>登录并绑定手机,赢取金币奖励</Text>
                             <View style={{ height: 220, width: 220, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
-                                <QRCode
-                                    value={'https://github.com'}
-                                    size={200}
-                                    bgColor='rgb(34,34,34)'
-                                    fgColor='white' />
+                                {this.state.qrCode}
                             </View>
                             <Text style={[styles.text, { marginTop: 15, fontSize: 15 }]}>扫描二维码 下载蝌蚪视频</Text>
                             <Text style={[styles.text, { marginTop: 35, fontSize: 15, color: 'rgb(255,206,145)' }]}>您的专属推广邀请码</Text>
