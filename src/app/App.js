@@ -3,6 +3,7 @@ import { StatusBar, Platform, AsyncStorage, AppState } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Provider } from 'react-redux';
 import store from '../store/index';
+import { set_lock } from '../store/actions/lockAction';
 import { get_device_account_info, get_user_info } from '../store/actions/accountAction';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import NavigationService from './NavigationService';
@@ -152,7 +153,8 @@ export default class App extends Component {
         lockReg.password = password;
       }
       if (islock) {
-        lockReg.isLock = islock;
+        store.dispatch(set_lock(islock));
+        // lockReg.isLock = islock;
       }
 
       //获取开屏动画
@@ -180,14 +182,14 @@ export default class App extends Component {
         }
       });
 
-      if (lockReg.isLock === 'true') {
+      if (store.getState().lock.isLock === 'true') {
         NavigationService.navigate('GesturePasswordModel', { type: 'normal' });
       }
     })();
 
     AppState.addEventListener('change', (appState) => {
       if (appState === 'active') {
-        if (lockReg.isLock === 'true') {
+        if (store.getState().lock.isLock === 'true') {
           let nowRouter = NavigationService.nowRouter();
           if (nowRouter === 'GesturePasswordModel') {
             //do nothing

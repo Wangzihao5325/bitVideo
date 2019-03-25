@@ -3,6 +3,8 @@ import { SafeAreaView, AsyncStorage } from 'react-native';
 import PasswordGesture from 'react-native-gesture-password';
 import * as Colors from '../../global/Colors';
 import { lockReg } from '../../global/Reg';
+import store from '../../store/index';
+import { set_lock } from '../../store/actions/lockAction';
 
 export default class GesturePassword extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -37,9 +39,9 @@ export default class GesturePassword extends PureComponent {
             });
             if (this.state.type) {
                 lockReg.password = '';
-                lockReg.isLock = 'false';
+                store.dispatch(set_lock('false'));
                 AsyncStorage.setItem('Lock_Password', lockReg.password);
-                AsyncStorage.setItem('Lock_Islock', lockReg.isLock);
+                AsyncStorage.setItem('Lock_Islock', store.getState().lock.isLock);
             }
             this.props.navigation.goBack();
             // your codes to close this view
