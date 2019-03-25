@@ -3,10 +3,11 @@ import { SafeAreaView, View, StyleSheet, Image, Text, TouchableHighlight } from 
 import * as Colors from '../../../global/Colors';
 import ToastRoot from '../../../components/toast/index';
 import store from '../../../store/index';
+import { connect } from 'react-redux';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 
-export default class SettingScreen extends PureComponent {
+class SettingScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null,
@@ -23,7 +24,7 @@ export default class SettingScreen extends PureComponent {
     }
 
     _toGesturePassword = () => {
-        if (store.getState().lock.isLock === 'true') {
+        if (this.props.lock === 'true') {
             this.props.navigation.navigate('GesturePasswordModel', { type: 'close' });
         } else {
             this.props.navigation.navigate('SetGesturePasswordModel');
@@ -58,7 +59,8 @@ export default class SettingScreen extends PureComponent {
                             <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>密码锁</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
-                            <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
+                            {this.props.lock === 'true' && <Image style={{ height: 25, width: 42, marginRight: 17 }} source={require('../../../image/mine/lock_open.png')} />}
+                            {this.props.lock === 'false' && <Image style={{ height: 25, width: 42, marginRight: 17 }} source={require('../../../image/mine/lock_close.png')} />}
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -93,6 +95,14 @@ export default class SettingScreen extends PureComponent {
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        lock: store.lock.isLock,
+    }
+}
+
+export default connect(mapState2Props)(SettingScreen);
 
 const styles = StyleSheet.create({
     container: {
