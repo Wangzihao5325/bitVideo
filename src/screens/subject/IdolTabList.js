@@ -44,7 +44,6 @@ export default class IdolTabList extends PureComponent {
     };
     componentDidMount() {
         Api.getActerList((e) => {
-            console.log(e);
             if (e.data) {
                 this.setState({ data: e.data });
             }

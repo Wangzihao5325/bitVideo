@@ -11,9 +11,9 @@ export default class TitleHeader extends PureComponent {
         return (
             <View style={[styles.titleHeaderContainer, this.props.style]}>
                 <Image resizeMode='contain' style={styles.headerImage} source={this.props.imageSource} />
-                <Text style={styles.headerText}>{this.props.title}</Text>
+                <Text style={[styles.headerText, this.props.headerStyle]}>{this.props.title}</Text>
                 <View style={styles.headerFlexView}>
-                    {this.props.btnTitle && <Text onPress={this.show_more} style={styles.more}>{this.props.btnTitle}</Text>}
+                    {this.props.btnTitle && <Text onPress={this.show_more} style={[styles.more, this.props.moreStyle]}>{this.props.btnTitle}</Text>}
                 </View>
             </View>
         );
