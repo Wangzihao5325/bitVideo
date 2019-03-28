@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableHighlight, ImageBackground } from 'react-native';
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 import PropTypes from 'prop-types';
@@ -30,9 +30,27 @@ class InnerItem extends PureComponent {
 }
 
 class Item extends PureComponent {
+
+    static contextTypes = {
+        subjectNavigation: PropTypes.object
+    }
+
+    _toActorDetail = () => {
+        const { subjectNavigation } = this.context;
+        subjectNavigation.navigate('ActorDetailScreen', {
+            id: this.props.item.actor_id,
+            coverPath: this.props.item.cover_path,
+            name: this.props.item.name,
+            intro: this.props.item.intro,
+        });
+    }
+
     render() {
         return (
             <View style={styles.itemContainer}>
+                <ImageBackground style={{ position: 'absolute', top: 20, right: 0, height: 27, width: 89, display: 'flex', flexDirection: 'row-reverse', alignItems: 'center' }} source={require('../../image/subject/actor_total.png')}>
+                    <Text onPress={this._toActorDetail} style={{ color: 'rgb(254,163,91)', marginRight: 3 }}>{`${this.props.item.video_count}部影片`}</Text>
+                </ImageBackground>
                 <View style={styles.titleContainer}>
                     <SecurtyImage style={styles.itemImage} source={{ uri: this.props.item.cover_path }} />
                     <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -58,6 +76,7 @@ export default class HotActor extends PureComponent {
 
     componentDidMount() {
         Api.getActerList((e) => {
+            console.log(e);
             if (e.data && e.data.length > 0) {
                 this.setState({
                     data: e.data

@@ -29,7 +29,7 @@ export default class VideoAvater extends PureComponent {
         return (
             <TouchableHighlight style={btnStyle} underlayColor='transparent' onPress={this.btnOnPress}>
                 <View style={styles.flexView} >
-                    {this.props.score && <Text style={scoreStyle}>{this.props.score}</Text>}
+                    {this.props.score == true && <Text style={scoreStyle}>{this.props.score}</Text>}
                     {/* <Image style={[imageStyle, { zIndex: 1 }]} defaultSource={require('../../image/usual/image_load_failed.png')} source={this.props.imageSource} /> */}
                     <SecurtyImage style={[imageStyle, { zIndex: 1 }]} source={this.props.imageSource} />
                     <Text style={[styles.titleText, { zIndex: 10 }]} ellipsizeMode='tail' numberOfLines={1}>{this.props.title}</Text>

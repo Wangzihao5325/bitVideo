@@ -454,6 +454,11 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
+    getActorDetails(id, page, limit, onSuccess, onError) {
+        const url = `/api/video/actor/video?actor_id=${id}&page=${page}&limit=${limit}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();

@@ -27,6 +27,7 @@ import AppMessageScreen from '../screens/mine/message/app/index';
 import SettingScreen from '../screens/mine/setting/index';
 import HotSubjectDetailScreen from '../screens/subject/hotSubjectDetail/index';
 import MoreHotSubjectScreen from '../screens/subject/moreHotSubject/index';
+import ActorDetailScreen from '../screens/subject/actorDetail/index';
 
 const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
@@ -114,6 +115,7 @@ let SubjectStack = createStackNavigator(
         SubjectScreen,
         HotSubjectDetailScreen,
         MoreHotSubjectScreen,
+        ActorDetailScreen,
     },
     {
         navigationOptions: { gesturesEnabled: false }
