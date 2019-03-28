@@ -20,12 +20,15 @@ export default class HotSubjectDetailScreen extends PureComponent {
     state = {
         data: [],
         page: -1,
-        totalPage: -1
+        totalPage: -1,
+        id: ''
     };
 
     componentDidMount() {
         const moduleId = this.props.navigation.getParam('moduleId', 'undefine_Id');
-
+        this.setState({
+            id: moduleId
+        });
         Api.getNewSubjectDetail(moduleId, 1, 15, (e) => {
             if (e && e.data) {
                 this.setState({
@@ -35,6 +38,35 @@ export default class HotSubjectDetailScreen extends PureComponent {
                 });
             }
         });
+    }
+
+    _flatListRefresh = () => {
+        Api.getNewSubjectDetail(this.state.id, 1, 15, (e) => {
+            if (e && e.data) {
+                this.setState({
+                    data: e.data,
+                    page: e.current_page,
+                    totalPage: e.last_page
+                });
+            }
+        });
+    }
+
+    _getNextPageData = () => {
+        if (this.state.page !== this.state.totalPage) {
+            Api.getNewSubjectDetail(this.state.id, this.state.page + 1, 15, (e) => {
+                if (Array.isArray(e.data)) {
+                    this.setState((preState, props) => {
+                        let newList = preState.data.concat(e.data);
+                        return {
+                            data: newList,
+                            page: e.current_page,
+                            totalPage: e.last_page
+                        }
+                    });
+                }
+            });
+        }
     }
 
     _goBack = () => {
@@ -51,6 +83,10 @@ export default class HotSubjectDetailScreen extends PureComponent {
                 <SafeAreaView style={{ flex: 1 }}>
                     {this.state.data.length > 0 &&
                         <FlatList
+                            onRefresh={this._flatListRefresh}
+                            refreshing={false}
+                            onEndReached={this._getNextPageData}
+                            onEndReachedThreshold={0.1}
                             data={this.state.data}
                             contentContainerStyle={{ alignSelf: 'center' }}
                             columnWrapperStyle={{ marginTop: 20 }}
