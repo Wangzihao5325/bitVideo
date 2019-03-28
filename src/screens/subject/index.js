@@ -39,20 +39,24 @@ export default class SubjectScreen extends PureComponent {
         }
     }
 
+    _goToMoreSubject = () => {
+        this.props.navigation.navigate('MoreHotSubjectScreen');
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <View style={{ flex: 1 }}>
                     <ScrollView>
-                        <Text style={styles.titleText}>{In18.HOT_TAG}</Text>
-                        <IdolTabList />
+                        {/* <Text style={styles.titleText}>{In18.HOT_TAG}</Text>
+                        <IdolTabList /> */}
                         <Ad />
                         <TitleHeader
                             imageSource={require('../../image/subject/hot_subject.png')}
                             title={In18.HOT_SUBJECT}
                             btnTitle={In18.MORE_TEXT}
                             headerStyle={{ color: 'white', fontWeight: 'bold' }}
-                            showMore={() => { console.log('11223344') }} />
+                            showMore={this._goToMoreSubject} />
                         <HotSubject />
                     </ScrollView>
                 </View>

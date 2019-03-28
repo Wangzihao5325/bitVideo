@@ -3,31 +3,31 @@ import { SafeAreaView, View, FlatList } from 'react-native';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
 
+import ModalHeader from '../../../components/modal/ModalHeader';
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
 export default class HotSubjectDetailScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: navigation.getParam('title', ''),
-            headerStyle: {
-                borderBottomColor: Colors.SCREEN_BGCOLOR,
-                backgroundColor: Colors.SCREEN_BGCOLOR
-            },
-            headerTintColor: Colors.NAVI_ACTIVE_TINT_COLOR,
-        };
+            header: null,
+            headerBackTitle: null
+        }
     };
 
     state = {
         data: [],
         page: -1,
         totalPage: -1,
-        id: ''
+        id: '',
+        title: ''
     };
 
     componentDidMount() {
+        const title = this.props.navigation.getParam('title', '');
         const moduleId = this.props.navigation.getParam('moduleId', 'undefine_Id');
         this.setState({
-            id: moduleId
+            id: moduleId,
+            title: title
         });
         Api.getNewSubjectDetail(moduleId, 1, 15, (e) => {
             if (e && e.data) {
@@ -81,6 +81,7 @@ export default class HotSubjectDetailScreen extends PureComponent {
         return (
             <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <SafeAreaView style={{ flex: 1 }}>
+                    <ModalHeader goBack={this._goBack} textStyle={{ color: Colors.NAVI_ACTIVE_TINT_COLOR }} backBtnColor={Colors.NAVI_ACTIVE_TINT_COLOR} title={this.state.title} rightBtnMode='none' />
                     {this.state.data.length > 0 &&
                         <FlatList
                             onRefresh={this._flatListRefresh}
