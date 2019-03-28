@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import IdolTabList from './IdolTabList';
 import TitleHeader from '../../components/titleHeader/index';
 import HotSubject from './HotSubject';
+import HotActor from './HotActor';
 
 class Ad extends PureComponent {
     render() {
@@ -43,6 +44,10 @@ export default class SubjectScreen extends PureComponent {
         this.props.navigation.navigate('MoreHotSubjectScreen');
     }
 
+    _goToMoreActor = () => {
+
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
@@ -58,6 +63,14 @@ export default class SubjectScreen extends PureComponent {
                             headerStyle={{ color: 'white', fontWeight: 'bold' }}
                             showMore={this._goToMoreSubject} />
                         <HotSubject />
+                        <TitleHeader
+                            style={{ borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'rgb(133,148,156)', marginTop: 0, height: 65 }}
+                            imageSource={require('../../image/subject/hot_subject.png')}
+                            title='人气演员'
+                            btnTitle={In18.MORE_TEXT}
+                            headerStyle={{ color: 'white', fontWeight: 'bold' }}
+                            showMore={this._goToMoreActor} />
+                        <HotActor />
                     </ScrollView>
                 </View>
             </SafeAreaView>
