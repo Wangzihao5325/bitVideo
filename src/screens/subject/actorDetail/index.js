@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ScrollView, View, Text, ImageBackground, Image, FlatList } from 'react-native';
+import { SafeAreaView, ScrollView, View, Text, ImageBackground, Image, FlatList, TouchableHighlight } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
+import VectorIconBtn from '../../../components/imageBtn';
 
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
@@ -35,7 +36,6 @@ export default class ActorDetail extends PureComponent {
         });
 
         Api.getActorDetails(id, 1, 15, (e) => {
-            console.log(e);
             if (e.data && e.data.length > 0) {
                 this.setState({
                     data: e.data,
@@ -79,11 +79,15 @@ export default class ActorDetail extends PureComponent {
         }
     }
 
+    _goBack = () => {
+        this.props.navigation.pop();
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>
-
                 <ScrollView style={{ backgroundColor: Colors.SCREEN_BGCOLOR }} >
+                    <TouchableHighlight onPress={this._goBack} style={{ position: 'absolute', top: 40, left: 15, height: 22, width: 22, zIndex: 10 }}><Image style={{ height: 22, width: 22, transform: [{ rotate: '180deg' }] }} source={require('../../../image/mine/message_left_arrow.png')} /></TouchableHighlight>
                     {this.state.coverPath.length > 0 &&
                         <ImageBackground style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={{ uri: this.state.coverPath }}>
                             <Image resizeMode='contain' style={{ position: 'absolute', left: 0, bottom: -1, width: Sizes.DEVICE_WIDTH, height: Sizes.DEVICE_WIDTH / 6.8 }} source={require('../../../image/subject/model.png')} />
