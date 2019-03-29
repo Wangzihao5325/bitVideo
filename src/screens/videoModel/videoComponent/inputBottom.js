@@ -5,7 +5,9 @@ import store from '../../../store/index';
 import { video_detail_add_myself_comment, change_video_collect_state } from '../../../store/actions/videoDetailInfoAction';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
+import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
+import ToastRoot from '../../../components/toast/index';
 
 import IconBtn from '../../../components/imageBtn/IconBtnWithTitle';
 
@@ -59,7 +61,7 @@ class InputBottom extends PureComponent {
                     }
                 });
         } else {
-            console.log('请输入内容！')
+            ToastRoot.show('请输入评论内容!');
         }
     }
 
@@ -86,9 +88,12 @@ class InputBottom extends PureComponent {
 
     render() {
         let collectImageSource = this.props.collectState ? require('../../../image/usual/star_collect.png') : require('../../../image/usual/star.png');
+        let containerStyle = this.state.isKeyboardShow ? { backgroundColor: 'white' } : { backgroundColor: 'rgb(55,65,70)' };
+        let inputStyle = this.state.isKeyboardShow ? { backgroundColor: 'white', borderColor: 'rgb(242,242,242)', borderWidth: 1, marginLeft: 10 } : null;
+        let inputPlaceholderColor = this.state.isKeyboardShow ? '#909090' : 'rgb(178,178,178)';
         return (
-            <View style={styles.container}>
-                <TextInput onChangeText={this.textChange} ref={(ref) => this.input = ref} style={styles.input} placeholder={In18.COMMENT_PLACEHOLDER} />
+            <View style={[styles.container, containerStyle]}>
+                <TextInput onChangeText={this.textChange} ref={(ref) => this.input = ref} style={[styles.input, inputStyle]} placeholderTextColor={inputPlaceholderColor} placeholder={In18.COMMENT_PLACEHOLDER} />
                 {this.state.isKeyboardShow &&
                     <View style={styles.keyboardView}>
                         <Text onPress={this.sendComment} style={styles.sendText}>{In18.SEND_TEXT}</Text>
@@ -126,9 +131,9 @@ const styles = StyleSheet.create({
     input: {
         height: 38,
         width: Sizes.DEVICE_WIDTH - 80,
-        borderColor: 'rgb(242,242,242)',
-        borderWidth: 1,
-        marginLeft: 10
+        marginLeft: 10,
+        backgroundColor: 'rgb(51,57,62)',
+        borderRadius: 5
     },
     keyboardView: {
         flex: 1,
@@ -156,6 +161,8 @@ const styles = StyleSheet.create({
         width: 18
     },
     iconTitleStyle: {
-        fontSize: 8
+        fontSize: 8,
+        color: 'rgb(153,153,153)',
+        marginTop:3
     }
 });
