@@ -75,7 +75,8 @@ export default connect(mapState2Props)(AmazingComment);
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 10
+        marginTop: 10,
+        zIndex: 10
     },
     header: {
         height: 40,

@@ -102,7 +102,7 @@ class EpiscodeTab extends PureComponent {
 
     render() {
         return (
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop: 10, zIndex: 10 }}>
                 <View style={styles.titleContainer}>
                     <View style={styles.flexView2}>
                         <Text style={styles.titleText}>{In18.CHOOSE_EPISODE}</Text>

@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
+        zIndex:10,
         // borderBottomColor: 'rgb(244,244,244)',
         // borderBottomWidth: 1,
     },

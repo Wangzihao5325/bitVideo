@@ -52,7 +52,6 @@ class Ad extends PureComponent {
     }
 
     render() {
-        console.log(this.state);
         return (
             <TouchableHighlight onPress={this._onPress} style={{ width: 345, height: 150, marginTop: 20, alignSelf: 'center' }} underlayColor='transparent'>
                 <View style={{ flex: 1 }}>

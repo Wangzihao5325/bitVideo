@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
         width: Sizes.DEVICE_WIDTH,
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 11
+        marginTop: 11,
+        zIndex:10
     },
     flexView2: {
         flex: 2,

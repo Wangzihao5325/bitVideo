@@ -92,7 +92,7 @@ export default class VideoModel extends PureComponent {
                         <VideoHeader toIntro={this._introModelOpen} />
                         <UsualInfoTab />
                         <CommentTab />
-                        <SourceTab />
+                        <SourceTab style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }} />
                         <EpiscodeTab toChooseEpiscode={this._chooseEpiscodeModelOpen} />
                         <GuessLike />
                         <AmazingComment />

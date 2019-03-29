@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, ImageBackground, TouchableHighlight, Image, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-export default class Toptab extends PureComponent {
+import { connect } from 'react-redux';
+
+class Toptab extends PureComponent {
     render() {
         return (
             <View style={styles.container}>
@@ -14,7 +16,7 @@ export default class Toptab extends PureComponent {
                             <View style={{ flex: 2, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                     <Image style={{ height: 33, width: 33, marginLeft: 18 }} source={require('../../image/task/icons.png')} />
-                                    <Text style={{ fontSize: 21, color: 'rgb(34,34,34)', marginLeft: 6 }}>79</Text>
+                                    <Text style={{ fontSize: 21, color: 'rgb(34,34,34)', marginLeft: 6 }}>{this.props.coin}</Text>
                                 </View>
                                 <Icon style={{ marginRight: 18 }} name='chevron-right' size={22} color='rgb(33,45,49)' />
                             </View>
@@ -42,6 +44,14 @@ export default class Toptab extends PureComponent {
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        coin: store.account.icons,
+    }
+}
+
+export default connect(mapState2Props)(Toptab);
 
 const styles = StyleSheet.create({
     container: {

@@ -11,13 +11,13 @@ class Btn extends PureComponent {
     }
 
     btnOnPress = () => {
-        if (this.props.highlightIndex === this.props.index) {
-            return;
-        } else {
-            if (this.props.onPress) {
-                this.props.onPress(this.props.index);
-            }
-        }
+        // if (this.props.highlightIndex === this.props.index) {
+        //     return;
+        // } else {
+        //     if (this.props.onPress) {
+        //         this.props.onPress(this.props.index);
+        //     }
+        // }
     }
     render() {
         let textStyle = this.props.highlightIndex === this.props.index ? styles.btnHighlightText : styles.btnNormalText;
@@ -76,7 +76,7 @@ class SourceTab extends PureComponent {
 
     render() {
         return (
-            <View>
+            <View style={this.props.style}>
                 {
                     this.state.source && <FlatList
                         showsHorizontalScrollIndicator={false}
@@ -115,14 +115,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'rgb(242,242,242)',
         borderRadius: 5,
-        marginHorizontal: 5
+        marginHorizontal: 5,
+        backgroundColor: 'transparent'
     },
     btnHighlightText: {
-        color: 'rgb(5,131,255)',
+        color: 'transparent',
         fontSize: 16
     },
     btnNormalText: {
-        color: 'rgb(32,32,32)',
+        color: 'transparent',
         fontSize: 16
     },
 });

@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10,
         borderBottomColor: 'rgb(133,148,156)',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        zIndex:10
     },
     flexView1: {
         display: 'flex',
