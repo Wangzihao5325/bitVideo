@@ -174,7 +174,7 @@ export default class App extends Component {
           Variables.account.deviceToken = e.api_token;
           store.dispatch(get_device_account_info(e));
           //获取个人信息
-          Api.getUserInfo((e) => {
+          Api.getUserInfo((e, code, message) => {
             if (e) {
               store.dispatch(get_user_info(e));
             }

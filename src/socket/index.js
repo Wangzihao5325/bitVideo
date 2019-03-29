@@ -459,6 +459,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getSubjectAd(page, limit, onSuccess, onError) {
+        const url = `/api/video/ad?page=${page}&limit=${limit}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
 }
 
 export default new api();

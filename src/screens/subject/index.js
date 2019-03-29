@@ -1,22 +1,63 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, SafeAreaView, View, Text, TouchableHighlight, ScrollView, Image } from 'react-native';
-import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
 import * as In18 from '../../global/In18';
-import * as Sizes from '../../global/Sizes';
 import * as Colors from '../../global/Colors';
+import Api from '../../socket/index';
 import PropTypes from 'prop-types';
-
-import IdolTabList from './IdolTabList';
+// import * as Sizes from '../../global/Sizes';
+// import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
+//import IdolTabList from './IdolTabList';
 import TitleHeader from '../../components/titleHeader/index';
 import HotSubject from './HotSubject';
 import HotActor from './HotActor';
 
 class Ad extends PureComponent {
+    static contextTypes = {
+        subjectNavigation: PropTypes.object
+    }
+
+    state = {
+        url: '',
+        type: '',
+        webUrl: '',
+        videoId: ''
+    }
+
+    componentDidMount() {
+        Api.getSubjectAd(1, 1, (e) => {
+            if (e.data && e.data.length > 0) {
+                let data = e.data.shift();
+                if (data.type === 'VIDEO') {
+                    this.setState({
+                        url: data.cover_path,
+                        type: data.type,
+                        videoId: data.video_id
+                    });
+                } else {
+                    this.setState({
+                        url: data.cover_path,
+                        type: data.type,
+                        webUrl: data.redirect_url
+                    });
+                }
+            }
+        })
+    }
+
+    _onPress = () => {
+        if (this.state.type === 'VIDEO') {
+            const { subjectNavigation } = this.context;
+            subjectNavigation.navigate('VideoModel', { videoId: this.state.videoId });
+        }
+    }
+
     render() {
+        console.log(this.state);
         return (
-            <TouchableHighlight style={{ width: 345, height: 150, backgroundColor: '#909090', marginTop: 20, alignSelf: 'center' }}>
-                {/* <Image style={{}}/> */}
-                <View style={{ flex: 1 }}></View>
+            <TouchableHighlight onPress={this._onPress} style={{ width: 345, height: 150, marginTop: 20, alignSelf: 'center' }} underlayColor='transparent'>
+                <View style={{ flex: 1 }}>
+                    {this.state.length > 0 && <Image style={{ flex: 1 }} source={{ uri: this.state.url }} defaultSource={require('../../image/usual/banner_load_failed.png')} />}
+                </View>
             </TouchableHighlight>
         );
     }
