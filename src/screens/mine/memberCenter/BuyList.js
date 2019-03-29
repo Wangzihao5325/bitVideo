@@ -12,6 +12,7 @@ const Item = function (props) {
     return (
         <View style={styles.itemContainer}>
             <View style={styles.bottomLine}></View>
+            <Text style={styles.priceText}>{`¥${props.item.price_current}`}</Text>
             <View style={{ flex: 3 }}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>{props.item.vc_title}</Text>
@@ -21,9 +22,9 @@ const Item = function (props) {
                 <Text style={styles.introText}>{`订单编号:${props.item.order_no}`}</Text>
                 <Text style={styles.introText}>{`交易时间:${props.item.created_at}`}</Text>
             </View>
-            <View style={{ flex: 2, flexDirection: 'row-reverse' }}>
+            {/* <View style={{ flex: 2, flexDirection: 'row-reverse' }}>
                 <Text style={styles.priceText}>{`¥${props.item.price_current}`}</Text>
-            </View>
+            </View> */}
         </View>
     );
 }
@@ -75,7 +76,7 @@ export default class BugListScreen extends PureComponent {
 
 const styles = StyleSheet.create({
     itemContainer: {
-        height: 135 + 10,
+        height: 135 + 10 + 10,
         width: '100%',
         display: 'flex',
         flexDirection: 'row'
@@ -83,8 +84,9 @@ const styles = StyleSheet.create({
     priceText: {
         fontSize: 19,
         color: 'rgb(255,184,117)',
-        marginRight: 28,
-        marginTop: 20,
+        position: 'absolute',
+        right: 28,
+        top: 20,
         fontWeight: 'bold'
     },
     titleContainer: {

@@ -65,9 +65,9 @@ class VideoDetailInfoWithEdit extends PureComponent {
                         {/* <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} /> */}
                     </View>
                     <View style={styles.infoContainer}>
-                        <Text style={styles.titleText}>{this.props.title}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.titleText}>{this.props.title}</Text>
                         <Text numberOfLines={2} ellipsizeMode='tail' style={styles.introText}>{this.props.intro}</Text>
-                        <Text style={styles.directorText}>{this.props.director}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.directorText}>{this.props.director}</Text>
                     </View>
                 </View>
             </TouchableHighlight>
