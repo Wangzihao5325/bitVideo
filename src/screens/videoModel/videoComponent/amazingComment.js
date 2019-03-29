@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         marginLeft: 10,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(178,178,178)',
         fontSize: 16,
         fontWeight: 'bold'
     },
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         height: 34,
         width: Sizes.DEVICE_WIDTH - 65 - 19,
         fontSize: 12,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(178,178,178)',
         marginTop: 10
     },
     commemtListContainer: {

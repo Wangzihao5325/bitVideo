@@ -62,10 +62,11 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
+        alignItems:'center',
         marginTop: 10,
         borderBottomColor: 'rgb(133,148,156)',
-        borderBottomWidth: 1,
-        zIndex:10
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        zIndex: 10
     },
     flexView1: {
         display: 'flex',

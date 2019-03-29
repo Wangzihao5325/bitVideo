@@ -105,11 +105,11 @@ class EpiscodeTab extends PureComponent {
             <View style={{ marginTop: 10, zIndex: 10 }}>
                 <View style={styles.titleContainer}>
                     <View style={styles.flexView2}>
-                        <Text style={styles.titleText}>{In18.CHOOSE_EPISODE}</Text>
+                        <Text style={styles.titleText}>画质选择</Text>
                     </View>
                     <View style={styles.flexView1}>
-                        <Text style={styles.introText}>{`${In18.HOLE_TEXT}${this.props.totalEpisodeNum}${In18.EPISODE_TEXT}`}</Text>
-                        <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this._chooseEpiscode} source={require('../../../image/usual/arrow_right_circle.png')} />
+                        {/* <Text style={styles.introText}>{`${In18.HOLE_TEXT}${this.props.totalEpisodeNum}${In18.EPISODE_TEXT}`}</Text>
+                        <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this._chooseEpiscode} source={require('../../../image/usual/arrow_right_circle.png')} /> */}
                     </View>
                 </View>
                 {
@@ -149,16 +149,16 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgb(242,242,242)',
+        backgroundColor: 'rgb(51,57,62)',
         borderRadius: 5,
         marginHorizontal: 5
     },
     btnHighlightText: {
-        color: 'rgb(5,131,255)',
+        color: 'rgb(254,163,93)',
         fontSize: 16
     },
     btnNormalText: {
-        color: 'rgb(32,32,32)',
+        color: 'rgb(178,178,178)',
         fontSize: 16
     },
     titleContainer: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         marginLeft: 10,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(178,178,178)',
         fontSize: 16,
         fontWeight: 'bold'
     },

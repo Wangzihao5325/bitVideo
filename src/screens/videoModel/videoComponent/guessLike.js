@@ -66,7 +66,9 @@ export default connect(mapState2Props)(GuessLike);
 const styles = StyleSheet.create({
     container: {
         marginTop: 10,
-        zIndex:10
+        zIndex: 10,
+        borderTopColor: 'rgb(133,148,156)',
+        borderTopWidth: StyleSheet.hairlineWidth,
     },
     header: {
         height: 40,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         marginLeft: 10,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(178,178,178)',
         fontSize: 16,
         fontWeight: 'bold'
     },
