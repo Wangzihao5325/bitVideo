@@ -40,34 +40,36 @@ class QrCode extends PureComponent {
 
 
     _goToInviteFriend = () => {
-        Share.share({
-            message: In18.SHARE_MESSAGE,
-            url: In18.SHARE_URL,
-            title: In18.SHARE_TITLE
-        }, {
-                dialogTitle: In18.SHARE_DIALOG_TITLE
-            })
-            .then(this._shareResult)
-            .catch((e) => { console.log(e) });
+        Api.postShareQrCodeMessage(this.props.inviteCode, 'official', 'qrcode', (e) => {
+            if (e.content) {
+                let shareUrl = e.content.split(':')[1];
+                Share.share({
+                    message: e.content,
+                    url: shareUrl,
+                    title: '蝌蚪视频App'
+                }, {
+                        dialogTitle: In18.SHARE_DIALOG_TITLE
+                    })
+                    .then(this._shareResult);
+                // .catch((e) => { console.log(e) });
+            }
+        });
     }
 
     _shareResult = (result) => {
         if (result.action === Share.sharedAction) {
-            if (result.activityType) {
-                console.log('shared with action type');
-            } else {
-                console.log(done);
-            }
-        } else if (result.action === Share.dismissedAction) {
-            console.log('dismiss');
+            // wait for other click
         }
     }
 
     _saveQrCode = () => {
         captureScreen({ format: "jpg", quality: 1 }).then(uri => {
-            console.log(uri);
-            CameraRoll.saveToCameraRoll(uri, 'photo')
-        }, error => console.error("Oops, snapshot failed", error));
+
+            CameraRoll.saveToCameraRoll(uri, 'photo');
+
+        }, error => {
+            // do nothing
+        });
     }
 
 

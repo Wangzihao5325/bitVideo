@@ -488,6 +488,16 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
+    postShareQrCodeMessage(inviteCode, channel, from, onSuccess, onError) {
+        const url = '/api/user/task/share';
+        let formData = new FormData();
+        formData.append('code', inviteCode);
+        formData.append('channel', channel);
+        formData.append('from', from);
+
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
 }
 
 export default new api();
