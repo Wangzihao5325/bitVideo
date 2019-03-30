@@ -46,10 +46,14 @@ class Item extends PureComponent {
     }
 
     render() {
+        let videoCount = this.props.item.video_count;
+        if (this.props.item.video_count > 999) {
+            videoCount = '999+'
+        }
         return (
             <View style={styles.itemContainer}>
                 <ImageBackground style={{ position: 'absolute', top: 20, right: 0, height: 27, width: 89, display: 'flex', flexDirection: 'row-reverse', alignItems: 'center' }} source={require('../../image/subject/actor_total.png')}>
-                    <Text onPress={this._toActorDetail} style={{ color: 'rgb(254,163,91)', marginRight: 3 }}>{`${this.props.item.video_count}部影片`}</Text>
+                    <Text onPress={this._toActorDetail} style={{ color: 'rgb(254,163,91)', marginRight: 2 }}>{`${videoCount}部影片`}</Text>
                 </ImageBackground>
                 <View style={styles.titleContainer}>
                     <SecurtyImage style={styles.itemImage} source={{ uri: this.props.item.cover_path }} />

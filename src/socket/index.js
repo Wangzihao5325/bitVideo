@@ -96,8 +96,7 @@ class api {
                 try {
                     onSuccess(result, code, message);
                 } catch (error) {
-                    // console.log(error);
-                    onError ? onError(result, code, message) : console.log(responseJson);
+                    onError ? onError(result, code, message) : console.log(`error: socket error! ${fullUrl}`);
                 }
             }
         )
@@ -161,14 +160,10 @@ class api {
                     const result = reponseJson.result ? reponseJson.result : null;
                     const code = reponseJson.code ? reponseJson.code : null;
                     const message = reponseJson.message ? reponseJson.message : null;
-                    if (message === 'success') {
-                        try {
-                            onSuccess(result, code, message);
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    } else {
-                        onError ? onError(result, code, message) : console.log(responseJson);
+                    try {
+                        onSuccess(result, code, message);
+                    } catch (error) {
+                        onError ? onError(result, code, message) : console.log(`error: socket error! ${fullUrl}`);
                     }
                 }
             )

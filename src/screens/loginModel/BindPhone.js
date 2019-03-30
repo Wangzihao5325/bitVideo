@@ -13,6 +13,7 @@ import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 import ModalHeader from '../../components/modal/ModalHeader';
 
+
 let reg = { mobile: '', password: '', code: '', verCode: '' };
 
 class MainTitle extends PureComponent {
@@ -36,10 +37,12 @@ class InputField extends PureComponent {
     }
 
     login = () => {
-        Api.postBindPhone(reg.mobile, reg.verCode, reg.code, (e, code, message) => {
+        Api.postBindPhone(reg.mobile, '121212', reg.code, (e, code, message) => {//reg.verCode
             if (message == 'success') {
                 const { modalNavigation } = this.context;
                 modalNavigation.goBack();
+            } else {
+
             }
         });
     }

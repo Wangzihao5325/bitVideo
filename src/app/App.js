@@ -145,6 +145,7 @@ export default class App extends Component {
     //   console.log(state);
     //   console.log(rate);
     // });
+    let that = this;
 
     (async function () {
       let password = await AsyncStorage.getItem('Lock_Password');
@@ -158,9 +159,9 @@ export default class App extends Component {
       }
 
       //获取开屏动画
-      Api.getSplashScreen((result, message, code) => {
-        if (result) {
-          this.setState({
+      Api.getSplashScreen((result) => {
+        if (result.ad_path) {
+          that.setState({
             uri: result.ad_path
           });
         }

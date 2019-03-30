@@ -95,7 +95,7 @@ export default class SubjectScreen extends PureComponent {
                     <ScrollView>
                         {/* <Text style={styles.titleText}>{In18.HOT_TAG}</Text>
                         <IdolTabList /> */}
-                        <Ad />
+                        {/* <Ad /> */}
                         <TitleHeader
                             imageSource={require('../../image/subject/hot_subject.png')}
                             title={In18.HOT_SUBJECT}
