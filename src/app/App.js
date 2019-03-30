@@ -170,6 +170,7 @@ export default class App extends Component {
       let deviceId = DeviceInfo.getUniqueID();
       Api.postRegisterByDeviceId(deviceId, (e, code, message) => {
         if (e && e.api_token) {
+          console.log(e.api_token);
           Variables.account.token = e.api_token;
           Variables.account.deviceToken = e.api_token;
           store.dispatch(get_device_account_info(e));

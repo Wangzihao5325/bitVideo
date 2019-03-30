@@ -480,6 +480,14 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
+    postTaskCoins(key, onSuccess, onError) {
+        const url = '/api/user/get-coins';
+        let formData = new FormData();
+        formData.append('key', key);
+
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
 }
 
 export default new api();

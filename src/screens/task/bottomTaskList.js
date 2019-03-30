@@ -4,6 +4,8 @@ import Api from '../../socket/index';
 import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
+import ToastRoot from '../../components/toast/index';
+import { NavigationEvents } from 'react-navigation';
 
 const Header = function (props) {
     return (
@@ -21,28 +23,51 @@ class Item extends PureComponent {
 
     _onPress = () => {
         const { taskNavigation } = this.context;
-        switch (this.props.type) {
-            case 'SAVE_PHOTO':
-                taskNavigation.navigate('QrCodeModel');
-                break;
-            case 'BIND_MOBILE':
-                //taskNavigation.navigate('QrCodeModel');
-                break;
-            case 'DAILY_SHARED':
-                taskNavigation.navigate('QrCodeModel');
-                break;
-            case 'CLICK_AD':
-                taskNavigation.navigate('MainScreen');
-                break;
-            case 'INVITE_REGISTER':
-                taskNavigation.navigate('QrCodeModel');
-                break;
-            case 'LOOKED_VIDEO_SATISFY':
-                taskNavigation.navigate('MainScreen');
-                break;
-            case 'SAILY_SIGN_IN':
-                //taskNavigation.navigate('QrCodeModel');
-                break;
+        if (this.props.sign == 0 || this.props.sign == 1) {
+            switch (this.props.type) {
+                case 'SAVE_PHOTO':
+                    taskNavigation.navigate('QrCodeModel');
+                    break;
+                case 'BIND_MOBILE':
+                    taskNavigation.navigate('BindPhoneModel');
+                    break;
+                case 'DAILY_SHARED':
+                    taskNavigation.navigate('QrCodeModel');
+                    break;
+                case 'CLICK_AD':
+                    taskNavigation.navigate('MainScreen');
+                    break;
+                case 'INVITE_REGISTER':
+                    taskNavigation.navigate('QrCodeModel');
+                    break;
+                case 'LOOKED_VIDEO_SATISFY':
+                    taskNavigation.navigate('MainScreen');
+                    break;
+                case 'SAILY_SIGN_IN':
+                    Api.postTaskAndExchange(this.props.type, (e, code, message) => {
+                        if (message === 'success') {
+                            if (this.props.refreshCallBack) {
+                                Api.getTaskList((e) => {
+                                    this.props.refreshCallBack(e)
+                                });
+                            }
+                        }
+                    });
+                    break;
+            }
+        } else if (this.props.sign == 2) {
+            Api.postTaskCoins(this.props.type, (e, code, message) => {
+                if (message === 'success') {
+                    if (this.props.refreshCallBack) {
+                        Api.getTaskList((e) => {
+                            this.props.refreshCallBack(e)
+                        });
+                    }
+                }
+            });
+        } else {
+            ToastRoot.show('您已经领取过该项福利!')
+            // do nothing
         }
     }
 
@@ -52,7 +77,12 @@ class Item extends PureComponent {
         let btnTextColor = { color: 'rgb(34,34,34)' };
         switch (this.props.sign) {
             case 0:
-                btnText = '去做任务';
+                if (this.props.type === 'SAILY_SIGN_IN') {
+                    btnText = '立即签到';
+                } else {
+                    btnText = '去做任务';
+                }
+
                 btnColor = { backgroundColor: 'rgb(247,203,148)' };
                 btnTextColor = { color: 'rgb(34,34,34)' }
                 break;
@@ -80,7 +110,7 @@ class Item extends PureComponent {
                     <Text style={{ color: 'rgb(255,197,10)', fontSize: 14, marginLeft: 15, marginTop: 11 }}>{`+${this.props.coins}`}<Text style={{ color: 'rgb(169,169,169)', fontSize: 14 }}>金币奖励</Text></Text>
                 </View>
                 <View style={{ flex: 1, alignItems: 'center' }}>
-                    <TouchableHighlight style={[styles.itemBtn, btnColor]} onPress={this._onPress}>
+                    <TouchableHighlight style={[styles.itemBtn, btnColor]} onPress={this._onPress} underlayColor='transparent'>
                         <Text style={[styles.btnText, btnTextColor]}>{btnText}</Text>
                     </TouchableHighlight>
                     <Text style={{ color: 'rgb(155,155,155)', fontSize: 11, marginTop: 5 }}>已完成<Text style={{ color: 'rgb(255,168,96)' }}>{this.props.has}</Text></Text>
@@ -92,7 +122,7 @@ class Item extends PureComponent {
 
 const ModuleGenerate = function (props) {
     let items = props.data.map((item, index) => {
-        return (<Item key={index} iconSource={item.icon} coins={item.coins} title={item.title} sign={item.sign} has={item.has} type={item.key} />)
+        return (<Item refreshCallBack={props.refreshCallBack} key={index} iconSource={item.icon} coins={item.coins} title={item.title} sign={item.sign} has={item.has} type={item.key} />)
     });
     let containerHeight = props.data.length * 75 + 45 + 5;
     return (
@@ -112,7 +142,6 @@ export default class bottomTaskList extends PureComponent {
     };
     componentDidMount() {
         Api.getTaskList((e) => {
-            console.log(e);
             if (e instanceof Array) {
                 let daily = e.filter((item) => {
                     return item.group == 'daily';
@@ -131,27 +160,71 @@ export default class bottomTaskList extends PureComponent {
             }
         });
     }
+
+    _refresh = (e) => {
+        if (e instanceof Array) {
+            let daily = e.filter((item) => {
+                return item.group == 'daily';
+            });
+            let extend = e.filter((item) => {
+                return item.group == 'extend';
+            });
+            let welfare = e.filter((item) => {
+                return item.group == 'welfare';
+            });
+            this.setState({
+                daily,
+                extend,
+                welfare
+            });
+        }
+    }
+
+    _onDidFocus = () => {
+        Api.getTaskList((e) => {
+            if (e instanceof Array) {
+                let daily = e.filter((item) => {
+                    return item.group == 'daily';
+                });
+                let extend = e.filter((item) => {
+                    return item.group == 'extend';
+                });
+                let welfare = e.filter((item) => {
+                    return item.group == 'welfare';
+                });
+                this.setState({
+                    daily,
+                    extend,
+                    welfare
+                });
+            }
+        });
+    }
+
     render() {
         let modules = [];
         let height = 0;
         if (Array.isArray(this.state.extend) && this.state.extend.length > 0) {
-            let extendModule = <ModuleGenerate key={'1'} data={this.state.extend} title='推广任务' />;
+            let extendModule = <ModuleGenerate refreshCallBack={this._refresh} key={'1'} data={this.state.extend} title='推广任务' />;
             modules.push(extendModule);
             height = height + this.state.extend.length * 75 + 45 + 5;
         }
         if (Array.isArray(this.state.welfare) && this.state.welfare.length > 0) {
-            let welfareModule = <ModuleGenerate key={'2'} data={this.state.welfare} title='福利任务' />;
+            let welfareModule = <ModuleGenerate refreshCallBack={this._refresh} key={'2'} data={this.state.welfare} title='福利任务' />;
             modules.push(welfareModule);
             height = height + this.state.welfare.length * 75 + 45 + 5;
         }
         if (Array.isArray(this.state.daily) && this.state.daily.length > 0) {
-            let dailyModule = <ModuleGenerate key={'3'} data={this.state.daily} title='日常任务' />;
+            let dailyModule = <ModuleGenerate refreshCallBack={this._refresh} key={'3'} data={this.state.daily} title='日常任务' />;
             modules.push(dailyModule);
             height = height + this.state.daily.length * 75 + 45 + 5;
         }
 
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
+                <NavigationEvents
+                    onDidFocus={this._onDidFocus}
+                />
                 {modules}
             </ScrollView>
         );
