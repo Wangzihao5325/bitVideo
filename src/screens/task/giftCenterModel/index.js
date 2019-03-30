@@ -1,16 +1,75 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, SafeAreaView, Text, View, FlatList, Image, Platform, ImageBackground, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
 import * as Sizes from '../../../global/Sizes';
 import { isXDevice } from '../../../global/utils/PixelUtil';
+import ToastRoot from '../../../components/toast/index';
+import store from '../../../store/index';
+import { get_user_info } from '../../../store/actions/accountAction';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 
+
 class Item extends PureComponent {
+    static contextTypes = {
+        giftNavigation: PropTypes.object
+    }
+
+    _onPress = () => {
+        if (this.props.sign == 1) {
+            ToastRoot.show('您已经兑换过该项福利');
+            return;
+        }
+        if (this.props.haveCoins >= this.props.coin) {
+            Api.postTaskAndExchange(this.props.eventId, (e, code, message) => {
+                if (message == 'success') {
+                    ToastRoot.show('兑换成功');
+                    Api.getUserInfo((e, code, message) => {
+                        if (e) {
+                            store.dispatch(get_user_info(e));
+                        }
+                    });
+                    Api.getUserExchangeList((e) => {
+                        if (Array.isArray(e) && e.length > 0) {
+                            if (this.props.pressCallback) {
+                                this.props.pressCallback(e);
+                            }
+                        }
+                    });
+                } else {
+                    ToastRoot.show('兑换失败');
+                }
+            });
+        } else {
+            const { giftNavigation } = this.context;
+            giftNavigation.navigate('TaskScreen');
+        }
+    }
+
     render() {
+        let text = '';
+        let btnStyle = null;
+        let textStyle = null;
+
+        if (this.props.sign == 0) {
+            if (this.props.haveCoins > this.props.coin) {
+                text = '立即兑换';
+                btnStyle = { backgroundColor: 'rgb(33,45,49)' };
+                textStyle = { color: 'white' }
+            } else {
+                text = '去做任务';
+                btnStyle = { backgroundColor: 'rgb(247,203,148)' };
+                textStyle = { color: 'rgb(34,34,34)' }
+            }
+        } else if (this.props.sign == 1) {
+            text = '兑换完毕';
+            btnStyle = { backgroundColor: 'rgb(33,45,49)' };
+            textStyle = { color: 'white' }
+        }
         return (
             <View style={styles.itemContainer}>
                 <View style={{ flex: 2 }}>
@@ -24,8 +83,8 @@ class Item extends PureComponent {
                     </View>
                 </View>
                 <View style={{ flex: 3, flexDirection: 'row-reverse', alignItems: 'center', borderBottomColor: 'rgb(246,246,246)', borderBottomWidth: StyleSheet.hairlineWidth }}>
-                    <TouchableHighlight style={styles.itemBtn}>
-                        <Text style={styles.btnText}>立即兑换</Text>
+                    <TouchableHighlight style={[styles.itemBtn, btnStyle]}>
+                        <Text onPress={this._onPress} style={[styles.btnText, textStyle]}>{text}</Text>
                     </TouchableHighlight>
                 </View>
             </View>
@@ -45,6 +104,16 @@ class GiftCenterModel extends PureComponent {
         data: []
     }
 
+    static childContextTypes = {
+        giftNavigation: PropTypes.object,
+    }
+
+    getChildContext() {
+        return {
+            giftNavigation: this.props.navigation
+        }
+    }
+
     componentDidMount() {
         Api.getUserExchangeList((e) => {
             if (Array.isArray(e) && e.length > 0) {
@@ -57,6 +126,12 @@ class GiftCenterModel extends PureComponent {
 
     _goBack = () => {
         this.props.navigation.goBack();
+    }
+
+    _pressCallback = (e) => {
+        this.setState({
+            data: e
+        });
     }
 
 
@@ -95,7 +170,8 @@ class GiftCenterModel extends PureComponent {
                         <FlatList
                             style={{ flex: 1 }}
                             data={this.state.data}
-                            renderItem={({ item }) => <Item date={item.untile} url={item.icon} title={item.title} coin={item.coins} />}
+                            extraData={this.props.coins}
+                            renderItem={({ item }) => <Item sign={item.sign} pressCallback={this._pressCallback} eventId={item.key} haveCoins={this.props.coins} date={item.untile} url={item.icon} title={item.title} coin={item.coins} />}
                         />
                     </View>
                 </SafeAreaView>

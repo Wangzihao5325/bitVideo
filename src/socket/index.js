@@ -464,10 +464,18 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
-    postAddOrder(mobile,onSuccess,onError) {
+    postAddOrder(mobile, onSuccess, onError) {
         const url = '/api/user/order/add';
         let formData = new FormData();
         formData.append('mobile', mobile);
+
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
+    postTaskAndExchange(param, onSuccess, onError) {
+        const url = '/api/user/equity/exchange';
+        let formData = new FormData();
+        formData.append('event', param);
 
         this.postFetch(url, formData, onSuccess, onError);
     }
