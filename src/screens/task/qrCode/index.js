@@ -66,7 +66,9 @@ class QrCode extends PureComponent {
         captureScreen({ format: "jpg", quality: 1 }).then(uri => {
 
             CameraRoll.saveToCameraRoll(uri, 'photo');
-
+            Api.postTaskAndExchange('SAVE_PHOTO',(e)=>{
+                // do nothing
+            });
         }, error => {
             // do nothing
         });
