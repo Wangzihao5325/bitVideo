@@ -1,17 +1,14 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
-import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
 import * as Colors from '../../global/Colors';
 import Api from '../../socket/index';
-import Variables from '../../global/Variables';
-
-import VectorIconBtn from '../../components/imageBtn/VectorIconBtn';
 import MobileInput from '../../components/input/MobileInput';
 import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 import ModalHeader from '../../components/modal/ModalHeader';
+import ToastRoot from '../../components/toast/index';
 
 
 let reg = { mobile: '', password: '', code: '', verCode: '' };
@@ -37,12 +34,16 @@ class InputField extends PureComponent {
     }
 
     login = () => {
+        const { modalNavigation } = this.context;
         Api.postBindPhone(reg.mobile, reg.verCode, reg.code, (e, code, message) => {//reg.verCode
             if (message == 'success') {
-                const { modalNavigation } = this.context;
-                modalNavigation.goBack();
+                Api.postTaskAndExchange('BIND_MOBILE', (e, code, message) => {
+                    if (message === 'success') {
+                        modalNavigation.goBack();
+                    }
+                });
             } else {
-
+                ToastRoot.show(message);
             }
         });
     }

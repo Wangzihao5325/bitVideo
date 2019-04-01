@@ -39,7 +39,7 @@ export default class VideoModel extends PureComponent {
             //获取video信息
             Api.getVideoInfo(videoId, (result, code, message) => {
                 if (result) {
-                    //console.log(result);
+                    console.log(result);
                     store.dispatch(set_video_full_data(result));
                 } else {
                     // console.log(message);
