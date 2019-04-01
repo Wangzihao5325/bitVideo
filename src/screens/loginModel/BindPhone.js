@@ -37,7 +37,7 @@ class InputField extends PureComponent {
     }
 
     login = () => {
-        Api.postBindPhone(reg.mobile, '121212', reg.code, (e, code, message) => {//reg.verCode
+        Api.postBindPhone(reg.mobile, reg.verCode, reg.code, (e, code, message) => {//reg.verCode
             if (message == 'success') {
                 const { modalNavigation } = this.context;
                 modalNavigation.goBack();

@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react';
 import { View, Text, Image, ScrollView, TouchableHighlight, StyleSheet, ImageBackground } from 'react-native';
 import Api from '../../socket/index';
 import PropTypes from 'prop-types';
-import * as Sizes from '../../global/Sizes';
-import * as In18 from '../../global/In18';
 import ToastRoot from '../../components/toast/index';
 import { NavigationEvents } from 'react-navigation';
+import { get_user_info } from '../../store/actions/accountAction';
+import store from '../../store/index';
 
 const Header = function (props) {
     return (
@@ -63,6 +63,11 @@ class Item extends PureComponent {
                             this.props.refreshCallBack(e)
                         });
                     }
+                    Api.getUserInfo((e, code, message) => {
+                        if (e) {
+                            store.dispatch(get_user_info(e));
+                        }
+                    });
                 }
             });
         } else {
