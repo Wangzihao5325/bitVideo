@@ -60,7 +60,7 @@ class Avater extends PureComponent {
     // }
 
     render() {
-        let typeText = accountTypeTransform(this.props.type);
+        let typeText = this.props.vip ? this.props.vip.title : '';
         return (
             <View style={styles.avaterContainer}>
                 {this.props.source && <Image style={styles.avaterImage} source={{ uri: this.props.source }} defaultSource={require('../../image/mine/mine_defalut_avater.png')} />}
@@ -122,7 +122,7 @@ class Header extends PureComponent {
                     onDidFocus={this._onDidFocus}
                 />
                 <TopBtns isLogin={this.props.isLogin} />
-                <Avater source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
+                <Avater vip={this.props.vip} source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
                 <CountList vipEndDay={this.props.vipEndDay} vipHasDays={this.props.vipHasDays} remainCount={this.props.remainCount} total={this.props.viewCountTotal} use={this.props.viewCountUse} />
             </View>
         );
@@ -140,6 +140,7 @@ function mapState2Props(store) {
         vipHasDays: store.account.vipHasDays,
         vipEndDay: store.account.vipEndDay,
         coverPath: store.account.coverPath,
+        vip: store.account.vip
     }
 }
 
