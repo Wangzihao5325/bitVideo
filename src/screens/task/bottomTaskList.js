@@ -22,6 +22,7 @@ class Item extends PureComponent {
     }
 
     _onPress = () => {
+        let callbackReg = this.props.refreshCallBack;
         const { taskNavigation } = this.context;
         if (this.props.sign == 0 || this.props.sign == 1) {
             switch (this.props.type) {
@@ -46,9 +47,9 @@ class Item extends PureComponent {
                 case 'SAILY_SIGN_IN':
                     Api.postTaskAndExchange(this.props.type, (e, code, message) => {
                         if (message === 'success') {
-                            if (this.props.refreshCallBack) {
+                            if (callbackReg) {
                                 Api.getTaskList((e) => {
-                                    this.props.refreshCallBack(e)
+                                    callbackReg(e);
                                 });
                             }
                         }

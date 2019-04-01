@@ -29,14 +29,20 @@ export default class VideoModel extends PureComponent {
 
     componentDidMount() {
         const videoId = this.props.navigation.getParam('videoId', 'undefine_Id');
+        const type = this.props.navigation.getParam('type', 'video');
+        if (type == 'ad') {
+            Api.postTaskAndExchange('CLICK_AD', (e, code, message) => {
+                //do nothing
+            })
+        }
         if (videoId !== 'undefine_Id') {
             //获取video信息
             Api.getVideoInfo(videoId, (result, code, message) => {
                 if (result) {
-                    console.log(result);
+                    // console.log(result);
                     store.dispatch(set_video_full_data(result));
                 } else {
-                    console.log(message);
+                    // console.log(message);
                 }
             });
             //根据video id 获取猜你喜欢信息

@@ -1,15 +1,23 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 
 export default class AdModule extends PureComponent {
+    _watchAd = () => {
+        if (this.props.navi) {
+            this.props.navi.navigate('VideoModel', { videoId: this.props.data.video_id, type: 'ad' });
+        }
+    }
+
     render() {
         return (
-            <View style={styles.container}>
-                <Image style={styles.image} source={{ uri: this.props.data.cover_path }} />
-                <Text style={styles.titleText}>{this.props.data.title}</Text>
-                <Text style={styles.remarkText}>{this.props.data.remark}</Text>
-            </View>
+            <TouchableWithoutFeedback style={styles.container} onPress={this._watchAd}>
+                <View style={{ flex: 1 }}>
+                    <Image style={styles.image} source={{ uri: this.props.data.cover_path }} />
+                    <Text style={styles.titleText}>{this.props.data.title}</Text>
+                    <Text style={styles.remarkText}>{this.props.data.remark}</Text>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 }

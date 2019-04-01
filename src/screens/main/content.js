@@ -35,7 +35,7 @@ class Item extends PureComponent {
                 }
             case 'm_ad':
                 if (this.props.item.m_ad_data && this.props.item.m_ad_data.length > 0) {
-                    return (<AdModule key={this.props.index} data={this.props.item.m_ad_data[0]} />);
+                    return (<AdModule key={this.props.index} data={this.props.item.m_ad_data[0]} navi={mainNavigation} />);
                 }
             default:
                 return (<View style={{ height: 1, width: Sizes.DEVICE_WIDTH, backgroundColor: 'transparent' }} />);
@@ -57,6 +57,7 @@ class Content extends PureComponent {
             return;
         }
         Api.postGlobalTypeVideo('recommend', this.props.nowPage + 1, (e, code, message) => {
+            console.log(e);
             if (e.data) {
                 store.dispatch(addMainPageData(e.data));
                 store.dispatch(setPageInfo(e.current_page, e.last_page));
