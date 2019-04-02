@@ -72,7 +72,6 @@ class MemberCenter extends PureComponent {
 
     componentDidMount() {
         Api.getVIPCardList((e) => {
-            console.log(e);
             if (e) {
                 this.setState({
                     data: e

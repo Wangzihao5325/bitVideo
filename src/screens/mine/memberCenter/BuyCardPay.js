@@ -35,7 +35,7 @@ export default class BuyCardPay extends PureComponent {
     }
 
     _buyCard = () => {
-        console.log('12122121');
+        // to do
     }
 
     render() {

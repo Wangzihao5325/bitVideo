@@ -121,7 +121,7 @@ export default class ShortVideo extends PureComponent {
                 dialogTitle: In18.SHARE_DIALOG_TITLE
             })
             .then(this._shareResult)
-            .catch((e) => { console.log(e) });
+            .catch((e) => { /** do nothing */ });
     }
 
     _shareResult = (result) => {

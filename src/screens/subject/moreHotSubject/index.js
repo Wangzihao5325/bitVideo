@@ -53,7 +53,6 @@ export default class MoreHotSubject extends PureComponent {
 
     componentDidMount() {
         Api.getNewSubjectList(1, 32, (e) => {
-            console.log(e);
             if (e.data && e.data.length > 0) {
                 this.setState({
                     data: e.data

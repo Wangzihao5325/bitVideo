@@ -23,13 +23,13 @@ export default class SubjectScreen extends PureComponent {
                     imageSource={require('../../image/subject/hot_subject.png')}
                     title={In18.HOT_SUBJECT}
                     btnTitle={In18.MORE_TEXT}
-                    showMore={() => { console.log('11223344') }} />
+                    showMore={() => {  }} />
                 <HotSubject />
                 <TitleHeader
                     imageSource={require('../../image/subject/newest_movie.png')}
                     title={In18.HOT_MOVIE}
                     btnTitle={In18.MORE_TEXT}
-                    showMore={() => { console.log('11223344') }} />
+                    showMore={() => { }} />
                 <TopRecommendVideos />
                 <View style={{ height: 30, width: '100%' }} />
             </ScrollView>

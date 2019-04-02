@@ -31,8 +31,7 @@ export default class DetailTypeScreen extends PureComponent {
             type: type
         });
         Api.getTypeArrsByGlobalType(type, (e) => {
-            console.log('1122334');
-            console.log(e);
+
         });
     }
 
@@ -45,7 +44,7 @@ export default class DetailTypeScreen extends PureComponent {
     }
 
     _changeTab = (type) => {
-        console.log(type);
+
     }
 
     render() {

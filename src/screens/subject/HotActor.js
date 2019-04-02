@@ -83,7 +83,6 @@ export default class HotActor extends PureComponent {
 
     componentDidMount() {
         Api.getActerList((e) => {
-            console.log(e);
             if (e.data && e.data.length > 0) {
                 this.setState({
                     data: e.data

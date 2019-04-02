@@ -16,7 +16,7 @@ export default class LostPassword extends PureComponent {
         this.props.navigation.goBack();
     }
     submit = () => {
-        console.log('go to submit');
+
     }
     gotoChangeCountryCode = () => {
         this.props.navigation.navigate('CountryCodeModal');
@@ -43,7 +43,6 @@ export default class LostPassword extends PureComponent {
             reg.verCode,
             reg.code,
             (e) => {
-                console.log('success');
                 this.props.navigation.goBack();
             });
     }
