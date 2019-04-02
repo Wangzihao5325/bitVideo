@@ -47,6 +47,9 @@ class Item extends PureComponent {
 
     render() {
         let videoCount = this.props.item.video_count;
+        if (!this.props.item.video_count) {
+            videoCount = '0'
+        }
         if (this.props.item.video_count > 999) {
             videoCount = '999+'
         }
@@ -80,6 +83,7 @@ export default class HotActor extends PureComponent {
 
     componentDidMount() {
         Api.getActerList((e) => {
+            console.log(e);
             if (e.data && e.data.length > 0) {
                 this.setState({
                     data: e.data

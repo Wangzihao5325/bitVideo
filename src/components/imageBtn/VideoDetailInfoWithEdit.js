@@ -55,7 +55,6 @@ class VideoDetailInfoWithEdit extends PureComponent {
     }
 
     render() {
-        console.log(this.props.source);
         return (
             <TouchableHighlight style={styles.container} onPress={this._goToSeeMovie} underlayColor='transparent'>
                 <View style={[styles.flexView, styles.borderBottom]}>
