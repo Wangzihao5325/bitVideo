@@ -10,6 +10,7 @@ import accountReducer from './reducers/accountReducer';
 import watchHistoryReducer from './reducers/watchHistoryReducer';
 import userCollectReducer from './reducers/userCollectReducer';
 import lockReducer from './reducers/lockReducer';
+import modelReducer from './reducers/modelReducer';
 
 const rootReducer = combineReducers({
   test: testReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   watchHistory: watchHistoryReducer,
   userCollect: userCollectReducer,
   lock: lockReducer,
+  model: modelReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

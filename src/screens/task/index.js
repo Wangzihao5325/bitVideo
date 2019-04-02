@@ -1,13 +1,16 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, Image, Platform, View, Text, StyleSheet, ScrollView } from 'react-native';
-import * as Colors from '../../global/Colors';
+import { NavigationEvents } from 'react-navigation';
 import * as In18 from '../../global/In18';
 import PropTypes from 'prop-types';
 import { isXDevice } from '../../global/utils/PixelUtil';
+import { newReg } from '../../global/Reg';
+import store from '../../store/index';
 
 import ModalHeader from '../../components/modal/ModalHeader';
 import Toptab from './TopTab';
 import BottomTaskList from './bottomTaskList';
+import MessageModel from '../../components/MessageModel/index';
 
 export default class TaskScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -39,6 +42,13 @@ export default class TaskScreen extends PureComponent {
         this.props.navigation.navigate('GiftCenterModel');
     }
 
+    _onDidFocus = () => {
+        if (newReg.isNew) {//newReg.isNew
+            store.dispatch({ type: 'MESSAGE_MODEL_SHOW_STATE_CHANGE', state: true });
+            newReg.isNew = false;
+        }
+    }
+
     render() {
         let isX = isXDevice();
         let bgImageStyle = { width: '100%', height: 207 - 20 };
@@ -50,6 +60,10 @@ export default class TaskScreen extends PureComponent {
         }
         return (
             <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <MessageModel />
+                <NavigationEvents
+                    onDidFocus={this._onDidFocus}
+                />
                 <Image
                     style={[{
                         position: 'absolute',

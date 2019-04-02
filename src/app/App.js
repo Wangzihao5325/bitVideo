@@ -11,7 +11,7 @@ import { MainStack, ShortVideoStack, SubjectStack, TaskStack, MineStack } from '
 import * as Colors from '../global/Colors';
 import Api from '../socket/index';
 import Variables from '../global/Variables';
-import { lockReg } from '../global/Reg';
+import { lockReg, newReg } from '../global/Reg';
 
 import LoginModel from '../screens/loginModel/index';
 import RegisterModal from '../screens/loginModel/register/index';
@@ -106,7 +106,7 @@ const RouterWithModal = createStackNavigator(
     },
     BindPhoneModel: {
       screen: BindPhoneModel
-    }
+    },
   },
   {
     mode: 'modal',
@@ -151,6 +151,10 @@ export default class App extends Component {
       let islock = await AsyncStorage.getItem('Lock_Islock');
       let userToken = await AsyncStorage.getItem('User_Token');
       let clipboardContent = await Clipboard.getString();
+
+      if (clipboardContent) {
+        newReg.isNew = false;
+      }
 
       if (password) {
         lockReg.password = password;

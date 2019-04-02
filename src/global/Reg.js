@@ -12,7 +12,12 @@ let lockReg = {
     password: ''
 }
 
+let newReg = {
+    isNew: true
+}
+
 export {
     registerReg,
-    lockReg
+    lockReg,
+    newReg
 };
