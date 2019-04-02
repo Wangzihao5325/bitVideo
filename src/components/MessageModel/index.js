@@ -27,6 +27,7 @@ class MessageModel extends Component {
                         <Text style={{ color: 'rgb(71,71,71)', fontSize: 14, marginTop: 3 }}>7天内有效，快去看片吧</Text>
                         <TouchableHighlight onPress={this._unshow} style={{ height: 37, width: 196, display: 'flex', marginTop: 21, backgroundColor: 'rgb(255,184,117)', borderRadius: 18, display: 'flex', justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 14, color: 'rgb(33,45,49)' }}>知道了</Text></TouchableHighlight>
                     </View>
+                    <TouchableHighlight onPress={this._unshow} style={{ height: 31, width: 31, marginTop: 36 }}><Image style={{ height: 31, width: 31 }} source={require('../../image/task/model_close.png')} /></TouchableHighlight>
                 </View>
             </Modal>
         );

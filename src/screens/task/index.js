@@ -43,7 +43,7 @@ export default class TaskScreen extends PureComponent {
     }
 
     _onDidFocus = () => {
-        if (newReg.isNew) {//newReg.isNew
+        if (newReg.isNew) {
             store.dispatch({ type: 'MESSAGE_MODEL_SHOW_STATE_CHANGE', state: true });
             newReg.isNew = false;
         }
