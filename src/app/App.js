@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, Platform, AsyncStorage, AppState } from 'react-native';
+import { StatusBar, Platform, AsyncStorage, AppState, Clipboard } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { Provider } from 'react-redux';
 import store from '../store/index';
@@ -150,6 +150,9 @@ export default class App extends Component {
     (async function () {
       let password = await AsyncStorage.getItem('Lock_Password');
       let islock = await AsyncStorage.getItem('Lock_Islock');
+      let userToken = await AsyncStorage.getItem('User_Token');
+      let clipboardContent = await Clipboard.getString();
+
       if (password) {
         lockReg.password = password;
       }
@@ -167,21 +170,32 @@ export default class App extends Component {
         }
       });
 
-      //设备号注册
-      let deviceId = DeviceInfo.getUniqueID();
-      Api.postRegisterByDeviceId(deviceId, (e, code, message) => {
-        if (e && e.api_token) {
-          Variables.account.token = e.api_token;
-          Variables.account.deviceToken = e.api_token;
-          store.dispatch(get_device_account_info(e));
-          //获取个人信息
-          Api.getUserInfo((e, code, message) => {
-            if (e) {
-              store.dispatch(get_user_info(e));
-            }
-          });
-        }
-      });
+      if (userToken) {
+        Variables.account.token = userToken;
+        Variables.account.deviceToken = userToken;
+        //获取个人信息
+        Api.getUserInfo((e, code, message) => {
+          if (e) {
+            store.dispatch(get_user_info(e));
+          }
+        });
+      } else {
+        //设备号注册
+        let deviceId = DeviceInfo.getUniqueID();
+        Api.postRegisterByDeviceId(deviceId, clipboardContent, (e, code, message) => {
+          if (e && e.api_token) {
+            Variables.account.token = e.api_token;
+            Variables.account.deviceToken = e.api_token;
+            store.dispatch(get_device_account_info(e));
+            //获取个人信息
+            Api.getUserInfo((e, code, message) => {
+              if (e) {
+                store.dispatch(get_user_info(e));
+              }
+            });
+          }
+        });
+      }
 
       if (store.getState().lock.isLock === 'true') {
         NavigationService.navigate('GesturePasswordModel', { type: 'normal' });

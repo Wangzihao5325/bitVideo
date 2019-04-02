@@ -18,6 +18,7 @@ export function get_device_account_info(e) {
 
 export function get_user_info(e) {
     let regObj = {};
+    regObj.isLogin = true;
     regObj.viewCountDailyTotal = e.view_count_daily_total;
     regObj.viewCountDailyUse = e.view_count_daily_use;
     regObj.icons = e.coins;
