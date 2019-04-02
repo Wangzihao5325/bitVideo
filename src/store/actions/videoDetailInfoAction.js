@@ -1,4 +1,5 @@
 import * as Types from '../actionTypes';
+import _ from 'lodash';
 
 export function set_video_full_data(fullData) {
     let source = fullData.resource;
@@ -34,9 +35,15 @@ export function refresh_video_recommend_negative_data(recommend_sum, negative_su
 }
 
 export function set_episode_source(source, episodeTotalNum, videoSourceName) {
+    let ObjZero = source[0];
+    let ObjOne = _.assign({}, ObjZero);
+    ObjZero.play_series = '标准';
+    ObjZero.play_url_h5 = ObjZero.shift_360_filename;
+    ObjOne.play_series = '高清';
+    ObjOne.play_url_h5 = ObjOne.shift_720_filename;
     return {
         type: Types.SET_EPISCODE_SOURCE,
-        data: source,
+        data: [ObjZero, ObjOne],
         episodeTotalNum: episodeTotalNum,
         videoSourceName: videoSourceName
     }

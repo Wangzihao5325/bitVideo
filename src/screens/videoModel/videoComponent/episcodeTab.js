@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import store from '../../../store/index';
 import { set_video_url_and_type } from '../../../store/actions/videoPlayAction';
 import _ from 'lodash';
-import * as In18 from '../../../global/In18';
 
-import IconBtn from '../../../components/imageBtn/IconBtn';
+import ToastRoot from '../../../components/toast/index';
 
 class Btn extends PureComponent {
     state = {
@@ -18,7 +17,15 @@ class Btn extends PureComponent {
             return;
         } else {
             if (this.props.onPress) {
-                this.props.onPress(this.props.index);
+                if (this.props.index == 0) {
+                    this.props.onPress(this.props.index);
+                } else {
+                    if (this.props.vip.id == 2) {
+                        ToastRoot.show('请提升会员等级');
+                    } else {
+                        this.props.onPress(this.props.index);
+                    }
+                }
             }
         }
     }
@@ -91,7 +98,7 @@ class EpiscodeTab extends PureComponent {
     }
 
     moreIntro = () => {
-        console.log('go to select episode!');
+        // console.log('go to select episode!');
     }
 
     _chooseEpiscode = () => {
@@ -119,6 +126,7 @@ class EpiscodeTab extends PureComponent {
                         data={this.state.source}
                         renderItem={
                             ({ item, index }) => <Btn
+                                vip={this.props.vip}
                                 key={index}
                                 index={index}
                                 highlightIndex={item.highlightIndex}
@@ -137,6 +145,7 @@ function mapState2Props(store) {
         source: store.videoDeatilInfo.episodeSource,
         videoId: store.videoDeatilInfo.id,
         totalEpisodeNum: store.videoDeatilInfo.totalEpisodeNum,
+        vip: store.account.vip,
     }
 }
 

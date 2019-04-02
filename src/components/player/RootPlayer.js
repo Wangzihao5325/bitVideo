@@ -40,7 +40,7 @@ export default class RootPlayer extends PureComponent {
     }
 
     render() {
-        if (false && this.props.videoUrl) {
+        if (this.props.videoUrl) {
             return (
                 <View style={this.state.isFullScreen ? styles.fullScreenFlexView : styles.flexView}>
                     {

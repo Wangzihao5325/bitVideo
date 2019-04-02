@@ -178,6 +178,7 @@ export default class App extends Component {
         Variables.account.deviceToken = userToken;
         //获取个人信息
         Api.getUserInfo((e, code, message) => {
+          console.log(e);
           if (e) {
             store.dispatch(get_user_info(e));
           }
@@ -187,9 +188,11 @@ export default class App extends Component {
         let deviceId = DeviceInfo.getUniqueID();
         Api.postRegisterByDeviceId(deviceId, clipboardContent, (e, code, message) => {
           if (e && e.api_token) {
+            AsyncStorage.setItem('User_Token', e.api_token);
             Variables.account.token = e.api_token;
             Variables.account.deviceToken = e.api_token;
             store.dispatch(get_device_account_info(e));
+
             //获取个人信息
             Api.getUserInfo((e, code, message) => {
               if (e) {

@@ -7,7 +7,6 @@ import * as Sizes from '../../global/Sizes';
 import { isXDevice } from '../../global/utils/PixelUtil';
 import * as Colors from '../../global/Colors';
 
-import Modal from "react-native-modal";
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import XSVideo from './videoComponent/video';
 import VideoHeader from './videoComponent/videoHeader';
@@ -39,7 +38,6 @@ export default class VideoModel extends PureComponent {
             //获取video信息
             Api.getVideoInfo(videoId, (result, code, message) => {
                 if (result) {
-                    console.log(result);
                     store.dispatch(set_video_full_data(result));
                 } else {
                     // console.log(message);
