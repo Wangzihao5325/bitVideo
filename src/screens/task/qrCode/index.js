@@ -42,7 +42,7 @@ class QrCode extends PureComponent {
     _goToInviteFriend = () => {
         Api.postShareQrCodeMessage(this.props.inviteCode, 'official', 'qrcode', (e) => {
             if (e.content) {
-                let shareUrl = e.content.split(':')[1];
+                let shareUrl = `${e.content.split(':')[1]}/share/${this.props.inviteCode}`;
                 Share.share({
                     message: e.content,
                     url: shareUrl,
@@ -66,7 +66,7 @@ class QrCode extends PureComponent {
         captureScreen({ format: "jpg", quality: 1 }).then(uri => {
 
             CameraRoll.saveToCameraRoll(uri, 'photo');
-            Api.postTaskAndExchange('SAVE_PHOTO',(e)=>{
+            Api.postTaskAndExchange('SAVE_PHOTO', (e) => {
                 // do nothing
             });
         }, error => {

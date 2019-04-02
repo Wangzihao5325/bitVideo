@@ -147,7 +147,7 @@ const ICON_LIST_TITLE = '爱逗币记录';
 const SHARE_MESSAGE = '快来爱逗视频看最新最全的电影吧！';
 const SHARE_URL = 'https://baidu.com';
 const SHARE_TITLE = 'title';
-const SHARE_DIALOG_TITLE = '分享爱逗到';
+const SHARE_DIALOG_TITLE = '分享蝌蚪视频到';
 
 //播放历史
 const SELECT_ALL = '全选';

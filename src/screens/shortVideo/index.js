@@ -1,17 +1,15 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, FlatList, Share } from 'react-native';
+import { SafeAreaView, View, FlatList, Share } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
+import { connect } from 'react-redux';
 import Api from '../../socket/index';
 import * as In18 from '../../global/In18';
-import * as Sizes from '../../global/Sizes';
 import * as Colors from '../../global/Colors';
-
-import TabBar from '../../components/tabBar/index';
 
 import shortVideoList from '../../mock/shortVideoList';
 import ShortVideoItem from './ShortVideoItem';
 const reg = { typeMap2Id: {}, type: [] };
-export default class ShortVideo extends PureComponent {
+class ShortVideo extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null,
@@ -112,27 +110,26 @@ export default class ShortVideo extends PureComponent {
     }
 
     //分享
-    _toShare = (url) => {
-        Share.share({
-            message: In18.SHARE_MESSAGE,
-            url: url,
-            title: In18.SHARE_TITLE
-        }, {
-                dialogTitle: In18.SHARE_DIALOG_TITLE
-            })
-            .then(this._shareResult)
-            .catch((e) => { /** do nothing */ });
+    _goToInviteFriend = () => {
+        Api.postShareQrCodeMessage(this.props.inviteCode, 'official', 'qrcode', (e) => {
+            if (e.content) {
+                let shareUrl = `${e.content.split(':')[1]}/share/${this.props.inviteCode}`;
+                Share.share({
+                    message: e.content,
+                    url: shareUrl,
+                    title: '蝌蚪视频App'
+                }, {
+                        dialogTitle: In18.SHARE_DIALOG_TITLE
+                    })
+                    .then(this._shareResult);
+                // .catch((e) => { console.log(e) });
+            }
+        });
     }
 
     _shareResult = (result) => {
         if (result.action === Share.sharedAction) {
-            if (result.activityType) {
-                console.log('shared with action type');
-            } else {
-                console.log(done);
-            }
-        } else if (result.action === Share.dismissedAction) {
-            console.log('dismiss');
+            // wait for other click
         }
     }
 
@@ -156,7 +153,7 @@ export default class ShortVideo extends PureComponent {
                                 renderItem={
                                     ({ item, index }) =>
                                         <ShortVideoItem
-                                            share={this._toShare}
+                                            share={this._goToInviteFriend}
                                             detail={this._toDetail}
                                             playPress={() => this._palyPress(index)}
                                             nowPlaying={this.state.playingIndex}
@@ -175,3 +172,11 @@ export default class ShortVideo extends PureComponent {
         );
     }
 }
+
+function mapState2Props(store) {
+    return {
+        inviteCode: store.account.inviteCode,
+    }
+}
+
+export default connect(mapState2Props)(ShortVideo);

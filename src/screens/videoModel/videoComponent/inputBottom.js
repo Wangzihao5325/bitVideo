@@ -5,7 +5,6 @@ import store from '../../../store/index';
 import { video_detail_add_myself_comment, change_video_collect_state } from '../../../store/actions/videoDetailInfoAction';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
-import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
 import ToastRoot from '../../../components/toast/index';
 
@@ -86,6 +85,29 @@ class InputBottom extends PureComponent {
         }
     }
 
+    _goToInviteFriend = () => {
+        Api.postShareQrCodeMessage(this.props.inviteCode, 'official', 'qrcode', (e) => {
+            if (e.content) {
+                let shareUrl = `${e.content.split(':')[1]}/share/${this.props.inviteCode}`;
+                Share.share({
+                    message: e.content,
+                    url: shareUrl,
+                    title: '蝌蚪视频App'
+                }, {
+                        dialogTitle: In18.SHARE_DIALOG_TITLE
+                    })
+                    .then(this._shareResult);
+                // .catch((e) => { console.log(e) });
+            }
+        });
+    }
+
+    _shareResult = (result) => {
+        if (result.action === Share.sharedAction) {
+            // wait for other click
+        }
+    }
+
     render() {
         let collectImageSource = this.props.collectState ? require('../../../image/usual/star_collect.png') : require('../../../image/usual/star.png');
         let containerStyle = this.state.isKeyboardShow ? { backgroundColor: 'white' } : { backgroundColor: 'rgb(55,65,70)' };
@@ -101,7 +123,7 @@ class InputBottom extends PureComponent {
                 }
                 {!this.state.isKeyboardShow &&
                     <View style={styles.noKeyboardView}>
-                        <IconBtn flexStyle={{ justifyContent: 'center' }} containerStyle={styles.iconContainerStyle} imageStyle={styles.iconImageStyle} titleStyle={styles.iconTitleStyle} source={require('../../../image/videoDetail/video_share.png')} title={In18.SHARE_TEXT} />
+                        <IconBtn flexStyle={{ justifyContent: 'center' }} containerStyle={styles.iconContainerStyle} imageStyle={styles.iconImageStyle} titleStyle={styles.iconTitleStyle} source={require('../../../image/videoDetail/video_share.png')} title={In18.SHARE_TEXT} onPress={this._goToInviteFriend} />
                         <IconBtn flexStyle={{ justifyContent: 'center' }} containerStyle={styles.iconContainerStyle} imageStyle={styles.iconImageStyle} titleStyle={styles.iconTitleStyle} source={collectImageSource} title={In18.COLLECTION_TEXT} onPress={this._collectVideo} />
                     </View>
                 }
@@ -114,6 +136,7 @@ function mapState2Props(store) {
         id: store.videoDeatilInfo.id,
         globalType: store.videoDeatilInfo.globalType,
         collectState: store.videoDeatilInfo.isCollect,
+        inviteCode: store.account.inviteCode,
     }
 }
 
@@ -163,6 +186,6 @@ const styles = StyleSheet.create({
     iconTitleStyle: {
         fontSize: 8,
         color: 'rgb(153,153,153)',
-        marginTop:3
+        marginTop: 3
     }
 });
