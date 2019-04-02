@@ -123,7 +123,6 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-
     //static server demo
     // console.log(fullPath);
     // let localM3u8Path = fullPath + '/testDoc';
