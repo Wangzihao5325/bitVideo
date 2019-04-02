@@ -12,6 +12,10 @@ import ShortVideoScreen from '../screens/shortVideo/index';
 import ShortVideoDetail from '../screens/shortVideo/shortVideoDetail/index';
 
 import SubjectScreen from '../screens/subject/index';
+import HotSubjectDetailScreen from '../screens/subject/hotSubjectDetail/index';
+import MoreHotSubjectScreen from '../screens/subject/moreHotSubject/index';
+import ActorDetailScreen from '../screens/subject/actorDetail/index';
+import MoreHotActor from '../screens/subject/moreHotActor/index';
 
 import TaskScreen from '../screens/task/index';
 import InviteListScreen from '../screens/task/inviteList/index';
@@ -25,9 +29,6 @@ import MessageScreen from '../screens/mine/message/index';
 import MyMessageScreen from '../screens/mine/message/my/index';
 import AppMessageScreen from '../screens/mine/message/app/index';
 import SettingScreen from '../screens/mine/setting/index';
-import HotSubjectDetailScreen from '../screens/subject/hotSubjectDetail/index';
-import MoreHotSubjectScreen from '../screens/subject/moreHotSubject/index';
-import ActorDetailScreen from '../screens/subject/actorDetail/index';
 
 const TAB_ICON_KEY_STR = ['film', 'delicious', 'th-list', 'user'];
 // 首页router
@@ -116,6 +117,7 @@ let SubjectStack = createStackNavigator(
         HotSubjectDetailScreen,
         MoreHotSubjectScreen,
         ActorDetailScreen,
+        MoreHotActor,
     },
     {
         navigationOptions: { gesturesEnabled: false }

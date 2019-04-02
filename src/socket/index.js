@@ -236,8 +236,8 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
-    getActerList(onSuccess, onError) {
-        const url = '/api/video/special/actor/list';
+    getActerList(action, page, limit, onSuccess, onError) {
+        const url = `/api/video/special/actor/list?action=${action}&page=${page}&limit=${limit}`;
         this.getFetch(url, onSuccess, onError);
     }
 

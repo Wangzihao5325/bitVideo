@@ -84,8 +84,8 @@ export default class SubjectScreen extends PureComponent {
         this.props.navigation.navigate('MoreHotSubjectScreen');
     }
 
-    _goToMoreActor = () => {
-
+    _goToMoreActor = () => {//MoreHotActor
+        this.props.navigation.navigate('MoreHotActor');
     }
 
     render() {
