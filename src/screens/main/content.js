@@ -25,9 +25,9 @@ class Item extends PureComponent {
                 if (this.props.item.m_banner_data && this.props.item.m_banner_data.length > 0) {//有可能会出现 arr.length=0 的情况
                     return (<BannerModule key={this.props.index} data={this.props.item.m_banner_data} navi={mainNavigation} />);
                 }
-            case 'm_global_type':
-                if (this.props.item.m_global_type_data && this.props.item.m_global_type_data.length > 0) {
-                    return (<GlobalTypeModule key={this.props.index} data={this.props.item.m_global_type_data} navi={mainNavigation} />);
+            case 'm_video_type':
+                if (this.props.item.m_video_type_data && this.props.item.m_video_type_data.length > 0) {
+                    return (<GlobalTypeModule key={this.props.index} data={this.props.item.m_video_type_data} navi={mainNavigation} />);
                 }
             case 'm_video':
                 if (this.props.item.m_video_data && this.props.item.m_video_data.length > 0) {

@@ -7,7 +7,7 @@ class Item extends PureComponent {
 
     _itemOnPress = () => {
         if (this.props.navi) {
-            this.props.navi.navigate('DetailTypeScreen', { type: this.props.type, title: this.props.title });
+            this.props.navi.navigate('DetailTypeScreen', { type: this.props.type, title: this.props.title, innerType: this.props.innerType });
         }
     }
 
@@ -38,7 +38,7 @@ export default class GlobalTypeModule extends PureComponent {
                         style={{ flex: 1 }}
                         numColumns={4}
                         data={this.props.data}
-                        renderItem={({ item }) => <Item title={item.title} uri={item.icon} type={item.global_type} navi={this.props.navi} />}
+                        renderItem={({ item }) => <Item title={item.title} uri={item.icon} type={item.global_type} innerType={item.type_id} navi={this.props.navi} />}
                     />}
             </View>
         );
