@@ -152,7 +152,7 @@ export default class App extends Component {
       let userToken = await AsyncStorage.getItem('User_Token');
       let clipboardContent = await Clipboard.getString();
 
-      if (clipboardContent) {
+      if (userToken) {
         newReg.isNew = false;
       }
 
