@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         width: '25%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     itemFlexView: {
         flex: 1,
@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
     },
     container: {
         height: 205,
-        width: '100%'
+        width: '100%',
+        marginTop: 10,
+        marginBottom: 10
     }
 });

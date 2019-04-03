@@ -501,7 +501,7 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
-    getVideoTypeList(globalType, typeId, sort, page, limit) {
+    getVideoTypeList(globalType, typeId, sort, page, limit, onSuccess, onError) {
         let url = `/api/video/type?type_id=${typeId}`;
         if (globalType) {
             url = url + `&global_type=${globalType}`;
@@ -510,12 +510,12 @@ class api {
             url = url + `&sort=${sort}`;
         }
         if (page) {
-            url = url + `&global_type=${page}`;
+            url = url + `&page=${page}`;
         }
-        if (globalType) {
-            url = url + `&global_type=${globalType}`;
+        if (limit) {
+            url = url + `&limit=${limit}`;
         }
-
+        this.getFetch(url, onSuccess, onError);
     }
 
 }

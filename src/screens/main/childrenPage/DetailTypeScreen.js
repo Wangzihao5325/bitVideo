@@ -6,8 +6,6 @@ import Api from '../../../socket/index';
 import ModalHeader from '../../../components/modal/ModalHeader';
 import TabBar from '../../../components/tabBar/SelectTab';
 
-
-
 export default class DetailTypeScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -17,21 +15,35 @@ export default class DetailTypeScreen extends PureComponent {
     };
 
     state = {
-        type: '',
+        type: '',//nowGlobalType
         title: '',
-        typeData: null,
-        videoData: null
+        innerType: '',//nowInnerType
+        globalTypeData: null,
+        innerTypeData: null,
+        sortTypeData: null,
+        videoData: null,
+        nowPage: -1,
+        totalPage: -1,
     }
 
     componentDidMount() {
         const type = this.props.navigation.getParam('type', '');
         const title = this.props.navigation.getParam('title', '');
+        const innerType = this.props.navigation.getParam('innerType', '');
         this.setState({
             title: title,
-            type: type
+            type: type,
+            innerType: innerType
         });
-        Api.getTypeArrsByGlobalType(type, (e) => {
-
+        Api.getVideoTypeList(type, innerType, 'created_at', 1, 12, (e) => {
+            this.setState({
+                globalTypeData: e.global,
+                innerTypeData: e.type,
+                sortTypeData: e.sort,
+                videoData: e.list.data,
+                nowPage: e.list.current_page,
+                totalPage: e.list.last_page,
+            });
         });
     }
 
@@ -48,6 +60,9 @@ export default class DetailTypeScreen extends PureComponent {
     }
 
     render() {
+        let globalArr = this.state.globalTypeData ? this.state.globalTypeData.map((item) => { return item.name }) : [];
+        let typeArr = this.state.innerTypeData ? this.state.innerTypeData.map((item) => { return item.title }) : [];
+        let sortArr = this.state.sortTypeData ? this.state.sortTypeData.map((item) => { return item.name }) : [];
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <View style={{ flex: 1 }}>
@@ -57,9 +72,9 @@ export default class DetailTypeScreen extends PureComponent {
                         rightBtnMode='icon'
                         rightBtnOnPress={this._search}
                         iconSource={require('../../../image/usual/search.png')} />
-                    <TabBar tabNames={['日本', 'AV', '港台电影', '国产']} tabTap={this._changeTab} />
-                    <TabBar tabNames={['全部类型', '无码', '内衣', '偷拍']} tabTap={this._changeTab} />
-                    <TabBar tabNames={['最近播放', '最新更新', '港台电影', '最多喜欢']} tabTap={this._changeTab} />
+                    <TabBar tabNames={globalArr} tabTap={this._changeTab} />
+                    <TabBar tabNames={typeArr} tabTap={this._changeTab} />
+                    <TabBar tabNames={sortArr} tabTap={this._changeTab} />
                 </View>
             </SafeAreaView>
         );

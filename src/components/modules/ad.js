@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     image: {
         width: Sizes.DEVICE_WIDTH,
         height: 130,
+        borderRadius:5,
     },
     titleText: {
         marginLeft: 5,

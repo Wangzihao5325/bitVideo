@@ -67,7 +67,7 @@ class SUDOKU extends PureComponent {
 
     render() {
         return (
-            <View style={{ alignItems: 'center' }} >
+            <View style={{ alignItems: 'center', marginTop: 10, marginBottom: 10 }} >
                 <TitleHeader style={{ marginTop: 10 }} imageSource={require('../../image/main/module_header.png')} title={this.props.title} />
                 <FlatList
                     horizontal={false}
@@ -99,7 +99,7 @@ class GUNDONG extends PureComponent {
     render() {
         let flatlistStyle = this.props.isVertical ? { height: Sizes.IMAGE_AVATER_VER_HEIGHT + 50, width: Sizes.DEVICE_WIDTH } : {};
         return (
-            <View style={{ alignItems: 'center' }}>
+            <View style={{ alignItems: 'center', marginTop: 10, marginBottom: 10 }}>
                 <TitleHeader showMore={this._showMore} style={{ marginTop: 10, marginBottom: 10 }} imageSource={require('../../image/main/module_header.png')} title={this.props.title} btnTitle={In18.MORE_TEXT} />
                 <FlatList
                     style={flatlistStyle}
