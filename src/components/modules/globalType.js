@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     image: {
         height: 62,
         width: 62,
+        borderRadius: 31,
     },
     titleText: {
         fontSize: 14,
