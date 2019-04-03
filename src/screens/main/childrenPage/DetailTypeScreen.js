@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 import TabBar from '../../../components/tabBar/SelectTab';
+import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
 export default class DetailTypeScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -18,6 +19,7 @@ export default class DetailTypeScreen extends PureComponent {
         type: '',//nowGlobalType
         title: '',
         innerType: '',//nowInnerType
+        sortType: '',
         globalTypeData: null,
         innerTypeData: null,
         sortTypeData: null,
@@ -35,14 +37,19 @@ export default class DetailTypeScreen extends PureComponent {
             type: type,
             innerType: innerType
         });
-        Api.getVideoTypeList(type, innerType, 'created_at', 1, 12, (e) => {
+        Api.getVideoTypeList((e) => {
             this.setState({
-                globalTypeData: e.global,
-                innerTypeData: e.type,
+                globalTypeData: e.type,
+                innerTypeData: e.type[0].children,
                 sortTypeData: e.sort,
-                videoData: e.list.data,
-                nowPage: e.list.current_page,
-                totalPage: e.list.last_page,
+            });
+            Api.getVideoTypeTrueList(type, innerType, e.sort[0].key, 1, 15, (innerE) => {
+                console.log(innerE);
+                this.setState({
+                    videoData: innerE.list.data,
+                    nowPage: innerE.list.current_page,
+                    totalPage: innerE.list.last_page,
+                });
             });
         });
     }
@@ -55,8 +62,24 @@ export default class DetailTypeScreen extends PureComponent {
         this.props.navigation.navigate('SearchModel');
     }
 
-    _changeTab = (type) => {
+    _globalChangeTab = (type) => {
 
+        console.log('global');
+        console.log(type);
+    }
+
+    _innerChangeTab = (type) => {
+        console.log('inner');
+        console.log(type);
+    }
+
+    _sortChangeTab = (type) => {
+        console.log('sort');
+        console.log(type);
+    }
+
+    _videoAvaterOnPress = (id) => {
+        this.props.navigation.navigate('VideoModel', { videoId: id });
     }
 
     render() {
@@ -72,9 +95,21 @@ export default class DetailTypeScreen extends PureComponent {
                         rightBtnMode='icon'
                         rightBtnOnPress={this._search}
                         iconSource={require('../../../image/usual/search.png')} />
-                    <TabBar tabNames={globalArr} tabTap={this._changeTab} />
-                    <TabBar tabNames={typeArr} tabTap={this._changeTab} />
-                    <TabBar tabNames={sortArr} tabTap={this._changeTab} />
+                    <TabBar tabNames={globalArr} tabTap={this._globalChangeTab} />
+                    <TabBar tabNames={typeArr} tabTap={this._innerChangeTab} />
+                    <TabBar tabNames={sortArr} tabTap={this._sortChangeTab} />
+                    <View style={{ flex: 1 }}>
+                        {this.state.videoData && this.state.videoData.length > 0 &&
+                            <FlatList
+                                style={{ flex: 1 }}
+                                data={this.state.videoData}
+                                contentContainerStyle={{ alignSelf: 'center' }}
+                                columnWrapperStyle={{ marginTop: 20 }}
+                                showsVerticalScrollIndicator={false}
+                                numColumns={3}
+                                renderItem={({ item }) => <VideoAvater isVertical={true} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
+                            />}
+                    </View>
                 </View>
             </SafeAreaView>
         );
