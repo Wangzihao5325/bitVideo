@@ -32,19 +32,49 @@ export default class DetailTypeScreen extends PureComponent {
         const type = this.props.navigation.getParam('type', '');
         const title = this.props.navigation.getParam('title', '');
         const innerType = this.props.navigation.getParam('innerType', '');
+        console.log(type);
+        console.log(innerType);
         this.setState({
             title: title,
             type: type,
             innerType: innerType
         });
         Api.getVideoTypeList((e) => {
+            console.log(e);
+            let globalTypeIndex = 0;
+            let innerTypeData = e.type[0].children;
+            e.type.every((item, index) => {
+                if (item.key == type) {
+                    globalTypeIndex = index;
+                    innerTypeData = item.children;
+                    return false;
+                } else {
+                    return true
+                }
+            });
+
+            let innerTypeIndex = 0;
+            innerTypeData.every((item, index) => {
+                if (item.id == innerType) {
+                    innerTypeIndex = index;
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+
             this.setState({
                 globalTypeData: e.type,
-                innerTypeData: e.type[0].children,
+                innerTypeData: innerTypeData,
                 sortTypeData: e.sort,
+                sortType: e.sort[0].key
+            }, () => {
+                this.globalType.reset(globalTypeIndex);
+                this.innerType.reset(innerTypeIndex);
             });
+
             Api.getVideoTypeTrueList(type, innerType, e.sort[0].key, 1, 15, (innerE) => {
-                console.log(innerE);
+                //console.log(innerE);
                 this.setState({
                     videoData: innerE.list.data,
                     nowPage: innerE.list.current_page,
@@ -63,19 +93,92 @@ export default class DetailTypeScreen extends PureComponent {
     }
 
     _globalChangeTab = (type) => {
+        let innerTypeData = this.state.globalTypeData[0].children;
+        let nowGlobalType = '';
+        this.state.globalTypeData.every((item, index) => {
+            if (item.name == type) {
+                innerTypeData = item.children;
+                nowGlobalType = item.key;
+                return false;
+            } else {
+                return true;
+            }
+        });
 
-        console.log('global');
-        console.log(type);
+
+        let innerIndex = 0;
+        let nowInnerType = innerTypeData[0].id;
+        innerTypeData.every((item, index) => {
+            if (item.id = this.state.innerType) {
+                innerIndex = index;
+                nowInnerType = item.id
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        this.setState({
+            type: nowGlobalType,
+            innerType: nowInnerType,
+        }, () => {
+            this.innerType.reset(innerIndex);
+            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 15, (innerE) => {
+                this.setState({
+                    videoData: innerE.list.data,
+                    nowPage: innerE.list.current_page,
+                    totalPage: innerE.list.last_page,
+                });
+            });
+        });
     }
 
     _innerChangeTab = (type) => {
-        console.log('inner');
-        console.log(type);
+        let nowId = this.state.innerTypeData[0].id;
+        this.state.innerTypeData.every((item, index) => {
+            if (item.title == type) {
+                nowId = item.id;
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        this.setState({
+            innerType: nowId,
+        }, () => {
+            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 15, (innerE) => {
+                this.setState({
+                    videoData: innerE.list.data,
+                    nowPage: innerE.list.current_page,
+                    totalPage: innerE.list.last_page,
+                });
+            });
+        });
     }
 
     _sortChangeTab = (type) => {
-        console.log('sort');
-        console.log(type);
+        let nowSortKey = this.state.sortTypeData[0].key;
+        this.state.sortTypeData.every((item, index) => {
+            if (item.name == type) {
+                nowSortKey = item.key;
+                return false;
+            } else {
+                return true
+            }
+        });
+
+        this.setState({
+            sortType: nowSortKey,
+        }, () => {
+            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 15, (innerE) => {
+                this.setState({
+                    videoData: innerE.list.data,
+                    nowPage: innerE.list.current_page,
+                    totalPage: innerE.list.last_page,
+                });
+            });
+        });
     }
 
     _videoAvaterOnPress = (id) => {
@@ -95,8 +198,8 @@ export default class DetailTypeScreen extends PureComponent {
                         rightBtnMode='icon'
                         rightBtnOnPress={this._search}
                         iconSource={require('../../../image/usual/search.png')} />
-                    <TabBar tabNames={globalArr} tabTap={this._globalChangeTab} />
-                    <TabBar tabNames={typeArr} tabTap={this._innerChangeTab} />
+                    <TabBar ref={(ref) => this.globalType = ref} tabNames={globalArr} tabTap={this._globalChangeTab} />
+                    <TabBar ref={(ref) => this.innerType = ref} tabNames={typeArr} tabTap={this._innerChangeTab} />
                     <TabBar tabNames={sortArr} tabTap={this._sortChangeTab} />
                     <View style={{ flex: 1 }}>
                         {this.state.videoData && this.state.videoData.length > 0 &&

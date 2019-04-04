@@ -51,6 +51,12 @@ export default class TabBar extends PureComponent {
         highlightIndex: 0
     }
 
+    reset = (index) => {
+        this.setState({
+            highlightIndex: index
+        });
+    }
+
     _itemTap = (keyValue) => {
         let oldstate = this.props.tabNames[this.state.highlightIndex];
         this.setState({ highlightIndex: keyValue });
