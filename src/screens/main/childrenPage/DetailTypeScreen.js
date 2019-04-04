@@ -32,15 +32,12 @@ export default class DetailTypeScreen extends PureComponent {
         const type = this.props.navigation.getParam('type', '');
         const title = this.props.navigation.getParam('title', '');
         const innerType = this.props.navigation.getParam('innerType', '');
-        console.log(type);
-        console.log(innerType);
         this.setState({
             title: title,
             type: type,
             innerType: innerType
         });
         Api.getVideoTypeList((e) => {
-            console.log(e);
             let globalTypeIndex = 0;
             let innerTypeData = e.type[0].children;
             e.type.every((item, index) => {
