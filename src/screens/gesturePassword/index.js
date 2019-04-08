@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, AsyncStorage } from 'react-native';
+import { SafeAreaView, AsyncStorage, BackHandler, Platform } from 'react-native';
 import PasswordGesture from 'react-native-gesture-password';
 import * as Colors from '../../global/Colors';
 import { lockReg } from '../../global/Reg';
@@ -28,6 +28,19 @@ export default class GesturePassword extends PureComponent {
             this.setState({
                 type: true
             });
+        }
+
+        if (Platform.OS == 'android') {
+            this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+                return true;
+            });
+        }
+
+    }
+
+    componentWillUnmount() {
+        if (this.backHandler) {
+            this.backHandler.remove();
         }
     }
 
