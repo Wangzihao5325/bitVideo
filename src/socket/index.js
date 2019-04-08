@@ -526,6 +526,22 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getPayList(onSuccess, onError) {
+        let url = '/api/pay-list';
+        this.getFetch(url, onSuccess, onError);
+    }
+
+    postAddOrder(payType, vcId, deviceType, deviceCode, onSuccess, onError) {
+        const url = '/api/user/order/add';
+        let formData = new FormData();
+        formData.append('pay_type', payType);
+        formData.append('vc_id', vcId);
+        formData.append('device_type', deviceType);
+        formData.append('device_code', deviceCode);
+
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
 }
 
 export default new api();

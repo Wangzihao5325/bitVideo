@@ -88,8 +88,8 @@ class MemberCenter extends PureComponent {
         this.props.navigation.navigate('BugListScreen');
     }
 
-    _buyCard = (title, price, days) => {
-        this.props.navigation.navigate('BuyCardPayScreen', { title: title, price: price, days: days });
+    _buyCard = (title, price, days, id) => {
+        this.props.navigation.navigate('BuyCardPayScreen', { title: title, price: price, days: days, id: id });
     }
 
     render() {
@@ -97,7 +97,7 @@ class MemberCenter extends PureComponent {
         if (this.state.data && this.state.data.length > 0) {
             cards = this.state.data.map((item, index) => {
                 return (
-                    <VIPCard key={index} type={item.key} price={item.price_current} title={item.title} remark={item.remark} buyCard={() => this._buyCard(item.title, item.price_current, item.daily_until)} />
+                    <VIPCard key={index} type={item.key} price={item.price_current} title={item.title} remark={item.remark} buyCard={() => this._buyCard(item.title, item.price_current, item.daily_until, item.id)} />
                 );
             })
         }
