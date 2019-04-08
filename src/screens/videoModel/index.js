@@ -17,6 +17,7 @@ import EpiscodeTab from './videoComponent/episcodeTab';
 import InputBottom from './videoComponent/inputBottom';
 import GuessLike from './videoComponent/guessLike';
 import AmazingComment from './videoComponent/amazingComment';
+import ToastRoot from '../../components/toast/index';
 
 // import IntroHalfModal from './HalfModal';
 
@@ -40,7 +41,8 @@ export default class VideoModel extends PureComponent {
                 if (result) {
                     store.dispatch(set_video_full_data(result));
                 } else {
-                    // console.log(message);
+                    ToastRoot.show('当日观影次数已用完');
+                    this.props.navigation.goBack();
                 }
             });
             //根据video id 获取猜你喜欢信息
