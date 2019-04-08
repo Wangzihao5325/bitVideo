@@ -17,7 +17,7 @@ class MessageModel extends Component {
                 visible={this.props.isShow}
             >
                 <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.6)', justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ borderRadius: 5, width: 242, backgroundColor: 'rgb(252,252,252)', display: 'flex', alignItems: 'center' }}>
+                    <View style={{ borderRadius: 5, width: 242, paddingBottom: 15, backgroundColor: 'rgb(252,252,252)', display: 'flex', alignItems: 'center' }}>
                         <Text style={{ fontSize: 18, color: 'rgb(34,34,34)', marginTop: 23 }}>新用户专享</Text>
                         <View style={{ height: 26, width: 90, justifyContent: 'center', flexDirection: 'row', marginTop: 27 }}>
                             <Text style={{ fontSize: 24, color: 'rgb(253,206,0)' }}>+20</Text>
@@ -25,9 +25,9 @@ class MessageModel extends Component {
                         </View>
                         <Text style={{ color: 'rgb(71,71,71)', fontSize: 14, marginTop: 25 }}>已为您兑换每日9次观影特权</Text>
                         <Text style={{ color: 'rgb(71,71,71)', fontSize: 14, marginTop: 3 }}>7天内有效，快去看片吧</Text>
-                        <TouchableHighlight onPress={this._unshow} style={{ height: 37, width: 196, display: 'flex', marginTop: 21, backgroundColor: 'rgb(255,184,117)', borderRadius: 18, display: 'flex', justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 14, color: 'rgb(33,45,49)' }}>知道了</Text></TouchableHighlight>
+                        <TouchableHighlight underlayColor='transparent' onPress={this._unshow} style={{ height: 37, width: 196, display: 'flex', marginTop: 21, backgroundColor: 'rgb(255,184,117)', borderRadius: 18, display: 'flex', justifyContent: 'center', alignItems: 'center' }}><Text style={{ fontSize: 14, color: 'rgb(33,45,49)' }}>知道了</Text></TouchableHighlight>
                     </View>
-                    <TouchableHighlight onPress={this._unshow} style={{ height: 31, width: 31, marginTop: 36, marginBottom: 20 }}><Image style={{ height: 31, width: 31 }} source={require('../../image/task/model_close.png')} /></TouchableHighlight>
+                    <TouchableHighlight underlayColor='transparent' onPress={this._unshow} style={{ height: 31, width: 31, marginTop: 36, marginBottom: 20 }}><Image style={{ height: 31, width: 31 }} source={require('../../image/task/model_close.png')} /></TouchableHighlight>
                 </View>
             </Modal>
         );
