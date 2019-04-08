@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, Text, TouchableHighlight, ImageBackground, ScrollView, Share, CameraRoll } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, TouchableHighlight, ImageBackground, ScrollView, Share, CameraRoll, PermissionsAndroid } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
@@ -9,6 +9,7 @@ import * as In18 from '../../../global/In18';
 import ModalHeader from '../../../components/modal/ModalHeader';
 import QRCode from 'react-native-qrcode';
 import { captureScreen } from "react-native-view-shot";
+import ToastRoot from '../../../components/toast';
 
 class QrCode extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -62,16 +63,31 @@ class QrCode extends PureComponent {
         }
     }
 
-    _saveQrCode = () => {
-        captureScreen({ format: "jpg", quality: 1 }).then(uri => {
+    _saveQrCode = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                {
+                    'title': '读写内存卡权限',
+                    'message': '请给予读写内存卡权限以保存分享二维码'
+                }
+            )
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                captureScreen({ format: "jpg", quality: 1 }).then(uri => {
 
-            CameraRoll.saveToCameraRoll(uri, 'photo');
-            Api.postTaskAndExchange('SAVE_PHOTO', (e) => {
-                // do nothing
-            });
-        }, error => {
-            // do nothing
-        });
+                    CameraRoll.saveToCameraRoll(uri, 'photo');
+                    Api.postTaskAndExchange('SAVE_PHOTO', (e) => {
+                        // do nothing
+                    });
+                }, error => {
+                    // do nothing
+                });
+            } else {
+                ToastRoot.show('权限不足，无法保存二维码');
+            }
+        } catch (err) {
+            //
+        }
     }
 
 
