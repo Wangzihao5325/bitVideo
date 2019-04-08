@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, Text, TouchableHighlight, ImageBackground, ScrollView, Share, CameraRoll, PermissionsAndroid } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, Platform, ImageBackground, ScrollView, Share, CameraRoll, PermissionsAndroid } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
@@ -64,29 +64,43 @@ class QrCode extends PureComponent {
     }
 
     _saveQrCode = async () => {
-        try {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-                {
-                    'title': '读写内存卡权限',
-                    'message': '请给予读写内存卡权限以保存分享二维码'
-                }
-            )
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                captureScreen({ format: "jpg", quality: 1 }).then(uri => {
+        if (Platform.OS == 'android') {
+            try {
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                    {
+                        'title': '读写内存卡权限',
+                        'message': '请给予读写内存卡权限以保存分享二维码'
+                    }
+                )
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    captureScreen({ format: "jpg", quality: 1 }).then(uri => {
 
-                    CameraRoll.saveToCameraRoll(uri, 'photo');
-                    Api.postTaskAndExchange('SAVE_PHOTO', (e) => {
+                        CameraRoll.saveToCameraRoll(uri, 'photo');
+                        ToastRoot.show('保存二维码成功');
+                        Api.postTaskAndExchange('SAVE_PHOTO', (e) => {
+                            // do nothing
+                        });
+                    }, error => {
                         // do nothing
                     });
-                }, error => {
+                } else {
+                    ToastRoot.show('权限不足，无法保存二维码');
+                }
+            } catch (err) {
+                //
+            }
+        } else {
+            captureScreen({ format: "jpg", quality: 1 }).then(uri => {
+
+                CameraRoll.saveToCameraRoll(uri, 'photo');
+                ToastRoot.show('保存二维码成功');
+                Api.postTaskAndExchange('SAVE_PHOTO', (e, code, message) => {
                     // do nothing
                 });
-            } else {
-                ToastRoot.show('权限不足，无法保存二维码');
-            }
-        } catch (err) {
-            //
+            }, error => {
+                // do nothing
+            });
         }
     }
 
