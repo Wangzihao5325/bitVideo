@@ -96,7 +96,7 @@ class QrCode extends PureComponent {
                             <Text style={[styles.text, { marginTop: 15, fontSize: 15 }]}>扫描二维码 下载蝌蚪视频</Text>
                             <Text style={[styles.text, { marginTop: 35, fontSize: 15, color: 'rgb(255,206,145)' }]}>您的专属推广邀请码</Text>
                             <Text style={[styles.text, { marginTop: 10, fontSize: 30 }]}>{this.props.inviteCode}</Text>
-                            <Text style={[styles.text, { marginTop: 33, fontSize: 15 }]}>看片前请保存官网，被封后可在官网下载新APP</Text>
+                            <Text style={[styles.text, { marginTop: 13, fontSize: 15 }]}>看片前请保存官网，被封后可在官网下载新APP</Text>
                             <Text style={[styles.text, { marginTop: 10, fontSize: 15 }]}>官网：www.baidu.com</Text>
                             <View style={{ marginTop: 20, height: 42, width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                                 <View style={{ height: 40, width: 100, borderColor: 'rgb(255,206,145)', borderWidth: StyleSheet.hairlineWidth, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
