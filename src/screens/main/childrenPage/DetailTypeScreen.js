@@ -118,6 +118,7 @@ export default class DetailTypeScreen extends PureComponent {
         this.setState({
             type: nowGlobalType,
             innerType: nowInnerType,
+            innerTypeData: innerTypeData
         }, () => {
             this.innerType.reset(innerIndex);
             Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 15, (innerE) => {
