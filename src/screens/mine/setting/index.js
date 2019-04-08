@@ -19,6 +19,10 @@ class SettingScreen extends PureComponent {
         this.props.navigation.pop();
     }
 
+    _cacheClear = () => {
+        ToastRoot.show('缓存已清除');
+    }
+
     _toast = () => {
         ToastRoot.show('功能开发中，敬请期待');
     }
@@ -67,7 +71,7 @@ class SettingScreen extends PureComponent {
 
                 <View style={{ height: 10, width: '100%', backgroundColor: 'rgb(26,28,41)' }} />
 
-                <TouchableHighlight onPress={this._toast} underlayColor='transparent'>
+                <TouchableHighlight onPress={this._cacheClear} underlayColor='transparent'>
                     <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/settings_clear_cache.png')} />

@@ -47,7 +47,7 @@ class SearchHeader extends PureComponent {
             <View style={styles.searchHeaderContainer}>
                 <View style={styles.searchContent}>
                     <IconBtn height={18} width={18} source={require('../../../image/mine/search.png')} />
-                    <TextInput style={{ flex: 1, marginLeft: 8, color: 'white' }} onChangeText={this.props.search} placeholderTextColor='white' placeholder='搜索' />
+                    <TextInput style={{ flex: 1, marginLeft: 8, color: 'white', fontSize: 12 }} onChangeText={this.props.search} placeholderTextColor='white' placeholder='搜索' />
                 </View>
             </View>
         );
