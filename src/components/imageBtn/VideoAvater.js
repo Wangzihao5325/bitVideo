@@ -43,7 +43,7 @@ export default class VideoAvater extends PureComponent {
 const styles = StyleSheet.create({
     verBtn: {
         width: verWidth,
-        height: verHeight + 41
+        height: verHeight + 50
     },
     flexView: {
         flex: 1
