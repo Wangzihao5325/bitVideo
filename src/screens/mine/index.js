@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, View, StyleSheet, Image, SafeAreaView, Platform, StatusBar } from 'react-native';
+import { ScrollView, View, StyleSheet, Image, SafeAreaView, Platform, StatusBar, Platform } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import * as Colors from '../../global/Colors';
 import { isXDevice } from '../../global/utils/PixelUtil';
@@ -17,6 +18,10 @@ export default class MineScreen extends PureComponent {
         }
     };
 
+    state = {
+        statusBarColor: Colors.SCREEN_BGCOLOR
+    }
+
     static childContextTypes = {
         mineNavigation: PropTypes.object,
     }
@@ -24,6 +29,22 @@ export default class MineScreen extends PureComponent {
     getChildContext() {
         return {
             mineNavigation: this.props.navigation
+        }
+    }
+
+    _willFocus = () => {
+        if (Platform.OS === 'android') {
+            this.setState({
+                statusBarColor: 'rgb(17,23,27)'
+            });
+        }
+    }
+
+    _willBlur = () => {
+        if (Platform.OS === 'android') {
+            this.setState({
+                statusBarColor: Colors.SCREEN_BGCOLOR
+            });
         }
     }
 
@@ -47,7 +68,11 @@ export default class MineScreen extends PureComponent {
                     source={require('../../image/mine/mine_background.png')}
                 />
                 <SafeAreaView style={styles.container}>
-                    {Platform.OS === 'android' && <StatusBar backgroundColor={Colors.SCREEN_BGCOLOR} />}
+                    <NavigationEvents
+                        onWillFocus={this._willFocus}
+                        onWillBlur={this._willBlur}
+                    />
+                    {Platform.OS === 'android' && <StatusBar backgroundColor={this.state.statusBarColor} />}
                     <Header />
                     <FunList />
                     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
