@@ -45,7 +45,7 @@ export default class HotSubject extends PureComponent {
 
     render() {
         return (
-            <View style={{ width: '100%', height: 206 }}>
+            <View style={{ width: '100%', height: 206, justifyContent: 'center', alignItems: 'center' }}>
                 <FlatList
                     data={this.state.data}
                     horizontal={false}

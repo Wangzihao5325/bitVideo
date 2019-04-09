@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, View, StyleSheet, Image, SafeAreaView, Platform, StatusBar, Platform } from 'react-native';
+import { ScrollView, View, StyleSheet, Image, SafeAreaView, Platform, StatusBar } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import * as Colors from '../../global/Colors';
