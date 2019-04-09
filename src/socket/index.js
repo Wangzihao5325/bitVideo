@@ -542,6 +542,10 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
+    getDomain(onSuccess, onError) {
+        const url = '/api/domain';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

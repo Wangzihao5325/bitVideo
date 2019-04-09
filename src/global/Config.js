@@ -1,5 +1,4 @@
-const SERVICE_URL = 'http://192.168.0.148:50007';//http://192.168.0.162:50003';//'http://192.168.137.223:50004';//'http://video-dev.xsstxt.com';
-
+const SERVICE_URL = 'http://192.168.0.186:50009';
 
 export {
     SERVICE_URL

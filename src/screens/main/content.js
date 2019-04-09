@@ -57,7 +57,6 @@ class Content extends PureComponent {
             return;
         }
         Api.postGlobalTypeVideo('recommend', this.props.nowPage + 1, (e, code, message) => {
-            console.log(e);
             if (e.data) {
                 store.dispatch(addMainPageData(e.data));
                 store.dispatch(setPageInfo(e.current_page, e.last_page));
