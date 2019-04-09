@@ -20,8 +20,17 @@ class Item extends PureComponent {
             if (Platform.OS == 'ios') {
                 deviceType = 'ios';
             }
-            Api.postAddOrder(this.props.item.key, this.props.cardId, deviceType, deviceId, (e) => {
-                console.log(e);
+            Api.postAddOrder(this.props.item.key, this.props.cardId, deviceType, deviceId, (e, code, message) => {
+                switch (e.target) {
+                    case 0:
+                        if (this.props.callback) {
+                            this.props.callback();
+                        }
+                        this.props.navi.navigate('PayWebView', { payUrl: e.payUrl });
+                        break;
+                    case 1:
+                        break;
+                }
             });
         }
     }
@@ -74,11 +83,16 @@ export default class BuyCardPay extends PureComponent {
     _buyCard = () => {
         // to do
         Api.getPayList((e) => {
-            console.log(e);
             this.setState({
                 payListIsShow: true,
                 payListArr: e
             });
+        });
+    }
+
+    _ItemCallback = () => {
+        this.setState({
+            payListIsShow: false,
         });
     }
 
@@ -158,7 +172,7 @@ export default class BuyCardPay extends PureComponent {
                             style={{ flex: 1 }}
                             data={this.state.payListArr}
                             extraData={this.state.cardId}
-                            renderItem={({ item }) => <Item cardId={this.state.cardId} item={item} />}
+                            renderItem={({ item }) => <Item callback={this._ItemCallback} navi={this.props.navigation} cardId={this.state.cardId} item={item} />}
                             ItemSeparatorComponent={() => <View style={{ height: 2, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }} />}
                         />
                     </View>
