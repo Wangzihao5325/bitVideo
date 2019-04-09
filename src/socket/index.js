@@ -82,7 +82,7 @@ class api {
     }
 
     getWithUnsecurty(url, onSuccess, onError) {
-        let fullUrl = Config.SERVICE_URL + url;
+        let fullUrl = Config.SERVICE_URL.domainUrl + url;
         let header = { Accept: 'application/json' };
         if (Variables.account.token) {
             header = { Accept: 'application/json', Authorization: `Bearer ${Variables.account.token}` }
@@ -147,7 +147,7 @@ class api {
     }
 
     postWithUnsecurty(url, formData, onSuccess, onError) {
-        let fullUrl = Config.SERVICE_URL + url;
+        let fullUrl = Config.SERVICE_URL.domainUrl + url;
         let header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data' };
         if (Variables.account.token) {
             header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${Variables.account.token}` }
