@@ -8,8 +8,13 @@ class IntroHalfModal extends PureComponent {
         let title, intro = '';
         if (this.props.fullData) {
             title = this.props.fullData.title ? this.props.fullData.title : '';
-            title = this.props.fullData.intro ? this.props.fullData.intro : '';
+            intro = this.props.fullData.intro ? this.props.fullData.intro : '';
         }
+        // console.log(title);
+        // console.log('121');
+        // console.log(intro);
+        // console.log('121');
+        // console.log(this.props.fullData);
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <View style={styles.titleContainer}>

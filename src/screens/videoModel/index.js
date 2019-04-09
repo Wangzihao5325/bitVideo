@@ -19,7 +19,8 @@ import GuessLike from './videoComponent/guessLike';
 import AmazingComment from './videoComponent/amazingComment';
 import ToastRoot from '../../components/toast/index';
 
-// import IntroHalfModal from './HalfModal';
+import IntroHalfModal from './HalfModal';
+import Modal from "react-native-modal";
 
 export default class VideoModel extends PureComponent {
     state = {
@@ -106,22 +107,16 @@ export default class VideoModel extends PureComponent {
                     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
                         <InputBottom />
                     </KeyboardAvoidingView>
-                    {/* <Modal
-                    backdropColor='transparent'
-                    isVisible={this.state.detailInfoIsVisable}
-                    onBackdropPress={() => this.setState({ detailInfoIsVisable: false })}
-                    style={styles.bottomModal}
-                >
-                    <View style={[semiModalStyle, { backgroundColor: 'white' }]}><Text>half model1</Text></View>
-                </Modal> */}
-                    {/* <Modal
-                    backdropColor='transparent'
-                    isVisible={this.state.chooseEpiscodeIsVisable}
-                    onBackdropPress={() => this.setState({ chooseEpiscodeIsVisable: false })}
-                    style={styles.bottomModal}
-                >
-                    <View style={[semiModalStyle, { backgroundColor: 'white' }]}><Text>half model2</Text></View>
-                </Modal> */}
+                    <Modal
+                        backdropColor={Colors.SCREEN_BGCOLOR}
+                        isVisible={this.state.detailInfoIsVisable}
+                        onBackdropPress={() => this.setState({ detailInfoIsVisable: false })}
+                        style={styles.bottomModal}
+                    >
+                        <View style={[semiModalStyle, { backgroundColor: 'white' }]}>
+                            <IntroHalfModal />
+                        </View>
+                    </Modal>
                 </SafeAreaView>
             </View>
         );

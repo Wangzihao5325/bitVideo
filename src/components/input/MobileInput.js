@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         marginLeft: 34
     },
     contentView: {
-        height: 22,
+        height: 44,
         width: DEFALUT_WIDTH,
         display: 'flex',
         flexDirection: 'row',
