@@ -73,10 +73,11 @@ export default class MoreHotActor extends PureComponent {
 
     render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR, alignItems: 'center' }}>
                 <ModalHeader goBack={this._goBack} textStyle={{ color: Colors.NAVI_ACTIVE_TINT_COLOR }} backBtnColor={Colors.NAVI_ACTIVE_TINT_COLOR} title='人气演员' rightBtnMode='none' />
                 <FlatList
                     style={{ flex: 1 }}
+                    showsVerticalScrollIndicator={false}
                     data={this.state.data}
                     horizontal={false}
                     numColumns={4}
