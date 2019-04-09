@@ -88,7 +88,7 @@ export default class ActorDetail extends PureComponent {
             <View style={{ flex: 1 }}>
                 <ScrollView style={{ backgroundColor: Colors.SCREEN_BGCOLOR }} >
                     <TouchableHighlight underlayColor='transparent' onPress={this._goBack} style={{ position: 'absolute', top: 40, left: 15, height: 22, width: 22, zIndex: 10 }}><Image style={{ height: 22, width: 22, transform: [{ rotate: '180deg' }] }} source={require('../../../image/mine/message_left_arrow.png')} /></TouchableHighlight>
-                    {this.state.coverPath.length > 0 &&
+                    {typeof this.state.coverPath == 'string' && this.state.coverPath.length > 0 &&
                         <ImageBackground style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={{ uri: this.state.coverPath }}>
                             <Image resizeMode='contain' style={{ position: 'absolute', left: 0, bottom: -1, width: Sizes.DEVICE_WIDTH, height: Sizes.DEVICE_WIDTH / 6.8 }} source={require('../../../image/subject/model.png')} />
                         </ImageBackground>
