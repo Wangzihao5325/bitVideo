@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, Text, Platform, ImageBackground, ScrollView, Share, CameraRoll, PermissionsAndroid } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, Platform, ImageBackground, ScrollView, Share, CameraRoll, PermissionsAndroid, Clipboard } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
@@ -43,24 +43,10 @@ class QrCode extends PureComponent {
     _goToInviteFriend = () => {
         Api.postShareQrCodeMessage(this.props.inviteCode, 'official', 'qrcode', (e) => {
             if (e.content) {
-                let shareUrl = `${e.content.split(':')[1]}/share/${this.props.inviteCode}`;
-                Share.share({
-                    message: e.content,
-                    url: shareUrl,
-                    title: '蝌蚪视频App'
-                }, {
-                        dialogTitle: In18.SHARE_DIALOG_TITLE
-                    })
-                    .then(this._shareResult);
-                // .catch((e) => { console.log(e) });
+                Clipboard.setString(e.content);
+                ToastRoot.show('复制成功');
             }
         });
-    }
-
-    _shareResult = (result) => {
-        if (result.action === Share.sharedAction) {
-            // wait for other click
-        }
     }
 
     _saveQrCode = async () => {
@@ -107,7 +93,7 @@ class QrCode extends PureComponent {
 
     render() {
         return (
-            <ImageBackground style={{ height: Sizes.DEVICE_HEIGHT, width: Sizes.DEVICE_WIDTH }} source={require('../../../image/task/share_bg.png')} >
+            <ImageBackground style={{ height: Sizes.DEVICE_HEIGHT, width: Sizes.DEVICE_WIDTH }} resizeMode='cover' source={require('../../../image/task/share_bg.png')} >
                 <SafeAreaView style={{ flex: 1 }}>
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <ModalHeader titleStyle={{ color: 'white' }} goBack={this._goBack} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title='邀请码' rightBtnMode='none' />
@@ -133,7 +119,7 @@ class QrCode extends PureComponent {
                                     <Text onPress={this._saveQrCode} style={{ fontSize: 16, color: 'rgb(255,206,145)' }}>保存二维码</Text>
                                 </View>
                                 <View style={{ height: 40, width: 100, borderColor: 'rgb(255,206,145)', borderWidth: StyleSheet.hairlineWidth, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text onPress={this._goToInviteFriend} style={{ fontSize: 16, color: 'rgb(255,206,145)' }}>邀请好友</Text>
+                                    <Text onPress={this._goToInviteFriend} style={{ fontSize: 16, color: 'rgb(255,206,145)' }}>复制推广链接</Text>
                                 </View>
                             </View>
                         </ScrollView>
