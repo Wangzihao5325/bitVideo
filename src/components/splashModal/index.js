@@ -4,7 +4,7 @@ import { View, Modal, Image, TouchableHighlight, Text, StyleSheet } from 'react-
 export default class SplashModel extends Component {
     state = {
         isVisable: true,
-        time: 10
+        time: 5
     }
 
     componentDidMount() {
@@ -38,20 +38,23 @@ export default class SplashModel extends Component {
 
     render() {
         return (
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={this.state.isVisable}
-            >
-                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.6)' }}>
-                    <TouchableHighlight onPress={this._closeSplashModel} style={styles.btn}>
-                        <Text style={styles.btnTitle}>{`${this.state.time}秒`}</Text>
-                    </TouchableHighlight>
-                    {typeof this.props.source.uri === 'string' &&
-                        this.props.source.uri !== '' &&
-                        <Image style={{ flex: 1 }} source={this.props.source} />}
-                </View>
-            </Modal>
+            this.state.isVisable ?
+                <View style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                    <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={this.state.isVisable}
+                    >
+                        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.6)' }}>
+                            <TouchableHighlight onPress={this._closeSplashModel} style={styles.btn}>
+                                <Text style={styles.btnTitle}>{`点击跳过 ${this.state.time}秒`}</Text>
+                            </TouchableHighlight>
+                            {typeof this.props.source.uri === 'string' &&
+                                this.props.source.uri !== '' &&
+                                <Image style={{ flex: 1 }} source={this.props.source} />}
+                        </View>
+                    </Modal>
+                </View> : null
         );
     }
 }
@@ -59,14 +62,16 @@ export default class SplashModel extends Component {
 const styles = StyleSheet.create({
     btn: {
         height: 30,
-        width: 50,
+        width: 70,
         position: 'absolute',
         top: 40,
-        left: 5,
+        right: 10,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 10,
+        backgroundColor: 'rgba(34,34,34,0.3)',
+        borderRadius: 5
     },
     btnTitle: {
         fontSize: 10,

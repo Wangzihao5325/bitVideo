@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, StatusBar } from 'react-native';
 import * as Sizes from '../../global/Sizes';
+import * as Colors from '../../global/Colors';
 
 import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
@@ -14,7 +15,7 @@ export default class RootPlayer extends PureComponent {
     }
 
     state = {
-        isFullScreen: false
+        isFullScreen: false,
     }
 
     onBuffer = () => {
@@ -43,6 +44,8 @@ export default class RootPlayer extends PureComponent {
         if (this.props.videoUrl) {
             return (
                 <View style={this.state.isFullScreen ? styles.fullScreenFlexView : styles.flexView}>
+                    {Platform.OS === 'android' && !this.state.isFullScreen && <StatusBar backgroundColor={Colors.SCREEN_BGCOLOR} />}
+                    {Platform.OS === 'android' && this.state.isFullScreen && <StatusBar translucent={true} backgroundColor='transparent' />}
                     {
                         Platform.OS === 'ios' &&
                         <Video
