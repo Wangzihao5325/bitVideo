@@ -60,7 +60,7 @@ export default class ShortVideoItem extends PureComponent {
             <View style={styles.container}>
                 <View style={{ flex: 1 }} >
                     {this.props.nowPlaying === this.props.index ?
-                        <RootPlayer videoUrl={this.props.videoUrl} disableBack={true} /> :
+                        <RootPlayer disableFullscreen={true} videoUrl={this.props.videoUrl} disableBack={true} /> :
                         <Cover title={this.props.title} coverPress={this._toPlay} playPress={this._toPlay} source={this.props.coverUrl} />
                     }
                 </View>

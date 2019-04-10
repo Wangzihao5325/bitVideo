@@ -11,7 +11,8 @@ import Orientation from 'react-native-orientation';
 export default class RootPlayer extends PureComponent {
     static defaultProps = {
         disableBack: false,
-        navi: false
+        navi: false,
+        disableFullscreen: false
     }
 
     state = {
@@ -68,6 +69,7 @@ export default class RootPlayer extends PureComponent {
                             onEnterFullscreen={this._androidEnterFullScreen}
                             onExitFullscreen={this._androidExitFullScreen}
                             disableBack={this.props.disableBack}
+                            disableFullscreen={this.props.disableFullscreen}
                         />
                     }
                 </View>
