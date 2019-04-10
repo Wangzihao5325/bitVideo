@@ -1,21 +1,22 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, TextInput, TouchableHighlight, Text, ImageBackground } from 'react-native';
+import { View, StyleSheet, TextInput, TouchableHighlight, Text, ImageBackground, SafeAreaView } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
+import ModalHeader from '../../../components/modal/ModalHeader';
 
 const reg = { title: '', contact: '' };
 export default class HelpScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: In18.HELP_SUBMIT,  //header标题
-            headerStyle: {
-                borderBottomColor: Colors.SCREEN_BGCOLOR,
-                backgroundColor: Colors.SCREEN_BGCOLOR
-            },
-            headerTintColor: Colors.NAVI_ACTIVE_TINT_COLOR,
+            header: null,
+            headerBackTitle: null
         }
+    };
+
+    state = {
+        leftWords: 200
     };
 
     componentWillUnmount() {
@@ -33,24 +34,37 @@ export default class HelpScreen extends PureComponent {
 
     _titleInputChange = (e) => {
         reg.title = e;
+        let left = 200
+        if (e) {
+            left = 200 - e.length;
+        }
+        this.setState({
+            leftWords: left
+        })
     }
 
     _contentInputChange = (e) => {
         reg.contact = e;
     }
 
+    _goBack = () => {
+        this.props.navigation.pop();
+    }
+
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <ModalHeader goBack={this._goBack} backBtnColor='rgb(255,255,255)' title='在线反馈' rightBtnMode='none' />
                 <View style={styles.flexView}>
                     <TextInput
                         style={styles.mainInput}
                         placeholder={In18.PLEASE_INPUT_SUGGEST}
                         placeholderTextColor='rgb(37,19,4)'
                         multiline={true}
-                        maxLength={150}
+                        maxLength={200}
                         onChangeText={this._titleInputChange}
                     />
+                    <Text style={{ alignSelf: 'flex-end', marginRight: 10 }}>{`${this.state.leftWords}/200`}</Text>
                 </View>
                 <View style={styles.flexView2}>
                     <TextInput
@@ -70,7 +84,7 @@ export default class HelpScreen extends PureComponent {
                         <Text style={styles.btnText}>{In18.SUBMIT_SUGGEXT}</Text>
                     </TouchableHighlight>
                 </ImageBackground>
-            </View>
+            </SafeAreaView>
         );
     }
 }
@@ -83,11 +97,11 @@ const styles = StyleSheet.create({
     flexView: {
         marginTop: 40,
         display: 'flex',
-        height: 119,
+        height: 199,
         width: Sizes.DEVICE_WIDTH - 30,
         marginHorizontal: 15,
         justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         backgroundColor: 'rgb(255,216,169)',
         borderRadius: 5,
         shadowColor: 'black',
@@ -95,8 +109,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
     },
     mainInput: {
-        height: 119 - 40,
+        height: 199 - 40,
         width: Sizes.DEVICE_WIDTH - 30 - 40,
+        textAlignVertical: 'top',
+        alignSelf: 'center'
     },
     flexView2: {
         marginTop: 20,
@@ -113,7 +129,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
     },
     input2: {
-        height: 20,
+        height: 40,
         width: Sizes.DEVICE_WIDTH - 30 - 40,
     },
     btnBg: {
