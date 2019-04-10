@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, Text, Platform, ImageBackground, ScrollView, Share, CameraRoll, PermissionsAndroid, Clipboard } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, Platform, ImageBackground, ScrollView, StatusBar, CameraRoll, PermissionsAndroid, Clipboard } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
@@ -95,6 +95,7 @@ class QrCode extends PureComponent {
         return (
             <ImageBackground style={{ height: Sizes.DEVICE_HEIGHT, width: Sizes.DEVICE_WIDTH }} resizeMode='cover' source={require('../../../image/task/share_bg.png')} >
                 <SafeAreaView style={{ flex: 1 }}>
+                    {Platform.OS === 'android' && <StatusBar hidden={true} />}
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <ModalHeader titleStyle={{ color: 'white' }} goBack={this._goBack} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title='邀请码' rightBtnMode='none' />
                         <ScrollView
