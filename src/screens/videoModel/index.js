@@ -112,8 +112,9 @@ export default class VideoModel extends PureComponent {
                         isVisible={this.state.detailInfoIsVisable}
                         onBackdropPress={() => this.setState({ detailInfoIsVisable: false })}
                         style={styles.bottomModal}
+                        backdropOpacity={0.1}
                     >
-                        <View style={[semiModalStyle, { backgroundColor: 'white' }]}>
+                        <View style={[semiModalStyle]}>
                             <IntroHalfModal />
                         </View>
                     </Modal>
