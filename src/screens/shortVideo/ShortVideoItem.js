@@ -14,7 +14,8 @@ const Footer = (props) => {
                 <Text style={styles.footerText}>{`${MathUtils.playCountTransform(props.times)}${In18.TIMES_PLAY}`}</Text>
             </View>
             <TouchableHighlight style={styles.footerShareBtn} underlayColor='transparent' onPress={props.toShare}>
-                <Icon name='share-alt' size={22} color='#909090' />
+                {/* <Icon name='share-alt' size={22} color='#909090' /> */}
+                <Image style={{ height: 22, width: 22 }} source={require('../../image/usual/share.png')} />
             </TouchableHighlight>
         </View>
     );
