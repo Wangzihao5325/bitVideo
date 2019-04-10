@@ -23,7 +23,7 @@ class VideoHeader extends PureComponent {
                     <Text style={styles.titleText} numberOfLines={1} ellipsizeMode='tail'>{title}</Text>
                 </View>
                 <View style={styles.flexView1}>
-                    <Text style={styles.introText}>{In18.INTRODUCE_TEXT}</Text>
+                    <Text onPress={this.moreIntro} style={styles.introText}>{In18.INTRODUCE_TEXT}</Text>
                     <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this.moreIntro} source={require('../../../image/usual/arrow_right_circle.png')} />
                 </View>
             </View>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         marginTop: 11,
-        zIndex:10
+        zIndex: 10
     },
     flexView2: {
         flex: 2,

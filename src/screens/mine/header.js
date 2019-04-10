@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         marginLeft: 10,
-        marginTop: 25
+        marginTop: 15
     },
     accountTypeText: {
         color: 'white',
