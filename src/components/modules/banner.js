@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Image, TouchableHighlight } from 'react-native';
 import * as Sizes from '../../global/Sizes';
+import SecurtyImage from '../../components/securtyImage/index';
 
 import Carousel from 'react-native-looped-carousel';
 
@@ -31,7 +32,8 @@ export default class BannerModule extends PureComponent {
             items.push(
                 <View key={index} style={[this.state.size, { display: 'flex' }]}>
                     <TouchableHighlight style={{ flex: 1 }} onPress={() => this._bannerPress(item.id)}>
-                        <Image style={{ flex: 1, borderRadius: 5 }} defaultSource={require('../../image/usual/banner_load_failed.png')} source={{ uri: item.cover_path }}></Image>
+                        {/* <Image style={{ flex: 1, borderRadius: 5 }} defaultSource={require('../../image/usual/banner_load_failed.png')} source={{ uri: item.cover_path }}></Image> */}
+                        <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={{ flex: 1, borderRadius: 5 }} source={{ uri: item.cover_path }} />
                     </TouchableHighlight>
                 </View>
             );
