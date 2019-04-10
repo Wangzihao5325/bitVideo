@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, TextInput, Keyboard, Text } from 'react-native';
+import { View, StyleSheet, TextInput, Keyboard, Text, Share } from 'react-native';
 import { connect } from 'react-redux';
 import store from '../../../store/index';
 import { video_detail_add_myself_comment, change_video_collect_state } from '../../../store/actions/videoDetailInfoAction';
