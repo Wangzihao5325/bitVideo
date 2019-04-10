@@ -55,7 +55,7 @@ export default class SecurtyImage extends PureComponent {
                     <Image
                         resizeMethod='scale'
                         style={this.props.imageStyle ? this.props.imageStyle : this.props.style}
-                        defaultSource={require('../../image/usual/image_load_failed.png')}
+                        defaultSource={this.props.default}
                         source={this.state.source} />}
             </View>
         );
