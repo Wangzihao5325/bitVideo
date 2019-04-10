@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableWithoutFeedback, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Colors from '../../global/Colors';
 
@@ -23,17 +23,13 @@ export default class ModalHeader extends PureComponent {
             <View style={styles.headerContainer}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                     {!this.props.isDisableBack &&
-                        <VectorIconBtn
-                            style={{ marginLeft: 15 }}
-                            size={21}
-                            name='arrow-left'
-                            color={backBtnColor}
-                            onPress={this.props.goBack}
-                        />
+                        <TouchableWithoutFeedback onPress={this.props.goBack}>
+                            <Image style={{ height: 21, width: 21, marginLeft: 15 }} resizeMode='contain' source={require('../../image/usual/fina_back.png')} />
+                        </TouchableWithoutFeedback>
                     }
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={[styles.headerTitle,this.props.titleStyle]}>{this.props.title}</Text>
+                    <Text style={[styles.headerTitle, this.props.titleStyle]}>{this.props.title}</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                     {this.props.rightBtnMode == 'none' && <View style={[{ height: 10, width: 10 }, styles.marginStyle]} />}
