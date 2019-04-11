@@ -155,7 +155,7 @@ class ShortVideo extends PureComponent {
                                         <ShortVideoItem
                                             share={this._goToInviteFriend}
                                             detail={this._toDetail}
-                                            playPress={() => this._palyPress(index)}
+                                            playPress={this._palyPress}
                                             nowPlaying={this.state.playingIndex}
                                             index={index}
                                             title={item.title}

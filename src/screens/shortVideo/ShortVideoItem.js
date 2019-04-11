@@ -3,9 +3,11 @@ import { StyleSheet, View, Text, TouchableHighlight, Image, Platform } from 'rea
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
 import * as MathUtils from '../../global/utils/MathUtil';
+import Api from '../../socket/index';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RootPlayer from '../../components/player/RootPlayer';
+import ToastRoot from '../../components/toast/index';
 
 const Footer = (props) => {
     return (
@@ -36,6 +38,9 @@ const Cover = (props) => {
 }
 
 export default class ShortVideoItem extends PureComponent {
+    state = {
+        url: null,
+    }
 
     _toShare = () => {
         if (typeof this.props.share === 'function') {
@@ -51,7 +56,17 @@ export default class ShortVideoItem extends PureComponent {
 
     _toPlay = () => {
         if (typeof this.props.playPress === 'function') {
-            this.props.playPress();
+            this.props.playPress(this.props.index);
+            Api.getVideoInfo(this.props.videoId, (result, code, message) => {
+                if (result) {
+                    this.setState({
+                        url: this.props.videoUrl
+                    });
+                } else {
+                    this.props.playPress(-1);
+                    ToastRoot.show('当日观影次数已用完');
+                }
+            });
         }
     }
     //http://youku.com-www-163.com/20180506/576_bf997390/index.m3u8  //this.props.videoUrl
@@ -60,7 +75,7 @@ export default class ShortVideoItem extends PureComponent {
             <View style={styles.container}>
                 <View style={{ flex: 1 }} >
                     {this.props.nowPlaying === this.props.index ?
-                        <RootPlayer disableFullscreen={true} videoUrl={this.props.videoUrl} disableBack={true} /> :
+                        <RootPlayer disableFullscreen={true} videoUrl={this.state.url} disableBack={true} /> :
                         <Cover title={this.props.title} coverPress={this._toPlay} playPress={this._toPlay} source={this.props.coverUrl} />
                     }
                 </View>
