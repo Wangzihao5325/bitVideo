@@ -17,7 +17,7 @@ class Item extends PureComponent {
                 </View>
                 <View style={styles.itemAvaterFlexView2}>
                     <Text style={[styles.itemNameText,{marginTop:3}]}>{this.props.name ? this.props.name : ''}</Text>
-                    <Text style={[styles.itemNameText, { marginTop: 10, fontSize: 10 }]}>{this.props.time ? this.props.time : ''}</Text>
+                    <Text style={[styles.itemNameText, { marginTop: 5, fontSize: 10 }]}>{this.props.time ? this.props.time : ''}</Text>
                     <Text ellipsizeMode='tail' numberOfLines={2} style={styles.itemContentText}>{this.props.content}</Text>
                 </View>
             </View>

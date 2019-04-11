@@ -70,7 +70,7 @@ class Avater extends PureComponent {
                     <Text style={styles.accountTypeText}>{typeText}</Text>
                 </View>
                 <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
-                    <Text style={styles.rechargeText}>{`${this.props.coins}金币`}</Text>
+                    <Image style={{ height: 26, width: 26,marginLeft:10 }} source={require('../../image/task/icons.png')} /><Text style={styles.rechargeText}>{`${this.props.coins}`}</Text>
                 </ImageBackground>
             </View>
         );
@@ -192,13 +192,13 @@ const styles = StyleSheet.create({
         width: 101,
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
         marginTop: 30
     },
     rechargeText: {
         color: 'white',
-        fontSize: 14
+        fontSize: 14,
+        marginLeft:3
     },
     countListContainer: {
         height: 83 + 31,
