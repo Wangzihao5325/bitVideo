@@ -7,7 +7,7 @@ import store from '../../../store/index';
 import { set_video_full_data, set_guess_like_source, set_comment_list_data } from '../../../store/actions/videoDetailInfoAction';
 import * as Sizes from '../../../global/Sizes';
 
-import VideoAvater from '../../../components/imageBtn/VideoAvater';
+import VideoAvaterScrollHo from '../../../components/imageBtn/VideoAvater_scroll_ho';
 
 class GuessLike extends PureComponent {
 
@@ -44,11 +44,10 @@ class GuessLike extends PureComponent {
                 </View>
                 {this.props.data &&
                     <FlatList
-                        style={styles.FlatList}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         data={this.props.data}
-                        renderItem={({ item }) => <VideoAvater isVertical={true} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
+                        renderItem={({ item }) => <VideoAvaterScrollHo isVertical={false} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
                     />
                 }
             </View>
