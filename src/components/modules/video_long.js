@@ -73,7 +73,7 @@ export default class VideoLong extends PureComponent {
         return (
             <View>
                 <TitleHeader
-                    style={{ marginTop: 10, marginTop: 10 }}
+                    style={{ marginTop: 10, marginBottom: 10 }}
                     imageSource={require('../../image/main/module_header.png')}
                     title={this.props.title}
                     btnTitle='更多'
