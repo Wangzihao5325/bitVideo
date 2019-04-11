@@ -42,7 +42,7 @@ class SettingScreen extends PureComponent {
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                <ModalHeader goBack={this._goBack} titleStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title='设置' rightBtnMode='none' />
+                <ModalHeader goBack={this._goBack} titleStyle={{ color: 'rgb(255,168,96)' }} backBtnColor='rgb(255,255,255)' title='设置' rightBtnMode='none' />
 
                 <TouchableHighlight onPress={this._toBindPhone} underlayColor='transparent' >
                     <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
