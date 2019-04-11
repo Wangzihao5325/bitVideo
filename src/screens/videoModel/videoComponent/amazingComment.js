@@ -16,8 +16,8 @@ class Item extends PureComponent {
                     <Image style={styles.itemAvaterImage} defaultSource={require('../../../image/usual/default_avater.png')} source={defaultSource} />
                 </View>
                 <View style={styles.itemAvaterFlexView2}>
-                    <Text style={styles.itemNameText}>{this.props.name ? this.props.name : ''}</Text>
-                    <Text style={styles.itemNameText}>{this.props.time ? this.props.time : ''}</Text>
+                    <Text style={[styles.itemNameText,{marginTop:3}]}>{this.props.name ? this.props.name : ''}</Text>
+                    <Text style={[styles.itemNameText, { marginTop: 10, fontSize: 10 }]}>{this.props.time ? this.props.time : ''}</Text>
                     <Text ellipsizeMode='tail' numberOfLines={2} style={styles.itemContentText}>{this.props.content}</Text>
                 </View>
             </View>
@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'rgb(100,100,100)',
         marginLeft: 10,
-        marginTop: 9
     },
     itemTimeText: {
         fontSize: 12,
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         height: 34,
         width: Sizes.DEVICE_WIDTH - 65 - 19,
-        fontSize: 12,
+        fontSize: 14,
         color: 'rgb(178,178,178)',
         marginTop: 10
     },
