@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     },
     title: {
         marginHorizontal: 15,
-        fontSize: 20,
+        fontSize: 16,
         lineHeight: 29,
         marginTop: 12,
         color: 'rgb(187,187,186)'

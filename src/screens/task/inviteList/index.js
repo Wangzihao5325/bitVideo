@@ -15,9 +15,9 @@ class Item extends PureComponent {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 13, color: 'white' }}>{this.props.id}</Text>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                {/* <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 13, color: 'white' }}>{this.props.phone}</Text>
-                </View>
+                </View> */}
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 13, color: 'white' }}>{this.props.time.split(' ')[0]}</Text>
                 </View>
@@ -76,9 +76,9 @@ export default class InviteList extends PureComponent {
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ fontSize: 13, color: 'rgb(177,177,177)' }}>用户ID</Text>
                         </View>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        {/* <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ fontSize: 13, color: 'rgb(177,177,177)' }}>手机号码</Text>
-                        </View>
+                        </View> */}
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ fontSize: 13, color: 'rgb(177,177,177)' }}>注册时间</Text>
                         </View>
