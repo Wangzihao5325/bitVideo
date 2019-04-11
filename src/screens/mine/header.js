@@ -188,8 +188,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     imageBackground: {
-        height: 30,
-        width: 101,
+        height: 39,
+        width: 77,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
