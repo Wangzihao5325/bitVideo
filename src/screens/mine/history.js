@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     itemTitle: {
         color: 'white',
         fontSize: 14,
-        marginHorizontal:3
+        marginHorizontal: 3
     },
     flatList: {
         // height: 179 + 20 + 7,

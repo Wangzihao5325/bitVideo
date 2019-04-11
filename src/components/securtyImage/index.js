@@ -20,7 +20,7 @@ export default class SecurtyImage extends PureComponent {
 
     _getTrueSource = () => {
         let uri = this.props.source.uri;
-        if (uri !== this.state.lastSource) {
+        if (uri && uri !== this.state.lastSource) {
             let regArr = uri.split('.');
             let typeStr = regArr[regArr.length - 1];
             if (typeStr === 'ceb') {
