@@ -107,7 +107,7 @@ export default class VideoModel extends PureComponent {
                     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'position' : 'height'}>
                         <InputBottom />
                     </KeyboardAvoidingView>
-                    <Modal
+                    {/* <Modal
                         backdropColor={Colors.SCREEN_BGCOLOR}
                         isVisible={this.state.detailInfoIsVisable}
                         onBackdropPress={() => this.setState({ detailInfoIsVisable: false })}
@@ -117,7 +117,7 @@ export default class VideoModel extends PureComponent {
                         <View style={[semiModalStyle]}>
                             <IntroHalfModal />
                         </View>
-                    </Modal>
+                    </Modal> */}
                 </SafeAreaView>
             </View>
         );

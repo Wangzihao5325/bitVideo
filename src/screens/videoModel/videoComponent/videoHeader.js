@@ -7,11 +7,13 @@ import * as In18 from '../../../global/In18';
 import IconBtn from '../../../components/imageBtn/IconBtn';
 
 class VideoHeader extends PureComponent {
+
     moreIntro = () => {
         if (typeof this.props.toIntro === 'function') {
             this.props.toIntro();
         }
     }
+
     render() {
         let title = '';
         if (this.props.fullData) {
@@ -20,12 +22,9 @@ class VideoHeader extends PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.flexView2}>
-                    <Text style={styles.titleText} numberOfLines={1} ellipsizeMode='tail'>{title}</Text>
+                    <Text style={styles.titleText} numberOfLines={1} ellipsizeMode='middle' >{title}</Text>
                 </View>
-                <View style={styles.flexView1}>
-                    <Text onPress={this.moreIntro} style={styles.introText}>{In18.INTRODUCE_TEXT}</Text>
-                    <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this.moreIntro} source={require('../../../image/usual/arrow_right_circle.png')} />
-                </View>
+                {/* <IconBtn style={{ marginRight: 15 }} height={16} width={16} onPress={this.moreIntro} source={require('../../../image/usual/arrow_right_circle.png')} /> */}
             </View>
         );
     }
@@ -45,22 +44,25 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         marginTop: 11,
-        zIndex: 10
+        zIndex: 10,
+        alignItems: 'center'
     },
     flexView2: {
         flex: 2,
         justifyContent: 'center'
     },
     flexView1: {
-        flex: 1,
+
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center'
     },
     titleText: {
-        marginLeft: 37,
+        marginLeft: 15,
+        marginRight: 15,
         fontSize: 16,
-        color: 'rgb(178,178,178)'
+        color: 'rgb(178,178,178)',
+        lineHeight: 17
     },
     introText: {
         fontSize: 14,
