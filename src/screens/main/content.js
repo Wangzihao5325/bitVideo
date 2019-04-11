@@ -11,6 +11,7 @@ import AdModule from '../../components/modules/ad';
 import BannerModule from '../../components/modules/banner';
 import VideoModule from '../../components/modules/video';
 import GlobalTypeModule from '../../components/modules/globalType';
+import VideoLong from '../../components/modules/video_long';
 
 class Item extends PureComponent {
 
@@ -36,6 +37,10 @@ class Item extends PureComponent {
             case 'm_ad':
                 if (this.props.item.m_ad_data && this.props.item.m_ad_data.length > 0) {
                     return (<AdModule key={this.props.index} data={this.props.item.m_ad_data[0]} navi={mainNavigation} />);
+                }
+            case 'm_video_long':
+                if (this.props.item.m_video_long_data && this.props.item.m_video_long_data.length > 0) {
+                    return (<VideoLong key={this.props.index} moduleId={this.props.item.id} title={this.props.item.title} limit={this.props.item.client_limit} data={this.props.item.m_video_long_data} navi={mainNavigation} />);
                 }
             default:
                 return (<View style={{ height: 1, width: Sizes.DEVICE_WIDTH, backgroundColor: 'transparent' }} />);

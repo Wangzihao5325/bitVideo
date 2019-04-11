@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 export default class TitleHeader extends PureComponent {
     show_more = () => {
@@ -13,7 +13,14 @@ export default class TitleHeader extends PureComponent {
                 <Image resizeMode='contain' style={styles.headerImage} source={this.props.imageSource} />
                 <Text style={[styles.headerText, this.props.headerStyle]}>{this.props.title}</Text>
                 <View style={styles.headerFlexView}>
-                    {this.props.btnTitle && <Text onPress={this.show_more} style={[styles.more, this.props.moreStyle]}>{this.props.btnTitle}</Text>}
+                    {this.props.btnTitle &&
+                        <TouchableWithoutFeedback onPress={this.show_more}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 19 }}>
+                                <Text style={[styles.more, this.props.moreStyle]}>{this.props.btnTitle}</Text>
+                                <Image style={{ height: 24, width: 24 }} source={require('../../image/usual/more_arrow.png')} />
+                            </View>
+                        </TouchableWithoutFeedback>
+                    }
                 </View>
             </View>
         );
@@ -41,10 +48,10 @@ const styles = StyleSheet.create({
     headerFlexView: {
         flex: 1,
         flexDirection: 'row-reverse',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     more: {
-        marginRight: 38,
+        marginRight: 10,
         fontSize: 14,
         color: 'rgb(187,186,186)'
     }
