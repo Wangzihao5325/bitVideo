@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     hoBtn: {
         width: hoWidth,
-        height: hoHeight + 41
+        height: hoHeight + 50
     },
     hoImage: {
         height: hoHeight,

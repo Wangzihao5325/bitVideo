@@ -88,8 +88,11 @@ export default class ActorDetail extends PureComponent {
             <View style={{ flex: 1 }}>
                 <ScrollView style={{ backgroundColor: Colors.SCREEN_BGCOLOR }} >
                     <TouchableHighlight underlayColor='transparent' onPress={this._goBack} style={{ position: 'absolute', top: 40, left: 15, height: 22, width: 22, zIndex: 10 }}><Image style={{ height: 22, width: 22, transform: [{ rotate: '180deg' }] }} source={require('../../../image/mine/message_left_arrow.png')} /></TouchableHighlight>
-                    {typeof this.state.coverPath == 'string' && this.state.coverPath.length > 0 &&
+                    {(typeof this.state.coverPath == 'string' && this.state.coverPath.length > 0) ?
                         <ImageBackground style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={{ uri: this.state.coverPath }}>
+                            <Image resizeMode='contain' style={{ position: 'absolute', left: 0, bottom: -1, width: Sizes.DEVICE_WIDTH, height: Sizes.DEVICE_WIDTH / 6.8 }} source={require('../../../image/subject/model.png')} />
+                        </ImageBackground> :
+                        <ImageBackground style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={require('../../../image/usual/banner_load_failed.png')}>
                             <Image resizeMode='contain' style={{ position: 'absolute', left: 0, bottom: -1, width: Sizes.DEVICE_WIDTH, height: Sizes.DEVICE_WIDTH / 6.8 }} source={require('../../../image/subject/model.png')} />
                         </ImageBackground>
                     }
@@ -105,7 +108,7 @@ export default class ActorDetail extends PureComponent {
 
                     {this.state.data.length > 0 &&
                         <FlatList
-                            style={{ height: Sizes.DEVICE_HEIGHT, width: Sizes.DEVICE_WIDTH }}
+                            style={{ height: Sizes.DEVICE_HEIGHT + 20, width: Sizes.DEVICE_WIDTH }}
                             onRefresh={this._flatListRefresh}
                             refreshing={false}
                             onEndReached={this._getNextPageData}
@@ -114,8 +117,8 @@ export default class ActorDetail extends PureComponent {
                             contentContainerStyle={{ alignSelf: 'center' }}
                             columnWrapperStyle={{ marginTop: 20 }}
                             showsVerticalScrollIndicator={false}
-                            numColumns={3}
-                            renderItem={({ item }) => <VideoAvater isVertical={true} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
+                            numColumns={2}
+                            renderItem={({ item }) => <VideoAvater isVertical={false} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
                         />}
                 </ScrollView>
             </View>
