@@ -8,8 +8,10 @@ import store from '../../store/index';
 import { get_history_movie_list } from '../../store/actions/watchHistoryAction';
 import { connect } from 'react-redux';
 import SecurtyImage from '../../components/securtyImage/index';
+import * as Sizes from '../../global/Sizes';
 
-import watchHistory from '../../mock/watchHistory';
+const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
+const hoHeight = hoWidth / 1.5;
 
 class Header extends PureComponent {
     static contextTypes = {
@@ -50,10 +52,8 @@ class Item extends PureComponent {
             <TouchableHighlight style={styles.itemContainer} onPress={this.watchHistoryPressing} underlayColor='transparent'>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     {/* <Image style={styles.itemImage} source={this.props.source} /> */}
-                    <SecurtyImage style={styles.itemImage} source={this.props.source} />
-                    <View style={styles.itemTextContainer}>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.itemTitle}>{this.props.title}</Text>
-                    </View>
+                    <SecurtyImage default={require('../../image/usual/image_load_failed_ho.png')} style={styles.itemImage} source={this.props.source} />
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.itemTitle}>{this.props.title}</Text>
                 </View>
             </TouchableHighlight>
         );
@@ -145,13 +145,19 @@ const styles = StyleSheet.create({
         marginLeft: 6
     },
     itemContainer: {
-        height: 175 + 20 + 7,
-        width: 129,
+        width: hoWidth,
+        height: hoHeight + 30
+        // height: 175 + 20 + 7,
+        // width: 129,
     },
     itemImage: {
-        height: 175,
-        width: 125,
+        height: hoHeight,
+        width: hoWidth - 2,
+        marginHorizontal: 1,
         borderRadius: 5
+        // height: 175,
+        // width: 125,
+        // borderRadius: 5
     },
     itemTextContainer: {
         height: 20,
@@ -163,11 +169,13 @@ const styles = StyleSheet.create({
     },
     itemTitle: {
         color: 'white',
-        fontSize: 14
+        fontSize: 14,
+        marginHorizontal:3
     },
     flatList: {
-        height: 179 + 20 + 7,
+        // height: 179 + 20 + 7,
+        height: hoHeight + 30,
         width: '100%',
-        marginTop: 20
+        marginTop: 10
     }
 });
