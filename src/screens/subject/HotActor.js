@@ -74,6 +74,7 @@ class Item extends PureComponent {
                     style={{ height: hoHeight + 30, width: '100%' }}
                     data={this.props.item.list}
                     horizontal={true}
+                    showsHorizontalScrollIndicator={false}
                     renderItem={({ item, index }) => <InnerItem key={index} item={item} />}
                 />
             </View>
