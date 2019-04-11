@@ -3,6 +3,10 @@ import { StyleSheet, TouchableHighlight, View, Image, Text } from 'react-native'
 import { connect } from 'react-redux';
 import * as Colors from '../../global/Colors';
 import SecurtyImage from '../../components/securtyImage/index';
+import * as Sizes from '../../global/Sizes';
+
+const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
+const hoHeight = hoWidth / 1.5;
 
 class Select extends PureComponent {
     render() {
@@ -60,8 +64,7 @@ class VideoDetailInfoWithEdit extends PureComponent {
                 <View style={[styles.flexView, styles.borderBottom]}>
                     {this.props.isSelectMode && <Select isSelect={this.state.isSelectNow} />}
                     <View style={styles.imageContainer}>
-                        <SecurtyImage imageStyle={{ height: 114, width: 88, borderRadius: 5 }} style={styles.imageStyle} source={this.props.source} />
-                        {/* <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} /> */}
+                        <SecurtyImage imageStyle={{ height: hoHeight, width: hoWidth, borderRadius: 5 }} style={styles.imageStyle} source={this.props.source} />
                     </View>
                     <View style={styles.infoContainer}>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.titleText}>{this.props.title}</Text>
@@ -110,15 +113,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     imageContainer: {
-        width: 88 + 14,
+        width: hoWidth,
         height: 134,
         display: 'flex',
         justifyContent: 'center',
     },
     imageStyle: {
-        height: 114,
-        width: 88,
-        marginLeft: 14,
+        height: hoHeight,
+        width: hoWidth,
         borderRadius: 5
     },
     infoContainer: {
