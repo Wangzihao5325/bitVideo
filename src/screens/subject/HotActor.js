@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
 
 import SecurtyImage from '../../components/securtyImage/index';
 
+const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
+const hoHeight = hoWidth / 1.5;
+
 class InnerItem extends PureComponent {
 
     static contextTypes = {
@@ -19,10 +22,10 @@ class InnerItem extends PureComponent {
 
     render() {
         return (
-            <TouchableHighlight style={{ width: 91 + 12, height: 112 + 7 + 17, }} underlayColor='transparent' onPress={this._press}>
+            <TouchableHighlight style={{ width: hoWidth, height: hoHeight + 30, }} underlayColor='transparent' onPress={this._press}>
                 <View style={styles.innterContainer}>
-                    <SecurtyImage style={styles.innerImage} imageStyle={{ height: 112, width: 91, borderRadius: 5 }} source={{ uri: this.props.item.cover_path }} />
-                    <Text style={{ fontSize: 12, color: 'rgb(187,186,186)', marginTop: 7 }} numberOfLines={1} ellipsizeMode='tail'>{this.props.item.title}</Text>
+                    <SecurtyImage style={styles.innerImage} default={require('../../image/usual/image_load_failed_ho.png')} source={{ uri: this.props.item.cover_path }} />
+                    <Text style={{ fontSize: 12, color: 'rgb(187,186,186)', marginTop: 7,marginHorizontal:3 }} numberOfLines={1} ellipsizeMode='tail'>{this.props.item.title}</Text>
                 </View>
             </TouchableHighlight>
         );
@@ -68,7 +71,7 @@ class Item extends PureComponent {
                     </View>
                 </View>
                 <FlatList
-                    style={{ height: 112 + 7 + 17, width: '100%', marginBottom: 15, marginTop: 20 }}
+                    style={{ height: hoHeight + 30, width: '100%' }}
                     data={this.props.item.list}
                     horizontal={true}
                     renderItem={({ item, index }) => <InnerItem key={index} item={item} />}
@@ -109,7 +112,7 @@ export default class HotActor extends PureComponent {
 
 const styles = StyleSheet.create({
     itemContainer: {
-        height: 281,
+        height: 241,
         width: '100%',
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: 'rgb(133,148,156)'
@@ -128,16 +131,20 @@ const styles = StyleSheet.create({
         borderRadius: 30
     },
     innterContainer: {
-        width: 91 + 6,
-        height: 112 + 7 + 17,
-        display: 'flex',
+        // width: 91 + 6,
+        // height: 112 + 7 + 17,
+        // display: 'flex',
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
     innerImage: {
-        height: 112,
-        width: 91,
+        // height: 112,
+        // width: 91,
+        // borderRadius: 5
+        height: hoHeight,
+        width: hoWidth - 2,
+        marginHorizontal: 1,
         borderRadius: 5
-
     }
 });
