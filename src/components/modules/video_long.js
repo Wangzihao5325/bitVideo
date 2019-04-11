@@ -21,13 +21,13 @@ class Item extends PureComponent {
             <TouchableWithoutFeedback style={styles.ItemContainer} onPress={this.btnOnPress}>
                 <View style={styles.ItemContainer}>
                     <View style={[styles.Image, { display: 'flex' }]}>
-                        <View style={styles.ImageBottom}>
+                        {/* <View style={styles.ImageBottom}>
                             <Image style={styles.goodImage} source={require('../../image/main/good.png')} />
                             <Text style={styles.goodText}>{this.props.item.score}</Text>
                             <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
                                 <Text style={styles.timesText}>{`${this.props.item.play_count}次播放`}</Text>
                             </View>
-                        </View>
+                        </View> */}
                         <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={styles.Image} source={{ uri: this.props.item.cover_path }} />
                     </View>
                     <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail'>{this.props.item.title}</Text>
