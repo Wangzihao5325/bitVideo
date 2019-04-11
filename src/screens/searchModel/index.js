@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
 
     },
     itemText: {
-        fontSize: 12,
+        fontSize: 16,
         color: 'rgb(100,100,100)',
         marginLeft: 9,
         height: 16,

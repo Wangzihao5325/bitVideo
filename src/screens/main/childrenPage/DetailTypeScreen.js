@@ -207,8 +207,8 @@ export default class DetailTypeScreen extends PureComponent {
                                 contentContainerStyle={{ alignSelf: 'center' }}
                                 columnWrapperStyle={{ marginTop: 20 }}
                                 showsVerticalScrollIndicator={false}
-                                numColumns={3}
-                                renderItem={({ item }) => <VideoAvater isVertical={true} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
+                                numColumns={2}
+                                renderItem={({ item }) => <VideoAvater isVertical={false} onPress={() => this._videoAvaterOnPress(item.id)} imageSource={{ uri: `${item.cover_path}` }} title={item.title} info={item.intro} score={item.score} />}
                             />}
                     </View>
                 </View>
