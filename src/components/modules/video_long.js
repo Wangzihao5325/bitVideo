@@ -79,7 +79,7 @@ export default class VideoLong extends PureComponent {
                     btnTitle='更多'
                     showMore={this._moreVideo} />
                 <FlatList
-                ItemSeparatorComponent={()=><View style={{height:20,width:'100%'}}/>}
+                    ItemSeparatorComponent={() => <View style={{ height: 5, width: '100%' }} />}
                     data={this.state.data}
                     renderItem={({ item }) => <Item item={item} onPress={() => this._videoAvaterOnPress(item.id)} />}
                 />
@@ -90,7 +90,7 @@ export default class VideoLong extends PureComponent {
 
 const styles = StyleSheet.create({
     ItemContainer: {
-        height: HEIGHT + 50,
+        height: HEIGHT + 43,
         width: WIDTH,
         display: 'flex'
     },

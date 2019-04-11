@@ -16,7 +16,7 @@ class Item extends PureComponent {
     }
     render() {
         return (
-            <TouchableHighlight style={styles.itemContainer} onPress={this._press}>
+            <TouchableHighlight style={styles.itemContainer} onPress={this._press} underlayColor='transparent'>
                 <View style={styles.itemFlexView}>
                     {/* <Image style={styles.image} source={{ uri: this.props.item.cover_img }} /> */}
                     <SecurtyImage style={styles.image} imageStyle={{ height: 66, width: 66, borderRadius: 33 }} source={{ uri: this.props.item.cover_img }} />
@@ -45,7 +45,7 @@ export default class HotSubject extends PureComponent {
 
     render() {
         return (
-            <View style={{ width: '100%', height: 206, justifyContent: 'center', alignItems: 'center',marginTop:15 }}>
+            <View style={{ width: '100%', height: 206, justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
                 <FlatList
                     data={this.state.data}
                     horizontal={false}

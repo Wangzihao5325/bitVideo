@@ -13,7 +13,7 @@ class Item extends PureComponent {
 
     render() {
         return (
-            <TouchableHighlight style={styles.itemContainer} onPress={this._itemOnPress}>
+            <TouchableHighlight style={styles.itemContainer} onPress={this._itemOnPress} underlayColor='transaprent'>
                 <View style={styles.itemFlexView}>
                     <SecurtyImage style={styles.image} source={{ uri: this.props.uri }} />
                     <Text style={styles.titleText}>{this.props.title}</Text>
@@ -38,7 +38,7 @@ export default class GlobalTypeModule extends PureComponent {
                         style={{ flex: 1 }}
                         numColumns={4}
                         data={this.props.data}
-                        ItemSeparatorComponent={()=><View style={{height:10,width:'100%'}}/>}
+                        ItemSeparatorComponent={() => <View style={{ height: 10, width: '100%' }} />}
                         renderItem={({ item }) => <Item title={item.title} uri={item.icon} type={item.global_type} innerType={item.type_id} navi={this.props.navi} />}
                     />}
             </View>
