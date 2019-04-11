@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     },
     rechargeText: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 18,
         marginLeft:3
     },
     countListContainer: {
