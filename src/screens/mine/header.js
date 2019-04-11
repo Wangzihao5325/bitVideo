@@ -70,7 +70,7 @@ class Avater extends PureComponent {
                     <Text style={styles.accountTypeText}>{typeText}</Text>
                 </View>
                 <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
-                    <Text style={styles.rechargeText}>{In18.RECHARGE}</Text>
+                    <Text style={styles.rechargeText}>{`${this.props.coins}金币`}</Text>
                 </ImageBackground>
             </View>
         );
@@ -122,7 +122,7 @@ class Header extends PureComponent {
                     onDidFocus={this._onDidFocus}
                 />
                 <TopBtns isLogin={this.props.isLogin} />
-                <Avater vip={this.props.vip} source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
+                <Avater coins={this.props.coins} vip={this.props.vip} source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
                 <CountList vipEndDay={this.props.vipEndDay} vipHasDays={this.props.vipHasDays} remainCount={this.props.remainCount} total={this.props.viewCountTotal} use={this.props.viewCountUse} />
             </View>
         );
@@ -140,7 +140,8 @@ function mapState2Props(store) {
         vipHasDays: store.account.vipHasDays,
         vipEndDay: store.account.vipEndDay,
         coverPath: store.account.coverPath,
-        vip: store.account.vip
+        vip: store.account.vip,
+        coins: store.account.icons,
     }
 }
 

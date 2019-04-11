@@ -30,7 +30,7 @@ const Cover = (props) => {
             <TouchableHighlight style={styles.coverBtn} onPress={props.playPress} underlayColor='transparent'>
                 <Icon name='play' size={30} color='#909090' />
             </TouchableHighlight>
-            <Text style={styles.coverTitle}>{props.title}</Text>
+            <Text style={styles.coverTitle} numberOfLines={1} ellipsizeMode='middle'>{props.title}</Text>
         </View>
     );
 }
