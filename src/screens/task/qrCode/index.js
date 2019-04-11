@@ -97,7 +97,7 @@ class QrCode extends PureComponent {
                 <SafeAreaView style={{ flex: 1 }}>
                     {Platform.OS === 'android' && <StatusBar hidden={true} />}
                     <View style={{ flex: 1, alignItems: 'center' }}>
-                        <ModalHeader titleStyle={{ color: 'white' }} goBack={this._goBack} textStyle={{ color: 'white' }} backBtnColor='rgb(255,255,255)' title='邀请码' rightBtnMode='none' />
+                        <ModalHeader  goBack={this._goBack} titleStyle={{ color: 'rgb(255,168,96)' }} backBtnColor='rgb(255,255,255)' title='邀请码' rightBtnMode='none' />
                         <ScrollView
                             style={{ width: Sizes.DEVICE_WIDTH }}
                             contentContainerStyle={{ alignItems: 'center' }}
