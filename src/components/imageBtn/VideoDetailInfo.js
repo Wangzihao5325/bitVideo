@@ -1,5 +1,9 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, View, Image, Text } from 'react-native';
+import * as Sizes from '../../global/Sizes';
+
+const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
+const hoHeight = hoWidth / 1.5;
 
 export default class VideoDetailInfo extends PureComponent {
 
@@ -12,7 +16,8 @@ export default class VideoDetailInfo extends PureComponent {
             <TouchableHighlight style={styles.container} onPress={this._goToSeeMovie}>
                 <View style={[styles.flexView, styles.borderBottom]}>
                     <View style={styles.imageContainer}>
-                        <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} />
+                        {/* <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} /> */}
+                        <SecurtyImage imageStyle={{ height: hoHeight, width: hoWidth, borderRadius: 5 }} style={styles.imageStyle} source={this.props.source} />
                     </View>
                     <View style={styles.infoContainer}>
                         <Text style={styles.titleText}>{this.props.title}</Text>
@@ -36,15 +41,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     imageContainer: {
-        width: 88 + 14,
+        width: hoWidth,
         height: 134,
         display: 'flex',
         justifyContent: 'center',
     },
     imageStyle: {
-        height: 114,
-        width: 88,
-        marginLeft: 14
+        height: hoHeight,
+        width: hoWidth,
     },
     infoContainer: {
         flex: 1
