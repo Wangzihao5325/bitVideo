@@ -38,6 +38,7 @@ export default class GlobalTypeModule extends PureComponent {
                         style={{ flex: 1 }}
                         numColumns={4}
                         data={this.props.data}
+                        ItemSeparatorComponent={()=><View style={{height:10,width:'100%'}}/>}
                         renderItem={({ item }) => <Item title={item.title} uri={item.icon} type={item.global_type} innerType={item.type_id} navi={this.props.navi} />}
                     />}
             </View>

@@ -111,10 +111,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        marginHorizontal: 15,
+        marginHorizontal: 5,
         fontSize: 16,
         lineHeight: 29,
-        marginTop: 12,
+        marginTop: 6,
         color: 'rgb(187,187,186)'
     },
     goodImage: {
