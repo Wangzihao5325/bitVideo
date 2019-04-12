@@ -32,6 +32,7 @@ import SetGesturePasswordModel from '../screens/gesturePassword/SetPassword';
 import BindPhoneModel from '../screens/loginModel/BindPhone';
 
 import SplashModel from '../components/splashModal/index';
+import SplashScreen from 'react-native-splash-screen'
 
 
 // import M3u8Download from '../socket/download';
@@ -147,6 +148,7 @@ export default class App extends Component {
     //   console.log(rate);
     // });
     let that = this;
+    SplashScreen.hide();
     Api.getDomain((e) => {
       Config.SERVICE_URL.domainUrl = `http://${e}`;
       (async function () {
