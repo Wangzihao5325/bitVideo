@@ -19,11 +19,13 @@ export default class GesturePassword extends PureComponent {
         message: '请输入密码',
         status: 'normal',
         password: lockReg.password,
-        type: false
+        type: false,
+        times: 'seconds'
     };
 
     componentDidMount() {
         const type = this.props.navigation.getParam('type', '');
+        const times = this.props.navigation.getParam('type', 'seconds');
         if (type === 'close') {
             this.setState({
                 type: true
@@ -56,7 +58,11 @@ export default class GesturePassword extends PureComponent {
                 AsyncStorage.setItem('Lock_Password', lockReg.password);
                 AsyncStorage.setItem('Lock_Islock', store.getState().lock.isLock);
             }
-            this.props.navigation.goBack();
+            if (this.state.times = 'first') {
+                this.props.navigation.replace('AdModel');
+            } else {
+                this.props.navigation.goBack();
+            }
             // your codes to close this view
         } else {
             this.setState({

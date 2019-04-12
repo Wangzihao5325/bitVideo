@@ -96,7 +96,7 @@ class api {
                 try {
                     onSuccess(result, code, message);
                 } catch (error) {
-                    onError ? onError(result, code, message) : console.log(`error: get socket error! ${fullUrl}`);
+                    onError ? onError(result, code, message) : console.log(`error: get socket error! ${error}`);
                 }
             }
         )

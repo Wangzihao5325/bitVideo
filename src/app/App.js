@@ -30,9 +30,11 @@ import QrCodeModel from '../screens/task/qrCode/index';
 import GesturePasswordModel from '../screens/gesturePassword/index';
 import SetGesturePasswordModel from '../screens/gesturePassword/SetPassword';
 import BindPhoneModel from '../screens/loginModel/BindPhone';
+import AdModel from '../screens/adModel/index';
 
 import SplashModel from '../components/splashModal/index';
 import SplashScreen from 'react-native-splash-screen'
+
 
 
 // import M3u8Download from '../socket/download';
@@ -110,10 +112,18 @@ const RouterWithModal = createStackNavigator(
     BindPhoneModel: {
       screen: BindPhoneModel
     },
+    AdModel: {
+      screen: AdModel
+    }
   },
   {
     mode: 'modal',
     headerMode: 'none',
+    transparentCard: true,
+    cardStyle: {
+      // makes transparentCard work for android
+      opacity: 1.0
+    },
   }
 );
 
@@ -168,15 +178,6 @@ export default class App extends Component {
           // lockReg.isLock = islock;
         }
 
-        //获取开屏动画
-        Api.getSplashScreen((result) => {
-          if (result.ad_path) {
-            that.setState({
-              uri: result.ad_path
-            });
-          }
-        });
-
         if (userToken) {
           Variables.account.token = userToken;
           Variables.account.deviceToken = userToken;
@@ -206,7 +207,9 @@ export default class App extends Component {
         }
 
         if (store.getState().lock.isLock === 'true') {
-          NavigationService.navigate('GesturePasswordModel', { type: 'normal' });
+          NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
+        } else {
+          NavigationService.navigate('AdModel');
         }
       })();
 
@@ -232,7 +235,7 @@ export default class App extends Component {
       <Provider store={store}>
         {Platform.OS === 'ios' && <StatusBar translucent={true} barStyle='light-content' />}
         {Platform.OS === 'android' && <StatusBar backgroundColor={Colors.SCREEN_BGCOLOR} />}
-        <SplashModel source={{ uri: this.state.uri }} />
+        {/* <SplashModel source={{ uri: this.state.uri }} /> */}
         <AppContainer ref={navigatorRef => {
           NavigationService.setTopLevelNavigator(navigatorRef);
         }} />
