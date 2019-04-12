@@ -11,6 +11,7 @@
 #import <React/RCTRootView.h>
 
 #import "Orientation.h"
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -34,6 +35,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  //[RNSplashScreen show];
   return YES;
 }
 

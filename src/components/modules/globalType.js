@@ -13,7 +13,7 @@ class Item extends PureComponent {
 
     render() {
         return (
-            <TouchableHighlight style={styles.itemContainer} onPress={this._itemOnPress} underlayColor='transaprent'>
+            <TouchableHighlight style={styles.itemContainer} onPress={this._itemOnPress} underlayColor='transparent'>
                 <View style={styles.itemFlexView}>
                     <SecurtyImage style={styles.image} source={{ uri: this.props.uri }} />
                     <Text style={styles.titleText}>{this.props.title}</Text>

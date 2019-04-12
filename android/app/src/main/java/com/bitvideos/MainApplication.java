@@ -2,6 +2,7 @@ package com.bitvideos;
 
 import android.app.Application;
 
+
 import com.facebook.react.ReactApplication;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.futurepress.staticserver.FPStaticServerPackage;
