@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'rgb(100,100,100)',
         marginLeft: 9,
-        height: 16,
+        height: 20,
         width: 100
     },
     recommendHeader: {
