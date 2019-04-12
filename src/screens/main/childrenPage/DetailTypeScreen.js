@@ -70,7 +70,7 @@ export default class DetailTypeScreen extends PureComponent {
                 this.innerType.reset(innerTypeIndex);
             });
 
-            Api.getVideoTypeTrueList(type, innerType, e.sort[0].key, 1, 15, (innerE) => {
+            Api.getVideoTypeTrueList(type, innerType, e.sort[0].key, 1, 14, (innerE) => {
                 //console.log(innerE);
                 this.setState({
                     videoData: innerE.list.data,
@@ -121,7 +121,7 @@ export default class DetailTypeScreen extends PureComponent {
             innerTypeData: innerTypeData
         }, () => {
             this.innerType.reset(innerIndex);
-            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 15, (innerE) => {
+            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 14, (innerE) => {
                 this.setState({
                     videoData: innerE.list.data,
                     nowPage: innerE.list.current_page,
@@ -145,7 +145,7 @@ export default class DetailTypeScreen extends PureComponent {
         this.setState({
             innerType: nowId,
         }, () => {
-            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 15, (innerE) => {
+            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 14, (innerE) => {
                 this.setState({
                     videoData: innerE.list.data,
                     nowPage: innerE.list.current_page,
@@ -169,7 +169,7 @@ export default class DetailTypeScreen extends PureComponent {
         this.setState({
             sortType: nowSortKey,
         }, () => {
-            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 15, (innerE) => {
+            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, 1, 14, (innerE) => {
                 this.setState({
                     videoData: innerE.list.data,
                     nowPage: innerE.list.current_page,
@@ -181,6 +181,28 @@ export default class DetailTypeScreen extends PureComponent {
 
     _videoAvaterOnPress = (id) => {
         this.props.navigation.navigate('VideoModel', { videoId: id });
+    }
+
+    _getNextPageData = () => {
+        // console.log('11122233');
+        // console.log(this.state.nowPage);
+        // console.log(this.state.totalPage);
+        if (this.state.nowPage !== this.state.totalPage) {
+            Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, this.state.nowPage + 1, 14, (e) => {
+                if (e) {
+                    // console.log('11122233');
+                    // console.log(e);
+                    this.setState((preState, props) => {
+                        let newList = preState.videoData.concat(e.list.data);
+                        return {
+                            data: newList,
+                            page: e.list.current_page,
+                            totalPage: e.list.last_page
+                        }
+                    });
+                }
+            });
+        }
     }
 
     render() {
@@ -202,6 +224,8 @@ export default class DetailTypeScreen extends PureComponent {
                     <View style={{ flex: 1 }}>
                         {this.state.videoData && this.state.videoData.length > 0 &&
                             <FlatList
+                                onEndReached={this._getNextPageData}
+                                onEndReachedThreshold={0.1}
                                 style={{ flex: 1 }}
                                 data={this.state.videoData}
                                 contentContainerStyle={{ alignSelf: 'center' }}

@@ -19,7 +19,7 @@ export default class ViewModuleMoreScreen extends PureComponent {
         title: '',
         moduleId: -1,
         page: -1,
-        totalPage: 1
+        totalPage: -1,
     };
 
     componentDidMount() {
@@ -34,6 +34,7 @@ export default class ViewModuleMoreScreen extends PureComponent {
                 this.setState({
                     data: e.data,
                     page: e.current_page,
+                    totalPage: e.current_page + 1,
                 });
             }
         });
@@ -64,16 +65,24 @@ export default class ViewModuleMoreScreen extends PureComponent {
 
     _getNextPageData = () => {
         if (this.state.page !== this.state.totalPage) {
-            Api.getActorDetails(this.state.moduleId, this.state.page + 1, 14, (e) => {
+            Api.getViewModuleMore(this.state.moduleId, this.state.page + 1, 14, (e) => {
                 if (Array.isArray(e.data)) {
-                    this.setState((preState, props) => {
-                        let newList = preState.data.concat(e.data);
-                        return {
-                            data: newList,
-                            page: e.current_page,
-                            //totalPage: e.last_page
-                        }
-                    });
+                    if (e.data.length > 0) {
+                        this.setState((preState, props) => {
+                            let newList = preState.data.concat(e.data);
+                            return {
+                                data: newList,
+                                page: e.current_page,
+                                totalPage: e.current_page + 1,
+                            }
+                        });
+                    } else {
+                        this.setState((preState, props) => {
+                            return {
+                                totalPage: preState.page
+                            }
+                        });
+                    }
                 }
             });
         }
