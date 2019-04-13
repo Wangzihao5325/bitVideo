@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
@@ -22,8 +22,9 @@ export default class FunList extends PureComponent {
     }
 
     _goToShare = () => {
-        const { mineNavigation } = this.context;
-        mineNavigation.navigate('TaskScreen');
+        // const { mineNavigation } = this.context;
+        // mineNavigation.navigate('TaskScreen');
+        Linking.openURL('https://github.com');
     }
 
     _goToQrCode = () => {
