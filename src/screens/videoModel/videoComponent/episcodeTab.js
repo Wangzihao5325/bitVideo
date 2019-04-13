@@ -6,6 +6,7 @@ import { set_video_url_and_type } from '../../../store/actions/videoPlayAction';
 import _ from 'lodash';
 
 import ToastRoot from '../../../components/toast/index';
+import NavigationService from '../../../app/NavigationService';
 
 class Btn extends PureComponent {
     state = {
@@ -20,11 +21,12 @@ class Btn extends PureComponent {
                 if (this.props.index == 0) {
                     this.props.onPress(this.props.index);
                 } else {
-                    if (this.props.vip.id == 2) {
-                        ToastRoot.show('请提升会员等级');
-                    } else {
-                        this.props.onPress(this.props.index);
-                    }
+                    // if (this.props.vip.id == 2) {
+                    //     ToastRoot.show('请提升会员等级');
+                    // } else {
+                    //     this.props.onPress(this.props.index);
+                    // }
+                    NavigationService.navigate('ToastModel');
                 }
             }
         }

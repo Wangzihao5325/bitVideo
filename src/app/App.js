@@ -31,6 +31,7 @@ import GesturePasswordModel from '../screens/gesturePassword/index';
 import SetGesturePasswordModel from '../screens/gesturePassword/SetPassword';
 import BindPhoneModel from '../screens/loginModel/BindPhone';
 import AdModel from '../screens/adModel/index';
+import ToastModel from '../screens/toastModel/index';
 
 import SplashModel from '../components/splashModal/index';
 import SplashScreen from 'react-native-splash-screen';
@@ -114,6 +115,9 @@ const RouterWithModal = createStackNavigator(
     },
     AdModel: {
       screen: AdModel
+    },
+    ToastModel: {
+      screen: ToastModel
     }
   },
   {
