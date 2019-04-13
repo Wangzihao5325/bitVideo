@@ -21,12 +21,11 @@ class Btn extends PureComponent {
                 if (this.props.index == 0) {
                     this.props.onPress(this.props.index);
                 } else {
-                    // if (this.props.vip.id == 2) {
-                    //     ToastRoot.show('请提升会员等级');
-                    // } else {
-                    //     this.props.onPress(this.props.index);
-                    // }
-                    NavigationService.navigate('ToastModel');
+                    if (this.props.vip.id == 2) {
+                        NavigationService.navigate('ToastModel', { type: 'SeeHD' });
+                    } else {
+                        this.props.onPress(this.props.index);
+                    }
                 }
             }
         }
