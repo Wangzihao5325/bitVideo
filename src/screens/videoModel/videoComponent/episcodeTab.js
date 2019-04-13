@@ -5,7 +5,6 @@ import store from '../../../store/index';
 import { set_video_url_and_type } from '../../../store/actions/videoPlayAction';
 import _ from 'lodash';
 
-import ToastRoot from '../../../components/toast/index';
 import NavigationService from '../../../app/NavigationService';
 
 class Btn extends PureComponent {

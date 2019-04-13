@@ -8,6 +8,7 @@ import Api from '../../socket/index';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RootPlayer from '../../components/player/RootPlayer';
 import ToastRoot from '../../components/toast/index';
+import NavigationService from '../../app/NavigationService';
 
 const Footer = (props) => {
     return (
@@ -64,7 +65,7 @@ export default class ShortVideoItem extends PureComponent {
                     });
                 } else {
                     this.props.playPress(-1);
-                    ToastRoot.show('当日观影次数已用完');
+                    NavigationService.navigate('ToastModel', { type: 'NoTimes' });
                 }
             });
         }
