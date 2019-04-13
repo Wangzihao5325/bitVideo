@@ -146,10 +146,11 @@ export default class BuyCardPay extends PureComponent {
                         <Text style={{ fontSize: 19, color: 'white', marginTop: 15, marginLeft: 26 }}>使用卡说明</Text>
                         <View style={{ height: StyleSheet.hairlineWidth, width: Sizes.DEVICE_WIDTH - 50, marginLeft: 25, marginTop: 17 }} />
                         {/**观影卡说明 */}
-                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>1、观影卡购买后可在观影卡有效期内，无限次观看所有视频内容。</Text>
-                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>2、为保证交易公平，确保观影卡可正常使用，观影卡一经售出，不可退款。</Text>
-                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>3、观影卡可重复购买，重复购买后观影卡有效时间将累计计算，用户页只展示最高级观影卡。</Text>
-                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>4、分享邀请好友注册可延长观影卡有效时间，邀请越多，时间奖励越多。</Text>
+                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>1、购买会员后在有效期内，可每日无限次观看所有视频，并享受高清影质。</Text>
+                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>2、为保证交易公平，会员卡一经售出，不支持转让，不可退款。</Text>
+                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>3、支付购买时，请不要修改支付金额，避免支付失败。</Text>
+                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>4、如付款后未收到会员卡，请及时通过问题反馈或前往官方交流群，提交你的付款成功截图，由官方人员核实处理。</Text>
+                        <Text style={{ color: 'rgb(141,144,153)', marginHorizontal: 15, fontSize: 14, lineHeight: 24 }}>5、切勿频繁提交支付申请，如遇支付通道繁忙，请等待两分钟后再提交。</Text>
                     </View>
 
                     <View style={{ height: 50, width: '100%', display: 'flex', flexDirection: 'row' }}>
