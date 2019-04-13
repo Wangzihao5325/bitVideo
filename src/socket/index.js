@@ -147,7 +147,6 @@ class api {
             headers: headerGenerator(true),
             params: formdataToObj(unsecurtyFormdata),
         }
-
         let paramsStr = JSON.stringify(paramsRegObj);
 
         let encryptedData = CryptoJS.AES.encrypt(paramsStr, KEY, {
@@ -366,25 +365,37 @@ class api {
     postCancelCollect(id, onSuccess, onError) {
         const url = '/api/video/user/collect/cancel';
         let formData = new FormData();
-        formData.append('video_id[]', id);
+        if (isSecurty) {
+            formData.append('video_id', [id]);
+        } else {
+            formData.append('video_id[]', id);
+        }
         this.postFetch(url, formData, onSuccess, onError);
     }
 
     postCancelCollectArr(idArr, onSuccess, onError) {
         const url = '/api/video/user/collect/cancel';
         let formData = new FormData();
-        idArr.forEach((item) => {
-            formData.append('video_id[]', item);
-        });
+        if (isSecurty) {
+            formData.append('video_id', idArr);
+        } else {
+            idArr.forEach((item) => {
+                formData.append('video_id[]', item);
+            });
+        }
         this.postFetch(url, formData, onSuccess, onError);
     }
 
     postCancelHistory(idArr, onSuccess, onError) {
         const url = '/api/video/user/history/cancel';
         let formData = new FormData();
-        idArr.forEach((item) => {
-            formData.append('video_id[]', item);
-        });
+        if (isSecurty) {
+            formData.append('video_id', idArr);
+        } else {
+            idArr.forEach((item) => {
+                formData.append('video_id[]', item);
+            });
+        }
 
         this.postFetch(url, formData, onSuccess, onError);
     }
