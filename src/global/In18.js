@@ -32,7 +32,7 @@ const WATCH_HISTORY = '历史记录';
 const MY_STAR = '我的收藏';
 const MEMBER_CENTER = '会员中心';
 const PAY_MAKE_SURE = '确认订单';
-const I_WANT_SHARE = '我要推广';
+const I_WANT_SHARE = '撸友交流';
 const BUY_HISTORY = '购买记录';
 
 const FAST_LOGIN = '快捷登陆';
