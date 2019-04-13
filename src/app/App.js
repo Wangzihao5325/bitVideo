@@ -33,7 +33,7 @@ import BindPhoneModel from '../screens/loginModel/BindPhone';
 import AdModel from '../screens/adModel/index';
 
 import SplashModel from '../components/splashModal/index';
-import SplashScreen from 'react-native-splash-screen'
+import SplashScreen from 'react-native-splash-screen';
 
 
 
@@ -160,7 +160,7 @@ export default class App extends Component {
     let that = this;
     SplashScreen.hide();
     Api.getDomain((e) => {
-      Config.SERVICE_URL.domainUrl = `http://${e}`;
+      Config.SERVICE_URL.domainUrl = `http://192.168.0.186:50009`;
       (async function () {
         let password = await AsyncStorage.getItem('Lock_Password');
         let islock = await AsyncStorage.getItem('Lock_Islock');

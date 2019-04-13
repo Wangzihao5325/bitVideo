@@ -7,6 +7,7 @@ import store from '../../store/index';
 import { setMainPageData, setGlobalTypeData, setPageInfo, setNowGlobalType } from '../../store/actions/mainPageDataAction';
 import * as Colors from '../../global/Colors';
 import * as In18 from '../../global/In18';
+import * as Config from '../../global/Config';
 
 import TabBar from '../../components/tabBar/index';
 import IconBtn from '../../components/imageBtn/IconBtn';
@@ -23,13 +24,14 @@ export default class Header extends PureComponent {
     }
 
     componentDidMount() {
-        Api.postGlobalTypeVideo('recommend', null, (e) => {
-            if (e.data) {
-                console.log('origin data');
-                console.log(e);
-                store.dispatch(setMainPageData(e.data));
-                store.dispatch(setPageInfo(e.current_page, e.last_page));
-            }
+        Api.getDomain((e) => {
+            Config.SERVICE_URL.domainUrl = 'http://192.168.0.186:50009';
+            Api.postGlobalTypeVideo('recommend', null, (e) => {
+                if (e.data) {
+                    store.dispatch(setMainPageData(e.data));
+                    store.dispatch(setPageInfo(e.current_page, e.last_page));
+                }
+            });
         });
     }
 

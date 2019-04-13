@@ -3,7 +3,7 @@ import Variables from '../global/Variables';
 let CryptoJS = require('crypto-js');
 
 const SECURTY_URL = '/api/accept';
-const isSecurty = false;
+const isSecurty = true;
 const keyStr = 'bUYJ3nTV6VBasdJF';
 var KEY = CryptoJS.enc.Utf8.parse(keyStr);
 
@@ -91,6 +91,33 @@ class api {
         fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit)).then(
             (reponseJson) => {
                 const result = reponseJson.result ? reponseJson.result : null;
+                const code = reponseJson.code ? reponseJson.code : null;
+                const message = reponseJson.message ? reponseJson.message : null;
+                try {
+                    onSuccess(result, code, message);
+                } catch (error) {
+                    onError ? onError(result, code, message) : console.log(`error: get socket error! ${error}`);
+                }
+            }
+        )
+    }
+
+    getWithFirstUrl(url, onSuccess, onError) {
+        let fullUrl = Config.SERVICE_URL.FirstUrl + url;
+        let header = { Accept: 'application/json' };
+        if (Variables.account.token) {
+            header = { Accept: 'application/json', Authorization: `Bearer ${Variables.account.token}` }
+        }
+        let obj = { method: 'GET', headers: header }
+        fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit)).then(
+            (reponseJson) => {
+                let resultDecipher = '';
+                if (reponseJson.result) {
+                    let decodeUrl = decodeURIComponent(reponseJson.result);
+                    let bytes = CryptoJS.AES.decrypt(decodeUrl, KEY, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7, iv: '', });
+                    resultDecipher = JSON.parse(CryptoJS.enc.Utf8.stringify(bytes));
+                }
+                const result = resultDecipher;
                 const code = reponseJson.code ? reponseJson.code : null;
                 const message = reponseJson.message ? reponseJson.message : null;
                 try {
@@ -544,7 +571,7 @@ class api {
 
     getDomain(onSuccess, onError) {
         const url = '/api/domain';
-        this.getFetch(url, onSuccess, onError);
+        this.getWithFirstUrl(url, onSuccess, onError);
     }
 }
 
