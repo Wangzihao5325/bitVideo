@@ -20,6 +20,9 @@ class Item extends PureComponent {
         } else {
             const time = new Date().getTime();
             if (reg.times && time - reg.times < 120000) {
+                if (this.props.callback) {
+                    this.props.callback();
+                }
                 NavigationService.navigate('ToastModel', { type: 'PayBusy' });
             } else {
                 let deviceId = DeviceInfo.getUniqueID();
@@ -43,6 +46,9 @@ class Item extends PureComponent {
 
                         }
                     } else {
+                        if (this.props.callback) {
+                            this.props.callback();
+                        }
                         NavigationService.navigate('ToastModel', { type: 'PayBusy' });
                     }
                 });
