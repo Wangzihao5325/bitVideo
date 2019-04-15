@@ -25,7 +25,7 @@ class InnerItem extends PureComponent {
             <TouchableHighlight style={{ width: hoWidth, height: hoHeight + 30, }} underlayColor='transparent' onPress={this._press}>
                 <View style={styles.innterContainer}>
                     <SecurtyImage style={styles.innerImage} default={require('../../image/usual/image_load_failed_ho.png')} source={{ uri: this.props.item.cover_path }} />
-                    <Text style={{ fontSize: 12, color: 'rgb(187,186,186)', marginTop: 7,marginHorizontal:3 }} numberOfLines={1} ellipsizeMode='tail'>{this.props.item.title}</Text>
+                    <Text style={{ fontSize: 12, color: 'rgb(187,186,186)', marginTop: 7, marginHorizontal: 3 }} numberOfLines={1} ellipsizeMode='tail'>{this.props.item.title}</Text>
                 </View>
             </TouchableHighlight>
         );
@@ -71,7 +71,7 @@ class Item extends PureComponent {
                     </View>
                 </View>
                 <FlatList
-                    style={{ height: hoHeight + 30, width: '100%' }}
+                    style={{ height: hoHeight + 30, width: '100%', marginTop: 15 }}
                     data={this.props.item.list}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: Sizes.DEVICE_WIDTH - 15,
         marginLeft: 15,
-        marginTop: 35,
+        marginTop: 20,
         display: 'flex',
         flexDirection: 'row'
     },
