@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Platform } from 'react-native';
+import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Platform, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 
 class PayBusy extends PureComponent {
@@ -9,6 +9,7 @@ class PayBusy extends PureComponent {
 
     _btnPress = () => {
         const { toastNavigation } = this.context;
+        Linking.openURL('https://github.com');
         toastNavigation.goBack();
     }
 

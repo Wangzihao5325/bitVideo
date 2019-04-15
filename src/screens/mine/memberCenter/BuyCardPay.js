@@ -98,8 +98,6 @@ export default class BuyCardPay extends PureComponent {
     _buyCard = () => {
         // to do
         Api.getPayList((e) => {
-            console.log('121212');
-            console.log(e);
             this.setState({
                 payListIsShow: true,
                 payListArr: e
