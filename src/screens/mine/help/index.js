@@ -5,6 +5,7 @@ import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
 import ModalHeader from '../../../components/modal/ModalHeader';
+import ToastRoot from '../../../components/toast/index';
 
 const reg = { title: '', contact: '' };
 export default class HelpScreen extends PureComponent {
@@ -27,6 +28,7 @@ export default class HelpScreen extends PureComponent {
     submit = () => {
         Api.postFeedback(reg.title, reg.contact, (result, code, message) => {
             if (message == 'success') {
+                ToastRoot.show('反馈成功');
                 this.props.navigation.pop();
             }
         });
@@ -78,7 +80,7 @@ export default class HelpScreen extends PureComponent {
                 <ImageBackground style={styles.btnBg} source={require('../../../image/mine/feedback_btn_bg.png')}>
                     <TouchableHighlight
                         style={styles.btn}
-                        underlayColor='#909090'
+                        underlayColor='transparent'
                         onPress={this.submit}
                     >
                         <Text style={styles.btnText}>{In18.SUBMIT_SUGGEXT}</Text>
