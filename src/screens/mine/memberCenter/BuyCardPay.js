@@ -9,29 +9,44 @@ import Api from '../../../socket/index';
 import DeviceInfo from 'react-native-device-info';
 import Modal from "react-native-modal";
 import ToastRoot from '../../../components/toast/index';
+import NavigationService from '../../../app/NavigationService';
+
+const reg = { times: null };
 
 class Item extends PureComponent {
     _press = () => {
         if (this.props.item.status == 0) {
             ToastRoot.show('该支付方式尚未开放，敬请期待!');
         } else {
-            let deviceId = DeviceInfo.getUniqueID();
-            let deviceType = 'android';
-            if (Platform.OS == 'ios') {
-                deviceType = 'ios';
-            }
-            Api.postAddOrder(this.props.item.key, this.props.cardId, deviceType, deviceId, (e, code, message) => {
-                switch (e.target) {
-                    case 0:
-                        if (this.props.callback) {
-                            this.props.callback();
-                        }
-                        this.props.navi.navigate('PayWebView', { payUrl: e.payUrl });
-                        break;
-                    case 1:
-                        break;
+            const time = new Date().getTime();
+            if (reg.times && time - reg.times < 120000) {
+                NavigationService.navigate('ToastModel', { type: 'PayBusy' });
+            } else {
+                let deviceId = DeviceInfo.getUniqueID();
+                let deviceType = 'android';
+                if (Platform.OS == 'ios') {
+                    deviceType = 'ios';
                 }
-            });
+                reg.times = new Date().getTime();
+                Api.postAddOrder(this.props.item.key, this.props.cardId, deviceType, deviceId, (e, code, message) => {
+                    if (e) {
+                        switch (e.target) {
+                            case 0:
+                                if (this.props.callback) {
+                                    this.props.callback();
+                                }
+                                this.props.navi.navigate('PayWebView', { payUrl: e.payUrl });
+                                break;
+                            case 1:
+                                ToastRoot.show('支付成功');
+                                break;
+
+                        }
+                    } else {
+                        NavigationService.navigate('ToastModel', { type: 'PayBusy' });
+                    }
+                });
+            }
         }
     }
     render() {
@@ -83,6 +98,8 @@ export default class BuyCardPay extends PureComponent {
     _buyCard = () => {
         // to do
         Api.getPayList((e) => {
+            console.log('121212');
+            console.log(e);
             this.setState({
                 payListIsShow: true,
                 payListArr: e
