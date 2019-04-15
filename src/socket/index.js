@@ -584,6 +584,11 @@ class api {
         const url = '/api/domain';
         this.getWithFirstUrl(url, onSuccess, onError);
     }
+
+    getVersionMessage(platform, onSuccess, onError) {
+        const url = `/api/version?platform=${platform}`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

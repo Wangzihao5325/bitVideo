@@ -23,17 +23,17 @@ export default class Header extends PureComponent {
         mainNavigation: PropTypes.object
     }
 
-    componentDidMount() {
-        Api.getDomain((e) => {
-            Config.SERVICE_URL.domainUrl = 'http://192.168.0.186:50009';
-            Api.postGlobalTypeVideo('recommend', null, (e) => {
-                if (e.data) {
-                    store.dispatch(setMainPageData(e.data));
-                    store.dispatch(setPageInfo(e.current_page, e.last_page));
-                }
-            });
-        });
-    }
+    // componentDidMount() {
+    //     Api.getDomain((e) => {
+    //         Config.SERVICE_URL.domainUrl = e;
+    //         Api.postGlobalTypeVideo('recommend', null, (e) => {
+    //             if (e.data) {
+    //                 store.dispatch(setMainPageData(e.data));
+    //                 store.dispatch(setPageInfo(e.current_page, e.last_page));
+    //             }
+    //         });
+    //     });
+    // }
 
     _search = () => {
         const { mainNavigation } = this.context;

@@ -2,6 +2,33 @@ import React, { PureComponent } from 'react';
 import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Platform, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 
+class NewVersion extends PureComponent {
+    static contextTypes = {
+        toastNavigation: PropTypes.object
+    }
+
+    _btnPress = () => {
+        const { toastNavigation } = this.context;
+        Linking.openURL('https://github.com');
+        toastNavigation.goBack();
+    }
+
+    render() {
+        return (
+            <View style={{ height: 216, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+                <Text style={{ fontSize: 18, color: 'rgb(34,34,34)', marginTop: 35, fontWeight: 'bold' }}>支付异常</Text>
+                <Text style={{ fontSize: 14, marginTop: 30, color: 'rgb(71,71,71)' }}>支付系统繁忙,请在两分钟后再试</Text>
+                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>如有疑问前往蝌蚪交流群咨询管理</Text>
+                <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
+                    <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>立即咨询</Text>
+                    </ImageBackground>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
+
 class PayBusy extends PureComponent {
     static contextTypes = {
         toastNavigation: PropTypes.object
@@ -125,6 +152,11 @@ export default class ToastModel extends PureComponent {
             case 'PayBusy':
                 this.setState({
                     pop: <PayBusy />
+                });
+                break;
+            case 'NewVersion':
+                this.setState({
+                    pop: <NewVersion />
                 });
                 break;
         }

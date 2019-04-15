@@ -10,6 +10,8 @@ import RootPlayer from '../../components/player/RootPlayer';
 import ToastRoot from '../../components/toast/index';
 import NavigationService from '../../app/NavigationService';
 
+import SecurtyImage from '../../components/securtyImage/index';
+
 const Footer = (props) => {
     return (
         <View style={styles.footerContainer}>
@@ -28,7 +30,8 @@ const Cover = (props) => {
     return (
         <View style={styles.coverContainer}>
             <TouchableHighlight style={styles.coverContainer} onPress={props.coverPress} underlayColor='transparent'>
-                <Image style={styles.coverContainer} source={{ uri: `${props.source}` }} />
+                {/* <Image style={styles.coverContainer} source={{ uri: `${props.source}` }} /> */}
+                <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={styles.coverContainer} source={{ uri: `${props.source}` }} />
             </TouchableHighlight>
             <TouchableHighlight style={styles.coverBtn} onPress={props.playPress} underlayColor='transparent'>
                 <Icon name='play' size={30} color='#909090' />

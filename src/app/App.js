@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from '../store/index';
 import { set_lock } from '../store/actions/lockAction';
 import { get_device_account_info, get_user_info } from '../store/actions/accountAction';
+import { setMainPageData, setPageInfo } from '../store/actions/mainPageDataAction';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import NavigationService from './NavigationService';
 import { MainStack, ShortVideoStack, SubjectStack, TaskStack, MineStack } from '../app/register_screens';
@@ -35,8 +36,6 @@ import ToastModel from '../screens/toastModel/index';
 
 import SplashModel from '../components/splashModal/index';
 import SplashScreen from 'react-native-splash-screen';
-
-
 
 // import M3u8Download from '../socket/download';
 // import Video from 'react-native-video';
@@ -161,62 +160,87 @@ export default class App extends Component {
     //   console.log(state);
     //   console.log(rate);
     // });
-    let that = this;
     SplashScreen.hide();
     Api.getDomain((e) => {
-      Config.SERVICE_URL.domainUrl = `http://192.168.0.186:50009`;
-      (async function () {
-        let password = await AsyncStorage.getItem('Lock_Password');
-        let islock = await AsyncStorage.getItem('Lock_Islock');
-        let userToken = await AsyncStorage.getItem('User_Token');
-        let clipboardContent = await Clipboard.getString();
-        if (userToken) {
-          newReg.isNew = false;
+      Config.SERVICE_URL.domainUrl = e;
+      let PlatformKey = 'I';
+      if (Platform.OS === 'android') {
+        PlatformKey = 'A';
+      }
+      Api.getVersionMessage(PlatformKey, (e) => {
+        console.log('wwwwwwwzzzzzzzhhhhhhh');
+        console.log(e);
+        let AppVersion = DeviceInfo.getVersion();
+        if (AppVersion !== e.version_code) {
+          if (e.force) {
+            //强制更新
+            NavigationService.navigate('ToastModel', { type: 'PayBusy' });
+            return;
+          } else {
+            //非强制更新
+            NavigationService.navigate('ToastModel', { type: 'PayBusy' });
+          }
         }
+        (async function () {
+          let password = await AsyncStorage.getItem('Lock_Password');
+          let islock = await AsyncStorage.getItem('Lock_Islock');
+          let userToken = await AsyncStorage.getItem('User_Token');
+          let clipboardContent = await Clipboard.getString();
+          if (userToken) {
+            newReg.isNew = false;
+          }
 
-        if (password) {
-          lockReg.password = password;
-        }
-        if (islock) {
-          store.dispatch(set_lock(islock));
-          // lockReg.isLock = islock;
-        }
+          if (password) {
+            lockReg.password = password;
+          }
+          if (islock) {
+            store.dispatch(set_lock(islock));
+            // lockReg.isLock = islock;
+          }
 
-        if (userToken) {
-          Variables.account.token = userToken;
-          Variables.account.deviceToken = userToken;
-          //获取个人信息
-          Api.getUserInfo((e, code, message) => {
-            if (e) {
-              store.dispatch(get_user_info(e));
+          //设备号注册 获取用户信息
+          if (userToken) {
+            Variables.account.token = userToken;
+            Variables.account.deviceToken = userToken;
+            Api.getUserInfo((e, code, message) => {
+              if (e) {
+                store.dispatch(get_user_info(e));
+              }
+            });
+          } else {
+            let deviceId = DeviceInfo.getUniqueID();
+            Api.postRegisterByDeviceId(deviceId, clipboardContent, (e, code, message) => {
+              if (e && e.api_token) {
+                AsyncStorage.setItem('User_Token', e.api_token);
+                Variables.account.token = e.api_token;
+                Variables.account.deviceToken = e.api_token;
+                store.dispatch(get_device_account_info(e));
+                Api.getUserInfo((e, code, message) => {
+                  if (e) {
+                    store.dispatch(get_user_info(e));
+                  }
+                });
+              }
+            });
+          }
+
+          //获取主页数据
+          Api.postGlobalTypeVideo('recommend', null, (e) => {
+            if (e.data) {
+              store.dispatch(setMainPageData(e.data));
+              store.dispatch(setPageInfo(e.current_page, e.last_page));
             }
           });
-        } else {
-          //设备号注册
-          let deviceId = DeviceInfo.getUniqueID();
-          Api.postRegisterByDeviceId(deviceId, clipboardContent, (e, code, message) => {
-            if (e && e.api_token) {
-              AsyncStorage.setItem('User_Token', e.api_token);
-              Variables.account.token = e.api_token;
-              Variables.account.deviceToken = e.api_token;
-              store.dispatch(get_device_account_info(e));
-              //获取个人信息
-              Api.getUserInfo((e, code, message) => {
-                if (e) {
-                  store.dispatch(get_user_info(e));
-                }
-              });
-            }
-          });
-        }
 
-        if (store.getState().lock.isLock === 'true') {
-          NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
-        } else {
-          NavigationService.navigate('AdModel');
-        }
-      })();
+          //手势锁 广告页开启
+          if (store.getState().lock.isLock === 'true') {
+            NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
+          } else {
+            NavigationService.navigate('AdModel');
+          }
 
+        })();
+      });
     });
 
     AppState.addEventListener('change', (appState) => {
