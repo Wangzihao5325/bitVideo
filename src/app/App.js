@@ -168,17 +168,15 @@ export default class App extends Component {
         PlatformKey = 'A';
       }
       Api.getVersionMessage(PlatformKey, (e) => {
-        console.log('wwwwwwwzzzzzzzhhhhhhh');
-        console.log(e);
         let AppVersion = DeviceInfo.getVersion();
         if (AppVersion !== e.version_code) {
           if (e.force) {
             //强制更新
-            NavigationService.navigate('ToastModel', { type: 'PayBusy' });
+            NavigationService.navigate('ToastModel', { type: 'NewVersionForce', packageUrl: e.package_path });
             return;
           } else {
             //非强制更新
-            NavigationService.navigate('ToastModel', { type: 'PayBusy' });
+            NavigationService.navigate('ToastModel', { type: 'NewVersion', packageUrl: e.package_path });
           }
         }
         (async function () {
