@@ -70,8 +70,8 @@ class Item extends PureComponent {
                         <SecurtyImage style={styles.itemImage} source={{ uri: this.props.item.cover_path }} />
                     </TouchableHighlight>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 16, color: 'rgb(229,187,134)', marginLeft: 14 }}>{this.props.item.name}</Text>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ fontSize: 14, color: 'rgb(229,187,134)', marginLeft: 14, marginTop: 2 }}>{this.props.item.intro}</Text>
+                        <Text style={{ fontSize: 18, color: 'rgb(229,187,134)', marginLeft: 14 }}>{this.props.item.name}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ fontSize: 14, color: 'rgb(229,187,134)', marginLeft: 14, marginTop: 8 }}>{this.props.item.intro}</Text>
                     </View>
                 </View>
                 <FlatList

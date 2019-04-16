@@ -58,8 +58,8 @@ class InputField extends PureComponent {
     }
 
     gotoChangeCountryCode = () => {
-        const { modalNavigation } = this.context;
-        modalNavigation.navigate('CountryCodeModal');
+        // const { modalNavigation } = this.context;
+        // modalNavigation.navigate('CountryCodeModal');
     }
 
     mobileTextChange = (mobileText) => {
