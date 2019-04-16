@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, FlatList, View, Text, TouchableHighlight, ImageBackground } from 'react-native';
 import * as In18 from '../../global/In18';
 import * as Sizes from '../../global/Sizes';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
+
 
 import VideoAvater from '../imageBtn/VideoAvater';
 import TitleHeader from '../../components/titleHeader/index';
@@ -60,9 +62,10 @@ class SUDOKU extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        if (this.props.navi) {
-            this.props.navi.navigate('VideoModel', { videoId: id });
-        }
+        // if (this.props.navi) {
+        //     this.props.navi.navigate('VideoModel', { videoId: id });
+        // }
+        naviToVideoService(id);
     }
 
     render() {
@@ -87,9 +90,10 @@ class SUDOKU extends PureComponent {
 class GUNDONG extends PureComponent {
 
     _videoAvaterOnPress = (id) => {
-        if (this.props.navi) {
-            this.props.navi.navigate('VideoModel', { videoId: id });
-        }
+        // if (this.props.navi) {
+        //     this.props.navi.navigate('VideoModel', { videoId: id });
+        // }
+        naviToVideoService(id);
     }
 
     _showMore = () => {
@@ -97,7 +101,7 @@ class GUNDONG extends PureComponent {
     }
 
     render() {
-        let flatlistStyle = this.props.isVertical ? { height: Sizes.IMAGE_AVATER_VER_HEIGHT + 50, width: Sizes.DEVICE_WIDTH } : {height: Sizes.IMAGE_AVATER_HO_HEIGHT + 50, width: Sizes.DEVICE_WIDTH};
+        let flatlistStyle = this.props.isVertical ? { height: Sizes.IMAGE_AVATER_VER_HEIGHT + 50, width: Sizes.DEVICE_WIDTH } : { height: Sizes.IMAGE_AVATER_HO_HEIGHT + 50, width: Sizes.DEVICE_WIDTH };
         return (
             <View style={{ alignItems: 'center', marginTop: 10, marginBottom: 10 }}>
                 <TitleHeader showMore={this._showMore} style={{ marginTop: 10, marginBottom: 10 }} imageSource={require('../../image/main/module_header.png')} title={this.props.title} btnTitle={In18.MORE_TEXT} />

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
+import { naviToVideoService } from '../../../screens/videoModel/VideoService';
+
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 import TabBar from '../../../components/tabBar/SelectTab';
@@ -180,7 +182,8 @@ export default class DetailTypeScreen extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        this.props.navigation.navigate('VideoModel', { videoId: id });
+        //this.props.navigation.navigate('VideoModel', { videoId: id });
+        naviToVideoService(id);
     }
 
     _getNextPageData = () => {

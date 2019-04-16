@@ -2,13 +2,16 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, View, Image, Text } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
+
 const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
 const hoHeight = hoWidth / 1.5;
 
 export default class VideoDetailInfo extends PureComponent {
 
     _goToSeeMovie = () => {
-        this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+        //this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+        naviToVideoService(this.props.id);
     }
 
     render() {

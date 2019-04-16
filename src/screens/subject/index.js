@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 import TitleHeader from '../../components/titleHeader/index';
 import HotSubject from './HotSubject';
 import HotActor from './HotActor';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
+
 
 class Ad extends PureComponent {
     static contextTypes = {
@@ -46,8 +48,11 @@ class Ad extends PureComponent {
 
     _onPress = () => {
         if (this.state.type === 'VIDEO') {
-            const { subjectNavigation } = this.context;
-            subjectNavigation.navigate('VideoModel', { videoId: this.state.videoId });
+            // const { subjectNavigation } = this.context;
+            // subjectNavigation.navigate('VideoModel', { videoId: this.state.videoId });
+            naviToVideoService(this.state.videoId);
+
+
         }
     }
 

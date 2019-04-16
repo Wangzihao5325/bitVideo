@@ -4,6 +4,8 @@ import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
 import VectorIconBtn from '../../../components/imageBtn';
+import { naviToVideoService } from '../../../screens/videoModel/VideoService';
+
 
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
@@ -47,7 +49,9 @@ export default class ActorDetail extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        this.props.navigation.navigate('VideoModel', { videoId: id });
+        //this.props.navigation.navigate('VideoModel', { videoId: id });
+        naviToVideoService(id);
+
     }
 
     _flatListRefresh = () => {

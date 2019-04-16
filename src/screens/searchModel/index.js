@@ -7,6 +7,8 @@ import store from '../../store/index';
 import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data, reset_search_result_data } from '../../store/actions/searchHistoryAction';
 import * as In18 from '../../global/In18';
 import * as Colors from '../../global/Colors';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
+
 
 import IconBtn from '../../components/imageBtn/IconBtn';
 import VideoDetailInfo from '../../components/imageBtn/VideoDetailInfo';
@@ -132,8 +134,10 @@ class RecommendItem extends PureComponent {
     }
 
     _goToMovieDetail = () => {
-        const { searchNavigation } = this.context;
-        searchNavigation.navigate('VideoModel', { videoId: this.props.id });
+        // const { searchNavigation } = this.context;
+        // searchNavigation.navigate('VideoModel', { videoId: this.props.id });
+        naviToVideoService(this.props.id);
+
     }
 
     render() {

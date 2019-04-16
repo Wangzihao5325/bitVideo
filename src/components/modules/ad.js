@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import * as Sizes from '../../global/Sizes';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
 
 export default class AdModule extends PureComponent {
     _watchAd = () => {
-        if (this.props.navi) {
-            this.props.navi.navigate('VideoModel', { videoId: this.props.data.video_id, type: 'ad' });
-        }
+        // if (this.props.navi) {
+        //     this.props.navi.navigate('VideoModel', { videoId: this.props.data.video_id, type: 'ad' });
+        // }
+        naviToVideoService(this.props.data.video_id, 'ad');
     }
 
     render() {
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
     image: {
         width: Sizes.DEVICE_WIDTH,
         height: 130,
-        borderRadius:5,
+        borderRadius: 5,
     },
     titleText: {
         marginLeft: 5,

@@ -4,6 +4,8 @@ import * as Sizes from '../../global/Sizes';
 import SecurtyImage from '../../components/securtyImage/index';
 import TitleHeader from '../../components/titleHeader/index';
 import { FlatList } from 'react-native-gesture-handler';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
+
 
 const HEIGHT = Sizes.DEVICE_WIDTH / 1.9;
 const WIDTH = Sizes.DEVICE_WIDTH;
@@ -59,9 +61,10 @@ export default class VideoLong extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        if (this.props.navi) {
-            this.props.navi.navigate('VideoModel', { videoId: id });
-        }
+        // if (this.props.navi) {
+        //     this.props.navi.navigate('VideoModel', { videoId: id });
+        // }
+        naviToVideoService(id);
     }
 
     _moreVideo = () => {

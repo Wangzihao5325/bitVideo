@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as Colors from '../../global/Colors';
 import SecurtyImage from '../../components/securtyImage/index';
 import * as Sizes from '../../global/Sizes';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
 
 const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
 const hoHeight = hoWidth / 1.5;
@@ -54,7 +55,8 @@ class VideoDetailInfoWithEdit extends PureComponent {
                 }
             });
         } else {
-            this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+            //this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+            naviToVideoService(this.props.id);
         }
     }
 

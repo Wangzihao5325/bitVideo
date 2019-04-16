@@ -28,6 +28,7 @@ export default class VideoModel extends PureComponent {
         chooseEpiscodeIsVisable: false,
     }
 
+    /*
     componentDidMount() {
         const videoId = this.props.navigation.getParam('videoId', 'undefine_Id');
         const type = this.props.navigation.getParam('type', 'video');
@@ -60,6 +61,7 @@ export default class VideoModel extends PureComponent {
             });
         }
     }
+    */
 
     componentWillUnmount() {
         store.dispatch(video_detail_data_reset());

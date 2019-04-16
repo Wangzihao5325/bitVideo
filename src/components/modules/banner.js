@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { View, Image, TouchableHighlight } from 'react-native';
 import * as Sizes from '../../global/Sizes';
-import SecurtyImage from '../../components/securtyImage/index';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
 
+import SecurtyImage from '../../components/securtyImage/index';
 import Carousel from 'react-native-looped-carousel';
 
 export default class BannerModule extends PureComponent {
@@ -21,9 +22,10 @@ export default class BannerModule extends PureComponent {
     }
 
     _bannerPress = (id) => {
-        if (this.props.navi) {
-            this.props.navi.navigate('VideoModel', { videoId: id });
-        }
+        // if (this.props.navi) {
+        //     this.props.navi.navigate('VideoModel', { videoId: id });
+        // }
+        naviToVideoService(id);
     }
 
     itemGenerator = (dataArr) => {

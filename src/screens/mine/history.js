@@ -9,6 +9,8 @@ import { get_history_movie_list } from '../../store/actions/watchHistoryAction';
 import { connect } from 'react-redux';
 import SecurtyImage from '../../components/securtyImage/index';
 import * as Sizes from '../../global/Sizes';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
+
 
 const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
 const hoHeight = hoWidth / 1.5;
@@ -44,8 +46,10 @@ class Item extends PureComponent {
     }
 
     watchHistoryPressing = () => {
-        const { mineNavigation } = this.context;
-        mineNavigation.navigate('VideoModel', { videoId: this.props.id });
+        // const { mineNavigation } = this.context;
+        // mineNavigation.navigate('VideoModel', { videoId: this.props.id });
+        naviToVideoService(this.props.id);
+
     }
     render() {
         return (

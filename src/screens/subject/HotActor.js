@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, FlatList, TouchableHighlight, ImageBackground, 
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 import PropTypes from 'prop-types';
+import { naviToVideoService } from '../../screens/videoModel/VideoService';
+
 
 import SecurtyImage from '../../components/securtyImage/index';
 
@@ -16,8 +18,10 @@ class InnerItem extends PureComponent {
     }
 
     _press = () => {
-        const { subjectNavigation } = this.context;
-        subjectNavigation.navigate('VideoModel', { videoId: this.props.item.id });
+        // const { subjectNavigation } = this.context;
+        // subjectNavigation.navigate('VideoModel', { videoId: this.props.item.id });
+        naviToVideoService(this.props.item.id);
+
     }
 
     render() {

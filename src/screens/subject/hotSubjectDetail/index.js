@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { SafeAreaView, View, FlatList } from 'react-native';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
+import { naviToVideoService } from '../../../screens/videoModel/VideoService';
+
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
@@ -74,7 +76,8 @@ export default class HotSubjectDetailScreen extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        this.props.navigation.navigate('VideoModel', { videoId: id });
+        //this.props.navigation.navigate('VideoModel', { videoId: id });
+        naviToVideoService(id);
     }
 
     render() {
