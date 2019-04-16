@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ScrollView, View, Text, ImageBackground, Image, FlatList, TouchableHighlight } from 'react-native';
+import { SafeAreaView, ScrollView, View, Text, ImageBackground, Image, FlatList, TouchableHighlight, Platform } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
@@ -88,10 +88,11 @@ export default class ActorDetail extends PureComponent {
     }
 
     render() {
+        let btnHeight = Platform.OS == 'ios' ? 45 : 15;
         return (
             <View style={{ flex: 1 }}>
                 <ScrollView style={{ backgroundColor: Colors.SCREEN_BGCOLOR }} >
-                    <TouchableHighlight underlayColor='transparent' onPress={this._goBack} style={{ position: 'absolute', top: 15, left: 15, height: 22, width: 22, zIndex: 10 }}><Image style={{ height: 22, width: 22, transform: [{ rotate: '180deg' }] }} source={require('../../../image/mine/message_left_arrow.png')} /></TouchableHighlight>
+                    <TouchableHighlight underlayColor='transparent' onPress={this._goBack} style={{ position: 'absolute', top: btnHeight, left: 15, height: 22, width: 22, zIndex: 10 }}><Image style={{ height: 22, width: 22, transform: [{ rotate: '180deg' }] }} source={require('../../../image/mine/message_left_arrow.png')} /></TouchableHighlight>
                     {(typeof this.state.coverPath == 'string' && this.state.coverPath.length > 0) ?
                         <ImageBackground style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={{ uri: this.state.coverPath }}>
                             <Image resizeMode='contain' style={{ position: 'absolute', left: 0, bottom: -1, width: Sizes.DEVICE_WIDTH, height: Sizes.DEVICE_WIDTH / 6.8 }} source={require('../../../image/subject/model.png')} />

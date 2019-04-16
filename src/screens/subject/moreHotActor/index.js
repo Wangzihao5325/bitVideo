@@ -16,7 +16,7 @@ class Item extends PureComponent {
         const { subjectNavigation } = this.context;
         subjectNavigation.navigate('ActorDetailScreen', {
             id: this.props.item.actor_id,
-            coverPath: this.props.item.cover_path,
+            coverPath: this.props.item.cover_big_oss_filename,//cover_path
             name: this.props.item.name,
             intro: this.props.item.intro,
         });
