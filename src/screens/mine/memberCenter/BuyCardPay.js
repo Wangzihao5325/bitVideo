@@ -118,6 +118,7 @@ export default class BuyCardPay extends PureComponent {
     }
 
     render() {
+        let listHeight = Platform.OS == 'ios' ? 160 : 150;
         let enTitle = '';
         let titleColor = null;
         let imageSource = require('../../../image/mine/month_card.png');
@@ -189,7 +190,7 @@ export default class BuyCardPay extends PureComponent {
                     onBackdropPress={() => this.setState({ payListIsShow: false })}
                     style={{ justifyContent: "flex-end", margin: 0, }}
                 >
-                    <View style={{ height: 200, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                    <View style={{ height: listHeight, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }}>
                         <FlatList
                             style={{ flex: 1 }}
                             data={this.state.payListArr}
