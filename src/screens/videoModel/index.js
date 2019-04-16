@@ -6,6 +6,7 @@ import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 import { isXDevice } from '../../global/utils/PixelUtil';
 import * as Colors from '../../global/Colors';
+import { halfHourDetect } from './VideoService';
 
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import XSVideo from './videoComponent/video';
@@ -26,6 +27,10 @@ export default class VideoModel extends PureComponent {
     state = {
         detailInfoIsVisable: false,
         chooseEpiscodeIsVisable: false,
+    }
+
+    componentDidMount() {
+        //halfHourDetect();
     }
 
     /*
@@ -65,6 +70,7 @@ export default class VideoModel extends PureComponent {
 
     componentWillUnmount() {
         store.dispatch(video_detail_data_reset());
+        //halfHourDetect();
     }
 
     goBack = () => {

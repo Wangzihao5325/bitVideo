@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import NavigationService from '../../app/NavigationService';
 import store from '../../store/index';
 import {
@@ -42,6 +43,47 @@ const naviToVideoService = function (videoId, videoType) {
     }
 }
 
+const halfHourDetect = function () {
+    (async function () {
+        let times = await AsyncStorage.getItem('User_See_Times');
+        let todayIsDone = await AsyncStorage.getItem('Today_Is_Done');
+        let leftTimes = await AsyncStorage.getItem('Left_Times');
+        let nowTime = new Date();
+        if (!times) {
+            AsyncStorage.setItem('User_See_Times', nowTime.getTime().toString());
+            AsyncStorage.setItem('Today_Is_Done', 'false');
+            if (!leftTimes) {
+                AsyncStorage.setItem('Left_Times', '1800000');
+            }
+            return;
+        }
+        let storgeTimes = new Date(parseInt(times));
+        if (storgeTimes.getDate == nowTime.getDate) {
+            if (todayIsDone == 'true') {
+                return;
+            } else {
+                if (nowTime.getTime() - storgeTimes.getTime() > parseInt(leftTimes)) {
+                    //完成任务
+                    Api.postTaskAndExchange('LOOKED_VIDEO_SATISFY', (e, code, message) => {
+                        // do nothing
+                    });
+                    AsyncStorage.setItem('Today_Is_Done', 'true');
+                } else {
+                    AsyncStorage.setItem('User_See_Times', '');
+                    AsyncStorage.setItem('Left_Times', (parseInt(leftTimes) - (nowTime.getTime() - storgeTimes.getTime())).toString());
+                }
+            }
+        } else {
+            //新的一天
+            AsyncStorage.setItem('User_See_Times', nowTime.getTime());
+            AsyncStorage.setItem('Today_Is_Done', 'false');
+            AsyncStorage.setItem('Left_Times', '1800000');
+            return;
+        }
+    })();
+}
+
 export {
-    naviToVideoService
+    naviToVideoService,
+    halfHourDetect
 };
