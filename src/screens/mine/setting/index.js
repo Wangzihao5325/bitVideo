@@ -29,7 +29,7 @@ class SettingScreen extends PureComponent {
 
     _toGesturePassword = () => {
         if (this.props.lock === 'true') {
-            this.props.navigation.navigate('GesturePasswordModel', { type: 'close' });
+            this.props.navigation.navigate('GesturePasswordModel', { type: 'close', times: 'second' });
         } else {
             this.props.navigation.navigate('SetGesturePasswordModel');
         }

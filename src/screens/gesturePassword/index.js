@@ -25,10 +25,15 @@ export default class GesturePassword extends PureComponent {
 
     componentDidMount() {
         const type = this.props.navigation.getParam('type', '');
-        const times = this.props.navigation.getParam('type', 'seconds');
+        const times = this.props.navigation.getParam('times', 'seconds');
         if (type === 'close') {
             this.setState({
-                type: true
+                type: true,
+                times: times
+            });
+        } else {
+            this.setState({
+                times: times
             });
         }
 
@@ -58,7 +63,7 @@ export default class GesturePassword extends PureComponent {
                 AsyncStorage.setItem('Lock_Password', lockReg.password);
                 AsyncStorage.setItem('Lock_Islock', store.getState().lock.isLock);
             }
-            if (this.state.times = 'first') {
+            if (this.state.times == 'first') {
                 this.props.navigation.replace('AdModel');
             } else {
                 this.props.navigation.goBack();

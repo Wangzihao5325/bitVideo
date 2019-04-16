@@ -248,7 +248,7 @@ export default class App extends Component {
           if (nowRouter === 'GesturePasswordModel') {
             //do nothing
           } else {
-            NavigationService.navigate('GesturePasswordModel', { type: 'normal' });
+            NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
           }
         }
       }
