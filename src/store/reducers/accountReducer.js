@@ -18,7 +18,8 @@ const initialState = {
     vip: null,
     vipEndDay: '',
     vipHasDays: 0,
-    remainCount: ''
+    remainCount: '',
+    avaterIndex: 0,
 }
 
 const reducer = (state = initialState, action) => {

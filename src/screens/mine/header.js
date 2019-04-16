@@ -61,16 +61,45 @@ class Avater extends PureComponent {
 
     render() {
         let typeText = this.props.vip ? this.props.vip.title : '';
+        let defaultImage = require('../../image/avater/0.png');
+        switch (this.props.avaterIndex) {
+            case 0:
+                defaultImage = require('../../image/avater/0.png');
+                break;
+            case 1:
+                defaultImage = require('../../image/avater/1.png');
+                break;
+            case 2:
+                defaultImage = require('../../image/avater/2.png');
+                break;
+            case 3:
+                defaultImage = require('../../image/avater/3.png');
+                break;
+            case 4:
+                defaultImage = require('../../image/avater/4.png');
+                break;
+            case 5:
+                defaultImage = require('../../image/avater/5.png');
+                break;
+            case 6:
+                defaultImage = require('../../image/avater/6.png');
+                break;
+            case 7:
+                defaultImage = require('../../image/avater/7.png');
+                break;
+            case 8:
+                defaultImage = require('../../image/avater/8.png');
+                break;
+        }
         return (
             <View style={styles.avaterContainer}>
-                {this.props.source && <Image style={styles.avaterImage} source={{ uri: this.props.source }} defaultSource={require('../../image/mine/mine_defalut_avater.png')} />}
-                {!this.props.source && <Image style={styles.avaterImage} source={require('../../image/mine/mine_defalut_avater.png')} />}
+                <Image style={styles.avaterImage} source={defaultImage} />
                 <View style={styles.accountNameContainer}>
                     <Text style={styles.accountNameText}>{this.props.name}</Text>
                     <Text style={styles.accountTypeText}>{typeText}</Text>
                 </View>
                 <ImageBackground style={styles.imageBackground} source={require('../../image/mine/mine_recharge.png')}>
-                    <Image style={{ height: 26, width: 26,marginLeft:10 }} source={require('../../image/task/icons.png')} /><Text style={styles.rechargeText}>{`${this.props.coins}`}</Text>
+                    <Image style={{ height: 26, width: 26, marginLeft: 10 }} source={require('../../image/task/icons.png')} /><Text style={styles.rechargeText}>{`${this.props.coins}`}</Text>
                 </ImageBackground>
             </View>
         );
@@ -122,7 +151,7 @@ class Header extends PureComponent {
                     onDidFocus={this._onDidFocus}
                 />
                 <TopBtns isLogin={this.props.isLogin} />
-                <Avater coins={this.props.coins} vip={this.props.vip} source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
+                <Avater coins={this.props.coins} vip={this.props.vip} avaterIndex={this.props.avaterIndex} source={this.props.coverPath} name={this.props.accountName} type={this.props.accountType} />
                 <CountList vipEndDay={this.props.vipEndDay} vipHasDays={this.props.vipHasDays} remainCount={this.props.remainCount} total={this.props.viewCountTotal} use={this.props.viewCountUse} />
             </View>
         );
@@ -142,6 +171,7 @@ function mapState2Props(store) {
         coverPath: store.account.coverPath,
         vip: store.account.vip,
         coins: store.account.icons,
+        avaterIndex: store.account.avaterIndex,
     }
 }
 
@@ -198,7 +228,7 @@ const styles = StyleSheet.create({
     rechargeText: {
         color: 'white',
         fontSize: 18,
-        marginLeft:3
+        marginLeft: 3
     },
     countListContainer: {
         height: 83 + 31,

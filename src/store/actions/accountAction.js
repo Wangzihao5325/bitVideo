@@ -37,5 +37,6 @@ export function get_user_info(e) {
     regObj.coverPath = e.cover_path;
     regObj.collectCount = e.collect_count;
     regObj.historyCount = e.history_count;
+    regObj.avaterIndex = e.id % 9;
     return { type: Types.GET_USER_INFO, obj: regObj };
 }

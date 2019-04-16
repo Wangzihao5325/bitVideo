@@ -8,9 +8,39 @@ import Api from '../../../socket/index';
 import ModalHeader from '../../../components/modal/ModalHeader';
 
 const AvaterBanner = function (props) {
+    let defaultImage = require('../../../image/avater/0.png');
+    switch (props.avaterIndex) {
+        case 0:
+            defaultImage = require('../../../image/avater/0.png');
+            break;
+        case 1:
+            defaultImage = require('../../../image/avater/1.png');
+            break;
+        case 2:
+            defaultImage = require('../../../image/avater/2.png');
+            break;
+        case 3:
+            defaultImage = require('../../../image/avater/3.png');
+            break;
+        case 4:
+            defaultImage = require('../../../image/avater/4.png');
+            break;
+        case 5:
+            defaultImage = require('../../../image/avater/5.png');
+            break;
+        case 6:
+            defaultImage = require('../../../image/avater/6.png');
+            break;
+        case 7:
+            defaultImage = require('../../../image/avater/7.png');
+            break;
+        case 8:
+            defaultImage = require('../../../image/avater/8.png');
+            break;
+    }
     return (
         <View style={styles.avaterContainer}>
-            <Image style={styles.avaterImage} source={props.source} defaultSource={require('../../../image/usual/default_avater.png')} />
+            <Image style={styles.avaterImage} source={props.source} defaultSource={defaultImage} />
             <View style={{ flex: 1, marginLeft: 15 }}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={styles.userNameText}>{props.userName}</Text>
@@ -105,7 +135,7 @@ class MemberCenter extends PureComponent {
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <View style={{ flex: 1 }}>
                     <ModalHeader backBtnColor='rgb(255,255,255)' textStyle={{ fontSize: 15, color: 'white' }} goBack={this._goBack} title={In18.MEMBER_CENTER} rightBtnMode='text' rightBtnTitle={In18.BUY_HISTORY} rightBtnOnPress={this._showBuyHistory} />
-                    <AvaterBanner userName={this.props.userName} />
+                    <AvaterBanner avaterIndex={this.props.avaterIndex} userName={this.props.userName} />
                     {cards}
                 </View>
             </SafeAreaView>
@@ -116,6 +146,7 @@ class MemberCenter extends PureComponent {
 function mapState2Props(store) {
     return {
         userName: store.account.name,
+        avaterIndex: store.account.avaterIndex,
     }
 }
 
