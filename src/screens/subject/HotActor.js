@@ -62,7 +62,7 @@ class Item extends PureComponent {
         }
         return (
             <View style={styles.itemContainer}>
-                <ImageBackground style={{ position: 'absolute', top: 20, right: 0, height: 27, width: 89, display: 'flex', flexDirection: 'row-reverse', alignItems: 'center' }} source={require('../../image/subject/actor_total.png')}>
+                <ImageBackground style={{ position: 'absolute', top: 0, right: 0, height: 27, width: 89, display: 'flex', flexDirection: 'row-reverse', alignItems: 'center' }} source={require('../../image/subject/actor_total.png')}>
                     <Text onPress={this._toActorDetail} style={{ color: 'rgb(254,163,91)', marginRight: 2 }}>{`${videoCount}部影片`}</Text>
                 </ImageBackground>
                 <View style={styles.titleContainer}>
