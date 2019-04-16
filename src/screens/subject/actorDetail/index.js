@@ -6,7 +6,7 @@ import * as Colors from '../../../global/Colors';
 import VectorIconBtn from '../../../components/imageBtn';
 import { naviToVideoService } from '../../../screens/videoModel/VideoService';
 
-
+import SecurtyImage from '../../../components/securtyImage/index';
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
 
 export default class ActorDetail extends PureComponent {
@@ -94,9 +94,10 @@ export default class ActorDetail extends PureComponent {
                 <ScrollView style={{ backgroundColor: Colors.SCREEN_BGCOLOR }} >
                     <TouchableHighlight underlayColor='transparent' onPress={this._goBack} style={{ position: 'absolute', top: btnHeight, left: 15, height: 22, width: 22, zIndex: 10 }}><Image style={{ height: 22, width: 22, transform: [{ rotate: '180deg' }] }} source={require('../../../image/mine/message_left_arrow.png')} /></TouchableHighlight>
                     {(typeof this.state.coverPath == 'string' && this.state.coverPath.length > 0) ?
-                        <ImageBackground style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={{ uri: this.state.coverPath }}>
+                        <View style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT, display: 'flex' }}>
+                            <SecurtyImage default={require('../../../image/usual/banner_load_failed.png')} style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={{ uri: this.state.coverPath }} />
                             <Image resizeMode='contain' style={{ position: 'absolute', left: 0, bottom: -1, width: Sizes.DEVICE_WIDTH, height: Sizes.DEVICE_WIDTH / 6.8 }} source={require('../../../image/subject/model.png')} />
-                        </ImageBackground> :
+                        </View> :
                         <ImageBackground style={{ width: Sizes.DEVICE_WIDTH, height: 0.3 * Sizes.DEVICE_HEIGHT }} source={require('../../../image/usual/banner_load_failed.png')}>
                             <Image resizeMode='contain' style={{ position: 'absolute', left: 0, bottom: -1, width: Sizes.DEVICE_WIDTH, height: Sizes.DEVICE_WIDTH / 6.8 }} source={require('../../../image/subject/model.png')} />
                         </ImageBackground>
@@ -107,7 +108,7 @@ export default class ActorDetail extends PureComponent {
                             <Text style={{ fontSize: 16, color: 'white', marginLeft: 15 }}>{this.state.name}</Text>
                         </View>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text numberOfLines={2} ellipsizeMode='tail' style={{ height: 40, width: Sizes.DEVICE_WIDTH - 90, lineHeight: 20, fontSize: 14, color: 'rgb(178,178,178)' }}>{this.state.intro}</Text>
+                            <Text numberOfLines={2} ellipsizeMode='tail' style={{ height: 40, width: Sizes.DEVICE_WIDTH - 30, lineHeight: 20, fontSize: 14, color: 'rgb(178,178,178)' }}>{this.state.intro}</Text>
                         </View>
                     </View>
 

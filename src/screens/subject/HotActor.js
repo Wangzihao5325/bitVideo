@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableHighlight, ImageBackground, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableHighlight, ImageBackground } from 'react-native';
 import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 import PropTypes from 'prop-types';
@@ -66,9 +66,9 @@ class Item extends PureComponent {
                     <Text onPress={this._toActorDetail} style={{ color: 'rgb(254,163,91)', marginRight: 2 }}>{`${videoCount}部影片`}</Text>
                 </ImageBackground>
                 <View style={styles.titleContainer}>
-                    <TouchableWithoutFeedback style={styles.itemImage} onPress={this._toActorDetail}>
+                    <TouchableHighlight style={styles.itemImage} underlayColor='transparent' onPress={this._toActorDetail}>
                         <SecurtyImage style={styles.itemImage} source={{ uri: this.props.item.cover_path }} />
-                    </TouchableWithoutFeedback>
+                    </TouchableHighlight>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 16, color: 'rgb(229,187,134)', marginLeft: 14 }}>{this.props.item.name}</Text>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={{ fontSize: 14, color: 'rgb(229,187,134)', marginLeft: 14, marginTop: 2 }}>{this.props.item.intro}</Text>
