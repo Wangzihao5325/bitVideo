@@ -87,6 +87,7 @@ export default class VideoModel extends PureComponent {
 
     render() {
         //iOS设备适配完毕
+        /*
         let isX = isXDevice();
         let semiModalStyle = styles.modalIosNormal;
         if (isX) {
@@ -95,6 +96,7 @@ export default class VideoModel extends PureComponent {
         if (Platform.OS === 'android') {
             semiModalStyle = styles.modalAndroidNormal;
         }
+        */
         return (
             <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <SafeAreaView style={{ flex: 1 }}>

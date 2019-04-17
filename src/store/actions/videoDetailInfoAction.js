@@ -38,7 +38,7 @@ export function set_episode_source(source, episodeTotalNum, videoSourceName) {
     let ObjZero = source[0];
     let ObjOne = _.assign({}, ObjZero);
     ObjZero.play_series = '标准';
-    ObjZero.play_url_m3u8 = ObjZero.shift_360_filename;
+    ObjZero.play_url_m3u8 = ObjZero.shift_360_filename;//调整字段
     ObjOne.play_series = '高清';
     ObjOne.play_url_m3u8 = ObjOne.shift_720_filename;
     return {

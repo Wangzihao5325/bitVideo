@@ -41,10 +41,19 @@ class SourceTab extends PureComponent {
             let sourceWithHighlightIndex = nextProps.source.map((item) => {
                 let newItem = _.assign({}, item);
                 newItem.highlightIndex = 0;
+                newItem.video_list = [{
+                    play_series: "",
+                    play_url_m3u8: null,
+                    play_url_h5: null,
+                    play_url_mp4: null,
+                    shift_360_filename: newItem.play_url_m3u8_360,
+                    shift_720_filename: newItem.play_url_m3u8_720
+                }];
+                newItem.video_total = 1;
                 return newItem
             });
-            if (nextProps.source.length > 0) {
-                let regObj = nextProps.source[0];
+            if (sourceWithHighlightIndex.length > 0) {
+                let regObj = sourceWithHighlightIndex[0];
                 store.dispatch(set_episode_source(regObj.video_list, regObj.video_total, regObj.title));
             }
             return {
@@ -56,10 +65,19 @@ class SourceTab extends PureComponent {
             let sourceWithHighlightIndex = nextProps.source.map((item) => {
                 let newItem = _.assign({}, item);
                 newItem.highlightIndex = prevState.sourceTypeHighlightIndex;
+                newItem.video_list = [{
+                    play_series: "",
+                    play_url_m3u8: null,
+                    play_url_h5: null,
+                    play_url_mp4: null,
+                    shift_360_filename: newItem.play_url_m3u8_360,
+                    shift_720_filename: newItem.play_url_m3u8_720
+                }];
+                newItem.video_total = 1;
                 return newItem
             });
             if (nextProps.source.length > prevState.sourceTypeHighlightIndex) {
-                let regObj = nextProps.source[prevState.sourceTypeHighlightIndex];
+                let regObj = sourceWithHighlightIndex[prevState.sourceTypeHighlightIndex];
                 store.dispatch(set_episode_source(regObj.video_list, regObj.video_total, regObj.title));
             }
             return {
