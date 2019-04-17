@@ -171,7 +171,7 @@ class GiftCenterModel extends PureComponent {
                             style={{ flex: 1 }}
                             data={this.state.data}
                             extraData={this.props.coins}
-                            renderItem={({ item }) => <Item sign={item.sign} pressCallback={this._pressCallback} eventId={item.key} haveCoins={this.props.coins} date={item.untile} url={item.icon} title={item.title} coin={item.coins} />}
+                            renderItem={({ item }) => <Item sign={item.sign} pressCallback={this._pressCallback} eventId={item.key} haveCoins={this.props.coins} date={item.untile} url={item.icon_path} title={item.title} coin={item.coins} />}
                         />
                     </View>
                 </SafeAreaView>
