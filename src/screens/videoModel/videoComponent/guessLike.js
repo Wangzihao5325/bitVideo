@@ -8,6 +8,7 @@ import { set_video_full_data, set_guess_like_source, set_comment_list_data } fro
 import * as Sizes from '../../../global/Sizes';
 
 import VideoAvaterScrollHo from '../../../components/imageBtn/VideoAvater_scroll_ho';
+import NavigationService from '../../../app/NavigationService';
 
 class GuessLike extends PureComponent {
 
@@ -17,7 +18,8 @@ class GuessLike extends PureComponent {
             if (result) {
                 store.dispatch(set_video_full_data(result));
             } else {
-                console.log(message);
+                NavigationService.navigate('ToastModel', { type: 'NoTimes' });
+                //console.log(message);
             }
         });
         //根据video id 获取猜你喜欢信息
@@ -25,7 +27,7 @@ class GuessLike extends PureComponent {
             if (result) {
                 store.dispatch(set_guess_like_source(result.data));
             } else {
-                console.log(message);
+                //console.log(message);
             }
         });
         //根据video id 获取评论
