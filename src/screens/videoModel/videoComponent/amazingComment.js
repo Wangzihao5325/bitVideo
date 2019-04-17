@@ -6,17 +6,44 @@ import * as Sizes from '../../../global/Sizes';
 import { FlatList } from 'react-native-gesture-handler';
 class Item extends PureComponent {
     render() {
-        let defaultSource = require('../../../image/usual/default_avater.png');
-        if (this.props.source && this.props.source !== '') {
-            defaultSource = { uri: this.props.source };
+        let defaultSource = require('../../../image/avater/0.png');
+        let avaterIndex = this.props.userId % 9;
+        switch (avaterIndex) {
+            case 0:
+                defaultSource = require('../../../image/avater/0.png');
+                break;
+            case 1:
+                defaultSource = require('../../../image/avater/1.png');
+                break;
+            case 2:
+                defaultSource = require('../../../image/avater/2.png');
+                break;
+            case 3:
+                defaultSource = require('../../../image/avater/3.png');
+                break;
+            case 4:
+                defaultSource = require('../../../image/avater/4.png');
+                break;
+            case 5:
+                defaultSource = require('../../../image/avater/5.png');
+                break;
+            case 6:
+                defaultSource = require('../../../image/avater/6.png');
+                break;
+            case 7:
+                defaultSource = require('../../../image/avater/7.png');
+                break;
+            case 8:
+                defaultSource = require('../../../image/avater/8.png');
+                break;
         }
         return (
             <View style={styles.itemContainer}>
                 <View style={styles.itemAvaterFlexView}>
-                    <Image style={styles.itemAvaterImage} defaultSource={require('../../../image/usual/default_avater.png')} source={defaultSource} />
+                    <Image style={styles.itemAvaterImage} source={defaultSource} />
                 </View>
                 <View style={styles.itemAvaterFlexView2}>
-                    <Text style={[styles.itemNameText,{marginTop:3}]}>{this.props.name ? this.props.name : ''}</Text>
+                    <Text style={[styles.itemNameText, { marginTop: 3 }]}>{this.props.name ? this.props.name : ''}</Text>
                     <Text style={[styles.itemNameText, { marginTop: 5, fontSize: 10 }]}>{this.props.time ? this.props.time : ''}</Text>
                     <Text ellipsizeMode='tail' numberOfLines={2} style={styles.itemContentText}>{this.props.content}</Text>
                 </View>
@@ -37,7 +64,7 @@ class CommentList extends PureComponent {
                 <FlatList
                     style={{ flex: 1 }}
                     data={this.props.data}
-                    renderItem={({ item }) => <Item source={item.cover_path} name={item.name} time={item.updated_at} content={item.content} />}
+                    renderItem={({ item }) => <Item userId={item.user_id} source={item.cover_path} name={item.name} time={item.updated_at} content={item.content} />}
                 />
             </View>
         );

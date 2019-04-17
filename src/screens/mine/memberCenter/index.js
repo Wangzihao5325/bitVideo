@@ -40,7 +40,7 @@ const AvaterBanner = function (props) {
     }
     return (
         <View style={styles.avaterContainer}>
-            <Image style={styles.avaterImage} source={props.source} defaultSource={defaultImage} />
+            <Image style={styles.avaterImage} source={defaultImage} />
             <View style={{ flex: 1, marginLeft: 15 }}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={styles.userNameText}>{props.userName}</Text>
