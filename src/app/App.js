@@ -162,12 +162,12 @@ export default class App extends Component {
     // });
     SplashScreen.hide();
     Api.getDomain((e) => {
-      Config.SERVICE_URL.domainUrl = e;
+      Config.SERVICE_URL.domainUrl = `http://${e}`;
       let PlatformKey = 'I';
       if (Platform.OS === 'android') {
         PlatformKey = 'A';
       }
-      Api.getVersionMessage(PlatformKey, (e) => {
+      Api.getVersionMessage(PlatformKey, (e, code, message) => {
         let AppVersion = DeviceInfo.getVersion();
         if (AppVersion !== e.version_code) {
           if (e.force) {

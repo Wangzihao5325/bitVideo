@@ -1,4 +1,4 @@
-const SERVICE_URL = { domainUrl: '', FirstUrl: 'http://192.168.0.186:50006' };
+const SERVICE_URL = { domainUrl: '', FirstUrl: 'http://domain.speedcloud.me' };
 
 export {
     SERVICE_URL

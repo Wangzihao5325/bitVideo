@@ -4,7 +4,7 @@ let CryptoJS = require('crypto-js');
 
 const SECURTY_URL = '/api/accept';
 const isSecurty = true;
-const keyStr = 'bUYJ3nTV6VBasdJF';
+const keyStr = 'E8yC1EncqQZrfWQg';
 var KEY = CryptoJS.enc.Utf8.parse(keyStr);
 
 const headerGenerator = (isPost) => {
@@ -63,7 +63,6 @@ class api {
         });
 
         let securtyReg = encodeURI(encryptedData.toString());
-
         //normal post
         let formData = new FormData();
         formData.append('data', securtyReg);
