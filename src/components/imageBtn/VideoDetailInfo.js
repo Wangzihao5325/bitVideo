@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableHighlight, View, Image, Text } from 'react-native';
 import * as Sizes from '../../global/Sizes';
-
+import SecurtyImage from '../../components/securtyImage/index';
 import { naviToVideoService } from '../../screens/videoModel/VideoService';
 
 const hoWidth = (Sizes.DEVICE_WIDTH - 4) / 2.5;
