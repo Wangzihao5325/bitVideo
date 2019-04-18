@@ -30,7 +30,7 @@ export default class VideoModel extends PureComponent {
     }
 
     componentDidMount() {
-        //halfHourDetect();
+        halfHourDetect();
     }
 
     /*
@@ -70,7 +70,7 @@ export default class VideoModel extends PureComponent {
 
     componentWillUnmount() {
         store.dispatch(video_detail_data_reset());
-        //halfHourDetect();
+        halfHourDetect();
     }
 
     goBack = () => {

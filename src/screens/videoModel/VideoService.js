@@ -46,17 +46,15 @@ const naviToVideoService = function (videoId, videoType) {
 const halfHourDetect = function () {
     (async function () {
         let times = await AsyncStorage.getItem('User_See_Times');
-        let todayIsDone = await AsyncStorage.getItem('Today_Is_Done');
-        let leftTimes = await AsyncStorage.getItem('Left_Times');
         let nowTime = new Date();
         if (!times) {
             AsyncStorage.setItem('User_See_Times', nowTime.getTime().toString());
             AsyncStorage.setItem('Today_Is_Done', 'false');
-            if (!leftTimes) {
-                AsyncStorage.setItem('Left_Times', '1800000');
-            }
+            AsyncStorage.setItem('Left_Times', '1800000');
             return;
         }
+        let todayIsDone = await AsyncStorage.getItem('Today_Is_Done');
+        let leftTimes = await AsyncStorage.getItem('Left_Times');
         let storgeTimes = new Date(parseInt(times));
         if (storgeTimes.getDate == nowTime.getDate) {
             if (todayIsDone == 'true') {
