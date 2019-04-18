@@ -73,6 +73,7 @@ class SUDOKU extends PureComponent {
             <View style={{ alignItems: 'center', marginTop: 10, marginBottom: 10 }} >
                 <TitleHeader style={{ marginTop: 10 }} imageSource={require('../../image/main/module_header.png')} title={this.props.title} />
                 <FlatList
+                    style={{ width: '100%' }}
                     horizontal={false}
                     numColumns={this.props.lineNum}
                     data={this.state.data}

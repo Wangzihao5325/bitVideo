@@ -114,13 +114,12 @@ export default class ActorDetail extends PureComponent {
 
                     {this.state.data.length > 0 &&
                         <FlatList
-                            style={{ height: Sizes.DEVICE_HEIGHT + 20, width: Sizes.DEVICE_WIDTH }}
+                            style={{ height: Sizes.DEVICE_HEIGHT + 20, width: Sizes.DEVICE_WIDTH, alignSelf: 'center' }}
                             onRefresh={this._flatListRefresh}
                             refreshing={false}
                             onEndReached={this._getNextPageData}
                             onEndReachedThreshold={0.1}
                             data={this.state.data}
-                            contentContainerStyle={{ alignSelf: 'center' }}
                             columnWrapperStyle={{ marginTop: 20 }}
                             showsVerticalScrollIndicator={false}
                             numColumns={2}

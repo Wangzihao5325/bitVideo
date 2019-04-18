@@ -98,12 +98,12 @@ export default class ViewModuleMoreScreen extends PureComponent {
                     <ModalHeader goBack={this._goBack} titleStyle={{ color: 'rgb(255,168,96)' }} backBtnColor='rgb(255,255,255)' title={this.state.title} rightBtnMode='none' />
                     {this.state.data.length > 0 &&
                         <FlatList
+                            style={{ alignSelf: 'center' }}
                             onRefresh={this._flatListRefresh}
                             refreshing={false}
                             onEndReached={this._getNextPageData}
                             onEndReachedThreshold={0.1}
                             data={this.state.data}
-                            contentContainerStyle={{ alignSelf: 'center' }}
                             columnWrapperStyle={{ marginTop: 20 }}
                             showsVerticalScrollIndicator={false}
                             numColumns={2}

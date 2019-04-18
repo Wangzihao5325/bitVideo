@@ -87,12 +87,12 @@ export default class HotSubjectDetailScreen extends PureComponent {
                     <ModalHeader goBack={this._goBack} textStyle={{ color: Colors.NAVI_ACTIVE_TINT_COLOR }} backBtnColor={Colors.NAVI_ACTIVE_TINT_COLOR} title={this.state.title} rightBtnMode='none' />
                     {this.state.data.length > 0 &&
                         <FlatList
+                            style={{alignSelf: 'center'}}
                             onRefresh={this._flatListRefresh}
                             refreshing={false}
                             onEndReached={this._getNextPageData}
                             onEndReachedThreshold={0.1}
                             data={this.state.data}
-                            contentContainerStyle={{ alignSelf: 'center' }}
                             columnWrapperStyle={{ marginTop: 20 }}
                             showsVerticalScrollIndicator={false}
                             numColumns={2}

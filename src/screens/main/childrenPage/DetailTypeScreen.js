@@ -229,9 +229,8 @@ export default class DetailTypeScreen extends PureComponent {
                             <FlatList
                                 onEndReached={this._getNextPageData}
                                 onEndReachedThreshold={0.1}
-                                style={{ flex: 1 }}
+                                style={{  alignSelf: 'center' }}
                                 data={this.state.videoData}
-                                contentContainerStyle={{ alignSelf: 'center' }}
                                 columnWrapperStyle={{ marginTop: 20 }}
                                 showsVerticalScrollIndicator={false}
                                 numColumns={2}
