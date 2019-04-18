@@ -23,9 +23,9 @@ export default class VideoDetailInfo extends PureComponent {
                         <SecurtyImage imageStyle={{ height: hoHeight, width: hoWidth, borderRadius: 5 }} style={styles.imageStyle} source={this.props.source} />
                     </View>
                     <View style={styles.infoContainer}>
-                        <Text style={styles.titleText}>{this.props.title}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.titleText}>{this.props.title}</Text>
                         <Text numberOfLines={2} ellipsizeMode='tail' style={styles.introText}>{this.props.intro}</Text>
-                        <Text style={styles.directorText}>{this.props.director}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.directorText}>{this.props.director}</Text>
                     </View>
                 </View>
             </TouchableHighlight>
