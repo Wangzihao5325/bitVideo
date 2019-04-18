@@ -55,7 +55,7 @@ export default class SecurtyImage extends PureComponent {
                     <Image
                         resizeMethod='scale'
                         style={this.props.imageStyle ? this.props.imageStyle : this.props.style}
-                        defaultSource={this.props.default}
+                        defaultSource={this.props.default ? this.props.default : null}
                         source={this.state.source} />}
             </View>
         );

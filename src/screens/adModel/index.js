@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, StatusBar, StyleSheet, TouchableHighlight, Image, Text } from 'react-native';
 import Api from '../../socket/index';
+import SecurtyImage from '../../components/securtyImage/index';
 
 export default class AdModel extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -58,7 +59,9 @@ export default class AdModel extends PureComponent {
                 </TouchableHighlight>
                 {typeof this.state.uri === 'string' &&
                     this.state.uri !== '' &&
-                    <Image style={{ flex: 1 }} source={{ uri: this.state.uri }} />}
+                    <SecurtyImage style={{ flex: 1 }} source={{ uri: this.state.uri }} />
+                    // <Image style={{ flex: 1 }} source={{ uri: this.state.uri }} />
+                }
             </View>
         );
     }
