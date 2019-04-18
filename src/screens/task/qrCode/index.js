@@ -5,6 +5,7 @@ import * as Sizes from '../../../global/Sizes';
 import Api from '../../../socket/index';
 import { connect } from 'react-redux';
 import * as In18 from '../../../global/In18';
+import * as Config from '../../../global/Config';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 import QRCode from 'react-native-qrcode';
@@ -27,7 +28,7 @@ class QrCode extends PureComponent {
         setTimeout(() => {
             this.setState({
                 qrCode: <QRCode
-                    value={'https://github.com'}
+                    value={Config.URL_REG.official_url}
                     size={200}
                     bgColor='rgb(34,34,34)'
                     fgColor='white' />
@@ -97,7 +98,7 @@ class QrCode extends PureComponent {
                 <SafeAreaView style={{ flex: 1 }}>
                     {Platform.OS === 'android' && <StatusBar hidden={true} />}
                     <View style={{ flex: 1, alignItems: 'center' }}>
-                        <ModalHeader  goBack={this._goBack} titleStyle={{ color: 'rgb(255,168,96)' }} backBtnColor='rgb(255,255,255)' title='邀请码' rightBtnMode='none' />
+                        <ModalHeader goBack={this._goBack} titleStyle={{ color: 'rgb(255,168,96)' }} backBtnColor='rgb(255,255,255)' title='邀请码' rightBtnMode='none' />
                         <ScrollView
                             style={{ width: Sizes.DEVICE_WIDTH }}
                             contentContainerStyle={{ alignItems: 'center' }}
@@ -114,7 +115,7 @@ class QrCode extends PureComponent {
                             <Text style={[styles.text, { marginTop: 35, fontSize: 15, color: 'rgb(255,206,145)' }]}>您的专属推广邀请码</Text>
                             <Text style={[styles.text, { marginTop: 10, fontSize: 30 }]}>{this.props.inviteCode}</Text>
                             <Text style={[styles.text, { marginTop: 13, fontSize: 15 }]}>看片前请保存官网，被封后可在官网下载新APP</Text>
-                            <Text style={[styles.text, { marginTop: 10, fontSize: 15 }]}>官网：www.baidu.com</Text>
+                            <Text style={[styles.text, { marginTop: 10, fontSize: 15 }]}>{`官网：${Config.URL_REG.official_url.split('//')[1]}`}</Text>
                             <View style={{ marginTop: 20, height: 42, width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                                 <View style={{ height: 40, width: 100, borderColor: 'rgb(255,206,145)', borderWidth: StyleSheet.hairlineWidth, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <Text onPress={this._saveQrCode} style={{ fontSize: 16, color: 'rgb(255,206,145)' }}>保存二维码</Text>

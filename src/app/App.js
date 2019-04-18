@@ -168,6 +168,8 @@ export default class App extends Component {
         PlatformKey = 'A';
       }
       Api.getVersionMessage(PlatformKey, (e, code, message) => {
+        Config.URL_REG.official_url = e.official_url;
+        Config.URL_REG.invite_link = e.potato_invite_link;
         let AppVersion = DeviceInfo.getVersion();
         if (AppVersion !== e.version_code) {
           if (e.force) {

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Sizes from '../../global/Sizes';
 import * as In18 from '../../global/In18';
+import * as Config from '../../global/Config';
 
 import IconBtnWithTitle from '../../components/imageBtn/IconBtnWithTitle';
 
@@ -24,7 +25,9 @@ export default class FunList extends PureComponent {
     _goToShare = () => {
         // const { mineNavigation } = this.context;
         // mineNavigation.navigate('TaskScreen');
-        Linking.openURL('https://github.com');
+        if (Config.URL_REG.invite_link) {
+            Linking.openURL(Config.URL_REG.invite_link);
+        }
     }
 
     _goToQrCode = () => {
