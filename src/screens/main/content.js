@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, FlatList, Image, StyleSheet, TouchableHighlight, AsyncStorage, Clipboard, Platform, NetInfo } from 'react-native';
 import PropTypes from 'prop-types';
 import { setMainPageData, setPageInfo, addMainPageData } from '../../store/actions/mainPageDataAction';
 import store from '../../store/index';
@@ -12,6 +12,18 @@ import BannerModule from '../../components/modules/banner';
 import VideoModule from '../../components/modules/video';
 import GlobalTypeModule from '../../components/modules/globalType';
 import VideoLong from '../../components/modules/video_long';
+
+//restart
+import * as Config from '../../global/Config';
+import DeviceInfo from 'react-native-device-info';
+import NavigationService from '../../app/NavigationService';
+import { lockReg, newReg } from '../../global/Reg';
+import { set_lock } from '../../store/actions/lockAction';
+import Variables from '../../global/Variables';
+import { get_device_account_info, get_user_info } from '../../store/actions/accountAction';
+import { change_net_state } from '../../store/actions/netAction';
+
+
 
 class Item extends PureComponent {
 
@@ -49,6 +61,97 @@ class Item extends PureComponent {
 }
 
 class Content extends PureComponent {
+    _restartApp = () => {
+        NetInfo.isConnected.fetch().done((isConnected) => {
+            if (isConnected) {
+                store.dispatch(change_net_state(true));
+                Api.getDomain((outerE) => {
+                    Config.SERVICE_URL.domainUrl = `http://${outerE}`;
+                    let PlatformKey = 'I';
+                    if (Platform.OS === 'android') {
+                        PlatformKey = 'A';
+                    }
+                    Api.getVersionMessage(PlatformKey, (e, code, message) => {
+                        Config.URL_REG.official_url = e.official_url;
+                        Config.URL_REG.invite_link = e.potato_invite_link;
+                        let AppVersion = DeviceInfo.getVersion();
+                        if (AppVersion !== e.version_code) {
+                            if (e.force) {
+                                //强制更新
+                                NavigationService.navigate('ToastModel', { type: 'NewVersionForce', packageUrl: e.package_path });
+                                return;
+                            } else {
+                                //非强制更新
+                                NavigationService.navigate('ToastModel', { type: 'NewVersion', packageUrl: e.package_path });
+                            }
+                        }
+                        (async function () {
+                            let password = await AsyncStorage.getItem('Lock_Password');
+                            let islock = await AsyncStorage.getItem('Lock_Islock');
+                            let userToken = await AsyncStorage.getItem('User_Token');
+                            let clipboardContent = await Clipboard.getString();
+                            if (userToken) {
+                                newReg.isNew = false;
+                            }
+
+                            if (password) {
+                                lockReg.password = password;
+                            }
+                            if (islock) {
+                                store.dispatch(set_lock(islock));
+                                // lockReg.isLock = islock;
+                            }
+
+                            //设备号注册 获取用户信息
+                            if (userToken) {
+                                Variables.account.token = userToken;
+                                Variables.account.deviceToken = userToken;
+                                Api.getUserInfo((e, code, message) => {
+                                    if (e) {
+                                        store.dispatch(get_user_info(e));
+                                    }
+                                });
+                            } else {
+                                let deviceId = DeviceInfo.getUniqueID();
+                                Api.postRegisterByDeviceId(deviceId, clipboardContent, (e, code, message) => {
+                                    if (e && e.api_token) {
+                                        AsyncStorage.setItem('User_Token', e.api_token);
+                                        Variables.account.token = e.api_token;
+                                        Variables.account.deviceToken = e.api_token;
+                                        store.dispatch(get_device_account_info(e));
+                                        Api.getUserInfo((e, code, message) => {
+                                            if (e) {
+                                                store.dispatch(get_user_info(e));
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+
+                            //获取主页数据
+                            Api.postGlobalTypeVideo('recommend', null, (e) => {
+                                if (e.data) {
+                                    store.dispatch(setMainPageData(e.data));
+                                    store.dispatch(setPageInfo(e.current_page, e.last_page));
+                                }
+                            });
+
+                            //手势锁 广告页开启
+                            if (store.getState().lock.isLock === 'true') {
+                                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
+                            } else {
+                                NavigationService.navigate('AdModel');
+                            }
+
+                        })();
+                    });
+                });
+            } else {
+
+            }
+        });
+    }
+
     _flatListRefresh = () => {
         Api.postGlobalTypeVideo('recommend', null, (e) => {
             if (e.data) {
@@ -69,17 +172,33 @@ class Content extends PureComponent {
         });
     }
     render() {
-        return (
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                data={this.props.data}
-                renderItem={({ item, index }) => <Item item={item} index={index} />}
-                onRefresh={this._flatListRefresh}
-                refreshing={false}
-                onEndReached={this._getNextPageData}
-                onEndReachedThreshold={0.1}
-            />
-        );
+        if (this.props.netSate) {
+            return (
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={this.props.data}
+                    renderItem={({ item, index }) => <Item item={item} index={index} />}
+                    onRefresh={this._flatListRefresh}
+                    refreshing={false}
+                    onEndReached={this._getNextPageData}
+                    onEndReachedThreshold={0.1}
+                />
+            );
+        } else {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Image style={{ height: 97, width: 71 }} source={require('../../image/usual/no_net.png')} />
+                    <Text style={{ fontSize: 14, color: 'rgb(167,167,167)', marginTop: 15 }}>页面内容加载失败</Text>
+                    <TouchableHighlight
+                        style={{ height: 27, width: 70, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(79,86,90)', marginTop: 26, borderRadius: 5 }}
+                        underlayColor='transparent'
+                        onPress={this._restartApp}
+                    >
+                        <Text style={{ color: 'white', fontSize: 14 }}>点击刷新</Text>
+                    </TouchableHighlight>
+                </View>
+            );
+        }
     }
 }
 
@@ -87,7 +206,8 @@ function mapState2Props(store) {
     return {
         data: store.mainPageData.data,
         totalPage: store.mainPageData.totalPage,
-        nowPage: store.mainPageData.nowPage
+        nowPage: store.mainPageData.nowPage,
+        netSate: store.net.isConnection
     }
 }
 
