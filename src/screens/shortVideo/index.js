@@ -70,7 +70,7 @@ class ShortVideo extends PureComponent {
             this.setState({
                 playingIndex: -1
             });
-            Api.getShortVideoListById(10, this.state.lastPage, (e) => {
+            Api.getShortVideoListById(10, this.state.nowPage + 1, (e) => {
                 if (e.data.length > 0) {
                     this.setState((preState, props) => {
                         let newList = preState.shortVideoList.concat(e.data);
