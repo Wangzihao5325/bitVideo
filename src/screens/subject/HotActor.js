@@ -4,6 +4,7 @@ import Api from '../../socket/index';
 import * as Sizes from '../../global/Sizes';
 import PropTypes from 'prop-types';
 import { naviToVideoService } from '../../screens/videoModel/VideoService';
+import { NavigationEvents } from 'react-navigation';
 
 
 import SecurtyImage from '../../components/securtyImage/index';
@@ -91,7 +92,17 @@ export default class HotActor extends PureComponent {
         data: []
     };
 
-    componentDidMount() {
+    // componentDidMount() {
+    //     Api.getActerList('info', 1, 5, (e) => {
+    //         if (e.data && e.data.length > 0) {
+    //             this.setState({
+    //                 data: e.data
+    //             });
+    //         }
+    //     });
+    // }
+
+    _onDidFocus = () => {
         Api.getActerList('info', 1, 5, (e) => {
             if (e.data && e.data.length > 0) {
                 this.setState({
@@ -104,6 +115,9 @@ export default class HotActor extends PureComponent {
     render() {
         return (
             <View style={{ flex: 1 }}>
+                <NavigationEvents
+                    onDidFocus={this._onDidFocus}
+                />
                 <FlatList
                     style={{ flex: 1 }}
                     data={this.state.data}

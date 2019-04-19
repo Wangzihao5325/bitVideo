@@ -4,6 +4,8 @@ import Api from '../../socket/index';
 import PropTypes from 'prop-types';
 
 import SecurtyImage from '../../components/securtyImage/index';
+import { NavigationEvents } from 'react-navigation';
+
 
 class Item extends PureComponent {
     static contextTypes = {
@@ -32,7 +34,18 @@ export default class HotSubject extends PureComponent {
         data: []
     };
 
-    componentDidMount() {
+    // componentDidMount() {
+    //     Api.getNewSubjectList(1, 8, (e) => {
+    //         if (e.data && e.data.length > 0) {
+    //             this.setState({
+    //                 data: e.data
+    //             });
+    //         }
+
+    //     });
+    // }
+
+    _onDidFocus = () => {
         Api.getNewSubjectList(1, 8, (e) => {
             if (e.data && e.data.length > 0) {
                 this.setState({
@@ -46,6 +59,9 @@ export default class HotSubject extends PureComponent {
     render() {
         return (
             <View style={{ width: '100%', height: 206, justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
+                <NavigationEvents
+                    onDidFocus={this._onDidFocus}
+                />
                 <FlatList
                     data={this.state.data}
                     horizontal={false}

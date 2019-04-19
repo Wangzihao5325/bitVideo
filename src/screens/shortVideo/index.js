@@ -25,24 +25,24 @@ class ShortVideo extends PureComponent {
         lastUrl: '',
     };
 
-    componentDidMount() {
-        Api.getShortVideoListById(10, 1, (e) => {
-            if (e.data.length > 0) {
-                this.setState({
-                    shortVideoList: e.data,
-                    playingIndex: -1,
-                    nowPage: e.current_page,
-                    lastPage: e.last_page,
-                    lastUrl: e.last_page_url,
-                });
-            } else {
-                //mock数据
-                this.setState({
-                    shortVideoList: shortVideoList
-                });
-            }
-        });
-    }
+    // componentDidMount() {
+    //     Api.getShortVideoListById(10, 1, (e) => {
+    //         if (e.data.length > 0) {
+    //             this.setState({
+    //                 shortVideoList: e.data,
+    //                 playingIndex: -1,
+    //                 nowPage: e.current_page,
+    //                 lastPage: e.last_page,
+    //                 lastUrl: e.last_page_url,
+    //             });
+    //         } else {
+    //             //mock数据
+    //             this.setState({
+    //                 shortVideoList: shortVideoList
+    //             });
+    //         }
+    //     });
+    // }
     _flatListRefresh = () => {
         this.setState({
             playingIndex: -1
@@ -104,6 +104,25 @@ class ShortVideo extends PureComponent {
         });
     }
 
+    _onDidFocus = () => {
+        Api.getShortVideoListById(10, 1, (e) => {
+            if (e.data.length > 0) {
+                this.setState({
+                    shortVideoList: e.data,
+                    playingIndex: -1,
+                    nowPage: e.current_page,
+                    lastPage: e.last_page,
+                    lastUrl: e.last_page_url,
+                });
+            } else {
+                //mock数据
+                this.setState({
+                    shortVideoList: shortVideoList
+                });
+            }
+        });
+    }
+
     //进入短视频详情
     _toDetail = (url, id, title, times) => {
         this.props.navigation.navigate('ShortVideoDetail', { ShortVideoUrl: `${url}`, id: id, title: title, times: times });
@@ -139,6 +158,7 @@ class ShortVideo extends PureComponent {
                 <SafeAreaView style={{ flex: 1 }}>
                     <NavigationEvents
                         onWillBlur={this._willBlur}
+                        onDidFocus={this._onDidFocus}
                     />
                     <View style={{ flex: 1, marginTop: 10 }}>
                         {this.state.shortVideoList &&
