@@ -46,9 +46,9 @@ class Item extends PureComponent {
     }
 
     watchHistoryPressing = () => {
-        // const { mineNavigation } = this.context;
-        // mineNavigation.navigate('VideoModel', { videoId: this.props.id });
-        naviToVideoService(this.props.id);
+        const { mineNavigation } = this.context;
+        mineNavigation.navigate('VideoModel', { videoId: this.props.id });
+        //naviToVideoService(this.props.id);
 
     }
     render() {

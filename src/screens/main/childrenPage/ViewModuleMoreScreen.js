@@ -47,8 +47,8 @@ export default class ViewModuleMoreScreen extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        //this.props.navigation.navigate('VideoModel', { videoId: id });
-        naviToVideoService(id);
+        this.props.navigation.navigate('VideoModel', { videoId: id });
+        //naviToVideoService(id);
     }
 
     _goBack = () => {

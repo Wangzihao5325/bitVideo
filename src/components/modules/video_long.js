@@ -61,10 +61,10 @@ export default class VideoLong extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        // if (this.props.navi) {
-        //     this.props.navi.navigate('VideoModel', { videoId: id });
-        // }
-        naviToVideoService(id);
+        if (this.props.navi) {
+            this.props.navi.navigate('VideoModel', { videoId: id });
+        }
+        //naviToVideoService(id);
     }
 
     _moreVideo = () => {

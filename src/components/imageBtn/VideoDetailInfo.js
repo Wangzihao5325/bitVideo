@@ -10,8 +10,8 @@ const hoHeight = hoWidth / 1.5;
 export default class VideoDetailInfo extends PureComponent {
 
     _goToSeeMovie = () => {
-        //this.props.navi.navigate('VideoModel', { videoId: this.props.id });
-        naviToVideoService(this.props.id);
+        this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+        //naviToVideoService(this.props.id);
     }
 
     render() {

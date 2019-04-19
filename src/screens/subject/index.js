@@ -48,9 +48,9 @@ class Ad extends PureComponent {
 
     _onPress = () => {
         if (this.state.type === 'VIDEO') {
-            // const { subjectNavigation } = this.context;
-            // subjectNavigation.navigate('VideoModel', { videoId: this.state.videoId });
-            naviToVideoService(this.state.videoId);
+            const { subjectNavigation } = this.context;
+            subjectNavigation.navigate('VideoModel', { videoId: this.state.videoId });
+            //naviToVideoService(this.state.videoId);
 
 
         }

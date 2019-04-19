@@ -18,9 +18,9 @@ class InnerItem extends PureComponent {
     }
 
     _press = () => {
-        // const { subjectNavigation } = this.context;
-        // subjectNavigation.navigate('VideoModel', { videoId: this.props.item.id });
-        naviToVideoService(this.props.item.id);
+        const { subjectNavigation } = this.context;
+        subjectNavigation.navigate('VideoModel', { videoId: this.props.item.id });
+        //naviToVideoService(this.props.item.id);
 
     }
 

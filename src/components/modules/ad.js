@@ -5,10 +5,10 @@ import { naviToVideoService } from '../../screens/videoModel/VideoService';
 
 export default class AdModule extends PureComponent {
     _watchAd = () => {
-        // if (this.props.navi) {
-        //     this.props.navi.navigate('VideoModel', { videoId: this.props.data.video_id, type: 'ad' });
-        // }
-        naviToVideoService(this.props.data.video_id, 'ad');
+        if (this.props.navi) {
+            this.props.navi.navigate('VideoModel', { videoId: this.props.data.video_id, type: 'ad' });
+        }
+        //naviToVideoService(this.props.data.video_id, 'ad');
     }
 
     render() {

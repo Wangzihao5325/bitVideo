@@ -62,7 +62,7 @@ export default class ShortVideoItem extends PureComponent {
         if (typeof this.props.playPress === 'function') {
             this.props.playPress(this.props.index);
             Api.getVideoInfo(this.props.videoId, (result, code, message) => {
-                if (result) {
+                if (result && result.is_can == 1) {
                     this.setState({
                         url: this.props.videoUrl
                     });

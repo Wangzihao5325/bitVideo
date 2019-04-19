@@ -76,8 +76,8 @@ export default class HotSubjectDetailScreen extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        //this.props.navigation.navigate('VideoModel', { videoId: id });
-        naviToVideoService(id);
+        this.props.navigation.navigate('VideoModel', { videoId: id });
+        //naviToVideoService(id);
     }
 
     render() {

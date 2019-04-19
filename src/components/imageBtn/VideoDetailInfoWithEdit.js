@@ -55,8 +55,8 @@ class VideoDetailInfoWithEdit extends PureComponent {
                 }
             });
         } else {
-            //this.props.navi.navigate('VideoModel', { videoId: this.props.id });
-            naviToVideoService(this.props.id);
+            this.props.navi.navigate('VideoModel', { videoId: this.props.id });
+            //naviToVideoService(this.props.id);
         }
     }
 

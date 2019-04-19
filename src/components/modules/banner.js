@@ -22,10 +22,10 @@ export default class BannerModule extends PureComponent {
     }
 
     _bannerPress = (id) => {
-        // if (this.props.navi) {
-        //     this.props.navi.navigate('VideoModel', { videoId: id });
-        // }
-        naviToVideoService(id);
+        if (this.props.navi) {
+            this.props.navi.navigate('VideoModel', { videoId: id });
+        }
+        //naviToVideoService(id);
     }
 
     itemGenerator = (dataArr) => {

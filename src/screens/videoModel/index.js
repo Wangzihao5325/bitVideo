@@ -19,6 +19,8 @@ import InputBottom from './videoComponent/inputBottom';
 import GuessLike from './videoComponent/guessLike';
 import AmazingComment from './videoComponent/amazingComment';
 import ToastRoot from '../../components/toast/index';
+import NavigationService from '../../app/NavigationService';
+
 
 import IntroHalfModal from './HalfModal';
 import Modal from "react-native-modal";
@@ -30,10 +32,10 @@ export default class VideoModel extends PureComponent {
     }
 
     componentDidMount() {
-        halfHourDetect();
+
     }
 
-    /*
+
     componentDidMount() {
         const videoId = this.props.navigation.getParam('videoId', 'undefine_Id');
         const type = this.props.navigation.getParam('type', 'video');
@@ -45,11 +47,10 @@ export default class VideoModel extends PureComponent {
         if (videoId !== 'undefine_Id') {
             //获取video信息
             Api.getVideoInfo(videoId, (result, code, message) => {
-                if (result) {
+                if (result && result.is_can == 1) {
                     store.dispatch(set_video_full_data(result));
                 } else {
-                    ToastRoot.show('当日观影次数已用完');
-                    this.props.navigation.goBack();
+                    NavigationService.navigate('ToastModel', { type: 'NoTimes' });
                 }
             });
             //根据video id 获取猜你喜欢信息
@@ -64,9 +65,11 @@ export default class VideoModel extends PureComponent {
                     store.dispatch(set_comment_list_data(result.data));
                 }
             });
+
+            halfHourDetect();
         }
     }
-    */
+
 
     componentWillUnmount() {
         store.dispatch(video_detail_data_reset());

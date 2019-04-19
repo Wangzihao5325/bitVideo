@@ -134,9 +134,9 @@ class RecommendItem extends PureComponent {
     }
 
     _goToMovieDetail = () => {
-        // const { searchNavigation } = this.context;
-        // searchNavigation.navigate('VideoModel', { videoId: this.props.id });
-        naviToVideoService(this.props.id);
+        const { searchNavigation } = this.context;
+        searchNavigation.navigate('VideoModel', { videoId: this.props.id });
+        //naviToVideoService(this.props.id);
 
     }
 

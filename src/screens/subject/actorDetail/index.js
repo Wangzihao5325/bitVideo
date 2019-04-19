@@ -49,8 +49,8 @@ export default class ActorDetail extends PureComponent {
     }
 
     _videoAvaterOnPress = (id) => {
-        //this.props.navigation.navigate('VideoModel', { videoId: id });
-        naviToVideoService(id);
+        this.props.navigation.navigate('VideoModel', { videoId: id });
+        //naviToVideoService(id);
 
     }
 
