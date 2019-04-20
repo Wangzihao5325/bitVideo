@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, View, FlatList, Share } from 'react-native';
+import { SafeAreaView, View, FlatList, Share, Image, Text } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import Api from '../../socket/index';
@@ -153,49 +153,59 @@ class ShortVideo extends PureComponent {
     }
 
     render() {
-        return (
-            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                <SafeAreaView style={{ flex: 1 }}>
-                    <NavigationEvents
-                        onWillBlur={this._willBlur}
-                        onDidFocus={this._onDidFocus}
-                    />
-                    <View style={{ flex: 1, marginTop: 10 }}>
-                        {this.state.shortVideoList &&
-                            <FlatList
-                                showsVerticalScrollIndicator={false}
-                                onRefresh={this._flatListRefresh}
-                                refreshing={false}
-                                onEndReached={this._getNextPageData}
-                                onEndReachedThreshold={0.1}
-                                data={this.state.shortVideoList}
-                                extraData={this.state}
-                                renderItem={
-                                    ({ item, index }) =>
-                                        <ShortVideoItem
-                                            share={this._goToInviteFriend}
-                                            detail={this._toDetail}
-                                            playPress={this._palyPress}
-                                            nowPlaying={this.state.playingIndex}
-                                            index={index}
-                                            title={item.title}
-                                            videoUrl={item.play_url}
-                                            coverUrl={item.cover_path}
-                                            playTimes={item.play_count}
-                                            videoId={item.id}
-                                        />
-                                }
-                            />}
-                    </View>
-                </SafeAreaView>
-            </View>
-        );
+        if (this.props.netSate) {
+            return (
+                <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                    <SafeAreaView style={{ flex: 1 }}>
+                        <NavigationEvents
+                            onWillBlur={this._willBlur}
+                            onDidFocus={this._onDidFocus}
+                        />
+                        <View style={{ flex: 1, marginTop: 10 }}>
+                            {this.state.shortVideoList &&
+                                <FlatList
+                                    showsVerticalScrollIndicator={false}
+                                    onRefresh={this._flatListRefresh}
+                                    refreshing={false}
+                                    onEndReached={this._getNextPageData}
+                                    onEndReachedThreshold={0.1}
+                                    data={this.state.shortVideoList}
+                                    extraData={this.state}
+                                    renderItem={
+                                        ({ item, index }) =>
+                                            <ShortVideoItem
+                                                share={this._goToInviteFriend}
+                                                detail={this._toDetail}
+                                                playPress={this._palyPress}
+                                                nowPlaying={this.state.playingIndex}
+                                                index={index}
+                                                title={item.title}
+                                                videoUrl={item.play_url}
+                                                coverUrl={item.cover_path}
+                                                playTimes={item.play_count}
+                                                videoId={item.id}
+                                            />
+                                    }
+                                />}
+                        </View>
+                    </SafeAreaView>
+                </View>
+            );
+        } else {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                    <Image style={{ height: 97, width: 71 }} source={require('../../image/usual/no_net.png')} />
+                    <Text style={{ fontSize: 14, color: 'rgb(167,167,167)', marginTop: 15 }}>页面内容加载失败</Text>
+                </View>
+            );
+        }
     }
 }
 
 function mapState2Props(store) {
     return {
         inviteCode: store.account.inviteCode,
+        netSate: store.net.isConnection
     }
 }
 
