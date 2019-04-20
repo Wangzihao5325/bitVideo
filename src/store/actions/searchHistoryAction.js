@@ -34,8 +34,12 @@ export function search_history_clear() {
     return { type: Types.CLEAR_SEARCH_HISTORY, data: [], isShow: false };
 }
 
-export function get_search_result_data(data) {
-    return { type: Types.GET_SEARCH_RESULT_DATA, result: data, isResult: true };
+export function get_search_result_data(data, nowPage, lastPage, title) {
+    return { type: Types.GET_SEARCH_RESULT_DATA, result: data, isResult: true, nowPage: nowPage, lastPage: lastPage, title: title };
+}
+
+export function append_search_result_data(data, nowPage, lastPage) {
+    return { type: Types.APPEND_SEARCH_RESULT_DATA, result: data, nowPage: nowPage, lastPage: lastPage };
 }
 
 export function reset_search_result_data() {

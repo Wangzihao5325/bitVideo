@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Api from '../../socket/index';
 import { connect } from 'react-redux';
 import store from '../../store/index';
-import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data, reset_search_result_data } from '../../store/actions/searchHistoryAction';
+import { store_dispath_search_history_add, store_dispath_search_history_get, search_history_clear, get_search_result_data, reset_search_result_data, append_search_result_data } from '../../store/actions/searchHistoryAction';
 import * as In18 from '../../global/In18';
 import * as Colors from '../../global/Colors';
 import { naviToVideoService } from '../../screens/videoModel/VideoService';
@@ -35,9 +35,9 @@ class SearchHeader extends PureComponent {
     _endEdit = () => {
         if (reg.searchInput && reg.searchInput.length > 0) {
             store_dispath_search_history_add(reg.searchInput);
-            Api.getSearchVideoByName(reg.searchInput, (e) => {
+            Api.getSearchVideoByName(reg.searchInput, 1, 14, (e) => {
                 if (e.data) {
-                    store.dispatch(get_search_result_data(e.data));
+                    store.dispatch(get_search_result_data(e.data, e.current_page, e.last_page, reg.searchInput));
                 }
             });
         }
@@ -58,9 +58,9 @@ class SearchHeader extends PureComponent {
 
 class HistoryListItem extends PureComponent {
     _searchByHistory = () => {
-        Api.getSearchVideoByName(this.props.title, (e) => {
+        Api.getSearchVideoByName(this.props.title, 1, 14, (e) => {
             if (e.data) {
-                store.dispatch(get_search_result_data(e.data));
+                store.dispatch(get_search_result_data(e.data, e.current_page, e.last_page, this.props.title));
             }
         });
     }
@@ -192,13 +192,26 @@ class ResultList extends PureComponent {
     static contextTypes = {
         searchNavigation: PropTypes.object
     }
+
+    _getNextPageData = () => {
+        if (this.props.nowPage !== this.props.lastPage) {
+            Api.getSearchVideoByName(this.props.title, this.props.nowPage + 1, 14, (e) => {
+                if (e.data) {
+                    store.dispatch(append_search_result_data(e.data, e.current_page, e.last_page));
+                }
+            });
+        }
+    }
+
     render() {
         const { searchNavigation } = this.context;
         return (
             <FlatList
+                onEndReached={this._getNextPageData}
+                onEndReachedThreshold={0.1}
                 showsVerticalScrollIndicator={false}
                 data={this.props.data}
-                renderItem={({ item }) => <VideoDetailInfo title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={searchNavigation} id={item.id} />}
+                renderItem={({ item }) => <VideoDetailInfo key={item} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={searchNavigation} id={item.id} />}
             />
         );
     }
@@ -233,7 +246,7 @@ class SearchModel extends PureComponent {
                     <SearchHeader />
                     {!this.props.isResult && this.props.isShow && <SearchHistory data={this.props.data} />}
                     {!this.props.isResult && <SearchRecommend />}
-                    {this.props.isResult && this.props.searchresult.length > 0 && < ResultList data={this.props.searchresult} />}
+                    {this.props.isResult && this.props.searchresult.length > 0 && < ResultList title={this.props.title} lastPage={this.props.lastPage} nowPage={this.props.nowPage} data={this.props.searchresult} />}
                     {this.props.isResult && this.props.searchresult.length == 0 && <Text style={{ alignSelf: 'center', marginTop: 40 }}>{In18.NO_SEARCH_RESULT}</Text>}
                 </SafeAreaView>
             </View>
@@ -246,7 +259,10 @@ function mapState2Props(store) {
         isShow: store.searchHistory.isShow,
         data: store.searchHistory.data,
         isResult: store.searchHistory.isResult,
-        searchresult: store.searchHistory.resultData
+        searchresult: store.searchHistory.resultData,
+        nowPage: store.searchHistory.nowPage,
+        lastPage: store.searchHistory.lastPage,
+        title: store.searchHistory.title
     }
 }
 

@@ -187,14 +187,9 @@ export default class DetailTypeScreen extends PureComponent {
     }
 
     _getNextPageData = () => {
-        // console.log('11122233');
-        // console.log(this.state.nowPage);
-        // console.log(this.state.totalPage);
         if (this.state.nowPage !== this.state.totalPage) {
             Api.getVideoTypeTrueList(this.state.type, this.state.innerType, this.state.sortType, this.state.nowPage + 1, 14, (e) => {
                 if (e) {
-                    // console.log('11122233');
-                    // console.log(e);
                     this.setState((preState, props) => {
                         let newList = preState.videoData.concat(e.list.data);
                         return {

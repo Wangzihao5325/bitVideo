@@ -330,8 +330,8 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
-    getSearchVideoByName(name, onSuccess, onError) {
-        const url = `/api/video/lists?video_title=${name}`;
+    getSearchVideoByName(name, page, limit, onSuccess, onError) {
+        const url = `/api/video/lists?video_title=${name}&page=${page}&limit=${limit}`;
         this.getFetch(url, onSuccess, onError);
     }
 
