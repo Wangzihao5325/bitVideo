@@ -8,6 +8,7 @@ import { store_dispath_search_history_add, store_dispath_search_history_get, sea
 import * as In18 from '../../global/In18';
 import * as Colors from '../../global/Colors';
 import { naviToVideoService } from '../../screens/videoModel/VideoService';
+import NavigationService from '../../app/NavigationService';
 
 
 import IconBtn from '../../components/imageBtn/IconBtn';
@@ -34,10 +35,12 @@ class SearchHeader extends PureComponent {
 
     _endEdit = () => {
         if (reg.searchInput && reg.searchInput.length > 0) {
+            NavigationService.navigate('IndicatorScreen');
             store_dispath_search_history_add(reg.searchInput);
             Api.getSearchVideoByName(reg.searchInput, 1, 14, (e) => {
                 if (e.data) {
                     store.dispatch(get_search_result_data(e.data, e.current_page, e.last_page, reg.searchInput));
+                    NavigationService.navigate('SearchModel');
                 }
             });
         }
@@ -58,9 +61,12 @@ class SearchHeader extends PureComponent {
 
 class HistoryListItem extends PureComponent {
     _searchByHistory = () => {
+        NavigationService.navigate('IndicatorScreen');
         Api.getSearchVideoByName(this.props.title, 1, 14, (e) => {
             if (e.data) {
                 store.dispatch(get_search_result_data(e.data, e.current_page, e.last_page, this.props.title));
+                NavigationService.navigate('SearchModel');
+
             }
         });
     }

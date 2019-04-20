@@ -3,6 +3,8 @@ import { SafeAreaView, View, FlatList } from 'react-native';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
 import { naviToVideoService } from '../../../screens/videoModel/VideoService';
+import NavigationService from '../../../app/NavigationService';
+
 
 
 import VideoAvater from '../../../components/imageBtn/VideoAvater';
@@ -25,6 +27,7 @@ export default class ViewModuleMoreScreen extends PureComponent {
     };
 
     componentDidMount() {
+        NavigationService.navigate('IndicatorScreen');
         const moduleId = this.props.navigation.getParam('moduleId', 'undefine_Id');
         const title = this.props.navigation.getParam('title', 'undefine_Id');
         this.setState({
@@ -37,6 +40,8 @@ export default class ViewModuleMoreScreen extends PureComponent {
                     data: e.data,
                     page: e.current_page,
                     totalPage: e.current_page + 1,
+                }, () => {
+                    NavigationService.navigate('ViewModuleMoreScreen');
                 });
             }
         });
