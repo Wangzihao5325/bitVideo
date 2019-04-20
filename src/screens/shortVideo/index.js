@@ -30,6 +30,12 @@ class ShortVideo extends PureComponent {
         }
     };
 
+    constructor(props) {
+        super(props);
+
+        this.showTime = true;
+    }
+
     state = {
         shortVideoList: null,
         playingIndex: -1,
@@ -118,6 +124,9 @@ class ShortVideo extends PureComponent {
     }
 
     _onDidFocus = () => {
+        if (this.showTime) {
+            NavigationService.navigate('IndicatorScreen');
+        }
         Api.getShortVideoListById(10, 1, (e) => {
             if (e.data.length > 0) {
                 this.setState({
@@ -126,6 +135,11 @@ class ShortVideo extends PureComponent {
                     nowPage: e.current_page,
                     lastPage: e.last_page,
                     lastUrl: e.last_page_url,
+                }, () => {
+                    if (this.showTime) {
+                        NavigationService.navigate('ShortVideoScreen');
+                        this.showTime = false
+                    }
                 });
             } else {
                 //mock数据

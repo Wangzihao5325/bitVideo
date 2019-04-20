@@ -5,6 +5,8 @@ import * as Sizes from '../../global/Sizes';
 import PropTypes from 'prop-types';
 import { naviToVideoService } from '../../screens/videoModel/VideoService';
 import { NavigationEvents } from 'react-navigation';
+import NavigationService from '../../app/NavigationService';
+
 
 
 import SecurtyImage from '../../components/securtyImage/index';
@@ -92,6 +94,11 @@ export default class HotActor extends PureComponent {
         data: []
     };
 
+    constructor(props) {
+        super(props);
+        this.showTime = true;
+    }
+
     // componentDidMount() {
     //     Api.getActerList('info', 1, 5, (e) => {
     //         if (e.data && e.data.length > 0) {
@@ -103,10 +110,18 @@ export default class HotActor extends PureComponent {
     // }
 
     _onDidFocus = () => {
+        if (this.showTime) {
+            NavigationService.navigate('IndicatorScreen');
+        }
         Api.getActerList('info', 1, 5, (e) => {
             if (e.data && e.data.length > 0) {
                 this.setState({
                     data: e.data
+                }, () => {
+                    if (this.showTime) {
+                        NavigationService.navigate('SubjectScreen');
+                        this.showTime = false
+                    }
                 });
             }
         });
