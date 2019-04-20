@@ -3,6 +3,8 @@ import { StyleSheet, SafeAreaView, View, FlatList } from 'react-native';
 import * as Colors from '../../../global/Colors';
 import Api from '../../../socket/index';
 import { naviToVideoService } from '../../../screens/videoModel/VideoService';
+import NavigationService from '../../../app/NavigationService';
+
 
 
 import ModalHeader from '../../../components/modal/ModalHeader';
@@ -31,6 +33,7 @@ export default class DetailTypeScreen extends PureComponent {
     }
 
     componentDidMount() {
+        NavigationService.navigate('IndicatorScreen');
         const type = this.props.navigation.getParam('type', '');
         const title = this.props.navigation.getParam('title', '');
         const innerType = this.props.navigation.getParam('innerType', '');
@@ -70,6 +73,7 @@ export default class DetailTypeScreen extends PureComponent {
             }, () => {
                 this.globalType.reset(globalTypeIndex);
                 this.innerType.reset(innerTypeIndex);
+                NavigationService.navigate('DetailTypeScreen');
             });
 
             Api.getVideoTypeTrueList(type, innerType, e.sort[0].key, 1, 14, (innerE) => {
@@ -223,7 +227,7 @@ export default class DetailTypeScreen extends PureComponent {
                         {this.state.videoData && this.state.videoData.length > 0 &&
                             <FlatList
                                 onEndReached={this._getNextPageData}
-                                onEndReachedThreshold={0.1}
+                                onEndReachedThreshold={1}
                                 style={{ alignSelf: 'center', width: '100%' }}
                                 data={this.state.videoData}
                                 columnWrapperStyle={{ marginTop: 20 }}

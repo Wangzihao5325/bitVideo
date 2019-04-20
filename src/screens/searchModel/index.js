@@ -208,7 +208,7 @@ class ResultList extends PureComponent {
         return (
             <FlatList
                 onEndReached={this._getNextPageData}
-                onEndReachedThreshold={0.1}
+                onEndReachedThreshold={1}
                 showsVerticalScrollIndicator={false}
                 data={this.props.data}
                 renderItem={({ item }) => <VideoDetailInfo key={item} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={searchNavigation} id={item.id} />}

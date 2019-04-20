@@ -181,7 +181,7 @@ class Content extends PureComponent {
                     onRefresh={this._flatListRefresh}
                     refreshing={false}
                     onEndReached={this._getNextPageData}
-                    onEndReachedThreshold={0.1}
+                    onEndReachedThreshold={1}
                 />
             );
         } else {

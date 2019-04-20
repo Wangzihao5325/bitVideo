@@ -118,7 +118,7 @@ export default class ActorDetail extends PureComponent {
                             onRefresh={this._flatListRefresh}
                             refreshing={false}
                             onEndReached={this._getNextPageData}
-                            onEndReachedThreshold={0.1}
+                            onEndReachedThreshold={1}
                             data={this.state.data}
                             columnWrapperStyle={{ marginTop: 20 }}
                             showsVerticalScrollIndicator={false}
