@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 16,
-        color: 'rgb(54,54,54)',
+        color: 'rgb(151,151,151)',
         marginLeft: 10,
         fontWeight: 'bold',
         marginTop: 16

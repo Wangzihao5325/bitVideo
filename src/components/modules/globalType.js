@@ -7,7 +7,7 @@ class Item extends PureComponent {
 
     _itemOnPress = () => {
         if (this.props.navi) {
-            this.props.navi.navigate('DetailTypeScreen', { type: this.props.type, title: this.props.title, innerType: this.props.innerType });
+            this.props.navi.navigate('DetailTypeScreen', { type: this.props.type, title: '分类', innerType: this.props.innerType });
         }
     }
 
