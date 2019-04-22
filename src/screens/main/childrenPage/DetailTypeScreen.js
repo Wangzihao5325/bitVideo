@@ -197,8 +197,8 @@ export default class DetailTypeScreen extends PureComponent {
                     this.setState((preState, props) => {
                         let newList = preState.videoData.concat(e.list.data);
                         return {
-                            data: newList,
-                            page: e.list.current_page,
+                            videoData: newList,
+                            nowPage: e.list.current_page,
                             totalPage: e.list.last_page
                         }
                     });
