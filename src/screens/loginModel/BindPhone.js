@@ -9,7 +9,8 @@ import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 import ModalHeader from '../../components/modal/ModalHeader';
 import ToastRoot from '../../components/toast/index';
-
+import store from '../../store/index';
+import { get_user_info } from '../../store/actions/accountAction';
 
 let reg = { mobile: '', password: '', code: '', verCode: '' };
 
@@ -39,7 +40,12 @@ class InputField extends PureComponent {
             if (message == 'success') {
                 Api.postTaskAndExchange('BIND_MOBILE', (e, code, message) => {
                     if (message === 'success') {
-                        modalNavigation.goBack();
+                        Api.getUserInfo((getUser_e, code, message) => {
+                            if (getUser_e) {
+                                store.dispatch(get_user_info(getUser_e));
+                                modalNavigation.goBack();
+                            }
+                        });
                     }
                 });
             } else {

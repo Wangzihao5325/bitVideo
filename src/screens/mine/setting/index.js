@@ -40,6 +40,10 @@ class SettingScreen extends PureComponent {
     }
 
     render() {
+        let mobileText = '未绑定';
+        if (this.props.bindMobileType == '0') {
+            mobileText = this.props.mobile
+        }
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <ModalHeader goBack={this._goBack} titleStyle={{ color: 'rgb(255,168,96)' }} backBtnColor='rgb(255,255,255)' title='设置' rightBtnMode='none' />
@@ -48,10 +52,11 @@ class SettingScreen extends PureComponent {
                     <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ height: 17, width: 12, marginLeft: 19 }} source={require('../../../image/mine/settings_account.png')} />
-                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>账号与安全</Text>
+                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>绑定手机</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                             <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
+                            <Text style={{ color: 'rgb(232,232,232)', fontSize: 14, marginRight: 3 }}>{mobileText}</Text>
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -103,6 +108,8 @@ class SettingScreen extends PureComponent {
 function mapState2Props(store) {
     return {
         lock: store.lock.isLock,
+        bindMobileType: store.account.type,
+        mobile: store.account.mobile
     }
 }
 
