@@ -588,6 +588,11 @@ class api {
         const url = `/api/version?platform=${platform}`;
         this.getFetch(url, onSuccess, onError);
     }
+
+    getVideoIsAccess(id, onSuccess, onError) {
+        const url = `/api/view-auth?video_id=${id}`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

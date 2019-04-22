@@ -61,6 +61,17 @@ export default class ShortVideoItem extends PureComponent {
     _toPlay = () => {
         if (typeof this.props.playPress === 'function') {
             this.props.playPress(this.props.index);
+            Api.getVideoIsAccess(this.props.videoId, (result) => {
+                if (result) {
+                    this.setState({
+                        url: this.props.videoUrl
+                    });
+                } else {
+                    this.props.playPress(-1);
+                    NavigationService.navigate('ToastModel', { type: 'NoTimes' });
+                }
+            });
+            /*
             Api.getVideoInfo(this.props.videoId, (result, code, message) => {
                 if (result && result.is_can == 1) {
                     this.setState({
@@ -71,6 +82,7 @@ export default class ShortVideoItem extends PureComponent {
                     NavigationService.navigate('ToastModel', { type: 'NoTimes' });
                 }
             });
+            */
         }
     }
     //http://youku.com-www-163.com/20180506/576_bf997390/index.m3u8  //this.props.videoUrl
