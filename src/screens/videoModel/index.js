@@ -32,11 +32,6 @@ export default class VideoModel extends PureComponent {
     }
 
     componentDidMount() {
-
-    }
-
-
-    componentDidMount() {
         const videoId = this.props.navigation.getParam('videoId', 'undefine_Id');
         const type = this.props.navigation.getParam('type', 'video');
         if (type == 'ad') {
