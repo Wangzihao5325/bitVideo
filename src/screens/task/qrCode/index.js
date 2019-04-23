@@ -25,10 +25,11 @@ class QrCode extends PureComponent {
     }
 
     componentDidMount() {
+        let fullUrl = Config.URL_REG.shareUrl + this.props.inviteCode;
         setTimeout(() => {
             this.setState({
                 qrCode: <QRCode
-                    value={Config.URL_REG.official_url}
+                    value={fullUrl}
                     size={200}
                     bgColor='rgb(34,34,34)'
                     fgColor='white' />

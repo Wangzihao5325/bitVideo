@@ -193,6 +193,7 @@ class ShortVideo extends PureComponent {
                     Api.getVersionMessage(PlatformKey, (e, code, message) => {
                         Config.URL_REG.official_url = e.official_url;
                         Config.URL_REG.invite_link = e.potato_invite_link;
+                        Config.URL_REG.shareUrl = e.share_url;
                         let AppVersion = DeviceInfo.getVersion();
                         if (AppVersion !== e.version_code) {
                             if (e.force) {
