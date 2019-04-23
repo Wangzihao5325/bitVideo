@@ -56,7 +56,7 @@ class SettingScreen extends PureComponent {
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                             <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
-                            <Text style={{ color: 'rgb(232,232,232)', fontSize: 14, marginRight: 3 }}>{mobileText}</Text>
+                            <Text style={{ color: 'rgb(232,232,232)', fontSize: 14, marginRight: 10 }}>{mobileText}</Text>
                         </View>
                     </View>
                 </TouchableHighlight>
