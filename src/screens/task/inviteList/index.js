@@ -74,7 +74,7 @@ export default class InviteList extends PureComponent {
 
                     <View style={styles.listHeader}>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 13, color: 'rgb(177,177,177)' }}>用户ID</Text>
+                            <Text style={{ fontSize: 13, color: 'rgb(177,177,177)' }}>用户昵称</Text>
                         </View>
                         {/* <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ fontSize: 13, color: 'rgb(177,177,177)' }}>手机号码</Text>
