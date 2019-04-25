@@ -7,6 +7,7 @@ import * as Sizes from '../../global/Sizes';
 import { isXDevice } from '../../global/utils/PixelUtil';
 import * as Colors from '../../global/Colors';
 import { halfHourDetect } from './VideoService';
+import { clear_video_url_and_type } from '../../store/actions/videoPlayAction';
 
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import XSVideo from './videoComponent/video';
@@ -68,6 +69,7 @@ export default class VideoModel extends PureComponent {
 
     componentWillUnmount() {
         store.dispatch(video_detail_data_reset());
+        store.dispatch(clear_video_url_and_type());
         halfHourDetect();
     }
 

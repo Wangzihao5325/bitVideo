@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Platform, Linking } from 'react-native';
+import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Platform, Linking, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import * as Config from '../../global/Config';
 
@@ -181,7 +181,13 @@ export default class ToastModel extends PureComponent {
             case 'NoTimes':
                 this.setState({
                     pop: <NoTimes />,
-                    isShowBackBtn: true
+                    isShowBackBtn: false
+                }, () => {
+                    if (Platform.OS == 'android') {
+                        this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+                            return true;
+                        });
+                    }
                 });
                 break;
             case 'PayBusy':
@@ -200,8 +206,20 @@ export default class ToastModel extends PureComponent {
                 this.setState({
                     pop: <NewVersionForce url={url} />,
                     isShowBackBtn: false
+                }, () => {
+                    if (Platform.OS == 'android') {
+                        this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+                            return true;
+                        });
+                    }
                 });
                 break;
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.backHandler) {
+            this.backHandler.remove();
         }
     }
 

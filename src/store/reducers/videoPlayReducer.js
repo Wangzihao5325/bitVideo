@@ -13,6 +13,11 @@ const reducer = (state = initialState, action) => {
                 videoType: action.videoType,
                 videoUrl: action.videoUrl
             };
+        case Types.CLEAR_VIDEO_URL_AND_TYPE:
+            return {
+                ...state,
+                ...initialState,
+            };
         default: return state;
     }
 };
