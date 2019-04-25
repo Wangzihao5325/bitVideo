@@ -14,10 +14,21 @@ import NavigationService from '../../../app/NavigationService';
 const reg = { times: null };
 
 class Item extends PureComponent {
+
     _press = () => {
         if (this.props.item.status == 0) {
             ToastRoot.show('该支付方式尚未开放，敬请期待!');
         } else {
+
+            if (this.props.item.key == 'wechatpay' && this.props.item.status == 1) {
+                if (this.props.price == '10.00' || this.props.price == '20.00' || this.props.price == '30.00' || this.props.price == '50.00' || this.props.price == '100.00' || this.props.price == '200.00' || this.props.price == '300.00' || this.props.price == '500.00') {
+
+                } else {
+                    ToastRoot.show('该支付方式尚未开放，敬请期待!');
+                    return;
+                }
+            }
+
             const time = new Date().getTime();
             if (reg.times && time - reg.times < 120000) {
                 if (this.props.callback) {
@@ -57,6 +68,14 @@ class Item extends PureComponent {
     }
     render() {
         let textColor = this.props.item.status == 0 ? 'rgb(88,90,102)' : 'rgb(222,222,222)';
+
+        if (this.props.item.key == 'wechatpay' && this.props.item.status == 1) {
+            if (this.props.price == '10.00' || this.props.price == '20.00' || this.props.price == '30.00' || this.props.price == '50.00' || this.props.price == '100.00' || this.props.price == '200.00' || this.props.price == '300.00' || this.props.price == '500.00') {
+
+            } else {
+                textColor = 'rgb(88,90,102)';
+            }
+        }
         return (
             <TouchableHighlight onPress={this._press} style={{ height: 70, flex: 1, backgroundColor: 'rgb(72,75,88)', marginHorizontal: 13, borderRadius: 8 }}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
@@ -194,8 +213,8 @@ export default class BuyCardPay extends PureComponent {
                         <FlatList
                             style={{ flex: 1 }}
                             data={this.state.payListArr}
-                            extraData={this.state.cardId}
-                            renderItem={({ item }) => <Item callback={this._ItemCallback} navi={this.props.navigation} cardId={this.state.cardId} item={item} />}
+                            extraData={this.state}
+                            renderItem={({ item }) => <Item price={this.state.price} callback={this._ItemCallback} navi={this.props.navigation} cardId={this.state.cardId} item={item} />}
                             ItemSeparatorComponent={() => <View style={{ height: 2, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }} />}
                         />
                     </View>
