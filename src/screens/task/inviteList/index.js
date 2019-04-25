@@ -86,7 +86,7 @@ export default class InviteList extends PureComponent {
                         <FlatList
                             style={{ flex: 1 }}
                             data={this.state.data}
-                            renderItem={({ item }) => <Item id={item.use_user_id} phone={item.invite_mobile} time={item.created_at} />}
+                            renderItem={({ item }) => <Item id={item.invite_name} phone={item.invite_mobile} time={item.created_at} />}
                         />
                     }
                     {this.state.data.length <= 0 &&
