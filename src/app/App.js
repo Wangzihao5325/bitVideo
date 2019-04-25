@@ -206,6 +206,13 @@ export default class App extends Component {
                 // lockReg.isLock = islock;
               }
 
+              //手势锁 广告页开启
+              if (store.getState().lock.isLock === 'true') {
+                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
+              } else {
+                NavigationService.navigate('AdModel');
+              }
+
               //设备号注册 获取用户信息
               if (userToken) {
                 Variables.account.token = userToken;
@@ -240,13 +247,6 @@ export default class App extends Component {
                   store.dispatch(setPageInfo(e.current_page, e.last_page));
                 }
               });
-
-              //手势锁 广告页开启
-              if (store.getState().lock.isLock === 'true') {
-                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
-              } else {
-                NavigationService.navigate('AdModel');
-              }
 
             })();
           });

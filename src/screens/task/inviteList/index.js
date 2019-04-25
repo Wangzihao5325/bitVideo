@@ -6,8 +6,6 @@ import Api from '../../../socket/index';
 import ModalHeader from '../../../components/modal/ModalHeader';
 import { FlatList } from 'react-native-gesture-handler';
 
-import shortVideoList from '../../../mock/shortVideoList';
-
 class Item extends PureComponent {
     render() {
         return (
@@ -87,7 +85,7 @@ export default class InviteList extends PureComponent {
                     {this.state.data.length > 0 &&
                         <FlatList
                             style={{ flex: 1 }}
-                            data={shortVideoList}
+                            data={this.state.data}
                             renderItem={({ item }) => <Item id={item.use_user_id} phone={item.invite_mobile} time={item.created_at} />}
                         />
                     }
