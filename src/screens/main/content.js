@@ -17,7 +17,7 @@ import VideoLong from '../../components/modules/video_long';
 import * as Config from '../../global/Config';
 import DeviceInfo from 'react-native-device-info';
 import NavigationService from '../../app/NavigationService';
-import { lockReg, newReg } from '../../global/Reg';
+import { lockReg, newReg, videoChanelReg } from '../../global/Reg';
 import { set_lock } from '../../store/actions/lockAction';
 import Variables from '../../global/Variables';
 import { get_device_account_info, get_user_info } from '../../store/actions/accountAction';
@@ -103,6 +103,14 @@ class Content extends PureComponent {
                                 // lockReg.isLock = islock;
                             }
 
+
+                            //手势锁 广告页开启
+                            if (store.getState().lock.isLock === 'true') {
+                                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
+                            } else {
+                                NavigationService.navigate('AdModel');
+                            }
+
                             //设备号注册 获取用户信息
                             if (userToken) {
                                 Variables.account.token = userToken;
@@ -130,6 +138,20 @@ class Content extends PureComponent {
                                 });
                             }
 
+                            //获取线路数据
+                            Api.getVideoChannel((e) => {
+                                let chanelDic = {};
+                                let dropdownArr = [];
+                                e.forEach((item) => {
+                                    let title = item.title;
+                                    let key = item.key;
+                                    chanelDic[title] = key;
+                                    dropdownArr.push(item.title);
+                                });
+                                videoChanelReg.mapArr = chanelDic;
+                                videoChanelReg.data = dropdownArr;
+                            });
+
                             //获取主页数据
                             Api.postGlobalTypeVideo('recommend', null, (e) => {
                                 if (e.data) {
@@ -138,12 +160,6 @@ class Content extends PureComponent {
                                 }
                             });
 
-                            //手势锁 广告页开启
-                            if (store.getState().lock.isLock === 'true') {
-                                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
-                            } else {
-                                NavigationService.navigate('AdModel');
-                            }
 
                         })();
                     });

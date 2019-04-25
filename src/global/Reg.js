@@ -16,8 +16,14 @@ let newReg = {
     isNew: true
 }
 
+let videoChanelReg = {
+    mapArr: {},
+    data: []
+}
+
 export {
     registerReg,
     lockReg,
-    newReg
+    newReg,
+    videoChanelReg
 };

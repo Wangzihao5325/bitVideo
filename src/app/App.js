@@ -12,7 +12,7 @@ import { MainStack, ShortVideoStack, SubjectStack, TaskStack, MineStack } from '
 import * as Colors from '../global/Colors';
 import Api from '../socket/index';
 import Variables from '../global/Variables';
-import { lockReg, newReg } from '../global/Reg';
+import { lockReg, newReg, videoChanelReg } from '../global/Reg';
 import * as Config from '../global/Config';
 import { change_net_state } from '../store/actions/netAction';
 
@@ -239,6 +239,20 @@ export default class App extends Component {
                   }
                 });
               }
+
+              //获取线路数据
+              Api.getVideoChannel((e) => {
+                let chanelDic = {};
+                let dropdownArr = [];
+                e.forEach((item) => {
+                  let title = item.title;
+                  let key = item.key;
+                  chanelDic[title] = key;
+                  dropdownArr.push(item.title);
+                });
+                videoChanelReg.mapArr = chanelDic;
+                videoChanelReg.data = dropdownArr;
+              });
 
               //获取主页数据
               Api.postGlobalTypeVideo('recommend', null, (e) => {

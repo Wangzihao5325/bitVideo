@@ -298,6 +298,11 @@ class api {
         this.getFetch(url, onSuccess, onError);
     }
 
+    getVideoInfoWithChannel(id, channel, onSuccess, onError) {
+        const url = `/api/video/info?video_id=${id}&channel=${channel}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
     postRecommendOrNegative(id, action, status, onSuccess, onError) {
         const url = '/api/video/user/appraise/add';
         let formData = new FormData();
@@ -592,6 +597,11 @@ class api {
 
     getVideoIsAccess(id, onSuccess, onError) {
         const url = `/api/view-auth?video_id=${id}`;
+        this.getFetch(url, onSuccess, onError);
+    }
+
+    getVideoChannel(onSuccess, onError) {
+        const url = '/api/video/channel';
         this.getFetch(url, onSuccess, onError);
     }
 }

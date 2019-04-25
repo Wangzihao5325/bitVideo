@@ -3,10 +3,30 @@ import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import * as MathUtil from '../../../global/utils/MathUtil';
 import * as In18 from '../../../global/In18';
+import { videoChanelReg } from '../../../global/Reg';
+import store from '../../../store/index';
+import { set_video_full_data } from '../../../store/actions/videoDetailInfoAction';
+import Api from '../../../socket/index';
+import NavigationService from '../../../app/NavigationService';
 
-import IconBtn from '../../../components/imageBtn/IconBtnWithTitle';
+
+import ModalDropdown from '../../../components/dropdown/ModalDropdown';
 
 class UsualInfoTab extends PureComponent {
+    selectChanel = (index, value) => {
+        let videoId = store.getState().videoDeatilInfo.id;
+        let key = videoChanelReg.mapArr[value];
+        if (videoId) {
+            Api.getVideoInfoWithChannel(videoId, key, (result, code, message) => {
+                if (result && result.is_can == 1) {
+                    store.dispatch(set_video_full_data(result));
+                } else {
+                    NavigationService.navigate('ToastModel', { type: 'NoTimes' });
+                }
+            });
+
+        }
+    }
     //to do 后续优化，视频不变的部分与影片来源部分进行分离
     render() {
         let types = [];
@@ -37,10 +57,19 @@ class UsualInfoTab extends PureComponent {
                         <Text style={styles.sourceTitleText}>{sourceText}</Text>
                     </View>
                 </View>
-                {/* <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <IconBtn titleStyle={{ fontSize: 12, color: 'rgb(32,32,32)' }} source={require('../../../image/videoDetail/feedBack.png')} title='反馈' onPress={() => console.log('123')} />
-                    <IconBtn titleStyle={{ fontSize: 12, color: 'rgb(32,32,32)' }} source={require('../../../image/videoDetail/video_share.png')} title='分享' onPress={() => console.log('123')} />
-                </View> */}
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <ModalDropdown
+                        onSelect={this.selectChanel}
+                        defaultIndex={0}
+                        defaultValue={videoChanelReg.data[0]}
+                        textStyle={{ color: 'rgb(255,169,95)', fontSize: 13, flex: 1, lineHeight: 38 }}
+                        style={{ height: 38, width: 95, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                        options={videoChanelReg.data}
+                        dropdownStyle={{ height: 38 * videoChanelReg.data.length, width: 95, backgroundColor: 'rgb(51,57,62)' }}
+                        dropdownTextStyle={{ color: 'white', fontSize: 13, lineHeight: 20 }}
+                        dropdownTextHighlightStyle={{ color: 'white', fontSize: 13, textAlign: 'center', backgroundColor: 'rgb(51,57,62)' }}
+                    />
+                </View>
             </View>
         );
     }
@@ -62,7 +91,7 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        alignItems:'center',
+        alignItems: 'center',
         marginTop: 10,
         borderBottomColor: 'rgb(133,148,156)',
         borderBottomWidth: StyleSheet.hairlineWidth,
