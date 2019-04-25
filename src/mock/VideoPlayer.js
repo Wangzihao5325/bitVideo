@@ -440,6 +440,8 @@ export default class VideoPlayer extends Component {
             state.resizeMode = state.isFullscreen === true ? 'contain' : 'contain';
         }
 
+        this._hideControls();
+
         if (state.isFullscreen) {
             typeof this.events.onEnterFullscreen === 'function' && this.events.onEnterFullscreen();
         }
@@ -486,6 +488,7 @@ export default class VideoPlayer extends Component {
         let state = this.state;
         if (state.isFullscreen) {
             state.isFullscreen = !state.isFullscreen;
+            this._hideControls();
             typeof this.events.onExitFullscreen === 'function' && this.events.onExitFullscreen();
             this.setState(state);
         } else {
