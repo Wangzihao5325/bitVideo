@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Platform, Linking } from 'react-native';
 import PropTypes from 'prop-types';
+import * as Config from '../../global/Config';
+
 
 class NewVersionForce extends PureComponent {
     static contextTypes = {
@@ -65,7 +67,7 @@ class PayBusy extends PureComponent {
 
     _btnPress = () => {
         const { toastNavigation } = this.context;
-        Linking.openURL('https://github.com');
+        Linking.openURL(Config.URL_REG.invite_link);
         toastNavigation.goBack();
     }
 
