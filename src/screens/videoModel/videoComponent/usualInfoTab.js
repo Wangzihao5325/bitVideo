@@ -65,8 +65,8 @@ class UsualInfoTab extends PureComponent {
                         textStyle={{ color: 'rgb(255,169,95)', fontSize: 13, flex: 1, lineHeight: 38 }}
                         style={{ height: 38, width: 95, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                         options={videoChanelReg.data}
-                        dropdownStyle={{ height: 38 * videoChanelReg.data.length, width: 95, backgroundColor: 'rgb(51,57,62)' }}
-                        dropdownTextStyle={{ color: 'white', fontSize: 13, lineHeight: 20 }}
+                        dropdownStyle={{ height: 38 * videoChanelReg.data.length, width: 95, backgroundColor: 'rgb(51,57,62)',marginTop:2 }}
+                        dropdownTextStyle={{ color: 'white', textAlign: 'center', backgroundColor: 'rgb(51,57,62)', fontSize: 13, lineHeight: 20 }}
                         dropdownTextHighlightStyle={{ color: 'white', fontSize: 13, textAlign: 'center', backgroundColor: 'rgb(51,57,62)' }}
                     />
                 </View>
