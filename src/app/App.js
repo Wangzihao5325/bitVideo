@@ -216,8 +216,9 @@ export default class App extends Component {
                   }
                 });
               } else {
+                let platformWords = Platform.OS === 'ios' ? 'I' : 'A';
                 let deviceId = DeviceInfo.getUniqueID();
-                Api.postRegisterByDeviceId(deviceId, clipboardContent, (e, code, message) => {
+                Api.postRegisterByDeviceId(deviceId, clipboardContent, platformWords, (e, code, message) => {
                   if (e && e.api_token) {
                     AsyncStorage.setItem('User_Token', e.api_token);
                     Variables.account.token = e.api_token;

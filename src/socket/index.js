@@ -211,10 +211,11 @@ class api {
         this.postFetch(url, formData, onSuccess, onError);
     }
 
-    postRegisterByDeviceId(id, invite, onSuccess, onError) {
+    postRegisterByDeviceId(id, invite, platformWords, onSuccess, onError) {
         const url = '/api/register-device';
         let formData = new FormData();
         formData.append('device_code', id);
+        formData.append('platform', platformWords);
         if (invite) {
             formData.append('invite_code', invite);
         }
