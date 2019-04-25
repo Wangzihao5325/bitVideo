@@ -210,6 +210,9 @@ export default class VideoPlayer extends Component {
     _onProgress(data = {}) {
         let state = this.state;
         state.currentTime = data.currentTime;
+        if (state.loading) {
+            state.loading = false;
+        }
 
         if (!state.seeking) {
             const position = this.calculateSeekerPosition();
@@ -776,6 +779,8 @@ export default class VideoPlayer extends Component {
                     this.seekTo(time);
                     this.setControlTimeout();
                     state.seeking = false;
+                    state.loading = true;
+                    this.loadAnimation();
                 }
                 this.setState(state);
             }
