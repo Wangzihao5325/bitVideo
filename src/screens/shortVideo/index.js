@@ -8,20 +8,9 @@ import * as Colors from '../../global/Colors';
 
 import shortVideoList from '../../mock/shortVideoList';
 import ShortVideoItem from './ShortVideoItem';
-
-//restart
-import store from '../../store/index';
-import * as Config from '../../global/Config';
-import DeviceInfo from 'react-native-device-info';
 import NavigationService from '../../app/NavigationService';
-import { lockReg, newReg, videoChanelReg } from '../../global/Reg';
-import { set_lock } from '../../store/actions/lockAction';
-import Variables from '../../global/Variables';
-import { get_device_account_info, get_user_info } from '../../store/actions/accountAction';
-import { change_net_state } from '../../store/actions/netAction';
-import { setMainPageData, setPageInfo } from '../../store/actions/mainPageDataAction';
 
-const reg = { typeMap2Id: {}, type: [] };
+const reg = { typeMap2Id: {}, type: [], appearTimes: 0 };
 class ShortVideo extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -44,24 +33,32 @@ class ShortVideo extends PureComponent {
         lastUrl: '',
     };
 
-    // componentDidMount() {
-    //     Api.getShortVideoListById(10, 1, (e) => {
-    //         if (e.data.length > 0) {
-    //             this.setState({
-    //                 shortVideoList: e.data,
-    //                 playingIndex: -1,
-    //                 nowPage: e.current_page,
-    //                 lastPage: e.last_page,
-    //                 lastUrl: e.last_page_url,
-    //             });
-    //         } else {
-    //             //mock数据
-    //             this.setState({
-    //                 shortVideoList: shortVideoList
-    //             });
-    //         }
-    //     });
-    // }
+    componentDidMount() {
+        if (this.showTime) {
+            NavigationService.navigate('IndicatorScreen');
+        }
+        Api.getShortVideoListById(10, 1, (e) => {
+            if (e.data.length > 0) {
+                this.setState({
+                    shortVideoList: e.data,
+                    playingIndex: -1,
+                    nowPage: e.current_page,
+                    lastPage: e.last_page,
+                    lastUrl: e.last_page_url,
+                }, () => {
+                    if (this.showTime) {
+                        NavigationService.navigate('ShortVideoScreen');
+                        this.showTime = false
+                    }
+                });
+            } else {
+                //mock数据
+                this.setState({
+                    shortVideoList: shortVideoList
+                });
+            }
+        });
+    }
     _flatListRefresh = () => {
         this.setState({
             playingIndex: -1
@@ -122,34 +119,34 @@ class ShortVideo extends PureComponent {
             playingIndex: -1
         });
     }
-
-    _onDidFocus = () => {
-        if (this.showTime) {
-            NavigationService.navigate('IndicatorScreen');
-        }
-        Api.getShortVideoListById(10, 1, (e) => {
-            if (e.data.length > 0) {
-                this.setState({
-                    shortVideoList: e.data,
-                    playingIndex: -1,
-                    nowPage: e.current_page,
-                    lastPage: e.last_page,
-                    lastUrl: e.last_page_url,
-                }, () => {
-                    if (this.showTime) {
-                        NavigationService.navigate('ShortVideoScreen');
-                        this.showTime = false
-                    }
-                });
-            } else {
-                //mock数据
-                this.setState({
-                    shortVideoList: shortVideoList
-                });
+    /*
+        _onDidFocus = () => {
+            if (this.showTime) {
+                NavigationService.navigate('IndicatorScreen');
             }
-        });
-    }
-
+            Api.getShortVideoListById(10, 1, (e) => {
+                if (e.data.length > 0) {
+                    this.setState({
+                        shortVideoList: e.data,
+                        playingIndex: -1,
+                        nowPage: e.current_page,
+                        lastPage: e.last_page,
+                        lastUrl: e.last_page_url,
+                    }, () => {
+                        if (this.showTime) {
+                            NavigationService.navigate('ShortVideoScreen');
+                            this.showTime = false
+                        }
+                    });
+                } else {
+                    //mock数据
+                    this.setState({
+                        shortVideoList: shortVideoList
+                    });
+                }
+            });
+        }
+    */
     //进入短视频详情
     _toDetail = (url, id, title, times) => {
         this.props.navigation.navigate('ShortVideoDetail', { ShortVideoUrl: `${url}`, id: id, title: title, times: times });
@@ -179,186 +176,44 @@ class ShortVideo extends PureComponent {
         }
     }
 
-    _restartApp = () => {
-        let that = this;
-        NetInfo.isConnected.fetch().done((isConnected) => {
-            if (isConnected) {
-                store.dispatch(change_net_state(true));
-                Api.getDomain((outerE) => {
-                    Config.SERVICE_URL.domainUrl = `http://${outerE}`;
-                    let PlatformKey = 'I';
-                    if (Platform.OS === 'android') {
-                        PlatformKey = 'A';
-                    }
-                    Api.getVersionMessage(PlatformKey, (e, code, message) => {
-                        Config.URL_REG.official_url = e.official_url;
-                        Config.URL_REG.invite_link = e.potato_invite_link;
-                        Config.URL_REG.shareUrl = e.share_url;
-                        let AppVersion = DeviceInfo.getVersion();
-                        if (AppVersion !== e.version_code) {
-                            if (e.force) {
-                                //强制更新
-                                NavigationService.navigate('ToastModel', { type: 'NewVersionForce', packageUrl: e.package_path });
-                                return;
-                            } else {
-                                //非强制更新
-                                NavigationService.navigate('ToastModel', { type: 'NewVersion', packageUrl: e.package_path });
-                            }
-                        }
-                        (async function () {
-                            let password = await AsyncStorage.getItem('Lock_Password');
-                            let islock = await AsyncStorage.getItem('Lock_Islock');
-                            let userToken = await AsyncStorage.getItem('User_Token');
-                            let clipboardContent = await Clipboard.getString();
-                            if (userToken) {
-                                newReg.isNew = false;
-                            }
-
-                            if (password) {
-                                lockReg.password = password;
-                            }
-                            if (islock) {
-                                store.dispatch(set_lock(islock));
-                                // lockReg.isLock = islock;
-                            }
-
-                            //手势锁 广告页开启
-                            if (store.getState().lock.isLock === 'true') {
-                                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
-                            } else {
-                                NavigationService.navigate('AdModel');
-                            }
-
-                            //设备号注册 获取用户信息
-                            if (userToken) {
-                                Variables.account.token = userToken;
-                                Variables.account.deviceToken = userToken;
-                                Api.getUserInfo((e, code, message) => {
-                                    if (e) {
-                                        store.dispatch(get_user_info(e));
-                                    }
-                                });
-                            } else {
-                                let platformWords = Platform.OS === 'ios' ? 'I' : 'A';
-                                let deviceId = DeviceInfo.getUniqueID();
-                                Api.postRegisterByDeviceId(deviceId, clipboardContent, platformWords, (e, code, message) => {
-                                    if (e && e.api_token) {
-                                        AsyncStorage.setItem('User_Token', e.api_token);
-                                        Variables.account.token = e.api_token;
-                                        Variables.account.deviceToken = e.api_token;
-                                        store.dispatch(get_device_account_info(e));
-                                        Api.getUserInfo((e, code, message) => {
-                                            if (e) {
-                                                store.dispatch(get_user_info(e));
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-
-                            //获取线路数据
-                            Api.getVideoChannel((e) => {
-                                let chanelDic = {};
-                                let dropdownArr = [];
-                                e.forEach((item) => {
-                                    let title = item.title;
-                                    let key = item.key;
-                                    chanelDic[title] = key;
-                                    dropdownArr.push(item.title);
-                                });
-                                videoChanelReg.mapArr = chanelDic;
-                                videoChanelReg.data = dropdownArr;
-                            });
-
-                            //获取主页数据
-                            Api.postGlobalTypeVideo('recommend', null, (e) => {
-                                if (e.data) {
-                                    store.dispatch(setMainPageData(e.data));
-                                    store.dispatch(setPageInfo(e.current_page, e.last_page));
-                                }
-                            });
-
-                            //获取短视频数据
-                            Api.getShortVideoListById(10, 1, (e) => {
-                                if (e.data.length > 0) {
-                                    that.setState({
-                                        shortVideoList: e.data,
-                                        playingIndex: -1,
-                                        nowPage: e.current_page,
-                                        lastPage: e.last_page,
-                                        lastUrl: e.last_page_url,
-                                    });
-                                } else {
-                                    //mock数据
-                                    that.setState({
-                                        shortVideoList: shortVideoList
-                                    });
-                                }
-                            });
-
-                        })();
-                    });
-                });
-            } else {
-
-            }
-        });
-    }
-
     render() {
-        if (this.props.netSate) {
-            return (
-                <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                    <SafeAreaView style={{ flex: 1 }}>
-                        <NavigationEvents
-                            onWillBlur={this._willBlur}
-                            onDidFocus={this._onDidFocus}
-                        />
-                        <View style={{ flex: 1, marginTop: 10 }}>
-                            {this.state.shortVideoList &&
-                                <FlatList
-                                    showsVerticalScrollIndicator={false}
-                                    onRefresh={this._flatListRefresh}
-                                    refreshing={false}
-                                    onEndReached={this._getNextPageData}
-                                    onEndReachedThreshold={1}
-                                    data={this.state.shortVideoList}
-                                    extraData={this.state}
-                                    renderItem={
-                                        ({ item, index }) =>
-                                            <ShortVideoItem
-                                                share={this._goToInviteFriend}
-                                                detail={this._toDetail}
-                                                playPress={this._palyPress}
-                                                nowPlaying={this.state.playingIndex}
-                                                index={index}
-                                                title={item.title}
-                                                videoUrl={item.play_url}
-                                                coverUrl={item.cover_path}
-                                                playTimes={item.play_count}
-                                                videoId={item.id}
-                                            />
-                                    }
-                                />}
-                        </View>
-                    </SafeAreaView>
-                </View>
-            );
-        } else {
-            return (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                    <Image style={{ height: 97, width: 71 }} source={require('../../image/usual/no_net.png')} />
-                    <Text style={{ fontSize: 14, color: 'rgb(167,167,167)', marginTop: 15 }}>页面内容加载失败</Text>
-                    <TouchableHighlight
-                        style={{ height: 27, width: 70, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(79,86,90)', marginTop: 26, borderRadius: 5 }}
-                        underlayColor='transparent'
-                        onPress={this._restartApp}
-                    >
-                        <Text style={{ color: 'white', fontSize: 14 }}>点击刷新</Text>
-                    </TouchableHighlight>
-                </View>
-            );
-        }
+        return (
+            <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <SafeAreaView style={{ flex: 1 }}>
+                    <NavigationEvents
+                        onWillBlur={this._willBlur}
+                        onDidFocus={this._onDidFocus}
+                    />
+                    <View style={{ flex: 1, marginTop: 10 }}>
+                        {this.state.shortVideoList &&
+                            <FlatList
+                                showsVerticalScrollIndicator={false}
+                                onRefresh={this._flatListRefresh}
+                                refreshing={false}
+                                onEndReached={this._getNextPageData}
+                                onEndReachedThreshold={1}
+                                data={this.state.shortVideoList}
+                                extraData={this.state}
+                                renderItem={
+                                    ({ item, index }) =>
+                                        <ShortVideoItem
+                                            share={this._goToInviteFriend}
+                                            detail={this._toDetail}
+                                            playPress={this._palyPress}
+                                            nowPlaying={this.state.playingIndex}
+                                            index={index}
+                                            title={item.title}
+                                            videoUrl={item.play_url}
+                                            coverUrl={item.cover_path}
+                                            playTimes={item.play_count}
+                                            videoId={item.id}
+                                        />
+                                }
+                            />}
+                    </View>
+                </SafeAreaView>
+            </View>
+        );
     }
 }
 

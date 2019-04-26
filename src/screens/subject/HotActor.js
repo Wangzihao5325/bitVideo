@@ -99,16 +99,25 @@ export default class HotActor extends PureComponent {
         this.showTime = true;
     }
 
-    // componentDidMount() {
-    //     Api.getActerList('info', 1, 5, (e) => {
-    //         if (e.data && e.data.length > 0) {
-    //             this.setState({
-    //                 data: e.data
-    //             });
-    //         }
-    //     });
-    // }
+    componentDidMount() {
+        if (this.showTime) {
+            NavigationService.navigate('IndicatorScreen');
+        }
+        Api.getActerList('info', 1, 5, (e) => {
+            if (e.data && e.data.length > 0) {
+                this.setState({
+                    data: e.data
+                }, () => {
+                    if (this.showTime) {
+                        NavigationService.navigate('SubjectScreen');
+                        this.showTime = false
+                    }
+                });
+            }
+        });
+    }
 
+    /*
     _onDidFocus = () => {
         if (this.showTime) {
             NavigationService.navigate('IndicatorScreen');
@@ -126,6 +135,7 @@ export default class HotActor extends PureComponent {
             }
         });
     }
+    */
 
     render() {
         return (

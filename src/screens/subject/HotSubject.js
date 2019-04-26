@@ -34,17 +34,18 @@ export default class HotSubject extends PureComponent {
         data: []
     };
 
-    // componentDidMount() {
-    //     Api.getNewSubjectList(1, 8, (e) => {
-    //         if (e.data && e.data.length > 0) {
-    //             this.setState({
-    //                 data: e.data
-    //             });
-    //         }
+    componentDidMount() {
+        Api.getNewSubjectList(1, 8, (e) => {
+            if (e.data && e.data.length > 0) {
+                this.setState({
+                    data: e.data
+                });
+            }
 
-    //     });
-    // }
+        });
+    }
 
+    /*
     _onDidFocus = () => {
         Api.getNewSubjectList(1, 8, (e) => {
             if (e.data && e.data.length > 0) {
@@ -55,6 +56,7 @@ export default class HotSubject extends PureComponent {
 
         });
     }
+    */
 
     render() {
         return (
