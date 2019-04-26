@@ -15,7 +15,7 @@ class Item extends PureComponent {
         return (
             <TouchableHighlight style={styles.itemContainer} onPress={this._itemOnPress} underlayColor='transparent'>
                 <View style={styles.itemFlexView}>
-                    <SecurtyImage style={styles.image} source={{ uri: this.props.uri }} />
+                    <SecurtyImage default={require('../../image/usual/avater_load_failed.png')} style={styles.image} source={{ uri: this.props.uri }} />
                     <Text style={styles.titleText}>{this.props.title}</Text>
                 </View>
             </TouchableHighlight>

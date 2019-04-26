@@ -70,7 +70,7 @@ class Item extends PureComponent {
                 </ImageBackground>
                 <View style={styles.titleContainer}>
                     <TouchableHighlight style={styles.itemImage} underlayColor='transparent' onPress={this._toActorDetail}>
-                        <SecurtyImage style={styles.itemImage} source={{ uri: this.props.item.cover_path }} />
+                        <SecurtyImage default={require('../../image/usual/avater_load_failed.png')} style={styles.itemImage} source={{ uri: this.props.item.cover_path }} />
                     </TouchableHighlight>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 18, color: 'rgb(229,187,134)', marginLeft: 14 }}>{this.props.item.name}</Text>

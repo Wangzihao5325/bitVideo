@@ -34,7 +34,8 @@ const Cover = (props) => {
                 <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={styles.coverContainer} source={{ uri: `${props.source}` }} />
             </TouchableHighlight>
             <TouchableHighlight style={styles.coverBtn} onPress={props.playPress} underlayColor='transparent'>
-                <Icon name='play' size={30} color='#909090' />
+                {/* <Icon name='play' size={30} color='#909090' /> */}
+                <Image style={{ height: 45, width: 45 }} source={require('../../image/usual/shortPlay.png')} />
             </TouchableHighlight>
             <Text style={styles.coverTitle} numberOfLines={1} ellipsizeMode='middle'>{props.title}</Text>
         </View>

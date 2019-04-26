@@ -20,7 +20,7 @@ export default class VideoDetailInfo extends PureComponent {
                 <View style={[styles.flexView, styles.borderBottom]}>
                     <View style={styles.imageContainer}>
                         {/* <Image style={styles.imageStyle} source={this.props.source} defaultSource={require('../../image/usual/image_load_failed.png')} /> */}
-                        <SecurtyImage imageStyle={{ height: hoHeight, width: hoWidth, borderRadius: 5 }} style={styles.imageStyle} source={this.props.source} />
+                        <SecurtyImage default={require('../../image/usual/image_load_failed_ho.png')} imageStyle={{ height: hoHeight, width: hoWidth, borderRadius: 5 }} style={styles.imageStyle} source={this.props.source} />
                     </View>
                     <View style={styles.infoContainer}>
                         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.titleText}>{this.props.title}</Text>

@@ -21,7 +21,7 @@ class Item extends PureComponent {
             <TouchableHighlight style={styles.itemContainer} onPress={this._press} underlayColor='transparent'>
                 <View style={styles.itemFlexView}>
                     {/* <Image style={styles.image} source={{ uri: this.props.item.cover_img }} /> */}
-                    <SecurtyImage style={styles.image} imageStyle={{ height: 66, width: 66, borderRadius: 33 }} source={{ uri: this.props.item.cover_img }} />
+                    <SecurtyImage style={styles.image} default={require('../../../image/usual/avater_load_failed.png')} imageStyle={{ height: 66, width: 66, borderRadius: 33 }} source={{ uri: this.props.item.cover_img }} />
                     <Text style={styles.text}>{this.props.item.title}</Text>
                 </View>
             </TouchableHighlight>
