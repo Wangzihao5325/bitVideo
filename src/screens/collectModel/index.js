@@ -90,7 +90,11 @@ class CollectModel extends PureComponent {
                             data={this.props.data}
                             renderItem={({ item }) => <VideoDetailInfoWithEditByCollect isSelect={this.props.isSelectMode} title={item.title} intro={item.intro} director={item.director} source={{ uri: item.cover_path }} navi={this.props.navigation} id={item.id} />}
                         />}
-                    {this.props.data.length == 0 && <View style={styles.listStyle} />}
+                    {(!this.props.data || this.props.data.length == 0) &&
+                        <View style={[styles.listStyle, { justifyContent: 'center', alignItems: 'center' }]} >
+                            <Text style={{ color: 'rgb(153,153,153)', fontSize: 14 }}>暂无收藏记录~~</Text>
+                            <Text style={{ color: 'rgb(153,153,153)', fontSize: 14, marginTop: 10 }}>快去收藏视频吧！</Text>
+                        </View>}
                     {this.props.isSelectMode && <BottomBtn deleteSet={this.props.deleteSet} />}
                 </View>
             </SafeAreaView>
