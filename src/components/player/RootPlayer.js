@@ -1,11 +1,56 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Platform, StatusBar } from 'react-native';
+import { View, StyleSheet, Platform, StatusBar, Image, Text } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 import * as Colors from '../../global/Colors';
 
 import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-controls';
 import Orientation from 'react-native-orientation';
+
+class PalyerAd extends PureComponent {
+    state = {
+        isShow: true,
+        time: 5,
+        image: Math.random() > 0.5 ? require('../../image/usual/player_ad_1.png') : require('../../image/usual/player_ad_2.png')
+    }
+
+    componentDidMount() {
+        this.timer = setInterval(() => {
+            let time = this.state.time - 1;
+            if (time > 0) {
+                this.setState({
+                    time: time
+                });
+            } else {
+                this.setState({
+                    time: time,
+                    isShow: false
+                }, () => {
+                    clearInterval(this.timer);
+                });
+            }
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+    }
+
+    render() {
+        if (this.state.isShow) {
+            return (
+                <View style={{ height: 200, width: Sizes.DEVICE_WIDTH, zIndex: 20, position: 'absolute', top: 0, left: 0 }}>
+                    <Image style={{ height: 200, width: Sizes.DEVICE_WIDTH }} source={this.state.image} />
+                    <View style={{ position: 'absolute', top: 5, right: 5 }}><Text style={{ color: 'white' }}>{`${this.state.time}秒`}</Text></View>
+                </View>
+            )
+        } else {
+            return (null);
+        }
+    }
+}
 
 //'https://pp.605ziyuan.com/20180905/btValsHQ/index.m3u8'
 export default class RootPlayer extends PureComponent {
@@ -72,6 +117,7 @@ export default class RootPlayer extends PureComponent {
                             disableFullscreen={this.props.disableFullscreen}
                         />
                     }
+                    {this.props.addShow && <PalyerAd />}
                 </View>
             );
         } else {

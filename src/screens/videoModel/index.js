@@ -101,7 +101,7 @@ export default class VideoModel extends PureComponent {
             <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <SafeAreaView style={{ flex: 1 }}>
                     {Platform.OS === 'ios' && <ModalHeader title='' goBack={this.goBack} />}
-                    <XSVideo navi={this.props.navigation} />
+                    <XSVideo addShow={true} navi={this.props.navigation} />
                     <ScrollView
                         style={styles.scroll}
                         showsVerticalScrollIndicator={false}
