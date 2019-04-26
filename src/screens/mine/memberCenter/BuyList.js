@@ -7,6 +7,7 @@ import Api from '../../../socket/index';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 
+
 const Item = function (props) {
     let imageSource = props.item.pay_status_label === '未支付' ? require('../../../image/mine/pay_failed.png') : require('../../../image/mine/pay_success.png');
     return (
@@ -43,7 +44,7 @@ export default class BugListScreen extends PureComponent {
 
     componentDidMount() {
         Api.getUserOrderList((e) => {
-            if (e.data && e.data.length > 0) {
+            if (e.data) {
                 this.setState({
                     data: e.data
                 });
@@ -61,12 +62,19 @@ export default class BugListScreen extends PureComponent {
                 <View style={{ flex: 1 }}>
                     <ModalHeader backBtnColor='rgb(255,255,255)' textStyle={{ fontSize: 15, color: 'white' }} goBack={this._goBack} title={In18.BUY_HISTORY} rightBtnMode='none' />
                     {/* <Item /> */}
-                    {this.state.data &&
+                    {this.state.data && this.state.data.length > 0 &&
                         <FlatList
                             style={{ flex: 1 }}
                             data={this.state.data}
                             renderItem={({ item }) => <Item item={item} />}
                         />
+                    }
+                    {
+                        this.state.data && this.state.data.length == 0 &&
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ color: 'rgb(153,153,153)', fontSize: 14 }}>暂无购买记录~~</Text>
+                            <Text style={{ color: 'rgb(153,153,153)', fontSize: 14 ,marginTop:10}}>快去购买会员吧！</Text>
+                        </View>
                     }
                 </View>
             </SafeAreaView>
