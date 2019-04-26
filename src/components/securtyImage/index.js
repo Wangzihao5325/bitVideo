@@ -24,23 +24,42 @@ export default class SecurtyImage extends PureComponent {
             let regArr = uri.split('.');
             let typeStr = regArr[regArr.length - 1];
             if (typeStr === 'ceb') {
-                RNFetchBlob
-                    .config({ fileCache: true })
-                    .fetch('GET', uri)
-                    .then((res) => {
-                        let filePath = res.path();
-                        let fs = RNFetchBlob.fs;
-                        fs.readFile(filePath, 'base64')//utf8//base64
-                            .then(data => {
-                                AESImageUtils.decryptFromJSBase64(data).then((e) => {
-                                    if (e.result) {
-                                        this.setState({
-                                            source: { uri: 'data:image/png;base64,' + e.result }
-                                        });
-                                    }
-                                });
+                let fs = RNFetchBlob.fs;
+                let dirs = fs.dirs;
+                let fileCachePath = dirs.DocumentDir + '/' + uri.split('/').pop();
+                fs.readFile(fileCachePath, 'base64')
+                    .then(data => {
+                        if (data) {
+                            AESImageUtils.decryptFromJSBase64(data).then((e) => {
+                                if (e.result) {
+                                    this.setState({
+                                        source: { uri: 'data:image/png;base64,' + e.result }
+                                    });
+                                }
                             });
-                    });
+                        }
+                    })
+                    .catch((e) => {
+                        RNFetchBlob
+                            .config({
+                                path: fileCachePath
+                            })
+                            .fetch('GET', uri)
+                            .then((res) => {
+                                let filePath = res.path();
+                                fs.readFile(filePath, 'base64')//utf8//base64
+                                    .then(data => {
+                                        AESImageUtils.decryptFromJSBase64(data).then((e) => {
+                                            if (e.result) {
+                                                this.setState({
+                                                    source: { uri: 'data:image/png;base64,' + e.result }
+                                                });
+                                            }
+                                        });
+                                    });
+                            });
+                    })
+
                 this.setState({ lastSource: uri });
             } else {
                 this.setState({ source: this.props.source, lastSource: uri });
