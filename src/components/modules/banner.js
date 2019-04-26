@@ -35,7 +35,7 @@ export default class BannerModule extends PureComponent {
                 <View key={index} style={[this.state.size, { display: 'flex' }]}>
                     <TouchableHighlight style={{ flex: 1 }} onPress={() => this._bannerPress(item.id)}>
                         {/* <Image style={{ flex: 1, borderRadius: 5 }} defaultSource={require('../../image/usual/banner_load_failed.png')} source={{ uri: item.cover_path }}></Image> */}
-                        <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={{ flex: 1, borderRadius: 5 }} source={{ uri: item.cover_path }} />
+                        <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={{ height: 200, width: '100%', borderRadius: 5 }} source={{ uri: item.cover_path }} />
                     </TouchableHighlight>
                 </View>
             );
