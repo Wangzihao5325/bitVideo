@@ -15,6 +15,18 @@ const headerGenerator = (isPost) => {
     if (Variables.account.token) {
         header['Authorization'] = `Bearer ${Variables.account.token}`;
     }
+    if (Variables.account.deviceId) {
+        header['device-id'] = Variables.account.deviceId;
+    }
+    if (Variables.account.platform) {
+        header['platform'] = Variables.account.platform;
+    }
+    if (Variables.account.versionName) {
+        header['version-name'] = Variables.account.versionName;
+    }
+    if (Variables.account.versionCode) {
+        header['version-code'] = Variables.account.versionCode;
+    }
     return header;
 }
 
