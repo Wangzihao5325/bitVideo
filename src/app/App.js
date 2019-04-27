@@ -186,7 +186,7 @@ export default class App extends Component {
             if (AppVersion !== e.version_code) {
               if (e.force) {
                 //强制更新
-                NavigationService.navigate('ToastModel', { type: 'NewVersionForce', packageUrl: e.package_path });
+                NavigationService.navigate('ToastModel', { type: 'NewVersionForce', packageUrl: e.package_path, versionCode: e.version_code });
                 return;
               } else {
                 //非强制更新

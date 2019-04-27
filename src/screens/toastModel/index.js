@@ -17,7 +17,7 @@ class NewVersionForce extends PureComponent {
         return (
             <ImageBackground style={{ height: 276, width: 240, display: 'flex' }} source={require('../../image/pop/update_pop_bg.png')}>
                 <View style={{ flex: 1 }}>
-                    <Text style={{ marginTop: 65, color: 'white', marginLeft: 23 }}>1.0.1</Text>
+                    <Text style={{ marginTop: 65, color: 'white', marginLeft: 23 }}>{this.props.versionCode}</Text>
                     <Text style={{ color: 'rgb(33,45,49)', fontSize: 14, marginTop: 60, alignSelf: 'center' }}>请更新版本以使用蝌蚪视频</Text>
                     <View style={{ flex: 1, flexDirection: 'column-reverse' }}>
                         <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginBottom: 15, alignSelf: 'center', display: 'flex' }} underlayColor='transparent'>
@@ -45,7 +45,7 @@ class NewVersion extends PureComponent {
         return (
             <ImageBackground style={{ height: 276, width: 240, display: 'flex' }} source={require('../../image/pop/update_pop_bg.png')}>
                 <View style={{ flex: 1 }}>
-                    <Text style={{ marginTop: 65, color: 'white', marginLeft: 23 }}>1.0.1</Text>
+                    <Text style={{ marginTop: 65, color: 'white', marginLeft: 23 }}>{this.props.versionCode}</Text>
                     <Text style={{ color: 'rgb(33,45,49)', fontSize: 14, marginTop: 60, alignSelf: 'center' }}>更新版本可获得更佳体验</Text>
                     <View style={{ flex: 1, flexDirection: 'column-reverse' }}>
                         <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginBottom: 15, alignSelf: 'center', display: 'flex' }} underlayColor='transparent'>
@@ -171,6 +171,7 @@ export default class ToastModel extends PureComponent {
     componentDidMount() {
         const type = this.props.navigation.getParam('type', '');
         const url = this.props.navigation.getParam('packageUrl', '');
+        const versionCode = this.props.navigation.getParam('versionCode', '');
         switch (type) {
             case 'SeeHD':
                 this.setState({
@@ -198,13 +199,13 @@ export default class ToastModel extends PureComponent {
                 break;
             case 'NewVersion':
                 this.setState({
-                    pop: <NewVersion url={url} />,
+                    pop: <NewVersion url={url} versionCode={versionCode} />,
                     isShowBackBtn: true
                 });
                 break;
             case 'NewVersionForce':
                 this.setState({
-                    pop: <NewVersionForce url={url} />,
+                    pop: <NewVersionForce url={url} versionCode={versionCode} />,
                     isShowBackBtn: false
                 }, () => {
                     if (Platform.OS == 'android') {
