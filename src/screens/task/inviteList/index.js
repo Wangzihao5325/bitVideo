@@ -43,10 +43,10 @@ export default class InviteList extends PureComponent {
         Api.getInviteList(1, 20, (e) => {
             if (e.data && e.data.length > 0) {
                 this.setState({
-                    inviteNum: e.data.length,
+                    inviteNum: e.total,
                     data: e.data,
                     page: e.current_page,
-                    totalPage: e.total
+                    totalPage: e.last_page
                 });
             }
         });
@@ -61,7 +61,7 @@ export default class InviteList extends PureComponent {
                         return {
                             data: newList,
                             page: e.current_page,
-                            totalPage: e.total,
+                            totalPage: e.last_page,
                         }
                     });
                 }
