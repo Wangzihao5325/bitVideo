@@ -177,12 +177,14 @@ export default class App extends Component {
             PlatformKey = 'A';
           }
           Variables.account.platform = PlatformKey;
+          let AppVersion = DeviceInfo.getVersion();
+          Variables.account.versionName = AppVersion;
+          let deviceIdreg = DeviceInfo.getUniqueID();
+          Variables.account.deviceId = deviceIdreg;
           Api.getVersionMessage(PlatformKey, (e, code, message) => {
             Config.URL_REG.official_url = e.official_url;
             Config.URL_REG.invite_link = e.potato_invite_link;
             Config.URL_REG.shareUrl = e.share_url;
-            let AppVersion = DeviceInfo.getVersion();
-            Variables.account.versionName = AppVersion;
             if (AppVersion !== e.version_code) {
               if (e.force) {
                 //强制更新
@@ -198,10 +200,6 @@ export default class App extends Component {
               let islock = await AsyncStorage.getItem('Lock_Islock');
               let userToken = await AsyncStorage.getItem('User_Token');
               let clipboardContent = await Clipboard.getString();
-              let device_Id = await AsyncStorage.getItem('Device_Id');
-              if (device_Id) {
-                Variables.account.deviceId = device_Id;
-              }
               if (userToken) {
                 newReg.isNew = false;
               }
@@ -236,7 +234,6 @@ export default class App extends Component {
                 Api.postRegisterByDeviceId(deviceId, clipboardContent, platformWords, (e, code, message) => {
                   if (e && e.api_token) {
                     AsyncStorage.setItem('User_Token', e.api_token);
-                    AsyncStorage.setItem('Device_Id', deviceId);
                     Variables.account.token = e.api_token;
                     Variables.account.deviceToken = e.api_token;
                     Variables.account.deviceId = deviceId;
