@@ -30,7 +30,7 @@ class Item extends PureComponent {
             }
 
             const time = new Date().getTime();
-            if (reg.times && time - reg.times < 120000) {
+            if (reg.times && time - reg.times < 300000) {
                 if (this.props.callback) {
                     this.props.callback();
                 }

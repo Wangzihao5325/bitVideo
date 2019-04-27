@@ -38,6 +38,7 @@ import IndicatorScreen from '../screens/toastModel/Indicator';
 
 import SplashModel from '../components/splashModal/index';
 import SplashScreen from 'react-native-splash-screen';
+import Orientation from 'react-native-orientation';
 
 // import M3u8Download from '../socket/download';
 // import Video from 'react-native-video';
@@ -166,6 +167,7 @@ export default class App extends Component {
     //   console.log(rate);
     // });
     SplashScreen.hide();
+    Orientation.lockToPortrait();
     NetInfo.isConnected.fetch().done((isConnected) => {
       if (isConnected) {
         Api.getDomain((e) => {
