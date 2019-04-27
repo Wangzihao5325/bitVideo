@@ -4,6 +4,7 @@ import * as Colors from '../../../global/Colors';
 import ToastRoot from '../../../components/toast/index';
 import store from '../../../store/index';
 import { connect } from 'react-redux';
+import RNFetchBlob from 'rn-fetch-blob';
 
 import ModalHeader from '../../../components/modal/ModalHeader';
 
@@ -20,7 +21,15 @@ class SettingScreen extends PureComponent {
     }
 
     _cacheClear = () => {
-        ToastRoot.show('缓存已清除');
+        let docPath = RNFetchBlob.fs.dirs.DocumentDir + '/ceb';
+        RNFetchBlob.fs.unlink(docPath)
+            .then(() => {
+                ToastRoot.show('缓存已清除');
+            })
+            .catch((err) => {
+                ToastRoot.show('清除缓存失败');
+            })
+
     }
 
     _toast = () => {

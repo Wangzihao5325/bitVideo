@@ -26,7 +26,7 @@ export default class SecurtyImage extends PureComponent {
             if (typeStr === 'ceb') {
                 let fs = RNFetchBlob.fs;
                 let dirs = fs.dirs;
-                let fileCachePath = dirs.DocumentDir + '/' + uri.split('/').pop();
+                let fileCachePath = dirs.DocumentDir + '/ceb/' + uri.split('/').pop();
                 fs.readFile(fileCachePath, 'base64')
                     .then(data => {
                         if (data) {
@@ -46,6 +46,7 @@ export default class SecurtyImage extends PureComponent {
                             })
                             .fetch('GET', uri)
                             .then((res) => {
+                                res.session('cebImage');
                                 let filePath = res.path();
                                 fs.readFile(filePath, 'base64')//utf8//base64
                                     .then(data => {
