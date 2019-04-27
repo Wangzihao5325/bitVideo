@@ -40,16 +40,33 @@ export default class InviteList extends PureComponent {
     }
 
     componentDidMount() {
-        Api.getInviteList((e) => {
+        Api.getInviteList(1, 20, (e) => {
             if (e.data && e.data.length > 0) {
                 this.setState({
                     inviteNum: e.data.length,
                     data: e.data,
                     page: e.current_page,
-                    totalPage: e.last_page
+                    totalPage: e.total
                 });
             }
         });
+    }
+
+    _getNextPageData = () => {
+        if (this.state.page !== this.state.totalPage) {
+            Api.getInviteList(this.state.page + 1, 20, (e) => {
+                if (e.data && e.data.length > 0) {
+                    this.setState((preState, props) => {
+                        let newList = preState.data.concat(e.data);
+                        return {
+                            data: newList,
+                            page: e.current_page,
+                            totalPage: e.total,
+                        }
+                    });
+                }
+            });
+        }
     }
 
     _goBack = () => {
@@ -84,6 +101,8 @@ export default class InviteList extends PureComponent {
 
                     {this.state.data.length > 0 &&
                         <FlatList
+                            onEndReached={this._getNextPageData}
+                            onEndReachedThreshold={1}
                             style={{ flex: 1 }}
                             data={this.state.data}
                             renderItem={({ item }) => <Item id={item.invite_name} phone={item.invite_mobile} time={item.created_at} />}
