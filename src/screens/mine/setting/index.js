@@ -133,7 +133,7 @@ class SettingScreen extends PureComponent {
                 <TouchableHighlight onPress={() => this.setState({ ModalIsShow: true })} underlayColor='transparent'>
                     <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/settings_clear_cache.png')} />
+                            <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/findAccount.png')} />
                             <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>找回账号</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>

@@ -128,7 +128,7 @@ export default class LoginModel extends PureComponent {
                         goBack={this._goBack}
                         textStyle={{ color: 'white' }}
                         backBtnColor='rgb(255,255,255)'
-                        title='绑定手机'
+                        title='找回账号'
                         rightBtnMode='none'
                     />
                     <MainTitle />
