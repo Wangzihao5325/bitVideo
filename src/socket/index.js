@@ -621,6 +621,22 @@ class api {
         const url = `/api/user/account/recallByMobile?mobile=${mobile}&verification_key=${verCode}&code=${code}`;
         this.getFetch(url, onSuccess, onError);
     }
+
+    findAccountByUserMessage(order_no, username, register_at, remark, onSuccess, onError) {
+        const url = '/api/user/find-msg';
+        let formData = new FormData();
+        if (order_no) {
+            formData.append('order_no', order_no);
+        }
+        if (username) {
+            formData.append('username', username);
+        }
+        if (register_at) {
+            formData.append('register_at', register_at);
+        }
+        formData.append('remark', remark);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();
