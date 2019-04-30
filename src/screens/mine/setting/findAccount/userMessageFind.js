@@ -6,6 +6,8 @@ import ModalHeader from '../../../../components/modal/ModalHeader';
 import ToastRoot from '../../../../components/toast/index';
 import Api from '../../../../socket/index';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 const reg = { inviteCode: '', userName: '', registerTime: '', more: '' };
 
 export default class UserMessageFind extends PureComponent {
@@ -54,40 +56,42 @@ export default class UserMessageFind extends PureComponent {
                     title='找回账号'
                     rightBtnMode='none'
                 />
-                <ScrollView style={{ flex: 1 }}>
-                    <Text style={{ color: 'rgb(254,163,91)', fontSize: 12, marginLeft: 17, marginTop: 17 }}>*以下资料可以帮助您找回账号,请尽量填写准确</Text>
-                    <Text style={{ color: 'white', fontSize: 13, marginTop: 25, marginLeft: 17 }}>开通会员时的支付宝订单编号(选填)</Text>
-                    <TextInput
-                        onChangeText={this._inviteCodeTextChange}
-                        style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
-                        placeholder='请填写订单编号'
-                        placeholderTextColor='rgb(139,140,145)'
-                    />
-                    <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>曾使用的用户名 (选填)</Text>
-                    <TextInput
-                        onChangeText={this._userNameTextChange}
-                        style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
-                        placeholder='如:舒服的菠萝'
-                        placeholderTextColor='rgb(139,140,145)'
-                    />
-                    <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>账号注册时间 (选填)</Text>
-                    <TextInput
-                        onChangeText={this._registerTimeTextChange}
-                        style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
-                        placeholder='登陆抖阴具体时间,精确到日'
-                        placeholderTextColor='rgb(139,140,145)'
-                    />
-                    <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>说明备注</Text>
-                    <TextInput
-                        onChangeText={this._moreTextChange}
-                        style={{ color: 'white', height: 150, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10, paddingTop: 20, textAlignVertical: 'top', lineHeight: 20 }}
-                        placeholder='请尽可能详情的描述需要找回的账号信息,可缩短找回账号所需要期限'
-                        placeholderTextColor='rgb(139,140,145)'
-                        multiline={true}
-                    />
+                <KeyboardAwareScrollView>
+                    <ScrollView style={{ flex: 1 }}>
+                        <Text style={{ color: 'rgb(254,163,91)', fontSize: 12, marginLeft: 17, marginTop: 17 }}>*以下资料可以帮助您找回账号,请尽量填写准确</Text>
+                        <Text style={{ color: 'white', fontSize: 13, marginTop: 25, marginLeft: 17 }}>开通会员时的支付宝订单编号(选填)</Text>
+                        <TextInput
+                            onChangeText={this._inviteCodeTextChange}
+                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
+                            placeholder='请填写订单编号'
+                            placeholderTextColor='rgb(139,140,145)'
+                        />
+                        <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>曾使用的用户名 (选填)</Text>
+                        <TextInput
+                            onChangeText={this._userNameTextChange}
+                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
+                            placeholder='如:舒服的菠萝'
+                            placeholderTextColor='rgb(139,140,145)'
+                        />
+                        <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>账号注册时间 (选填)</Text>
+                        <TextInput
+                            onChangeText={this._registerTimeTextChange}
+                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
+                            placeholder='登陆抖阴具体时间,精确到日'
+                            placeholderTextColor='rgb(139,140,145)'
+                        />
+                        <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>说明备注</Text>
+                        <TextInput
+                            onChangeText={this._moreTextChange}
+                            style={{ color: 'white', height: 150, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10, paddingTop: 20, textAlignVertical: 'top', lineHeight: 20 }}
+                            placeholder='请尽可能详情的描述需要找回的账号信息,可缩短找回账号所需要期限'
+                            placeholderTextColor='rgb(139,140,145)'
+                            multiline={true}
+                        />
 
-                    <TouchableHighlight onPress={this._findAccount} style={{ height: 42, borderRadius: 21, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', backgroundColor: 'rgb(255,168,96)', marginTop: 25, justifyContent: 'center', alignItems: 'center' }}><Text style={{ color: 'rgb(22,24,36)', fontSize: 18 }}>提交资料</Text></TouchableHighlight>
-                </ScrollView>
+                        <TouchableHighlight onPress={this._findAccount} style={{ height: 42, borderRadius: 21, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', backgroundColor: 'rgb(255,168,96)', marginTop: 25, justifyContent: 'center', alignItems: 'center' }}><Text style={{ color: 'rgb(22,24,36)', fontSize: 18 }}>提交资料</Text></TouchableHighlight>
+                    </ScrollView>
+                </KeyboardAwareScrollView>
             </SafeAreaView>
         );
     }
