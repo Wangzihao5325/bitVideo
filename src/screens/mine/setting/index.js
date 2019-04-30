@@ -87,6 +87,10 @@ class SettingScreen extends PureComponent {
         if (this.props.bindMobileType == '0') {
             mobileText = this.props.mobile
         }
+        let inviteCodeText = '未绑定';
+        if (this.props.inviteMeCode) {
+            inviteCodeText = '已绑定'
+        }
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <ModalHeader goBack={this._goBack} titleStyle={{ color: 'rgb(255,168,96)' }} backBtnColor='rgb(255,255,255)' title='设置' rightBtnMode='none' />
@@ -139,6 +143,7 @@ class SettingScreen extends PureComponent {
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                             <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
+                            <Text style={{ color: 'rgb(232,232,232)', fontSize: 14, marginRight: 10 }}>{inviteCodeText}</Text>
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -212,7 +217,8 @@ function mapState2Props(store) {
     return {
         lock: store.lock.isLock,
         bindMobileType: store.account.type,
-        mobile: store.account.mobile
+        mobile: store.account.mobile,
+        inviteMeCode: store.account.inviteMeCode,
     }
 }
 

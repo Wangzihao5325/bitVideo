@@ -36,6 +36,7 @@ export function get_user_info(e) {
     regObj.type = e.type;
     regObj.mobile = e.mobile;
     regObj.inviteCode = e.invite_code;
+    regObj.inviteMeCode = e.invite_me_code;
     regObj.coverPath = e.cover_path;
     regObj.collectCount = e.collect_count;
     regObj.historyCount = e.history_count;

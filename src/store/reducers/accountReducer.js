@@ -10,6 +10,7 @@ const initialState = {
     type: 10,
     mobile: '',
     inviteCode: '',
+    inviteMeCode:'',
     coverPath: null,
     collectCount: 0,
     historyCount: 0,

@@ -127,7 +127,7 @@ class IdCard extends PureComponent {
                                 underlayColor='transparent'
                                 onPress={this._saveQrCode}
                             >
-                                <Text style={{ fontSize: 17, color: '22,24,36', marginTop: 17 }}>保存至相册</Text>
+                                <Text style={{ fontSize: 17, color: 'rgb(22,24,36)', marginTop: 17 }}>保存至相册</Text>
                             </TouchableHighlight>
                         </ImageBackground>
                     </View>

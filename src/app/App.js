@@ -240,7 +240,6 @@ export default class App extends Component {
                 Variables.account.token = userToken;
                 Variables.account.deviceToken = userToken;
                 Api.getUserInfo((e, code, message) => {
-                  console.log(e);
                   if (e) {
                     store.dispatch(get_user_info(e));
                   }
