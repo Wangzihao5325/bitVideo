@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, SafeAreaView, View, ScrollView, Text, TextInput, TouchableHighlight } from 'react-native';
-
-
+import * as Colors from '../../../../global/Colors';
+import ModalHeader from '../../../../components/modal/ModalHeader';
 
 export default class QrCodeFind extends PureComponent {
     _goBack = () => {
