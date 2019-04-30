@@ -60,6 +60,10 @@ class SettingScreen extends PureComponent {
         this.props.navigation.navigate('IdCard');
     }
 
+    _toBindInviteCode = () => {
+        this.props.navigation.navigate('BindInviteCode');
+    }
+
     /*
     找回
     */
@@ -127,7 +131,7 @@ class SettingScreen extends PureComponent {
 
                 <View style={{ height: 10, width: '100%', backgroundColor: 'rgb(26,28,41)' }} />
 
-                <TouchableHighlight onPress={() => this.setState({ ModalIsShow: true })} underlayColor='transparent'>
+                <TouchableHighlight onPress={this._toBindInviteCode} underlayColor='transparent'>
                     <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/setting_inviteCode.png')} />
@@ -140,7 +144,7 @@ class SettingScreen extends PureComponent {
                 </TouchableHighlight>
 
                 <TouchableHighlight onPress={() => this.setState({ ModalIsShow: true })} underlayColor='transparent'>
-                    <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
+                    <View style={styles.container}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/findAccount.png')} />
                             <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>找回账号</Text>

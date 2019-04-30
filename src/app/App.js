@@ -35,6 +35,7 @@ import BindPhoneModel from '../screens/loginModel/BindPhone';
 import FindAccountByPhone from '../screens/loginModel/FindAccountByPhone';
 import UserMessageFind from '../screens/mine/setting/findAccount/userMessageFind';
 import IdCard from '../screens/mine/setting/idCard/index';
+import BindInviteCode from '../screens/mine/setting/bindInviteCode/index';
 import AdModel from '../screens/adModel/index';
 import ToastModel from '../screens/toastModel/index';
 import IndicatorScreen from '../screens/toastModel/Indicator';
@@ -126,6 +127,9 @@ const RouterWithModal = createStackNavigator(
     },
     IdCard: {
       screen: IdCard
+    },
+    BindInviteCode: {
+      screen: BindInviteCode
     },
     AdModel: {
       screen: AdModel
