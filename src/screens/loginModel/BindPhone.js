@@ -12,7 +12,7 @@ import ToastRoot from '../../components/toast/index';
 import store from '../../store/index';
 import { get_user_info } from '../../store/actions/accountAction';
 
-let reg = { mobile: '', password: '', code: '', verCode: '' };
+let reg = { mobile: '', password: '', code: '', verCode: '123' };
 
 class MainTitle extends PureComponent {
     render() {

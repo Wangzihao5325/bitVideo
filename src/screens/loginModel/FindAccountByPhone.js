@@ -14,7 +14,7 @@ import { get_user_info } from '../../store/actions/accountAction';
 import Variables from '../../global/Variables';
 
 
-let reg = { mobile: '', password: '', code: '', verCode: '' };
+let reg = { mobile: '', password: '', code: '', verCode: '123' };
 
 class MainTitle extends PureComponent {
     render() {

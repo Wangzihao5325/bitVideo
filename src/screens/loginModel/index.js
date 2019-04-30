@@ -13,7 +13,7 @@ import PasswordInput from '../../components/input/PasswordInput';
 import PasswordInputWithVerificationCode from '../../components/input/PasswordInputWithVerificationCode';
 import ModalHeader from '../../components/modal/ModalHeader';
 
-let reg = { mobile: '', password: '', code: '', verCode: '' };
+let reg = { mobile: '', password: '', code: '', verCode: '123' };
 
 class MainTitle extends PureComponent {
     render() {

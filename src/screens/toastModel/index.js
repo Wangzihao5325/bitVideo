@@ -3,6 +3,61 @@ import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Plat
 import PropTypes from 'prop-types';
 import * as Config from '../../global/Config';
 
+class AccountUseByOther extends PureComponent {
+
+    _btnPress = () => {
+        Linking.openURL(Config.URL_REG.official_url);
+    }
+
+    render() {
+        return (
+            <View style={{ height: 216, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+                <Text style={{ fontSize: 18, color: 'rgb(34,34,34)', marginTop: 35, fontWeight: 'bold' }}>账号异常</Text>
+                <Text style={{ fontSize: 14, marginTop: 30, color: 'rgb(71,71,71)' }}>你的账号在其他设备登陆</Text>
+                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>请卸载后重新安装</Text>
+                <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
+                    <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>重新安装</Text>
+                    </ImageBackground>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
+
+class IdCardGetSuccess extends PureComponent {
+    render() {
+        return (
+            <View style={{ height: 216, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+                <Image style={{ height: 56, width: 56, alignSelf: 'center', marginTop: 38 }} source={require('../../image/usual/find_account_success.png')} />
+                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>如有疑问前往蝌蚪交流群咨询管理</Text>
+                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>如有疑问前往蝌蚪交流群咨询管理</Text>
+                <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
+                    <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>立即咨询</Text>
+                    </ImageBackground>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
+
+class IdCardGetFailed extends PureComponent {
+    render() {
+        return (
+            <View style={{ height: 216, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+                <Text style={{ fontSize: 18, color: 'rgb(34,34,34)', marginTop: 35, fontWeight: 'bold' }}>支付异常</Text>
+                <Text style={{ fontSize: 14, marginTop: 30, color: 'rgb(71,71,71)' }}>支付系统繁忙,请在两分钟后再试</Text>
+                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>如有疑问前往蝌蚪交流群咨询管理</Text>
+                <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
+                    <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>立即咨询</Text>
+                    </ImageBackground>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
 
 class NewVersionForce extends PureComponent {
     static contextTypes = {
@@ -213,6 +268,36 @@ export default class ToastModel extends PureComponent {
                             return true;
                         });
                     }
+                });
+                break;
+            case 'NewVersionForce':
+                this.setState({
+                    pop: <NewVersionForce url={url} versionCode={versionCode} />,
+                    isShowBackBtn: false
+                }, () => {
+                    if (Platform.OS == 'android') {
+                        this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+                            return true;
+                        });
+                    }
+                });
+                break;
+            case 'AccountUseByOther':
+                this.setState({
+                    pop: <AccountUseByOther />,
+                    isShowBackBtn: false
+                }, () => {
+                    if (Platform.OS == 'android') {
+                        this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+                            return true;
+                        });
+                    }
+                });
+                break;
+            case 'IdCardGetSuccess':
+                this.setState({
+                    pop: <IdCardGetSuccess />,
+                    isShowBackBtn: true
                 });
                 break;
         }
