@@ -81,7 +81,7 @@ class BindInviteCode extends PureComponent {
                 }
                 {
                     this.state.isBind &&
-                    <View style={{ borderRadius: 5, marginTop: 40, height: 50, width: Sizes.DEVICE_WIDTH - 40, alignSelf: 'center', backgroundColor: 'rgb(51,57,62)', display: 'flex', alignItems: 'center' }}>
+                    <View style={{ borderRadius: 5, marginTop: 40, height: 50, width: Sizes.DEVICE_WIDTH - 40, alignSelf: 'center', backgroundColor: 'rgb(51,57,62)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ color: 'white', marginLeft: 21, fontSize: 18 }}>{this.props.inviteMeCode}</Text>
                     </View>
                 }

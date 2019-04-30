@@ -190,108 +190,108 @@ export default class App extends Component {
     Orientation.lockToPortrait();
     NetInfo.isConnected.fetch().done((isConnected) => {
       if (isConnected) {
-        Api.getDomain((e) => {
-          Config.SERVICE_URL.domainUrl = `http://${e}`;
-          let PlatformKey = 'I';
-          if (Platform.OS === 'android') {
-            PlatformKey = 'A';
-          }
-          Variables.account.platform = PlatformKey;
-          let AppVersion = DeviceInfo.getVersion();
-          Variables.account.versionName = AppVersion;
-          let deviceIdreg = DeviceInfo.getUniqueID();
-          Variables.account.deviceId = deviceIdreg;
-          Api.getVersionMessage(PlatformKey, (e, code, message) => {
-            Config.URL_REG.official_url = e.official_url;
-            Config.URL_REG.invite_link = e.potato_invite_link;
-            Config.URL_REG.shareUrl = e.share_url;
-            if (AppVersion !== e.version_code) {
-              if (e.force) {
-                //强制更新
-                NavigationService.navigate('ToastModel', { type: 'NewVersionForce', packageUrl: e.package_path, versionCode: e.version_code });
-                return;
-              } else {
-                //非强制更新
-                NavigationService.navigate('ToastModel', { type: 'NewVersion', packageUrl: e.package_path });
-              }
+        // Api.getDomain((e) => {
+        Config.SERVICE_URL.domainUrl = `http://192.168.0.186:50009`;
+        let PlatformKey = 'I';
+        if (Platform.OS === 'android') {
+          PlatformKey = 'A';
+        }
+        Variables.account.platform = PlatformKey;
+        let AppVersion = DeviceInfo.getVersion();
+        Variables.account.versionName = AppVersion;
+        let deviceIdreg = DeviceInfo.getUniqueID();
+        Variables.account.deviceId = deviceIdreg;
+        Api.getVersionMessage(PlatformKey, (e, code, message) => {
+          Config.URL_REG.official_url = e.official_url;
+          Config.URL_REG.invite_link = e.potato_invite_link;
+          Config.URL_REG.shareUrl = e.share_url;
+          if (AppVersion !== e.version_code) {
+            if (e.force) {
+              //强制更新
+              NavigationService.navigate('ToastModel', { type: 'NewVersionForce', packageUrl: e.package_path, versionCode: e.version_code });
+              return;
+            } else {
+              //非强制更新
+              NavigationService.navigate('ToastModel', { type: 'NewVersion', packageUrl: e.package_path });
             }
-            (async function () {
-              let password = await AsyncStorage.getItem('Lock_Password');
-              let islock = await AsyncStorage.getItem('Lock_Islock');
-              let userToken = await AsyncStorage.getItem('User_Token');
-              let clipboardContent = await Clipboard.getString();
-              if (userToken) {
-                newReg.isNew = false;
-              }
+          }
+          (async function () {
+            let password = await AsyncStorage.getItem('Lock_Password');
+            let islock = await AsyncStorage.getItem('Lock_Islock');
+            let userToken = await AsyncStorage.getItem('User_Token');
+            let clipboardContent = await Clipboard.getString();
+            if (userToken) {
+              newReg.isNew = false;
+            }
 
-              if (password) {
-                lockReg.password = password;
-              }
-              if (islock) {
-                store.dispatch(set_lock(islock));
-                // lockReg.isLock = islock;
-              }
+            if (password) {
+              lockReg.password = password;
+            }
+            if (islock) {
+              store.dispatch(set_lock(islock));
+              // lockReg.isLock = islock;
+            }
 
-              //手势锁 广告页开启
-              if (store.getState().lock.isLock === 'true') {
-                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
-              } else {
-                NavigationService.navigate('AdModel');
-              }
+            //手势锁 广告页开启
+            if (store.getState().lock.isLock === 'true') {
+              NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
+            } else {
+              NavigationService.navigate('AdModel');
+            }
 
-              //设备号注册 获取用户信息
-              if (userToken) {
-                Variables.account.token = userToken;
-                Variables.account.deviceToken = userToken;
-                Api.getUserInfo((e, code, message) => {
-                  if (e) {
-                    store.dispatch(get_user_info(e));
-                  }
-                });
-              } else {
-                let platformWords = Platform.OS === 'ios' ? 'I' : 'A';
-                let deviceId = DeviceInfo.getUniqueID();
-                Api.postRegisterByDeviceId(deviceId, clipboardContent, platformWords, (e, code, message) => {
-                  if (e && e.api_token) {
-                    AsyncStorage.setItem('User_Token', e.api_token);
-                    Variables.account.token = e.api_token;
-                    Variables.account.deviceToken = e.api_token;
-                    Variables.account.deviceId = deviceId;
-                    store.dispatch(get_device_account_info(e));
-                    Api.getUserInfo((e, code, message) => {
-                      if (e) {
-                        store.dispatch(get_user_info(e));
-                      }
-                    });
-                  }
-                });
-              }
-
-              //获取线路数据
-              Api.getVideoChannel((e) => {
-                let chanelDic = {};
-                let dropdownArr = [];
-                e.forEach((item) => {
-                  let title = item.title;
-                  let key = item.key;
-                  chanelDic[title] = key;
-                  dropdownArr.push(item.title);
-                });
-                videoChanelReg.mapArr = chanelDic;
-                videoChanelReg.data = dropdownArr;
-              });
-
-              //获取主页数据
-              Api.postGlobalTypeVideo('recommend', null, (e) => {
-                if (e.data) {
-                  store.dispatch(setMainPageData(e.data));
-                  store.dispatch(setPageInfo(e.current_page, e.last_page));
+            //设备号注册 获取用户信息
+            if (userToken) {
+              Variables.account.token = userToken;
+              Variables.account.deviceToken = userToken;
+              Api.getUserInfo((e, code, message) => {
+                if (e) {
+                  store.dispatch(get_user_info(e));
                 }
               });
+            } else {
+              let platformWords = Platform.OS === 'ios' ? 'I' : 'A';
+              let deviceId = DeviceInfo.getUniqueID();
+              Api.postRegisterByDeviceId(deviceId, clipboardContent, platformWords, (e, code, message) => {
+                if (e && e.api_token) {
+                  AsyncStorage.setItem('User_Token', e.api_token);
+                  Variables.account.token = e.api_token;
+                  Variables.account.deviceToken = e.api_token;
+                  Variables.account.deviceId = deviceId;
+                  store.dispatch(get_device_account_info(e));
+                  Api.getUserInfo((e, code, message) => {
+                    if (e) {
+                      store.dispatch(get_user_info(e));
+                    }
+                  });
+                }
+              });
+            }
 
-            })();
-          });
+            //获取线路数据
+            Api.getVideoChannel((e) => {
+              let chanelDic = {};
+              let dropdownArr = [];
+              e.forEach((item) => {
+                let title = item.title;
+                let key = item.key;
+                chanelDic[title] = key;
+                dropdownArr.push(item.title);
+              });
+              videoChanelReg.mapArr = chanelDic;
+              videoChanelReg.data = dropdownArr;
+            });
+
+            //获取主页数据
+            Api.postGlobalTypeVideo('recommend', null, (e) => {
+              if (e.data) {
+                store.dispatch(setMainPageData(e.data));
+                store.dispatch(setPageInfo(e.current_page, e.last_page));
+              }
+            });
+
+          })();
         });
+        // });
       } else {
         //没网环境
         store.dispatch(change_net_state(false));

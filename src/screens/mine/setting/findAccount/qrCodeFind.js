@@ -53,6 +53,9 @@ export default class QrCodeFind extends PureComponent {
                     });
                 } else {
                     ToastRoot.show(message);
+                    if (this.scanner) {
+                        this.scanner.reactivate();
+                    }
                 }
             });
         }
@@ -115,6 +118,7 @@ export default class QrCodeFind extends PureComponent {
                 />
                 <QRCodeScanner
                     onRead={this.onSuccess.bind(this)}
+                    ref={(node) => { this.scanner = node }}
                 //             topContent={
                 //                 <Text style={styles.centerText}>
                 //                     Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
