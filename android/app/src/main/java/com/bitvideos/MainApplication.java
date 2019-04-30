@@ -4,6 +4,7 @@ import android.app.Application;
 
 
 import com.facebook.react.ReactApplication;
+import org.reactnative.camera.RNCameraPackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.futurepress.staticserver.FPStaticServerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNCameraPackage(),
               new SplashScreenReactPackage(),
             new RNViewShotPackage(),
             new FPStaticServerPackage(),
