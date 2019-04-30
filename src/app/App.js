@@ -34,6 +34,7 @@ import SetGesturePasswordModel from '../screens/gesturePassword/SetPassword';
 import BindPhoneModel from '../screens/loginModel/BindPhone';
 import FindAccountByPhone from '../screens/loginModel/FindAccountByPhone';
 import UserMessageFind from '../screens/mine/setting/findAccount/userMessageFind';
+import QrCodeFind from '../screens/mine/setting/findAccount/qrCodeFind';
 import IdCard from '../screens/mine/setting/idCard/index';
 import BindInviteCode from '../screens/mine/setting/bindInviteCode/index';
 import AdModel from '../screens/adModel/index';
@@ -124,6 +125,9 @@ const RouterWithModal = createStackNavigator(
     },
     UserMessageFind: {
       screen: UserMessageFind
+    },
+    QrCodeFind: {
+      screen: QrCodeFind
     },
     IdCard: {
       screen: IdCard

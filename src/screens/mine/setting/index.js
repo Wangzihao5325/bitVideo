@@ -82,6 +82,11 @@ class SettingScreen extends PureComponent {
         this.props.navigation.navigate('FindAccountByPhone');
     }
 
+    findAccountByQr = () => {
+        this.setState({ ModalIsShow: false });
+        this.props.navigation.navigate('QrCodeFind');
+    }
+
     render() {
         let mobileText = '未绑定';
         if (this.props.bindMobileType == '0') {
