@@ -32,6 +32,12 @@ export default class QrCodeFind extends PureComponent {
         avatarSource: null
     }
 
+    componentWillUnmount() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+    }
+
     _goBack = () => {
         this.props.navigation.goBack();
     }
@@ -54,7 +60,12 @@ export default class QrCodeFind extends PureComponent {
                 } else {
                     ToastRoot.show(message);
                     if (this.scanner) {
-                        this.scanner.reactivate();
+                        this.timer = setTimeout(() => {
+                            this.scanner.reactivate();
+                            if (this.timer) {
+                                clearTimeout(this.timer);
+                            }
+                        }, 2000)
                     }
                 }
             });

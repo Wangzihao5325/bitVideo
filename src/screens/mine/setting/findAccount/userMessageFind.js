@@ -66,18 +66,18 @@ export default class UserMessageFind extends PureComponent {
                             placeholder='请填写订单编号'
                             placeholderTextColor='rgb(139,140,145)'
                         />
-                        <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>曾使用的用户名 (选填)</Text>
+                        <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>丢失账户用户名(选填)</Text>
                         <TextInput
                             onChangeText={this._userNameTextChange}
                             style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, paddingHorizontal: 10 }}
                             placeholder='如:舒服的菠萝'
                             placeholderTextColor='rgb(139,140,145)'
                         />
-                        <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>账号注册时间 (选填)</Text>
+                        <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>丢失账号邀请码(选填)</Text>
                         <TextInput
                             onChangeText={this._registerTimeTextChange}
                             style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, paddingHorizontal: 10 }}
-                            placeholder='登陆抖阴具体时间,精确到日'
+                            placeholder='G58461'
                             placeholderTextColor='rgb(139,140,145)'
                         />
                         <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>说明备注</Text>

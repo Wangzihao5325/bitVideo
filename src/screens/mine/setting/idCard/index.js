@@ -96,7 +96,7 @@ class IdCard extends PureComponent {
                             style={{ width: 298, height: 453, alignSelf: 'center', marginTop: 36 }}
                             source={require('../../../../image/mine/id_card_bg.png')}
                         >
-                            <Image style={{ height: 60, width: 60, alignSelf: 'center', marginTop: 45 }} source={require('../../../../image/avater/0.png')} />
+                            <Image style={{ height: 60, width: 60, alignSelf: 'center', marginTop: 45 }} source={require('../../../../image/mine/id_card_icon.png')} />
                             <Text style={{ color: 'rgb(34,34,34)', fontSize: 16, marginTop: 17, alignSelf: 'center' }}>{this.props.accountName}</Text>
                             <Text style={{ color: 'rgb(139,140,145)', fontSize: 14, marginTop: 8, alignSelf: 'center' }}>{`编码:${this.props.nickName}`}</Text>
                             <View style={{ height: 160, width: 160, marginTop: 10, alignSelf: 'center' }}>
