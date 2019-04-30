@@ -11,6 +11,8 @@ import ModalHeader from '../../components/modal/ModalHeader';
 import ToastRoot from '../../components/toast/index';
 import store from '../../store/index';
 import { get_user_info } from '../../store/actions/accountAction';
+import Variables from '../../global/Variables';
+
 
 let reg = { mobile: '', password: '', code: '', verCode: '' };
 

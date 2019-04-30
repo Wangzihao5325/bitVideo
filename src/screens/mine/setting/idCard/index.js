@@ -35,7 +35,7 @@ class IdCard extends PureComponent {
                 qrCode: <QRCode
                     value={code}
                     size={140}
-                    bgColor='rgb(34,34,34)'
+                    bgColor='rgb(0,0,0)'
                     fgColor='white' />
             });
         }, 0);

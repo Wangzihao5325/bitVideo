@@ -1,11 +1,19 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, SafeAreaView, View, ScrollView, Text, TextInput, TouchableHighlight, TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, Linking, AsyncStorage } from 'react-native';
 import * as Colors from '../../../../global/Colors';
 import ModalHeader from '../../../../components/modal/ModalHeader';
 import ToastRoot from '../../../../components/toast/index';
+import Api from '../../../../socket/index';
+import Variables from '../../../../global/Variables';
+import { get_user_info } from '../../../../store/actions/accountAction';
+
+
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import ImagePicker from 'react-native-image-picker';
+import { QRreader } from 'react-native-qr-scanner';
+import DeviceInfo from 'react-native-device-info';
+
 
 const options = {
     title: '选取身份卡',
@@ -29,30 +37,65 @@ export default class QrCodeFind extends PureComponent {
     }
 
     onSuccess(e) {
-        Linking
-            .openURL(e.data)
-            .catch(err => console.error('An error occured', err));
+        if (e.data) {
+            let deviceIdreg = DeviceInfo.getUniqueID();
+            Api.findAccountByIdCard(e.data, deviceIdreg, (e, code, message) => {
+                if (message == 'success') {
+                    AsyncStorage.setItem('User_Token', e.api_token);
+                    Variables.account.token = e.api_token;
+                    Variables.account.deviceToken = e.api_token;
+                    Api.getUserInfo((getUser_e, code, message) => {
+                        if (getUser_e) {
+                            store.dispatch(get_user_info(getUser_e));
+                            ToastRoot.show('账号找回成功');
+                            this.props.navigation.goBack();
+                        }
+                    });
+                } else {
+                    ToastRoot.show(message);
+                }
+            });
+        }
     }
 
     _selectImage = () => {
         ImagePicker.showImagePicker(options, (response) => {
-            console.log('Response = ', response);
 
             if (response.didCancel) {
-                ToastRoot.show('没有权限无法找回账号...');
+                //ToastRoot.show('');
             } else if (response.error) {
                 ToastRoot.show('哎呀呀，报错了，请优先采取其他方式找回账号吧');
             } else if (response.customButton) {
                 // nothing
             } else {
-                const source = { uri: response.uri };
+                let imageSource = Platform.OS === 'ios' ? response.uri : response.path;
+                //uri
+                QRreader(imageSource).then((data) => {
+                    if (data) {
+                        let deviceIdreg = DeviceInfo.getUniqueID();
+                        Api.findAccountByIdCard(data, deviceIdreg, (e, code, message) => {
+                            if (message == 'success') {
+                                AsyncStorage.setItem('User_Token', e.api_token);
+                                Variables.account.token = e.api_token;
+                                Variables.account.deviceToken = e.api_token;
+                                Api.getUserInfo((getUser_e, code, message) => {
+                                    if (getUser_e) {
+                                        store.dispatch(get_user_info(getUser_e));
+                                        ToastRoot.show('账号找回成功');
+                                        this.props.navigation.goBack();
+                                    }
+                                });
+                            } else {
+                                ToastRoot.show(message);
+                            }
+                        });
+                    }
+                }).catch((err) => {
+                    ToastRoot.show('哎呀呀，报错了，请优先采取其他方式找回账号吧');
+                });
 
                 // You can also display the image using data:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                this.setState({
-                    avatarSource: source,
-                });
             }
         });
     }

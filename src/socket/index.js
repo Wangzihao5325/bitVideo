@@ -644,6 +644,14 @@ class api {
         formData.append('code', code);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    findAccountByIdCard(token, device_code, onSuccess, onError) {
+        const url = '/api/user/account/recallByCard';
+        let formData = new FormData();
+        formData.append('token', token);
+        formData.append('device_code', device_code);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();

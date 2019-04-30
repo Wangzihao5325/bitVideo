@@ -31,7 +31,7 @@ class QrCode extends PureComponent {
                 qrCode: <QRCode
                     value={fullUrl}
                     size={200}
-                    bgColor='rgb(34,34,34)'
+                    bgColor='rgb(0,0,0)'
                     fgColor='white' />
             });
         }, 0);
