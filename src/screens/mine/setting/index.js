@@ -56,6 +56,10 @@ class SettingScreen extends PureComponent {
         this.props.navigation.navigate('BindPhoneModel');
     }
 
+    _toIdCard = () => {
+        this.props.navigation.navigate('IdCard');
+    }
+
     /*
     找回
     */
@@ -96,6 +100,18 @@ class SettingScreen extends PureComponent {
                     </View>
                 </TouchableHighlight>
 
+                <TouchableHighlight onPress={this._toIdCard} underlayColor='transparent'>
+                    <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
+                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Image style={{ height: 15, width: 15, marginLeft: 19 }} source={require('../../../image/mine/idCard.png')} />
+                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>身份卡</Text>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
+                            <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
+                        </View>
+                    </View>
+                </TouchableHighlight>
+
                 <TouchableHighlight onPress={this._toGesturePassword} underlayColor='transparent' >
                     <View style={styles.container}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -105,6 +121,32 @@ class SettingScreen extends PureComponent {
                         <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
                             {this.props.lock === 'true' && <Image style={{ height: 25, width: 42, marginRight: 17 }} source={require('../../../image/mine/lock_open.png')} />}
                             {this.props.lock === 'false' && <Image style={{ height: 25, width: 42, marginRight: 17 }} source={require('../../../image/mine/lock_close.png')} />}
+                        </View>
+                    </View>
+                </TouchableHighlight>
+
+                <View style={{ height: 10, width: '100%', backgroundColor: 'rgb(26,28,41)' }} />
+
+                <TouchableHighlight onPress={() => this.setState({ ModalIsShow: true })} underlayColor='transparent'>
+                    <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
+                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/setting_inviteCode.png')} />
+                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>邀请码</Text>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
+                            <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
+                        </View>
+                    </View>
+                </TouchableHighlight>
+
+                <TouchableHighlight onPress={() => this.setState({ ModalIsShow: true })} underlayColor='transparent'>
+                    <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
+                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/findAccount.png')} />
+                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>找回账号</Text>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
+                            <Image style={{ height: 14, width: 7, marginRight: 17 }} source={require('../../../image/mine/settings_right_arrow.png')} />
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -135,25 +177,13 @@ class SettingScreen extends PureComponent {
                     </View>
                 </TouchableHighlight>
 
-                <TouchableHighlight onPress={() => this.setState({ ModalIsShow: true })} underlayColor='transparent'>
-                    <View style={[styles.container, { borderBottomColor: 'rgb(81,94,101)', borderBottomWidth: StyleSheet.hairlineWidth }]}>
-                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Image style={{ height: 14, width: 13, marginLeft: 19 }} source={require('../../../image/mine/findAccount.png')} />
-                            <Text style={{ marginLeft: 12, color: 'rgb(232,232,232)', fontSize: 14 }}>找回账号</Text>
-                        </View>
-                        <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center' }}>
-
-                        </View>
-                    </View>
-                </TouchableHighlight>
-
                 <Modal
                     backdropColor='transparent'
                     isVisible={this.state.ModalIsShow}
                     onBackdropPress={() => this.setState({ ModalIsShow: false })}
                     style={{ justifyContent: "flex-end", margin: 0, }}
                 >
-                    <View style={{ display: 'flex', alignItems: 'center', height: 350, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                    <View style={{ display: 'flex', alignItems: 'center', height: 300, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }}>
                         <TouchableHighlight style={{ backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>用身份卡找回</Text>
                         </TouchableHighlight>
@@ -165,9 +195,6 @@ class SettingScreen extends PureComponent {
                         </TouchableHighlight>
                         <TouchableHighlight onPress={this.customServiceFind} style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>联系客服找回</Text>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={() => this.setState({ ModalIsShow: false })} style={{ marginTop: 10, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 31, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>取消</Text>
                         </TouchableHighlight>
                     </View>
                 </Modal>

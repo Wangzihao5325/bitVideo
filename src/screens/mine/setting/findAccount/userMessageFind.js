@@ -53,7 +53,7 @@ export default class UserMessageFind extends PureComponent {
                     goBack={this._goBack}
                     textStyle={{ color: 'white' }}
                     backBtnColor='rgb(255,255,255)'
-                    title='找回账号'
+                    title='填写资料找回'
                     rightBtnMode='none'
                 />
                 <KeyboardAwareScrollView>
@@ -62,29 +62,29 @@ export default class UserMessageFind extends PureComponent {
                         <Text style={{ color: 'white', fontSize: 13, marginTop: 25, marginLeft: 17 }}>开通会员时的支付宝订单编号(选填)</Text>
                         <TextInput
                             onChangeText={this._inviteCodeTextChange}
-                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
+                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, paddingHorizontal: 10 }}
                             placeholder='请填写订单编号'
                             placeholderTextColor='rgb(139,140,145)'
                         />
                         <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>曾使用的用户名 (选填)</Text>
                         <TextInput
                             onChangeText={this._userNameTextChange}
-                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
+                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, paddingHorizontal: 10 }}
                             placeholder='如:舒服的菠萝'
                             placeholderTextColor='rgb(139,140,145)'
                         />
                         <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>账号注册时间 (选填)</Text>
                         <TextInput
                             onChangeText={this._registerTimeTextChange}
-                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10 }}
+                            style={{ color: 'white', height: 50, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, paddingHorizontal: 10 }}
                             placeholder='登陆抖阴具体时间,精确到日'
                             placeholderTextColor='rgb(139,140,145)'
                         />
                         <Text style={{ color: 'white', fontSize: 13, marginTop: 18, marginLeft: 17 }}>说明备注</Text>
                         <TextInput
                             onChangeText={this._moreTextChange}
-                            style={{ color: 'white', height: 150, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,54,69)', borderRadius: 5, paddingHorizontal: 10, paddingTop: 20, textAlignVertical: 'top', lineHeight: 20 }}
-                            placeholder='请尽可能详情的描述需要找回的账号信息,可缩短找回账号所需要期限'
+                            style={{ color: 'white', height: 150, width: Sizes.DEVICE_WIDTH - 34, alignSelf: 'center', marginTop: 11, backgroundColor: 'rgb(51,57,62)', borderRadius: 5, paddingHorizontal: 10, paddingTop: 20, textAlignVertical: 'top', lineHeight: 20 }}
+                            placeholder='请尽可能详情的描述需要找回的账号信息,可缩短找回账号所需要期限。'
                             placeholderTextColor='rgb(139,140,145)'
                             multiline={true}
                         />
