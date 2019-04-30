@@ -5,6 +5,10 @@ import * as Colors from '../../../../global/Colors';
 import { connect } from 'react-redux';
 import * as Sizes from '../../../../global/Sizes';
 import ToastRoot from '../../../../components/toast/index';
+import Api from '../../../../socket/index';
+import { get_user_info } from '../../../../store/actions/accountAction';
+import store from '../../../../store/index';
+
 
 const reg = { inviteCode: '' };
 
@@ -35,7 +39,17 @@ class BindInviteCode extends PureComponent {
 
     _saveInviteCode = () => {
         if (reg.inviteCode) {
-
+            Api.bindInviteCode(reg.inviteCode, (e, code, message) => {
+                if (message === 'success') {
+                    Api.getUserInfo((e, code, message) => {
+                        if (e) {
+                            store.dispatch(get_user_info(e));
+                            ToastRoot.show('绑定成功');
+                            this.props.navigation.goBack();
+                        }
+                    });
+                }
+            });
         } else {
             ToastRoot.show('请输入邀请码');
         }

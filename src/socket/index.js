@@ -637,6 +637,13 @@ class api {
         formData.append('remark', remark);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    bindInviteCode(code, onSuccess, onError) {
+        const url = '/api/user/invitation/bind-code';
+        let formData = new FormData();
+        formData.append('code', code);
+        this.postFetch(url, formData, onSuccess, onError);
+    }
 }
 
 export default new api();
