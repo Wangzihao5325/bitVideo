@@ -616,6 +616,11 @@ class api {
         const url = '/api/video/channel';
         this.getFetch(url, onSuccess, onError);
     }
+
+    findAccountByPhone(mobile, verCode, code, onSuccess, onError) {
+        const url = `/api/user/account/recallByMobile?mobile=${mobile}&verification_key=${verCode}&code=${code}`;
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

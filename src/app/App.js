@@ -32,6 +32,7 @@ import QrCodeModel from '../screens/task/qrCode/index';
 import GesturePasswordModel from '../screens/gesturePassword/index';
 import SetGesturePasswordModel from '../screens/gesturePassword/SetPassword';
 import BindPhoneModel from '../screens/loginModel/BindPhone';
+import FindAccountByPhone from '../screens/loginModel/FindAccountByPhone';
 import AdModel from '../screens/adModel/index';
 import ToastModel from '../screens/toastModel/index';
 import IndicatorScreen from '../screens/toastModel/Indicator';
@@ -114,6 +115,9 @@ const RouterWithModal = createStackNavigator(
     },
     BindPhoneModel: {
       screen: BindPhoneModel
+    },
+    FindAccountByPhone: {
+      screen: FindAccountByPhone
     },
     AdModel: {
       screen: AdModel

@@ -64,6 +64,11 @@ class SettingScreen extends PureComponent {
         Linking.openURL(Config.URL_REG.invite_link);
     }
 
+    findAccountByPhone = () => {
+        this.setState({ ModalIsShow: false });
+        this.props.navigation.navigate('FindAccountByPhone');
+    }
+
     render() {
         let mobileText = '未绑定';
         if (this.props.bindMobileType == '0') {
@@ -147,7 +152,7 @@ class SettingScreen extends PureComponent {
                         <TouchableHighlight style={{ backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>用身份卡找回</Text>
                         </TouchableHighlight>
-                        <TouchableHighlight style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableHighlight onPress={this.findAccountByPhone} style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>手机号码找回</Text>
                         </TouchableHighlight>
                         <TouchableHighlight style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
