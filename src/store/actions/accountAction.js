@@ -28,6 +28,8 @@ export function get_user_info(e) {
     regObj.remainCount = e.remain_count;
 
     regObj.name = e.name;
+    regObj.nickName = e.nick_name;
+    regObj.salt = e.salt;
     regObj.id = e.id;
     regObj.sex = e.sex;
     regObj.status = e.status;

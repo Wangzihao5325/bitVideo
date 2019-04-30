@@ -3,6 +3,7 @@ import * as Types from '../actionTypes';
 const initialState = {
     isLogin: true,//false
     name: '',
+    nickName:'',
     id: 0,
     sex: 1,
     status: 1,
@@ -20,6 +21,7 @@ const initialState = {
     vipHasDays: 0,
     remainCount: '',
     avaterIndex: 0,
+    salt:'',
 }
 
 const reducer = (state = initialState, action) => {
