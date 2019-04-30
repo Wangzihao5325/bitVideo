@@ -23,6 +23,7 @@ export default class BindInviteCode extends PureComponent {
                     rightBtnMode='text'
                     rightBtnTitle='保存'
                     rightBtnOnPress={this._saveInviteCode}
+                    textStyle={{ fontSize: 16, color: 'white' }}
                 />
                 <View style={{ flex: 1 }}>
 
