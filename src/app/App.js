@@ -33,6 +33,7 @@ import GesturePasswordModel from '../screens/gesturePassword/index';
 import SetGesturePasswordModel from '../screens/gesturePassword/SetPassword';
 import BindPhoneModel from '../screens/loginModel/BindPhone';
 import FindAccountByPhone from '../screens/loginModel/FindAccountByPhone';
+import UserMessageFind from '../screens/mine/setting/findAccount/userMessageFind';
 import AdModel from '../screens/adModel/index';
 import ToastModel from '../screens/toastModel/index';
 import IndicatorScreen from '../screens/toastModel/Indicator';
@@ -118,6 +119,9 @@ const RouterWithModal = createStackNavigator(
     },
     FindAccountByPhone: {
       screen: FindAccountByPhone
+    },
+    UserMessageFind: {
+      screen: UserMessageFind
     },
     AdModel: {
       screen: AdModel

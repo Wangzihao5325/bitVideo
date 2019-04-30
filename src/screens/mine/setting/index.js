@@ -64,6 +64,11 @@ class SettingScreen extends PureComponent {
         Linking.openURL(Config.URL_REG.invite_link);
     }
 
+    userMessageFind = () => {
+        this.setState({ ModalIsShow: false });
+        this.props.navigation.navigate('UserMessageFind');
+    }
+
     findAccountByPhone = () => {
         this.setState({ ModalIsShow: false });
         this.props.navigation.navigate('FindAccountByPhone');
@@ -155,7 +160,7 @@ class SettingScreen extends PureComponent {
                         <TouchableHighlight onPress={this.findAccountByPhone} style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>手机号码找回</Text>
                         </TouchableHighlight>
-                        <TouchableHighlight style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableHighlight onPress={this.userMessageFind} style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>填写资料找回</Text>
                         </TouchableHighlight>
                         <TouchableHighlight onPress={this.customServiceFind} style={{ marginTop: 5, backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
