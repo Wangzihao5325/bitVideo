@@ -197,7 +197,7 @@ class SettingScreen extends PureComponent {
                     onBackdropPress={() => this.setState({ ModalIsShow: false })}
                     style={{ justifyContent: "flex-end", margin: 0, }}
                 >
-                    <View style={{ display: 'flex', alignItems: 'center', height: 300, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                    <View style={{ display: 'flex', alignItems: 'center', height: 270, width: '100%', backgroundColor: Colors.SCREEN_BGCOLOR }}>
                         <TouchableHighlight onPress={this.findAccountByQr} style={{ backgroundColor: 'rgb(56,59,71)', height: 62, width: Sizes.DEVICE_WIDTH - 30, display: 'flex', borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={{ color: 'rgb(222,222,222)', fontSize: 16 }}>用身份卡找回</Text>
                         </TouchableHighlight>
