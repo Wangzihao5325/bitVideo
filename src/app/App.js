@@ -220,7 +220,7 @@ export default class App extends Component {
               }
             }
             Api.getnotice((e) => {
-              if (e && e[0].msg) {
+              if (e.length > 0) {
                 NavigationService.navigate('NoticeModel', { type: 'Notice', text: e[0].msg });
               }
               (async function () {
