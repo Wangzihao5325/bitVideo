@@ -53,7 +53,7 @@ export default class QrCodeFind extends PureComponent {
                     Api.getUserInfo((getUser_e, code, message) => {
                         if (getUser_e) {
                             store.dispatch(get_user_info(getUser_e));
-                            this.props.navigation.replace('ToastModel', { type: 'IdCardGetSuccess' });
+                            this.props.navigation.navigate('ToastModel', { type: 'IdCardGetSuccess' });
                         } else {
                             this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                         }
@@ -96,7 +96,7 @@ export default class QrCodeFind extends PureComponent {
                                 Api.getUserInfo((getUser_e, code, message) => {
                                     if (getUser_e) {
                                         store.dispatch(get_user_info(getUser_e));
-                                        this.props.navigation.replace('ToastModel', { type: 'IdCardGetSuccess' });
+                                        this.props.navigation.navigate('ToastModel', { type: 'IdCardGetSuccess' });
                                     } else {
                                         this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                                     }
