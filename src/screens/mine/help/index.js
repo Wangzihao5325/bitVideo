@@ -186,11 +186,19 @@ export default class HelpScreen extends PureComponent {
             multiple: true,
             maxFiles: 3
         }).then(images => {
-            if (images.length < 3) {
-                images.push({ size: 0 });
+            let nowData = this.state.imageSelectData;
+            if (nowData[nowData.length - 1].size === 0) {
+                nowData.pop();
+            }
+            let newData = nowData.concat(images);
+            if (newData.length < 3) {
+                newData.push({ size: 0 });
+            }
+            if (newData.length > 3) {
+                newData.length = 3;
             }
             this.setState({
-                imageSelectData: images
+                imageSelectData: newData
             });
         }).catch(e => {
             //
@@ -221,6 +229,13 @@ export default class HelpScreen extends PureComponent {
     }
 
     _submit = () => {
+        if (this.state.selectTab.length <= 0) {
+            ToastRoot.show('请至少选择一个问题场景');
+            return;
+        }
+        if (reg.remark.length < 10) {
+            ToastRoot.show('问题描述必须多于10字以上');
+        }
         NavigationService.navigate('IndicatorScreen');
         let imageSelectData = this.state.imageSelectData.concat();
         if (imageSelectData[imageSelectData.length - 1].size == 0) {
@@ -301,6 +316,7 @@ export default class HelpScreen extends PureComponent {
                     }
                 });
             }
+            return;
         }
         this._submitText(null);
 
@@ -315,9 +331,8 @@ export default class HelpScreen extends PureComponent {
         });
         let newKeyArr = null;
         if (keyArr.length > 0) {
-            newKeyArr = newKeyArr;
+            newKeyArr = keyArr;
         }
-
         Api.submitFeedback(reg.remark, reg.contact, newImageArr, newKeyArr, (e, code, message) => {
             NavigationService.navigate('HelpScreen');
             ToastRoot.show('我们已经收到反馈信息，请您耐心等候');
@@ -339,6 +354,10 @@ export default class HelpScreen extends PureComponent {
     }
 
     render() {
+        let textInputStyle = null;
+        if (Platform.OS = 'ios') {
+            textInputStyle = { paddingTop: 15 };
+        }
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <ModalHeader goBack={this._goBack} backBtnColor='rgb(255,255,255)' title='意见反馈' rightBtnMode='none' />
@@ -353,7 +372,7 @@ export default class HelpScreen extends PureComponent {
                         <View style={{ marginTop: 20, height: 180, width: Sizes.DEVICE_WIDTH - 24, display: 'flex', alignSelf: 'center', backgroundColor: 'rgb(24,32,26)' }}>
                             <TextInput
                                 onChangeText={this.remarkTextChange}
-                                style={{ height: 100, width: Sizes.DEVICE_WIDTH - 24, paddingHorizontal: 15, paddingTop: 15, color: 'white' }}
+                                style={[{ height: 100, width: Sizes.DEVICE_WIDTH - 24, paddingHorizontal: 15, color: 'white' }, textInputStyle]}
                                 placeholderTextColor='rgb(72,88,96)'
                                 placeholder='请用10~200字描述问题的详细情况,有助于我们快速帮您解决'
                                 multiline={true}
