@@ -216,6 +216,33 @@ class api {
             )
     }
 
+    upLoadWithUnsecurty(url, formData, onSuccess, onError) {
+        let fullUrl = 'http://api.kdcloud.me' + url;
+        let header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data' };
+        if (Variables.account.token) {
+            header = { Accept: 'application/json', 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${Variables.account.token}` }
+        }
+        let obj = { method: 'POST', headers: header, body: formData };
+
+        fetch(fullUrl, obj).then((response) => JSON.parse(response._bodyInit))
+            .then(
+                (reponseJson) => {
+                    const result = reponseJson.result ? reponseJson.result : null;
+                    const code = reponseJson.code ? reponseJson.code : null;
+                    const message = reponseJson.message ? reponseJson.message : null;
+                    try {
+                        if (code === 401) {
+                            NavigationService.navigate('ToastModel', { type: 'AccountUseByOther' });
+                        } else {
+                            onSuccess(result, code, message);
+                        }
+                    } catch (error) {
+                        onError ? onError(result, code, message) : console.log(`error: socket error! ${error}`);
+                    }
+                }
+            )
+    }
+
     getGlobalType(onSuccess, onError) {
         const url = '/api/video/globaltype';
         this.getFetch(url, onSuccess, onError);
@@ -690,24 +717,18 @@ class api {
         formData.append('remark', remark);
         formData.append('contact', contact);
         if (cover_filename) {
-            if (isSecurty) {
-                formData.append('cover_filename', cover_filename);
-            } else {
                 cover_filename.forEach((item) => {
                     formData.append('cover_filename[]', item);
                 });
-            }
         }
         if (keys) {
-            if (isSecurty) {
-                formData.append('keys', keys);
-            } else {
                 keys.forEach((item) => {
                     formData.append('keys[]', item);
                 });
-            }
         }
-        this.postFetch(url, formData, onSuccess, onError);
+
+        this.upLoadWithUnsecurty(url, formData, onSuccess, onError);
+
     }
 
     getnotice(onSuccess, onError) {
