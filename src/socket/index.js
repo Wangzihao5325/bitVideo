@@ -709,6 +709,11 @@ class api {
         }
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    getnotice(onSuccess, onError) {
+        const url = '/api/notice';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

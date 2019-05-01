@@ -40,6 +40,7 @@ import BindInviteCode from '../screens/mine/setting/bindInviteCode/index';
 import AdModel from '../screens/adModel/index';
 import ToastModel from '../screens/toastModel/index';
 import IndicatorScreen from '../screens/toastModel/Indicator';
+import NoticeModel from '../screens/toastModel/notice';
 
 import SplashModel from '../components/splashModal/index';
 import SplashScreen from 'react-native-splash-screen';
@@ -143,6 +144,9 @@ const RouterWithModal = createStackNavigator(
     },
     IndicatorScreen: {
       screen: IndicatorScreen
+    },
+    NoticeModel: {
+      screen: NoticeModel
     }
   },
   {
@@ -215,81 +219,86 @@ export default class App extends Component {
               NavigationService.navigate('ToastModel', { type: 'NewVersion', packageUrl: e.package_path });
             }
           }
-          (async function () {
-            let password = await AsyncStorage.getItem('Lock_Password');
-            let islock = await AsyncStorage.getItem('Lock_Islock');
-            let userToken = await AsyncStorage.getItem('User_Token');
-            let clipboardContent = await Clipboard.getString();
-            if (userToken) {
-              newReg.isNew = false;
+          Api.getnotice((e) => {
+            if (e && e[0].msg) {
+              NavigationService.navigate('NoticeModel', { type: 'Notice', text: e[0].msg });
             }
-
-            if (password) {
-              lockReg.password = password;
-            }
-            if (islock) {
-              store.dispatch(set_lock(islock));
-              // lockReg.isLock = islock;
-            }
-
-            //手势锁 广告页开启
-            if (store.getState().lock.isLock === 'true') {
-              NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
-            } else {
-              NavigationService.navigate('AdModel');
-            }
-
-            //设备号注册 获取用户信息
-            if (userToken) {
-              Variables.account.token = userToken;
-              Variables.account.deviceToken = userToken;
-              Api.getUserInfo((e, code, message) => {
-                if (e) {
-                  store.dispatch(get_user_info(e));
-                }
-              });
-            } else {
-              let platformWords = Platform.OS === 'ios' ? 'I' : 'A';
-              let deviceId = DeviceInfo.getUniqueID();
-              Api.postRegisterByDeviceId(deviceId, clipboardContent, platformWords, (e, code, message) => {
-                if (e && e.api_token) {
-                  AsyncStorage.setItem('User_Token', e.api_token);
-                  Variables.account.token = e.api_token;
-                  Variables.account.deviceToken = e.api_token;
-                  Variables.account.deviceId = deviceId;
-                  store.dispatch(get_device_account_info(e));
-                  Api.getUserInfo((e, code, message) => {
-                    if (e) {
-                      store.dispatch(get_user_info(e));
-                    }
-                  });
-                }
-              });
-            }
-
-            //获取线路数据
-            Api.getVideoChannel((e) => {
-              let chanelDic = {};
-              let dropdownArr = [];
-              e.forEach((item) => {
-                let title = item.title;
-                let key = item.key;
-                chanelDic[title] = key;
-                dropdownArr.push(item.title);
-              });
-              videoChanelReg.mapArr = chanelDic;
-              videoChanelReg.data = dropdownArr;
-            });
-
-            //获取主页数据
-            Api.postGlobalTypeVideo('recommend', null, (e) => {
-              if (e.data) {
-                store.dispatch(setMainPageData(e.data));
-                store.dispatch(setPageInfo(e.current_page, e.last_page));
+            (async function () {
+              let password = await AsyncStorage.getItem('Lock_Password');
+              let islock = await AsyncStorage.getItem('Lock_Islock');
+              let userToken = await AsyncStorage.getItem('User_Token');
+              let clipboardContent = await Clipboard.getString();
+              if (userToken) {
+                newReg.isNew = false;
               }
-            });
 
-          })();
+              if (password) {
+                lockReg.password = password;
+              }
+              if (islock) {
+                store.dispatch(set_lock(islock));
+                // lockReg.isLock = islock;
+              }
+
+              //手势锁 广告页开启
+              if (store.getState().lock.isLock === 'true') {
+                NavigationService.navigate('GesturePasswordModel', { type: 'normal', times: 'first' });
+              } else {
+                NavigationService.navigate('AdModel');
+              }
+
+              //设备号注册 获取用户信息
+              if (userToken) {
+                Variables.account.token = userToken;
+                Variables.account.deviceToken = userToken;
+                Api.getUserInfo((e, code, message) => {
+                  if (e) {
+                    store.dispatch(get_user_info(e));
+                  }
+                });
+              } else {
+                let platformWords = Platform.OS === 'ios' ? 'I' : 'A';
+                let deviceId = DeviceInfo.getUniqueID();
+                Api.postRegisterByDeviceId(deviceId, clipboardContent, platformWords, (e, code, message) => {
+                  if (e && e.api_token) {
+                    AsyncStorage.setItem('User_Token', e.api_token);
+                    Variables.account.token = e.api_token;
+                    Variables.account.deviceToken = e.api_token;
+                    Variables.account.deviceId = deviceId;
+                    store.dispatch(get_device_account_info(e));
+                    Api.getUserInfo((e, code, message) => {
+                      if (e) {
+                        store.dispatch(get_user_info(e));
+                      }
+                    });
+                  }
+                });
+              }
+
+              //获取线路数据
+              Api.getVideoChannel((e) => {
+                let chanelDic = {};
+                let dropdownArr = [];
+                e.forEach((item) => {
+                  let title = item.title;
+                  let key = item.key;
+                  chanelDic[title] = key;
+                  dropdownArr.push(item.title);
+                });
+                videoChanelReg.mapArr = chanelDic;
+                videoChanelReg.data = dropdownArr;
+              });
+
+              //获取主页数据
+              Api.postGlobalTypeVideo('recommend', null, (e) => {
+                if (e.data) {
+                  store.dispatch(setMainPageData(e.data));
+                  store.dispatch(setPageInfo(e.current_page, e.last_page));
+                }
+              });
+
+            })();
+          });
         });
         // });
       } else {
