@@ -46,13 +46,14 @@ class InputField extends PureComponent {
                 Api.getUserInfo((getUser_e, code, message) => {
                     if (getUser_e) {
                         store.dispatch(get_user_info(getUser_e));
-                        modalNavigation.goBack();
+                        modalNavigation.replace('ToastModel', { type: 'PhoneGetSuccess' });
                     }
                 });
             } else {
-                ToastRoot.show(message);
+                modalNavigation.navigate('ToastModel', { type: 'PhoneGetFailed' });
             }
         });
+
     }
 
     changeLoginWay = () => {

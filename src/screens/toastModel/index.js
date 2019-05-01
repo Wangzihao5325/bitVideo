@@ -26,7 +26,12 @@ class AccountUseByOther extends PureComponent {
 }
 
 class IdCardGetSuccess extends PureComponent {
+    static contextTypes = {
+        toastNavigation: PropTypes.object
+    }
+
     _btnPress = () => {
+        const { toastNavigation } = this.context;
         toastNavigation.goBack();
     }
     render() {
@@ -46,7 +51,12 @@ class IdCardGetSuccess extends PureComponent {
 }
 
 class IdCardGetFailed extends PureComponent {
+    static contextTypes = {
+        toastNavigation: PropTypes.object
+    }
+
     _btnPress = () => {
+        const { toastNavigation } = this.context;
         toastNavigation.goBack();
     }
     render() {
@@ -66,9 +76,15 @@ class IdCardGetFailed extends PureComponent {
 }
 
 class PhoneGetSuccess extends PureComponent {
+    static contextTypes = {
+        toastNavigation: PropTypes.object
+    }
+
     _btnPress = () => {
+        const { toastNavigation } = this.context;
         toastNavigation.goBack();
     }
+
     render() {
         return (
             <View style={{ height: 265, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
@@ -86,7 +102,12 @@ class PhoneGetSuccess extends PureComponent {
 }
 
 class PhoneGetFailed extends PureComponent {
+    static contextTypes = {
+        toastNavigation: PropTypes.object
+    }
+
     _btnPress = () => {
+        const { toastNavigation } = this.context;
         toastNavigation.goBack();
     }
     render() {
