@@ -53,12 +53,12 @@ export default class QrCodeFind extends PureComponent {
                     Api.getUserInfo((getUser_e, code, message) => {
                         if (getUser_e) {
                             store.dispatch(get_user_info(getUser_e));
-                            ToastRoot.show('账号找回成功');
-                            this.props.navigation.goBack();
+                            this.props.navigation.replace('ToastModel', { type: 'IdCardGetSuccess' });
+                        } else {
+                            this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                         }
                     });
                 } else {
-                    ToastRoot.show(message);
                     if (this.scanner) {
                         this.timer = setTimeout(() => {
                             this.scanner.reactivate();
@@ -67,6 +67,7 @@ export default class QrCodeFind extends PureComponent {
                             }
                         }, 2000)
                     }
+                    this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                 }
             });
         }
@@ -76,9 +77,9 @@ export default class QrCodeFind extends PureComponent {
         ImagePicker.showImagePicker(options, (response) => {
 
             if (response.didCancel) {
-                //ToastRoot.show('');
+                //
             } else if (response.error) {
-                ToastRoot.show('哎呀呀，报错了，请优先采取其他方式找回账号吧');
+                this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
             } else if (response.customButton) {
                 // nothing
             } else {
@@ -95,23 +96,25 @@ export default class QrCodeFind extends PureComponent {
                                 Api.getUserInfo((getUser_e, code, message) => {
                                     if (getUser_e) {
                                         store.dispatch(get_user_info(getUser_e));
-                                        ToastRoot.show('账号找回成功');
-                                        this.props.navigation.goBack();
+                                        this.props.navigation.replace('ToastModel', { type: 'IdCardGetSuccess' });
+                                    } else {
+                                        this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                                     }
                                 });
                             } else {
-                                ToastRoot.show(message);
+                                this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                             }
                         });
                     }
                 }).catch((err) => {
-                    ToastRoot.show('哎呀呀，报错了，请优先采取其他方式找回账号吧');
+                    this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                 });
 
                 // You can also display the image using data:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
             }
         });
+
     }
 
     render() {
