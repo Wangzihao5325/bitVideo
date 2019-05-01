@@ -708,7 +708,7 @@ class api {
         //     let file = { uri: uri, type: 'multipart/form-data', name: `kedou${index}.png` };
         //     formData.append('image', file);
         // });
-        this.postFetch(url, formData, onSuccess, onError);
+        this.upLoadWithUnsecurty(url, formData, onSuccess, onError);
     }
 
     submitFeedback(remark, contact, cover_filename, keys, onSuccess, onError) {
@@ -717,18 +717,24 @@ class api {
         formData.append('remark', remark);
         formData.append('contact', contact);
         if (cover_filename) {
+            if (isSecurty) {
+                formData.append('cover_filename', cover_filename);
+            } else {
                 cover_filename.forEach((item) => {
                     formData.append('cover_filename[]', item);
                 });
+            }
         }
         if (keys) {
+            if (isSecurty) {
+                formData.append('keys', keys);
+            } else {
                 keys.forEach((item) => {
                     formData.append('keys[]', item);
                 });
+            }
         }
-
-        this.upLoadWithUnsecurty(url, formData, onSuccess, onError);
-
+        this.postFetch(url, formData, onSuccess, onError);
     }
 
     getnotice(onSuccess, onError) {
