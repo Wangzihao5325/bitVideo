@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, TextInput, TouchableHighlight, Text, ImageBackground, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { View, StyleSheet, TextInput, TouchableHighlight, Text, Image, FlatList, ScrollView, SafeAreaView, Platform } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
@@ -7,8 +7,46 @@ import * as Colors from '../../../global/Colors';
 import ModalHeader from '../../../components/modal/ModalHeader';
 import ToastRoot from '../../../components/toast/index';
 import _ from 'lodash';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const reg = { title: '', contact: '' };
+
+class ImageItem extends PureComponent {
+    selectBtnOnPress = () => {
+        if (this.props.selectTap) {
+            this.props.selectTap();
+        }
+    }
+    delePic = () => {
+        if (this.props.dele) {
+            this.props.dele(this.props.item.path);
+        }
+    }
+    render() {
+        if (this.props.item.size == 0) {
+            return (
+                <View style={{ height: 70, width: 70, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <TouchableHighlight onPress={this.selectBtnOnPress} style={{ height: 60, width: 60 }}>
+                        <Image style={{ height: 60, width: 60 }} source={require('../../../image/usual/add_image.png')} />
+                    </TouchableHighlight>
+                </View>
+            );
+        } else {
+            let uri = this.props.item.path;
+            if (Platform.OS === 'ios') {
+                uri = this.props.item.sourceURL;
+            }
+            return (
+                <View style={{ height: 70, width: 70, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Image resizeMode='stretch' style={{ height: 60, width: 60 }} source={{ uri: uri }} />
+                    <TouchableHighlight onPress={this.delePic} style={{ height: 15, width: 15, position: 'absolute', top: 0, right: 0, display: 'flex' }}>
+                        <Image style={{ height: 15, width: 15 }} source={require('../../../image/usual/image_del.png')} />
+                    </TouchableHighlight>
+                </View>
+            );
+        }
+    }
+}
 
 class Btn extends PureComponent {
 
@@ -88,7 +126,9 @@ export default class HelpScreen extends PureComponent {
         mapObj: {},
         data: [],
         selectTab: [],
-        selectNum: 0
+        selectNum: 0,
+        imageSelectData: [{ size: 0 }],
+        test: null
     }
 
     componentDidMount() {
@@ -139,6 +179,45 @@ export default class HelpScreen extends PureComponent {
         }
     }
 
+    _selectPic = () => {
+        ImagePicker.openPicker({
+            multiple: true,
+            maxFiles: 3
+        }).then(images => {
+            if (images.length < 3) {
+                images.push({ size: 0 });
+            }
+            this.setState({
+                imageSelectData: images
+            });
+        }).catch(e => {
+            //
+        });
+    }
+
+    _delePic = (path) => {
+        let { imageSelectData } = this.state;
+        let deleIndex = -1;
+        imageSelectData.every((item, index) => {
+            if (item.path === path) {
+                deleIndex = index;
+                return false;
+            } else {
+                return true;
+            }
+        })
+        if (deleIndex >= 0) {
+            imageSelectData.splice(deleIndex, 1);
+            let newData = imageSelectData.concat();
+            if (newData[newData.length - 1].size !== 0) {
+                newData.push({ size: 0 });
+            }
+            this.setState({
+                imageSelectData: newData
+            });
+        }
+    }
+
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
@@ -156,6 +235,14 @@ export default class HelpScreen extends PureComponent {
                             placeholderTextColor='rgb(72,88,96)'
                             placeholder='请用10~200字描述问题的详细情况,有助于我们快速帮您解决'
                             multiline={true}
+                        />
+                        {/* <TouchableHighlight onPress={this._selectPic} style={{ height: 30, width: 30, backgroundColor: 'red' }} ><Text>12</Text></TouchableHighlight>
+                        {this.state.test && <Image style={{ height: 30, width: 30 }} source={this.state.test} />} */}
+                        <FlatList
+                            style={{ height: 70, width: Sizes.DEVICE_WIDTH - 34, marginLeft: 5, marginTop: 5 }}
+                            horizontal={true}
+                            data={this.state.imageSelectData}
+                            renderItem={({ item }) => <ImageItem dele={this._delePic} selectTap={this._selectPic} item={item} />}
                         />
                     </View>
                     <TextInput style={{ alignSelf: 'center', marginTop: 11, height: 50, width: Sizes.DEVICE_WIDTH - 24, paddingHorizontal: 15, backgroundColor: 'rgb(24,32,26)' }} placeholder='邮箱/Telegram/Potato,方便我们联系(选填)' placeholderTextColor='rgb(72,88,96)' />
