@@ -26,15 +26,18 @@ class AccountUseByOther extends PureComponent {
 }
 
 class IdCardGetSuccess extends PureComponent {
+    _btnPress = () => {
+        toastNavigation.goBack();
+    }
     render() {
         return (
-            <View style={{ height: 216, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+            <View style={{ height: 265, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
                 <Image style={{ height: 56, width: 56, alignSelf: 'center', marginTop: 38 }} source={require('../../image/usual/find_account_success.png')} />
-                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>如有疑问前往蝌蚪交流群咨询管理</Text>
-                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>如有疑问前往蝌蚪交流群咨询管理</Text>
+                <Text style={{ fontSize: 21, marginTop: 17, color: 'rgb(34,34,34)' }}>身份卡识别成功</Text>
+                <Text style={{ fontSize: 13, marginTop: 13, color: 'rgb(172,172,172)' }}>您的账号信息已经恢复</Text>
                 <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
                     <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
-                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>立即咨询</Text>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>前往查看</Text>
                     </ImageBackground>
                 </TouchableHighlight>
             </View>
@@ -43,15 +46,58 @@ class IdCardGetSuccess extends PureComponent {
 }
 
 class IdCardGetFailed extends PureComponent {
+    _btnPress = () => {
+        toastNavigation.goBack();
+    }
     render() {
         return (
-            <View style={{ height: 216, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
-                <Text style={{ fontSize: 18, color: 'rgb(34,34,34)', marginTop: 35, fontWeight: 'bold' }}>支付异常</Text>
-                <Text style={{ fontSize: 14, marginTop: 30, color: 'rgb(71,71,71)' }}>支付系统繁忙,请在两分钟后再试</Text>
-                <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>如有疑问前往蝌蚪交流群咨询管理</Text>
+            <View style={{ height: 265, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+                <Image style={{ height: 56, width: 56, alignSelf: 'center', marginTop: 38 }} source={require('../../image/usual/find_account_failed.png')} />
+                <Text style={{ fontSize: 21, marginTop: 17, color: 'rgb(34,34,34)' }}>身份卡找回失败</Text>
+                <Text style={{ fontSize: 13, marginTop: 13, color: 'rgb(172,172,172)' }}>请重新扫描/上传身份卡</Text>
                 <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
                     <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
-                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>立即咨询</Text>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>重新识别</Text>
+                    </ImageBackground>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
+
+class PhoneGetSuccess extends PureComponent {
+    _btnPress = () => {
+        toastNavigation.goBack();
+    }
+    render() {
+        return (
+            <View style={{ height: 265, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+                <Image style={{ height: 56, width: 56, alignSelf: 'center', marginTop: 38 }} source={require('../../image/usual/find_account_success.png')} />
+                <Text style={{ fontSize: 21, marginTop: 17, color: 'rgb(34,34,34)' }}>恭喜找回成功</Text>
+                <Text style={{ fontSize: 13, marginTop: 13, color: 'rgb(172,172,172)' }}>你的账号信息已经恢复</Text>
+                <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
+                    <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>前往查看</Text>
+                    </ImageBackground>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
+
+class PhoneGetFailed extends PureComponent {
+    _btnPress = () => {
+        toastNavigation.goBack();
+    }
+    render() {
+        return (
+            <View style={{ height: 265, width: 242, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
+                <Image style={{ height: 56, width: 56, alignSelf: 'center', marginTop: 38 }} source={require('../../image/usual/find_account_failed.png')} />
+                <Text style={{ fontSize: 21, marginTop: 17, color: 'rgb(34,34,34)' }}>很遗憾找回失败</Text>
+                <Text style={{ fontSize: 13, marginTop: 13, color: 'rgb(172,172,172)' }}>请输入正确的手机号</Text>
+                <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
+                    <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>重新找回</Text>
                     </ImageBackground>
                 </TouchableHighlight>
             </View>
@@ -297,6 +343,24 @@ export default class ToastModel extends PureComponent {
             case 'IdCardGetSuccess':
                 this.setState({
                     pop: <IdCardGetSuccess />,
+                    isShowBackBtn: true
+                });
+                break;
+            case 'IdCardGetFailed':
+                this.setState({
+                    pop: <IdCardGetFailed />,
+                    isShowBackBtn: true
+                });
+                break;
+            case 'PhoneGetSuccess':
+                this.setState({
+                    pop: <PhoneGetSuccess />,
+                    isShowBackBtn: true
+                });
+                break;
+            case 'PhoneGetFailed':
+                this.setState({
+                    pop: <PhoneGetFailed />,
                     isShowBackBtn: true
                 });
                 break;
