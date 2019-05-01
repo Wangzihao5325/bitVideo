@@ -50,14 +50,7 @@ export default class QrCodeFind extends PureComponent {
                     AsyncStorage.setItem('User_Token', e.api_token);
                     Variables.account.token = e.api_token;
                     Variables.account.deviceToken = e.api_token;
-                    Api.getUserInfo((getUser_e, code, message) => {
-                        if (getUser_e) {
-                            store.dispatch(get_user_info(getUser_e));
-                            this.props.navigation.navigate('ToastModel', { type: 'IdCardGetSuccess' });
-                        } else {
-                            this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
-                        }
-                    });
+                    this.props.navigation.navigate('ToastModel', { type: 'IdCardGetSuccess' });
                 } else {
                     if (this.scanner) {
                         this.timer = setTimeout(() => {
@@ -93,14 +86,7 @@ export default class QrCodeFind extends PureComponent {
                                 AsyncStorage.setItem('User_Token', e.api_token);
                                 Variables.account.token = e.api_token;
                                 Variables.account.deviceToken = e.api_token;
-                                Api.getUserInfo((getUser_e, code, message) => {
-                                    if (getUser_e) {
-                                        store.dispatch(get_user_info(getUser_e));
-                                        this.props.navigation.navigate('ToastModel', { type: 'IdCardGetSuccess' });
-                                    } else {
-                                        this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
-                                    }
-                                });
+                                this.props.navigation.navigate('ToastModel', { type: 'IdCardGetSuccess' });
                             } else {
                                 this.props.navigation.navigate('ToastModel', { type: 'IdCardGetFailed' });
                             }
