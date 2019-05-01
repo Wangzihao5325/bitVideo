@@ -373,7 +373,7 @@ export default class HelpScreen extends PureComponent {
                         <View style={{ marginTop: 20, height: 180, width: Sizes.DEVICE_WIDTH - 24, display: 'flex', alignSelf: 'center', backgroundColor: 'rgb(24,32,26)' }}>
                             <TextInput
                                 onChangeText={this.remarkTextChange}
-                                style={[{ height: 100, width: Sizes.DEVICE_WIDTH - 24, paddingHorizontal: 15, color: 'white' }, textInputStyle]}
+                                style={[{ height: 100, width: Sizes.DEVICE_WIDTH - 24, paddingHorizontal: 15, color: 'white', textAlignVertical: 'top' }, textInputStyle]}
                                 placeholderTextColor='rgb(72,88,96)'
                                 placeholder='请用10~200字描述问题的详细情况,有助于我们快速帮您解决'
                                 multiline={true}
