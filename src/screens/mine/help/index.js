@@ -74,7 +74,7 @@ class Item extends PureComponent {
     }
 }
 
-const TestData = [['视频加载速度慢/不出来', '视频播放失败/卡顿'], ['没有喜欢的视频', '没有喜欢的演员', '充值失败'], ['充值后会员未到账', '金币兑换未到账', '金币丢失'], ['账号丢失', '其他问题']];
+//const TestData = [['视频加载速度慢/不出来', '视频播放失败/卡顿'], ['没有喜欢的视频', '没有喜欢的演员', '充值失败'], ['充值后会员未到账', '金币兑换未到账', '金币丢失'], ['账号丢失', '其他问题']];
 
 export default class HelpScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
@@ -93,7 +93,6 @@ export default class HelpScreen extends PureComponent {
 
     componentDidMount() {
         Api.feedbackQuestionList((e) => {
-            console.log(e);
             let valueKeyMap = {};
             let flatListDataArr = [];
             let totalLength = 0;
@@ -141,17 +140,28 @@ export default class HelpScreen extends PureComponent {
     }
 
     render() {
-        let number = this.state.selectTab.length;
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <ModalHeader goBack={this._goBack} backBtnColor='rgb(255,255,255)' title='意见反馈' rightBtnMode='none' />
                 <ScrollView style={{ flex: 1 }}>
-                    <Text style={{ color: 'rgb(72,88,96)', marginTop: 17, marginLeft: 15 }}>{`请选择问题出现场景${this.state.selectNum}/3(必选)`}</Text>
+                    <Text style={{ color: 'rgb(72,88,96)', marginTop: 17, marginLeft: 15, marginBottom: 10 }}>{`请选择问题出现场景${this.state.selectNum}/3(必选)`}</Text>
                     <FlatList
                         extraData={this.state}
-                        data={TestData}//this.state.data
+                        data={this.state.data}//this.state.data
                         renderItem={({ item }) => <Item selectTab={this.state.selectTab} callback={this.someBtnIsPress} item={item} />}
                     />
+                    <View style={{ marginTop: 20, height: 180, width: Sizes.DEVICE_WIDTH - 24, display: 'flex', alignSelf: 'center', backgroundColor: 'rgb(24,32,26)' }}>
+                        <TextInput
+                            style={{ height: 100, width: Sizes.DEVICE_WIDTH - 24, paddingHorizontal: 15, paddingTop: 15, color: 'white' }}
+                            placeholderTextColor='rgb(72,88,96)'
+                            placeholder='请用10~200字描述问题的详细情况,有助于我们快速帮您解决'
+                            multiline={true}
+                        />
+                    </View>
+                    <TextInput style={{ alignSelf: 'center', marginTop: 11, height: 50, width: Sizes.DEVICE_WIDTH - 24, paddingHorizontal: 15, backgroundColor: 'rgb(24,32,26)' }} placeholder='邮箱/Telegram/Potato,方便我们联系(选填)' placeholderTextColor='rgb(72,88,96)' />
+                    <TouchableHighlight style={{ borderRadius: 21, marginTop: 20, height: 42, width: Sizes.DEVICE_WIDTH - 64, alignSelf: 'center', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgb(255,168,96)' }} underlayColor='transparent'>
+                        <Text style={{ fontSize: 18, color: 'rgb(22,24,36)' }}>提交</Text>
+                    </TouchableHighlight>
                 </ScrollView>
             </SafeAreaView>
         );
