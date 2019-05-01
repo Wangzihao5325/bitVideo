@@ -15,11 +15,11 @@ class AccountUseByOther extends PureComponent {
                 <Text style={{ fontSize: 18, color: 'rgb(34,34,34)', marginTop: 35, fontWeight: 'bold' }}>账号异常</Text>
                 <Text style={{ fontSize: 14, marginTop: 30, color: 'rgb(71,71,71)' }}>你的账号在其他设备登陆</Text>
                 <Text style={{ fontSize: 14, marginTop: 6, color: 'rgb(71,71,71)' }}>请卸载后重新安装</Text>
-                <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
+                {/* <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, display: 'flex' }} underlayColor='transparent'>
                     <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
                         <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>重新安装</Text>
                     </ImageBackground>
-                </TouchableHighlight>
+                </TouchableHighlight> */}
             </View>
         );
     }

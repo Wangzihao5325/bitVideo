@@ -1,5 +1,6 @@
 import * as Config from '../global/Config';
 import Variables from '../global/Variables';
+import NavigationService from '../app/NavigationService';
 let CryptoJS = require('crypto-js');
 
 const SECURTY_URL = '/api/accept';
@@ -105,7 +106,11 @@ class api {
                 const code = reponseJson.code ? reponseJson.code : null;
                 const message = reponseJson.message ? reponseJson.message : null;
                 try {
-                    onSuccess(result, code, message);
+                    if (code === 401) {
+                        NavigationService.navigate('ToastModel', { type: 'AccountUseByOther' });
+                    } else {
+                        onSuccess(result, code, message);
+                    }
                 } catch (error) {
                     onError ? onError(result, code, message) : console.log(`error: get socket error! ${fullUrl}`);
                 }
@@ -198,7 +203,11 @@ class api {
                     const code = reponseJson.code ? reponseJson.code : null;
                     const message = reponseJson.message ? reponseJson.message : null;
                     try {
-                        onSuccess(result, code, message);
+                        if (code === 401) {
+                            NavigationService.navigate('ToastModel', { type: 'AccountUseByOther' });
+                        } else {
+                            onSuccess(result, code, message);
+                        }
                     } catch (error) {
                         onError ? onError(result, code, message) : console.log(`error: socket error! ${error}`);
                     }
