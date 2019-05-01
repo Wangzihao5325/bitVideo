@@ -191,7 +191,7 @@ export default class App extends Component {
     NetInfo.isConnected.fetch().done((isConnected) => {
       if (isConnected) {
         // Api.getDomain((e) => {
-        Config.SERVICE_URL.domainUrl = `http://192.168.0.186:50009`;
+        Config.SERVICE_URL.domainUrl = `http://192.168.0.161:50009`;
         let PlatformKey = 'I';
         if (Platform.OS === 'android') {
           PlatformKey = 'A';

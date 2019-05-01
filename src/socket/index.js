@@ -661,6 +661,11 @@ class api {
         formData.append('device_code', device_code);
         this.postFetch(url, formData, onSuccess, onError);
     }
+
+    feedbackQuestionList(onSuccess, onError) {
+        const url = '/api/question/lists';
+        this.getFetch(url, onSuccess, onError);
+    }
 }
 
 export default new api();

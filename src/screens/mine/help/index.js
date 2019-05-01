@@ -1,13 +1,81 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, TextInput, TouchableHighlight, Text, ImageBackground, SafeAreaView } from 'react-native';
+import { View, StyleSheet, TextInput, TouchableHighlight, Text, ImageBackground, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import * as Sizes from '../../../global/Sizes';
 import * as In18 from '../../../global/In18';
 import Api from '../../../socket/index';
 import * as Colors from '../../../global/Colors';
 import ModalHeader from '../../../components/modal/ModalHeader';
 import ToastRoot from '../../../components/toast/index';
+import _ from 'lodash';
 
 const reg = { title: '', contact: '' };
+
+class Btn extends PureComponent {
+
+    state = {
+        isHighlight: false
+    }
+
+    _btnPress = () => {
+        if (!this.state.isHighlight && this.props.selectTab.length >= 3) {
+            return;
+        } else {
+            if (this.props.pressCallBack) {
+                this.setState((preState) => {
+                    let newState = !preState.isHighlight;
+                    return {
+                        isHighlight: newState
+                    }
+                }, (e) => {
+                    this.props.pressCallBack(this.props.title, this.state.isHighlight);
+                });
+            }
+        }
+    }
+
+    render() {
+        let containerStyle = this.state.isHighlight ? { backgroundColor: 'rgb(255,168,96)' } : { backgroundColor: 'rgb(51,57,62)' };
+        let textStyle = this.state.isHighlight ? { color: 'rgb(16,18,29)' } : { color: 'white' };
+        return (
+            <View style={[{ borderRadius: 17, marginHorizontal: 4, height: 35, paddingHorizontal: 12, justifyContent: 'center', alignItems: 'center' }, containerStyle]}>
+                <Text onPress={this._btnPress} style={[{ fontSize: 13 }, textStyle]}>{this.props.title}</Text>
+            </View>
+        );
+    }
+}
+
+class Item extends PureComponent {
+    state = {
+        content: null
+    }
+
+    _someBtnIsPressed = (title, state) => {
+        if (this.props.callback) {
+            this.props.callback(title, state);
+        }
+    }
+
+    componentDidMount() {
+        let contents = [];
+        this.props.item.forEach((e, index) => {
+            let innerItemComponent = <Btn selectTab={this.props.selectTab} pressCallBack={this._someBtnIsPressed} key={e} title={e} />;
+            contents.push(innerItemComponent);
+        });
+        this.setState({
+            content: contents
+        });
+    }
+    render() {
+        return (
+            <View style={{ height: 45, width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                {this.state.content}
+            </View>
+        );
+    }
+}
+
+const TestData = [['视频加载速度慢/不出来', '视频播放失败/卡顿'], ['没有喜欢的视频', '没有喜欢的演员', '充值失败'], ['充值后会员未到账', '金币兑换未到账', '金币丢失'], ['账号丢失', '其他问题']];
+
 export default class HelpScreen extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -17,75 +85,74 @@ export default class HelpScreen extends PureComponent {
     };
 
     state = {
-        leftWords: 200
-    };
-
-    componentWillUnmount() {
-        reg.title = '';
-        reg.contact = '';
+        mapObj: {},
+        data: [],
+        selectTab: [],
+        selectNum: 0
     }
 
-    submit = () => {
-        Api.postFeedback(reg.title, reg.contact, (result, code, message) => {
-            if (message == 'success') {
-                ToastRoot.show('反馈成功');
-                this.props.navigation.pop();
-            }
+    componentDidMount() {
+        Api.feedbackQuestionList((e) => {
+            console.log(e);
+            let valueKeyMap = {};
+            let flatListDataArr = [];
+            let totalLength = 0;
+            let lineArr = [];
+            e.forEach((item) => {
+                valueKeyMap[item.value] = item.key;
+                let length = item.value.length * 13 + 32;
+                if (totalLength + length < Sizes.DEVICE_WIDTH) {
+                    lineArr.push(item.value);
+                    totalLength = totalLength + length;
+                } else {
+                    flatListDataArr.push(lineArr);
+                    lineArr = [];
+                    lineArr.push(item.value);
+                    totalLength = length;
+                }
+            });
+
+            this.setState({
+                mapObj: valueKeyMap,
+                data: flatListDataArr
+            });
         });
-    }
-
-    _titleInputChange = (e) => {
-        reg.title = e;
-        let left = 200
-        if (e) {
-            left = 200 - e.length;
-        }
-        this.setState({
-            leftWords: left
-        })
-    }
-
-    _contentInputChange = (e) => {
-        reg.contact = e;
     }
 
     _goBack = () => {
         this.props.navigation.pop();
     }
 
+    someBtnIsPress = (title, state) => {
+        let { selectTab } = this.state;
+        if (state) {
+            selectTab.push(title);
+            this.setState({
+                selectTab: selectTab,
+                selectNum: selectTab.length
+            });
+        } else {
+            _.pull(selectTab, title);
+            this.setState({
+                selectTab: selectTab,
+                selectNum: selectTab.length
+            });
+        }
+    }
+
     render() {
+        let number = this.state.selectTab.length;
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
-                <ModalHeader goBack={this._goBack} backBtnColor='rgb(255,255,255)' title='在线反馈' rightBtnMode='none' />
-                <View style={styles.flexView}>
-                    <TextInput
-                        style={styles.mainInput}
-                        placeholder={In18.PLEASE_INPUT_SUGGEST}
-                        placeholderTextColor='rgb(37,19,4)'
-                        multiline={true}
-                        maxLength={200}
-                        onChangeText={this._titleInputChange}
+                <ModalHeader goBack={this._goBack} backBtnColor='rgb(255,255,255)' title='意见反馈' rightBtnMode='none' />
+                <ScrollView style={{ flex: 1 }}>
+                    <Text style={{ color: 'rgb(72,88,96)', marginTop: 17, marginLeft: 15 }}>{`请选择问题出现场景${this.state.selectNum}/3(必选)`}</Text>
+                    <FlatList
+                        extraData={this.state}
+                        data={TestData}//this.state.data
+                        renderItem={({ item }) => <Item selectTab={this.state.selectTab} callback={this.someBtnIsPress} item={item} />}
                     />
-                    <Text style={{ alignSelf: 'flex-end', marginRight: 10 }}>{`${this.state.leftWords}/200`}</Text>
-                </View>
-                <View style={styles.flexView2}>
-                    <TextInput
-                        style={styles.input2}
-                        placeholder={In18.PLEASE_INPUT_CONTRACT}
-                        placeholderTextColor='rgb(37,19,4)'
-                        maxLength={20}
-                        onChangeText={this._contentInputChange}
-                    />
-                </View>
-                <ImageBackground style={styles.btnBg} source={require('../../../image/mine/feedback_btn_bg.png')}>
-                    <TouchableHighlight
-                        style={styles.btn}
-                        underlayColor='transparent'
-                        onPress={this.submit}
-                    >
-                        <Text style={styles.btnText}>{In18.SUBMIT_SUGGEXT}</Text>
-                    </TouchableHighlight>
-                </ImageBackground>
+                </ScrollView>
             </SafeAreaView>
         );
     }
