@@ -235,6 +235,7 @@ export default class HelpScreen extends PureComponent {
         }
         if (reg.remark.length < 10) {
             ToastRoot.show('问题描述必须多于10字以上');
+            return;
         }
         NavigationService.navigate('IndicatorScreen');
         let imageSelectData = this.state.imageSelectData.concat();
@@ -355,7 +356,7 @@ export default class HelpScreen extends PureComponent {
 
     render() {
         let textInputStyle = null;
-        if (Platform.OS = 'ios') {
+        if (Platform.OS === 'ios') {
             textInputStyle = { paddingTop: 15 };
         }
         return (
