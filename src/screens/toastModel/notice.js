@@ -17,8 +17,8 @@ class NoticeTab extends PureComponent {
         return (
             <View style={{ height: 352, width: 277, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
                 <Text style={{ fontSize: 23, color: 'rgb(34,34,34)', marginTop: 19, fontWeight: 'bold' }}>系统公告</Text>
-                <View style={{ marginTop:15,height: 1, width: 237, backgroundColor: 'rgb(224,224,224)' }} />
-                <ScrollView style={{ flex: 1, marginTop: 28 }}>
+                <View style={{ marginTop: 15, height: 1, width: 237, backgroundColor: 'rgb(224,224,224)' }} />
+                <ScrollView style={{ flex: 1, marginTop: 28, width: 237 }}>
                     <Text style={{ fontSize: 15 }}>{this.props.text}</Text>
                 </ScrollView>
                 <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, marginBottom: 25, display: 'flex' }} underlayColor='transparent'>
