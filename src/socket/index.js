@@ -1,6 +1,7 @@
 import * as Config from '../global/Config';
 import Variables from '../global/Variables';
 import NavigationService from '../app/NavigationService';
+import { Platform } from 'react-native';
 let CryptoJS = require('crypto-js');
 
 const SECURTY_URL = '/api/accept';
@@ -665,6 +666,48 @@ class api {
     feedbackQuestionList(onSuccess, onError) {
         const url = '/api/question/lists';
         this.getFetch(url, onSuccess, onError);
+    }
+
+    uploadPic(uri, onSuccess, onError) {
+        const url = '/api/feedback/upload';
+        let formData = new FormData();
+        let file = { uri: uri, type: 'multipart/form-data', name: `kedou.png` };
+        formData.append('image', file);
+        // arrs.forEach((item, index) => {
+        //     let uri = item.path;
+        //     if (Platform.OS === 'ios') {
+        //         uri = item.sourceURL;
+        //     }
+        //     let file = { uri: uri, type: 'multipart/form-data', name: `kedou${index}.png` };
+        //     formData.append('image', file);
+        // });
+        this.postFetch(url, formData, onSuccess, onError);
+    }
+
+    submitFeedback(remark, contact, cover_filename, keys, onSuccess, onError) {
+        const url = '/api/feedback/create';
+        let formData = new FormData();
+        formData.append('remark', remark);
+        formData.append('contact', contact);
+        if (cover_filename) {
+            if (isSecurty) {
+                formData.append('cover_filename', cover_filename);
+            } else {
+                cover_filename.forEach((item) => {
+                    formData.append('cover_filename[]', item);
+                });
+            }
+        }
+        if (keys) {
+            if (isSecurty) {
+                formData.append('keys', keys);
+            } else {
+                keys.forEach((item) => {
+                    formData.append('keys[]', item);
+                });
+            }
+        }
+        this.postFetch(url, formData, onSuccess, onError);
     }
 }
 
