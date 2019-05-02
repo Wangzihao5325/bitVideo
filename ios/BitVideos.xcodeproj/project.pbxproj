@@ -1848,7 +1848,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv.35ff;
 				PRODUCT_NAME = BitVideos;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1890,7 +1890,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv.35ff;
 				PRODUCT_NAME = BitVideos;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
