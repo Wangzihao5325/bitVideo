@@ -11,6 +11,7 @@ import { clear_video_url_and_type } from '../../store/actions/videoPlayAction';
 
 import ModalHeader from '../loginModel/modalComponent/ModalHeader';
 import XSVideo from './videoComponent/video';
+import BitVideo from './videoComponent/bitVideo';
 import VideoHeader from './videoComponent/videoHeader';
 import UsualInfoTab from './videoComponent/usualInfoTab';
 import CommentTab from './videoComponent/commentTab';
@@ -101,7 +102,8 @@ export default class VideoModel extends PureComponent {
             <View style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
                 <SafeAreaView style={{ flex: 1 }}>
                     {Platform.OS === 'ios' && <ModalHeader title='' goBack={this.goBack} />}
-                    <XSVideo addShow={true} navi={this.props.navigation} />
+                    {/* <XSVideo addShow={true} navi={this.props.navigation} /> */}
+                    <BitVideo />
                     <ScrollView
                         style={styles.scroll}
                         showsVerticalScrollIndicator={false}
