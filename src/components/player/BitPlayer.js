@@ -28,43 +28,15 @@ const { width, height } = Dimensions.get('window');
 
 class HeaderController extends PureComponent {
 
-    static contextTypes = {
-        fullScreenCallback: PropTypes.func,
-    }
-
     render() {
-        let { fullScreenCallback } = this.context;
+        let title = '';
+        if (this.props.fullData) {
+            title = this.props.fullData.title;
+        }
         return (
             <View style={[styles.headerControl, this.props.widthStyle]}>
-                <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center', paddingHorizontal: 10 }}>
-                    {Platform.OS === 'ios' &&
-                        <TouchableHighlight
-                            style={{ height: 34, width: 34, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                            underlayColor='transparent'
-                            onPress={() => fullScreenCallback()}
-                        >
-                            <Icons
-                                style={styles.playButton}
-                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
-                                color='white'
-                                size={34}
-                            />
-                        </TouchableHighlight>
-                    }
-                    {Platform.OS === 'android' &&
-                        <GuestureTouchable
-                            style={{ height: 34, width: 34, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                            underlayColor='transparent'
-                            onPress={() => fullScreenCallback()}
-                        >
-                            <Icons
-                                style={styles.playButton}
-                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
-                                color='white'
-                                size={34}
-                            />
-                        </GuestureTouchable>
-                    }
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }}>
+                    <Text ellipsizeMode='middle' style={{ color: 'white', fontSize: 14, marginLeft: 20 }}>{title}</Text>
                 </View>
             </View>
         );
@@ -376,10 +348,11 @@ export default class BitPlayer extends PureComponent {
                         }}
                     >
                         {this.state.isFullscreen && <StatusBar hidden={true} />}
-                        {this.state.isShowController &&
+                        {this.state.isShowController && this.state.isFullscreen &&
                             <HeaderController
                                 isFullscreen={this.state.isFullscreen}
                                 widthStyle={this.state.controllerWidthStyle}
+                                fullData={this.props.fullData}
                             />
                         }
                         {(this.state.isLoading || this.state.isShowController) &&
@@ -546,13 +519,14 @@ export default class BitPlayer extends PureComponent {
                 }, () => {
                     this._setTimer();
                 });
-            } else {
-                this.setState({
-                    isShowController: false
-                }, () => {
-                    this._cancelTimer();
-                });
             }
+            // else {
+            //     this.setState({
+            //         isShowController: false
+            //     }, () => {
+            //         this._cancelTimer();
+            //     });
+            // }
         }
         if (tapGestureState == 5) {//手指离开
             if (this.state.isShowController) {
