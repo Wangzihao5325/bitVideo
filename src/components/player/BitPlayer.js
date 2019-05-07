@@ -5,7 +5,7 @@ import {
     Platform,
     StatusBar,
     StyleSheet,
-    Dimensions,
+    BackHandler,
     ActivityIndicator,
     TouchableHighlight,
 } from 'react-native';
@@ -267,6 +267,18 @@ export default class BitPlayer extends PureComponent {
 
                 seekBarNowTime: currentTime,
                 seekBarTotal: seekableDuration,
+            });
+        }
+    }
+
+    componentDidMount() {
+        if (Platform.OS == 'android') {
+            this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+                if (this.state.isFullscreen) {
+                    return true;
+                } else {
+                    return false;
+                }
             });
         }
     }

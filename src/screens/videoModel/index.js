@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View, Text, KeyboardAvoidingView, Platform } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, KeyboardAvoidingView, Platform, BackHandler } from 'react-native';
 import store from '../../store/index';
 import { set_video_full_data, set_guess_like_source, set_comment_list_data, video_detail_data_reset } from '../../store/actions/videoDetailInfoAction';
 import Api from '../../socket/index';
@@ -28,6 +28,7 @@ import IntroHalfModal from './HalfModal';
 import Modal from "react-native-modal";
 
 export default class VideoModel extends PureComponent {
+
     state = {
         detailInfoIsVisable: false,
         chooseEpiscodeIsVisable: false,
