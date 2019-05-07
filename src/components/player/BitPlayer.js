@@ -355,7 +355,7 @@ export default class BitPlayer extends PureComponent {
                                 fullData={this.props.fullData}
                             />
                         }
-                        {(this.state.isLoading || this.state.isShowController) &&
+                        {(this.state.isLoading || false) &&
                             <CenterController
                                 isLoading={this.state.isLoading}
                                 isController={this.state.isShowController}
@@ -380,6 +380,7 @@ export default class BitPlayer extends PureComponent {
                         {this.state.isShowController &&
                             <BottomController
                                 widthStyle={this.state.controllerWidthStyle}
+                                isFullscreen={this.state.isFullscreen}
                                 isPaused={this.state.isPaused}
                                 now={this.state.nowTime}
                                 total={this.state.totalTime}
@@ -478,22 +479,12 @@ export default class BitPlayer extends PureComponent {
     _playerDoubleTap = ({ nativeEvent }) => {
         let tapGestureState = nativeEvent.state;
         if (tapGestureState == 4) {//双击手势完成
-            if (
-                (this.state.isFullscreen && nativeEvent.x < height / 2) ||
-                (!this.state.isFullscreen && nativeEvent.x < width / 2)
-            ) {
-                this.setState({
-                    isSeeking: true
-                }, () => {
-                    this.player.seek(this.state.nowTime - 5);
-                });
-            } else {
-                this.setState({
-                    isSeeking: true
-                }, () => {
-                    this.player.seek(this.state.nowTime + 5);
-                });
-            }
+            this.setState((preState) => {
+                let paused = preState.isPaused;
+                return {
+                    isPaused: !paused
+                }
+            });
         }
     }
 
