@@ -5,6 +5,7 @@ import {
     Platform,
     StatusBar,
     StyleSheet,
+    Dimensions,
     BackHandler,
     ActivityIndicator,
     TouchableHighlight,
@@ -22,6 +23,8 @@ import Orientation from 'react-native-orientation';
 import * as Sizes from '../../global/Sizes';
 
 const delayTimes = 5000;
+const doubleTap = React.createRef();
+const { width, height } = Dimensions.get('window');
 
 class HeaderController extends PureComponent {
 
@@ -33,10 +36,10 @@ class HeaderController extends PureComponent {
         let { fullScreenCallback } = this.context;
         return (
             <View style={[styles.headerControl, this.props.widthStyle]}>
-                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flex: 1, flexDirection: 'row-reverse', alignItems: 'center', paddingHorizontal: 10 }}>
                     {Platform.OS === 'ios' &&
                         <TouchableHighlight
-                            style={{ height: 24, width: 24, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                            style={{ height: 34, width: 34, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                             underlayColor='transparent'
                             onPress={() => fullScreenCallback()}
                         >
@@ -44,13 +47,13 @@ class HeaderController extends PureComponent {
                                 style={styles.playButton}
                                 name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
                                 color='white'
-                                size={24}
+                                size={34}
                             />
                         </TouchableHighlight>
                     }
                     {Platform.OS === 'android' &&
                         <GuestureTouchable
-                            style={{ height: 24, width: 24, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                            style={{ height: 34, width: 34, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                             underlayColor='transparent'
                             onPress={() => fullScreenCallback()}
                         >
@@ -58,7 +61,7 @@ class HeaderController extends PureComponent {
                                 style={styles.playButton}
                                 name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
                                 color='white'
-                                size={24}
+                                size={34}
                             />
                         </GuestureTouchable>
                     }
@@ -288,59 +291,65 @@ export default class BitPlayer extends PureComponent {
         return (
             <TapGestureHandler
                 onHandlerStateChange={this._playerTap}
+                waitFor={doubleTap}
             >
-                <View
-                    style={containerStyle}
-                    onLayout={event => {
-                        this.setState({
-                            controllerWidthStyle: { width: event.nativeEvent.layout.width },
-                            controllerHeightStyle: { height: event.nativeEvent.layout.height }
-                        })
-                    }}
+                <TapGestureHandler
+                    ref={doubleTap}
+                    numberOfTaps={2}
+                    onHandlerStateChange={this._playerDoubleTap}
                 >
-                    {this.state.isFullscreen && <StatusBar hidden={true} />}
-                    {this.state.isShowController &&
-                        <HeaderController
-                            isFullscreen={this.state.isFullscreen}
-                            widthStyle={this.state.controllerWidthStyle}
-                        />
-                    }
-                    {(this.state.isLoading || this.state.isShowController) &&
-                        <CenterController
-                            isLoading={this.state.isLoading}
-                            isController={this.state.isShowController}
-                            isPaused={this.state.isPaused}
-                            widthStyle={this.state.controllerWidthStyle}
-                            heightStyle={this.state.controllerHeightStyle}
-                        />
-                    }
-                    {this.props.source &&
-                        <Video source={{ uri: this.props.source }}
-                            ref={(ref) => {
-                                this.player = ref
-                            }}
-                            paused={this.state.isPaused}
-                            progressUpdateInterval={1000}
-                            onLoadStart={this._videoOnloadStart}
-                            onLoad={this._videoOnload}
-                            onProgress={this._videoProgress}
-                            onSeek={this._endSeek}
-                            style={{ flex: 1 }} />
-                    }
-                    {this.state.isShowController &&
-                        <BottomController
-                            widthStyle={this.state.controllerWidthStyle}
-                            now={this.state.nowTime}
-                            total={this.state.totalTime}
-                            playable={this.state.playableTime}
-                            seekNow={this.state.seekBarNowTime}
-                            seekTotal={this.state.seekBarTotal}
-                        />
-                    }
+                    <View
+                        style={containerStyle}
+                        onLayout={event => {
+                            this.setState({
+                                controllerWidthStyle: { width: event.nativeEvent.layout.width },
+                                controllerHeightStyle: { height: event.nativeEvent.layout.height }
+                            })
+                        }}
+                    >
+                        {this.state.isFullscreen && <StatusBar hidden={true} />}
+                        {this.state.isShowController &&
+                            <HeaderController
+                                isFullscreen={this.state.isFullscreen}
+                                widthStyle={this.state.controllerWidthStyle}
+                            />
+                        }
+                        {(this.state.isLoading || this.state.isShowController) &&
+                            <CenterController
+                                isLoading={this.state.isLoading}
+                                isController={this.state.isShowController}
+                                isPaused={this.state.isPaused}
+                                widthStyle={this.state.controllerWidthStyle}
+                                heightStyle={this.state.controllerHeightStyle}
+                            />
+                        }
+                        {this.props.source &&
+                            <Video source={{ uri: this.props.source }}
+                                ref={(ref) => {
+                                    this.player = ref
+                                }}
+                                paused={this.state.isPaused}
+                                progressUpdateInterval={1000}
+                                onLoadStart={this._videoOnloadStart}
+                                onLoad={this._videoOnload}
+                                onProgress={this._videoProgress}
+                                onSeek={this._endSeek}
+                                style={{ flex: 1 }} />
+                        }
+                        {this.state.isShowController &&
+                            <BottomController
+                                widthStyle={this.state.controllerWidthStyle}
+                                now={this.state.nowTime}
+                                total={this.state.totalTime}
+                                playable={this.state.playableTime}
+                                seekNow={this.state.seekBarNowTime}
+                                seekTotal={this.state.seekBarTotal}
+                            />
+                        }
 
-                </View>
-            </TapGestureHandler >
-
+                    </View>
+                </TapGestureHandler >
+            </TapGestureHandler>
         );
     }
 
@@ -424,6 +433,27 @@ export default class BitPlayer extends PureComponent {
     /*
       player 手势处理
     */
+    _playerDoubleTap = ({ nativeEvent }) => {
+        let tapGestureState = nativeEvent.state;
+        if (tapGestureState == 4) {//双击手势完成
+            if (
+                (this.state.isFullscreen && nativeEvent.x < height / 2) ||
+                (!this.state.isFullscreen && nativeEvent.x < width / 2)
+            ) {
+                this.setState({
+                    isSeeking: true
+                }, () => {
+                    this.player.seek(this.state.nowTime - 5);
+                });
+            } else {
+                this.setState({
+                    isSeeking: true
+                }, () => {
+                    this.player.seek(this.state.nowTime + 5);
+                });
+            }
+        }
+    }
 
     _playerTap = ({ nativeEvent }) => {
         let tapGestureState = nativeEvent.state;
@@ -446,6 +476,12 @@ export default class BitPlayer extends PureComponent {
                     isShowController: true
                 }, () => {
                     this._setTimer();
+                });
+            } else {
+                this.setState({
+                    isShowController: false
+                }, () => {
+                    this._cancelTimer();
                 });
             }
         }
