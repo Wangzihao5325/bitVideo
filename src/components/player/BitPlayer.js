@@ -134,20 +134,83 @@ class CenterController extends PureComponent {
 
 class BottomController extends PureComponent {
 
+    static contextTypes = {
+        playPausedCallback: PropTypes.func,
+        fullScreenCallback: PropTypes.func,
+    }
+
     render() {
+        let { fullScreenCallback } = this.context;
         let { now, total, playable } = this.props;
         let nowTimeStr = this._timeformat(now);
         let totalTimeStr = this._timeformat(total);
         return (
             <View style={[styles.bottomControl, this.props.widthStyle]}>
-                <View style={{ height: 40, width: 70, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={styles.timeTextStyle}>{nowTimeStr}</Text>
+                <View style={styles.bottomBtnContainer}>
+                    {Platform.OS === 'ios' &&
+                        <TouchableHighlight
+                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                            underlayColor='transparent'
+                            onPress={this._playPausedBtnPress}
+                        >
+                            <Icons
+                                style={styles.playButton}
+                                name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
+                                color='white'
+                                size={20}
+                            />
+                        </TouchableHighlight>
+                    }
+                    {Platform.OS === 'android' &&
+                        <GuestureTouchable
+                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                            underlayColor='transparent'
+                            onPress={this._playPausedBtnPress}
+                        >
+                            <Icons
+                                style={styles.playButton}
+                                name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
+                                color='white'
+                                size={20}
+                            />
+                        </GuestureTouchable>
+                    }
+                </View>
+                <View style={{ height: 40, width: 100, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={styles.timeTextStyle}>{`${nowTimeStr}/${totalTimeStr}`}</Text>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ProgressBar now={this.props.seekNow} total={this.props.seekTotal} superWidthStyle={this.props.widthStyle} />
                 </View>
-                <View style={{ height: 40, width: 70, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={styles.timeTextStyle}>{totalTimeStr}</Text>
+                <View style={styles.bottomBtnContainer}>
+                    {Platform.OS === 'ios' &&
+                        <TouchableHighlight
+                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                            underlayColor='transparent'
+                            onPress={() => fullScreenCallback()}
+                        >
+                            <Icons
+                                style={styles.playButton}
+                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
+                                color='white'
+                                size={20}
+                            />
+                        </TouchableHighlight>
+                    }
+                    {Platform.OS === 'android' &&
+                        <GuestureTouchable
+                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                            underlayColor='transparent'
+                            onPress={() => fullScreenCallback()}
+                        >
+                            <Icons
+                                style={styles.playButton}
+                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
+                                color='white'
+                                size={20}
+                            />
+                        </GuestureTouchable>
+                    }
                 </View>
             </View>
         );
@@ -160,6 +223,11 @@ class BottomController extends PureComponent {
         let formatSecond = _.padStart((secondsInt % 60).toFixed(0), 2, 0);
         return `${formatHour}:${formatMinute}:${formatSecond}`
     }
+
+    _playPausedBtnPress = () => {
+        const { playPausedCallback } = this.context;
+        playPausedCallback();
+    }
 }
 
 class ProgressBar extends PureComponent {
@@ -171,7 +239,7 @@ class ProgressBar extends PureComponent {
 
     render() {
         const { seekCallback, startSeekCallback } = this.context;
-        let width = this.props.superWidthStyle.width - 160;
+        let width = this.props.superWidthStyle.width - 170;
         return (
             <Slider
                 style={{ width: width, height: 20 }}
@@ -339,6 +407,7 @@ export default class BitPlayer extends PureComponent {
                         {this.state.isShowController &&
                             <BottomController
                                 widthStyle={this.state.controllerWidthStyle}
+                                isPaused={this.state.isPaused}
                                 now={this.state.nowTime}
                                 total={this.state.totalTime}
                                 playable={this.state.playableTime}
@@ -543,11 +612,19 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.6)',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        paddingHorizontal: 10
+    },
+    bottomBtnContainer: {
+        height: 20,
+        width: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     timeTextStyle: {
         color: 'white',
-        fontSize: 13,
+        fontSize: 11,
     },
     playButton: {
         opacity: 0.9
