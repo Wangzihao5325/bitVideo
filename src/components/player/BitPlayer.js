@@ -17,6 +17,7 @@ import {
 import Icons from 'react-native-vector-icons/MaterialIcons'
 import Slider from 'react-native-slider';
 import _ from 'lodash';
+import Orientation from 'react-native-orientation';
 import * as Sizes from '../../global/Sizes';
 
 const { height, width } = Dimensions.get('window');
@@ -277,6 +278,9 @@ export default class BitPlayer extends PureComponent {
                 <View
                     style={containerStyle}
                     onLayout={event => {
+                        console.log('1122334');
+                        console.log(event.nativeEvent.layout.width);
+                        console.log(event.nativeEvent.layout.height);
                         this.setState({
                             controllerWidthStyle: { width: event.nativeEvent.layout.width },
                             controllerHeightStyle: { height: event.nativeEvent.layout.height }
@@ -334,6 +338,11 @@ export default class BitPlayer extends PureComponent {
     _fullScreenCallback = () => {
         this.setState((preState) => {
             let isFullscreen = preState.isFullscreen;
+            if (isFullscreen) {
+                Orientation.lockToPortrait();
+            } else {
+                Orientation.lockToLandscape();
+            }
             return {
                 isFullscreen: !isFullscreen
             }
@@ -404,7 +413,6 @@ export default class BitPlayer extends PureComponent {
     */
 
     _playerTap = ({ nativeEvent }) => {
-        console.log(nativeEvent.state);
         let tapGestureState = nativeEvent.state;
         if (tapGestureState == 1) {//ios手势取消
             if (this.state.isShowController) {
@@ -443,8 +451,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         top: 0,
-        height: height,
-        width: width,
+        height: Dimensions.get('window').width,
+        width: Dimensions.get('window').height,
         zIndex: 10,
         backgroundColor: 'rgb(34,34,34)'
     },
