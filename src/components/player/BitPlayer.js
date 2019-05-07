@@ -21,7 +21,6 @@ import _ from 'lodash';
 import Orientation from 'react-native-orientation';
 import * as Sizes from '../../global/Sizes';
 
-const { height, width } = Dimensions.get('window');
 const delayTimes = 5000;
 
 class HeaderController extends PureComponent {
@@ -34,34 +33,36 @@ class HeaderController extends PureComponent {
         let { fullScreenCallback } = this.context;
         return (
             <View style={[styles.headerControl, this.props.widthStyle]}>
-                {Platform.OS === 'ios' &&
-                    <TouchableHighlight
-                        style={{ height: 24, width: 24, display: 'flex', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}
-                        underlayColor='transparent'
-                        onPress={() => fullScreenCallback()}
-                    >
-                        <Icons
-                            style={styles.playButton}
-                            name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
-                            color='white'
-                            size={24}
-                        />
-                    </TouchableHighlight>
-                }
-                {Platform.OS === 'android' &&
-                    <GuestureTouchable
-                        style={{ height: 24, width: 24, display: 'flex', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}
-                        underlayColor='transparent'
-                        onPress={() => fullScreenCallback()}
-                    >
-                        <Icons
-                            style={styles.playButton}
-                            name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
-                            color='white'
-                            size={24}
-                        />
-                    </GuestureTouchable>
-                }
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                    {Platform.OS === 'ios' &&
+                        <TouchableHighlight
+                            style={{ height: 24, width: 24, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                            underlayColor='transparent'
+                            onPress={() => fullScreenCallback()}
+                        >
+                            <Icons
+                                style={styles.playButton}
+                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
+                                color='white'
+                                size={24}
+                            />
+                        </TouchableHighlight>
+                    }
+                    {Platform.OS === 'android' &&
+                        <GuestureTouchable
+                            style={{ height: 24, width: 24, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                            underlayColor='transparent'
+                            onPress={() => fullScreenCallback()}
+                        >
+                            <Icons
+                                style={styles.playButton}
+                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
+                                color='white'
+                                size={24}
+                            />
+                        </GuestureTouchable>
+                    }
+                </View>
             </View>
         );
     }
@@ -342,10 +343,8 @@ export default class BitPlayer extends PureComponent {
             }
         }, () => {
             if (this.state.isFullscreen) {
-                //Orientation.lockToPortrait();
                 Orientation.lockToLandscape();
             } else {
-                //Orientation.lockToLandscape();
                 Orientation.lockToPortrait();
             }
         });
