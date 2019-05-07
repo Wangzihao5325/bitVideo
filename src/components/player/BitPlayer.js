@@ -3,6 +3,7 @@ import {
     View,
     Text,
     Platform,
+    StatusBar,
     StyleSheet,
     Dimensions,
     ActivityIndicator,
@@ -278,15 +279,13 @@ export default class BitPlayer extends PureComponent {
                 <View
                     style={containerStyle}
                     onLayout={event => {
-                        console.log('1122334');
-                        console.log(event.nativeEvent.layout.width);
-                        console.log(event.nativeEvent.layout.height);
                         this.setState({
                             controllerWidthStyle: { width: event.nativeEvent.layout.width },
                             controllerHeightStyle: { height: event.nativeEvent.layout.height }
                         })
                     }}
                 >
+                    {this.state.isFullscreen && <StatusBar hidden={true} />}
                     {this.state.isShowController &&
                         <HeaderController
                             isFullscreen={this.state.isFullscreen}
@@ -338,13 +337,16 @@ export default class BitPlayer extends PureComponent {
     _fullScreenCallback = () => {
         this.setState((preState) => {
             let isFullscreen = preState.isFullscreen;
-            if (isFullscreen) {
-                Orientation.lockToPortrait();
-            } else {
-                Orientation.lockToLandscape();
-            }
             return {
                 isFullscreen: !isFullscreen
+            }
+        }, () => {
+            if (this.state.isFullscreen) {
+                //Orientation.lockToPortrait();
+                Orientation.lockToLandscape();
+            } else {
+                //Orientation.lockToLandscape();
+                Orientation.lockToPortrait();
             }
         });
     }
