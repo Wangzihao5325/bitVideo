@@ -453,8 +453,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         top: 0,
-        height: Dimensions.get('window').width,
-        width: Dimensions.get('window').height,
+        bottom: 0,
+        right: 0,
         zIndex: 10,
         backgroundColor: 'rgb(34,34,34)'
     },
