@@ -67,7 +67,7 @@ class CenterController extends PureComponent {
                             style={{ height: 36, width: 36 }}
                             source={this.props.panTime >= 0 ? require('../../image/usual/fast_forward.png') : require('../../image/usual/fast_replay.png')}
                         />
-                        <Text style={{ color: 'white', marginTop: 10 }}>{`${formatStart}/${formatTotal}`}</Text>
+                        <Text style={{ color: 'white', marginTop: 20 }}>{`${formatStart}/${formatTotal}`}</Text>
                     </View>
                 </View>
             );
@@ -542,8 +542,7 @@ export default class BitPlayer extends PureComponent {
 
     _endSeek = () => {
         this.setState({
-            isSeeking: false,
-            isPaning: false
+            isSeeking: false
         });
     }
 
@@ -567,9 +566,42 @@ export default class BitPlayer extends PureComponent {
                 if (this.state.isPaning) {
                     this.setState({
                         isPaning: false,
+                        isSeeking: true
+                    }, () => {
+                        let startTime = this.state.panStartTime;
+                        let panTime = this.state.panTime;
+                        let totalTime = startTime + panTime;
+                        if (totalTime > this.state.totalTime) {
+                            totalTime = this.state.totalTime
+                        }
+                        if (totalTime <= 0) {
+                            totalTime = 0;
+                        }
+                        this.player.seek(totalTime);
                     });
                 }
-            }, 2000)
+            }, 1000);
+        } else {
+            clearTimeout(this.panTimer);
+            this.panTimer = null;
+            this.panTimer = setTimeout(() => {
+                if (this.state.isPaning) {
+                    this.setState({
+                        isPaning: false,
+                    }, () => {
+                        let startTime = this.state.panStartTime;
+                        let panTime = this.state.panTime;
+                        let totalTime = startTime + panTime;
+                        if (totalTime > this.state.totalTime) {
+                            totalTime = this.state.totalTime
+                        }
+                        if (totalTime <= 0) {
+                            totalTime = 0;
+                        }
+                        this.player.seek(totalTime);
+                    });
+                }
+            }, 1000);
         }
     }
 
@@ -630,6 +662,8 @@ export default class BitPlayer extends PureComponent {
                         panTime: x
                     }
                 }
+            }, () => {
+                this._setPanTimer();
             });
         }
     }
