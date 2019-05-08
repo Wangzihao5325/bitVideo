@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import {
     View,
     Text,
+    Image,
     Platform,
     StatusBar,
     StyleSheet,
@@ -109,6 +110,8 @@ class BottomController extends PureComponent {
     static contextTypes = {
         playPausedCallback: PropTypes.func,
         fullScreenCallback: PropTypes.func,
+        startSeekCallback: PropTypes.func,
+        seekCallback: PropTypes.func,
     }
 
     render() {
@@ -118,41 +121,130 @@ class BottomController extends PureComponent {
         let totalTimeStr = this._timeformat(total);
         return (
             <View style={[styles.bottomControl, this.props.widthStyle]}>
-                <View style={styles.bottomBtnContainer}>
-                    {Platform.OS === 'ios' &&
-                        <TouchableHighlight
-                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-                            underlayColor='transparent'
-                            onPress={this._playPausedBtnPress}
-                        >
-                            <Icons
-                                style={styles.playButton}
-                                name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
-                                color='white'
-                                size={20}
-                            />
-                        </TouchableHighlight>
-                    }
-                    {Platform.OS === 'android' &&
-                        <GuestureTouchable
-                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-                            underlayColor='transparent'
-                            onPress={this._playPausedBtnPress}
-                        >
-                            <Icons
-                                style={styles.playButton}
-                                name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
-                                color='white'
-                                size={20}
-                            />
-                        </GuestureTouchable>
-                    }
-                </View>
-                <View style={{ height: 40, width: 100, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                {this.props.isFullscreen &&
+                    <View style={[styles.fullscreenBottomSeekBtnContainer, { marginHorizontal: 5 }]}>
+                        {Platform.OS === 'ios' &&
+                            <TouchableHighlight
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._seekReplay_10}
+                            >
+                                <Image
+                                    style={{ height: 20, width: 20 }}
+                                    source={require('../../image/usual/player_replay.png')}
+                                />
+                            </TouchableHighlight>
+                        }
+                        {Platform.OS === 'android' &&
+                            <GuestureTouchable
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._seekReplay_10}
+                            >
+                                <Image
+                                    style={{ height: 20, width: 20 }}
+                                    source={require('../../image/usual/player_replay.png')}
+                                />
+                            </GuestureTouchable>
+                        }
+                    </View>
+                }
+                {this.props.isFullscreen &&
+                    <View style={[styles.bottomBtnContainer, { height: 25, width: 25 }]}>
+                        {Platform.OS === 'ios' &&
+                            <TouchableHighlight
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._playPausedBtnPress}
+                            >
+                                <Icons
+                                    style={styles.playButton}
+                                    name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
+                                    color='white'
+                                    size={25}
+                                />
+                            </TouchableHighlight>
+                        }
+                        {Platform.OS === 'android' &&
+                            <GuestureTouchable
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._playPausedBtnPress}
+                            >
+                                <Icons
+                                    style={styles.playButton}
+                                    name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
+                                    color='white'
+                                    size={25}
+                                />
+                            </GuestureTouchable>
+                        }
+                    </View>
+                }
+                {this.props.isFullscreen &&
+                    <View style={[styles.fullscreenBottomSeekBtnContainer, { marginHorizontal: 5 }]}>
+                        {Platform.OS === 'ios' &&
+                            <TouchableHighlight
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._seekForward_10}
+                            >
+                                <Image
+                                    style={{ height: 20, width: 20 }}
+                                    source={require('../../image/usual/player_forward.png')}
+                                />
+                            </TouchableHighlight>
+                        }
+                        {Platform.OS === 'android' &&
+                            <GuestureTouchable
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._seekForward_10}
+                            >
+                                <Image
+                                    style={{ height: 20, width: 20 }}
+                                    source={require('../../image/usual/player_forward.png')} />
+                            </GuestureTouchable>
+                        }
+                    </View>
+                }
+                {!this.props.isFullscreen &&
+                    <View style={styles.bottomBtnContainer}>
+                        {Platform.OS === 'ios' &&
+                            <TouchableHighlight
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._playPausedBtnPress}
+                            >
+                                <Icons
+                                    style={styles.playButton}
+                                    name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
+                                    color='white'
+                                    size={20}
+                                />
+                            </TouchableHighlight>
+                        }
+                        {Platform.OS === 'android' &&
+                            <GuestureTouchable
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={this._playPausedBtnPress}
+                            >
+                                <Icons
+                                    style={styles.playButton}
+                                    name={this.props.isPaused ? 'play-circle-outline' : 'pause-circle-outline'}
+                                    color='white'
+                                    size={20}
+                                />
+                            </GuestureTouchable>
+                        }
+                    </View>
+                }
+                <View style={{ height: 40, width: 110, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={styles.timeTextStyle}>{`${nowTimeStr}/${totalTimeStr}`}</Text>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <ProgressBar now={this.props.seekNow} total={this.props.seekTotal} superWidthStyle={this.props.widthStyle} />
+                    <ProgressBar now={this.props.seekNow} total={this.props.seekTotal} isFullscreen={this.props.isFullscreen} superWidthStyle={this.props.widthStyle} />
                 </View>
                 <View style={styles.bottomBtnContainer}>
                     {Platform.OS === 'ios' &&
@@ -200,6 +292,20 @@ class BottomController extends PureComponent {
         const { playPausedCallback } = this.context;
         playPausedCallback();
     }
+
+    _seekForward_10 = () => {
+        let { seekCallback, startSeekCallback } = this.context;
+        startSeekCallback();
+        let time = this.props.now + 10;
+        seekCallback(time);
+    }
+
+    _seekReplay_10 = () => {
+        let { seekCallback, startSeekCallback } = this.context;
+        startSeekCallback();
+        let time = this.props.now - 10;
+        seekCallback(time);
+    }
 }
 
 class ProgressBar extends PureComponent {
@@ -211,7 +317,10 @@ class ProgressBar extends PureComponent {
 
     render() {
         const { seekCallback, startSeekCallback } = this.context;
-        let width = this.props.superWidthStyle.width - 170;
+        let width = this.props.superWidthStyle.width - 180
+        if (this.props.isFullscreen) {
+            width = this.props.superWidthStyle.width - 240;
+        }
         return (
             <Slider
                 style={{ width: width, height: 20 }}
@@ -581,6 +690,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     bottomBtnContainer: {
+        height: 20,
+        width: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    fullscreenBottomSeekBtnContainer: {
         height: 20,
         width: 20,
         display: 'flex',
