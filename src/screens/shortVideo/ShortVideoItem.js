@@ -7,6 +7,7 @@ import Api from '../../socket/index';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RootPlayer from '../../components/player/RootPlayer';
+import BitPlayer from '../../components/player/BitPlayer';
 import ToastRoot from '../../components/toast/index';
 import NavigationService from '../../app/NavigationService';
 
@@ -92,7 +93,7 @@ export default class ShortVideoItem extends PureComponent {
             <View style={styles.container}>
                 <View style={{ flex: 1 }} >
                     {this.props.nowPlaying === this.props.index ?
-                        <RootPlayer disableFullscreen={true} videoUrl={this.state.url} disableBack={true} /> :
+                        <BitPlayer source={this.state.url} disableFullScreen={true} /> :
                         <Cover title={this.props.title} coverPress={this._toPlay} playPress={this._toPlay} source={this.props.coverUrl} />
                     }
                 </View>

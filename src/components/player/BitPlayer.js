@@ -238,36 +238,38 @@ class BottomController extends PureComponent {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ProgressBar now={this.props.seekNow} total={this.props.seekTotal} isFullscreen={this.props.isFullscreen} superWidthStyle={this.props.widthStyle} />
                 </View>
-                <View style={styles.bottomBtnContainer}>
-                    {Platform.OS === 'ios' &&
-                        <TouchableHighlight
-                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-                            underlayColor='transparent'
-                            onPress={() => fullScreenCallback()}
-                        >
-                            <Icons
-                                style={styles.playButton}
-                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
-                                color='white'
-                                size={20}
-                            />
-                        </TouchableHighlight>
-                    }
-                    {Platform.OS === 'android' &&
-                        <GuestureTouchable
-                            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-                            underlayColor='transparent'
-                            onPress={() => fullScreenCallback()}
-                        >
-                            <Icons
-                                style={styles.playButton}
-                                name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
-                                color='white'
-                                size={20}
-                            />
-                        </GuestureTouchable>
-                    }
-                </View>
+                {!this.props.disableFullScreen &&
+                    <View style={styles.bottomBtnContainer}>
+                        {Platform.OS === 'ios' &&
+                            <TouchableHighlight
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={() => fullScreenCallback()}
+                            >
+                                <Icons
+                                    style={styles.playButton}
+                                    name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
+                                    color='white'
+                                    size={20}
+                                />
+                            </TouchableHighlight>
+                        }
+                        {Platform.OS === 'android' &&
+                            <GuestureTouchable
+                                style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+                                underlayColor='transparent'
+                                onPress={() => fullScreenCallback()}
+                            >
+                                <Icons
+                                    style={styles.playButton}
+                                    name={this.props.isFullscreen ? 'fullscreen-exit' : 'fullscreen'}
+                                    color='white'
+                                    size={20}
+                                />
+                            </GuestureTouchable>
+                        }
+                    </View>
+                }
             </View>
         );
     }
@@ -338,7 +340,7 @@ export default class BitPlayer extends PureComponent {
     }
 
     static propTypes = {
-        source: PropTypes.object.isRequired,
+        source: PropTypes.string,
         style: PropTypes.object,
         fullScreen: PropTypes.bool
     };
@@ -489,6 +491,7 @@ export default class BitPlayer extends PureComponent {
                             }
                             {this.state.isShowController &&
                                 <BottomController
+                                    disableFullScreen={this.props.disableFullScreen}
                                     widthStyle={this.state.controllerWidthStyle}
                                     isFullscreen={this.state.isFullscreen}
                                     isPaused={this.state.isPaused}
@@ -634,7 +637,6 @@ export default class BitPlayer extends PureComponent {
     */
 
     _seekPan = ({ nativeEvent }) => {
-        console.log(nativeEvent);
         let tapGestureState = nativeEvent.state;
         if (tapGestureState == State.ACTIVE && this.state.isFullscreen) {
             let x = 0;
@@ -670,7 +672,6 @@ export default class BitPlayer extends PureComponent {
 
     _playerDoubleTap = ({ nativeEvent }) => {
         let tapGestureState = nativeEvent.state;
-        console.log(`double ${tapGestureState}`);
         if (tapGestureState == State.ACTIVE) {//双击手势完成
             this.setState((preState) => {
                 let paused = preState.isPaused;
@@ -683,7 +684,6 @@ export default class BitPlayer extends PureComponent {
 
     _playerTap = ({ nativeEvent }) => {
         let tapGestureState = nativeEvent.state;
-        console.log(`single ${tapGestureState}`);
         if (tapGestureState == State.FAILED) {//ios手势取消
             if (this.state.isShowController) {
                 this._setTimer();
