@@ -25,7 +25,7 @@ import _ from 'lodash';
 import Orientation from 'react-native-orientation';
 import * as Sizes from '../../global/Sizes';
 
-const delayTimes = 5000;
+const delayTimes = 2200;
 const doubleTap = React.createRef();
 const { width, height } = Dimensions.get('window');
 
