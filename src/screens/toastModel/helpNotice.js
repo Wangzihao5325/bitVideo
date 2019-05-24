@@ -1,28 +1,28 @@
 import React, { PureComponent } from 'react';
 import { View, Text, TouchableHighlight, ImageBackground, Image, StatusBar, Platform, ScrollView, Linking, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
+import * as Config from '../../global/Config';
 
-class NoticeTab extends PureComponent {
+class HelpNoticeTab extends PureComponent {
     static contextTypes = {
         noticeNavigation: PropTypes.object
     }
 
     _btnPress = () => {
-        const { noticeNavigation } = this.context;
-        noticeNavigation.goBack();
+        Linking.openURL(this.props.url);
     }
 
     render() {
         return (
             <View style={{ height: 352, width: 277, display: 'flex', backgroundColor: 'rgb(252,252,252)', alignItems: 'center', borderRadius: 6 }}>
-                <Text style={{ fontSize: 23, color: 'rgb(34,34,34)', marginTop: 19, fontWeight: 'bold' }}>系统公告</Text>
+                <Text style={{ fontSize: 23, color: 'rgb(34,34,34)', marginTop: 19, fontWeight: 'bold' }}>安全提示</Text>
                 <View style={{ marginTop: 15, height: 1, width: 237, backgroundColor: 'rgb(224,224,224)' }} />
                 <ScrollView style={{ flex: 1, marginTop: 28, width: 237 }}>
                     <Text style={{ fontSize: 15 }}>{this.props.text}</Text>
                 </ScrollView>
                 <TouchableHighlight onPress={this._btnPress} style={{ height: 38, width: 196, marginTop: 30, marginBottom: 25, display: 'flex' }} underlayColor='transparent'>
                     <ImageBackground style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} source={require('../../image/pop/pop_btn_bg.png')}>
-                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>确定</Text>
+                        <Text style={{ color: 'rgb(33,45,49)', fontSize: 14 }}>立即安装</Text>
                     </ImageBackground>
                 </TouchableHighlight>
             </View>
@@ -30,7 +30,7 @@ class NoticeTab extends PureComponent {
     }
 }
 
-export default class NoticeModel extends PureComponent {
+export default class HelpNoticeModel extends PureComponent {
 
     state = {
         pop: null,
@@ -49,11 +49,12 @@ export default class NoticeModel extends PureComponent {
 
     componentDidMount() {
         const type = this.props.navigation.getParam('type', '');
-        const text = this.props.navigation.getParam('text', '');
+        const url = this.props.navigation.getParam('url', '');
+        const text = '近期苹果大量封杀成人视频，请务必安装修复文件，以便您能随时找回蝌蚪！';
         switch (type) {
             case 'Notice':
                 this.setState({
-                    pop: <NoticeTab text={text} />,
+                    pop: <HelpNoticeTab text={text} url={url} />,
                     isShowBackBtn: true
                 });
                 break;

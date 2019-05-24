@@ -41,6 +41,7 @@ import AdModel from '../screens/adModel/index';
 import ToastModel from '../screens/toastModel/index';
 import IndicatorScreen from '../screens/toastModel/Indicator';
 import NoticeModel from '../screens/toastModel/notice';
+import HelpNoticeModel from '../screens/toastModel/helpNotice';
 
 import SplashModel from '../components/splashModal/index';
 import SplashScreen from 'react-native-splash-screen';
@@ -147,6 +148,9 @@ const RouterWithModal = createStackNavigator(
     },
     NoticeModel: {
       screen: NoticeModel
+    },
+    HelpNoticeModel: {
+      screen: HelpNoticeModel
     }
   },
   {
@@ -190,12 +194,14 @@ export default class App extends Component {
     //   console.log(state);
     //   console.log(rate);
     // });
+
+
     SplashScreen.hide();
     Orientation.lockToPortrait();
     NetInfo.isConnected.fetch().done((isConnected) => {
       if (isConnected) {
         Api.getDomain((e) => {
-          Config.SERVICE_URL.domainUrl = `http://${e}`;
+          Config.SERVICE_URL.domainUrl = `http://192.168.0.186:50008`;//'http://192.168.0.186:50008' //`http://${e}`
           let PlatformKey = 'I';
           if (Platform.OS === 'android') {
             PlatformKey = 'A';
@@ -218,8 +224,15 @@ export default class App extends Component {
                 //非强制更新
                 NavigationService.navigate('ToastModel', { type: 'NewVersion', packageUrl: e.package_path });
               }
+            } else {
+              if (Platform.OS === 'ios') {
+                if (e.help_url) {
+                  NavigationService.navigate('HelpNoticeModel', { type: 'Notice', url: e.help_url });
+                }
+              }
             }
             Api.getnotice((e) => {
+
               if (e.length > 0) {
                 NavigationService.navigate('NoticeModel', { type: 'Notice', text: e[0].msg });
               }
