@@ -31,14 +31,16 @@ class IdCard extends PureComponent {
 
     state = {
         qrCode: <View style={{ height: 140, width: 140, backgroundColor: 'white' }} />,
-        isFirst: false
+        isFirst: false,
+        bgColor: Colors.SCREEN_BGCOLOR
     }
 
     componentDidMount() {
         if (Platform.OS === 'ios') {
             const firstType = this.props.navigation.getParam('isFirst', false);
             this.setState({
-                isFirst: firstType
+                isFirst: firstType,
+                bgColor: 'rgba(0,0,0,0.6)'
             });
         }
         let code = this.props.id + this.props.salt;
@@ -54,10 +56,6 @@ class IdCard extends PureComponent {
     }
 
     _goBack = () => {
-        if (this.state.isFirst) {
-            ToastRoot.show('请保存身份卡');
-            return;
-        }
         this.props.navigation.goBack();
     }
 
@@ -102,7 +100,7 @@ class IdCard extends PureComponent {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <SafeAreaView style={{ flex: 1, backgroundColor: Colors.SCREEN_BGCOLOR }}>
+                <SafeAreaView style={{ flex: 1, backgroundColor: this.state.bgColor }}>
                     <ModalHeader
                         goBack={this._goBack}
                         textStyle={{ color: 'white' }}
@@ -115,9 +113,9 @@ class IdCard extends PureComponent {
                             style={{ width: 298, height: 453, alignSelf: 'center', marginTop: 36 }}
                             source={require('../../../../image/mine/id_card_bg.png')}
                         >
-                            <Image style={{ height: 60, width: 60, alignSelf: 'center', marginTop: 45 }} source={require('../../../../image/mine/id_card_icon.png')} />
-                            <Text style={{ color: 'rgb(34,34,34)', fontSize: 16, marginTop: 17, alignSelf: 'center' }}>{this.props.accountName}</Text>
-                            <Text style={{ color: 'rgb(139,140,145)', fontSize: 14, marginTop: 8, alignSelf: 'center' }}>{`编码:${this.props.nickName}`}</Text>
+                            <Image style={{ height: 60, width: 60, alignSelf: 'center', marginTop: 36 }} source={require('../../../../image/mine/id_card_icon.png')} />
+                            <Text style={{ color: 'rgb(34,34,34)', fontSize: 16, marginTop: 10, alignSelf: 'center' }}>{this.props.accountName}</Text>
+                            <Text style={{ color: 'rgb(254,166,95)', fontSize: 18, marginTop: 10, alignSelf: 'center' }}>{`邀请码:${this.props.inviteCode}`}</Text>
                             <View style={{ height: 160, width: 160, marginTop: 10, alignSelf: 'center' }}>
                                 <ScrollView
                                     style={{ flex: 1 }}
@@ -132,8 +130,8 @@ class IdCard extends PureComponent {
                         </ImageBackground>
                         <Image style={{ position: 'absolute', bottom: 0, left: 0, height: 123, width: Sizes.DEVICE_WIDTH }} source={require('../../../../image/mine/id_card_bottom_bg.png')} />
                         <View style={{ position: 'absolute', zIndex: 10, left: 0, bottom: 0, height: 60, width: Sizes.DEVICE_WIDTH, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 11, color: 'rgb(139,140,145)' }}>身份卡是个人专属身份标识</Text>
-                            <Text style={{ fontSize: 11, color: 'rgb(139,140,145)', marginTop: 3 }}>可用于账号找回，请提前保存至本地，切勿泄露与他人</Text>
+                            <Text style={{ fontSize: 16, color: 'rgb(228,193,143)' }}>防止账号丢失</Text>
+                            <Text style={{ fontSize: 16, color: 'rgb(228,193,143)', marginTop: 3 }}>请务必保存身份卡至相册</Text>
                         </View>
                     </View>
                     <View style={{ flex: 1, backgroundColor: 'rgb(22,30,34)' }}>
@@ -162,7 +160,8 @@ function mapState2Props(store) {
         accountName: store.account.name,
         nickName: store.account.nickName,
         id: store.account.id,
-        salt: store.account.salt
+        salt: store.account.salt,
+        inviteCode: store.account.inviteCode
     }
 }
 

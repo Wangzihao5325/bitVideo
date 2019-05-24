@@ -230,7 +230,7 @@ export default class App extends Component {
                 let clipboardContent = await Clipboard.getString();
                 if (userToken) {
                   newReg.isNew = false;
-                  newReg.mineIsNew = false;
+                  //newReg.mineIsNew = false;
                 }
 
                 if (password) {
