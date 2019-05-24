@@ -4,6 +4,7 @@ import { NavigationEvents } from 'react-navigation';
 import PropTypes from 'prop-types';
 import * as Colors from '../../global/Colors';
 import { isXDevice } from '../../global/utils/PixelUtil';
+import { newReg } from '../../global/Reg';
 
 import Header from './header';
 import FunList from './funList';
@@ -29,6 +30,15 @@ export default class MineScreen extends PureComponent {
     getChildContext() {
         return {
             mineNavigation: this.props.navigation
+        }
+    }
+
+    componentDidMount() {
+        if (newReg.mineIsNew) {
+            newReg.mineIsNew = false;
+            if (Platform.OS === 'ios') {
+                this.props.navigation.navigate('IdCard', { isFirst: true });
+            }
         }
     }
 

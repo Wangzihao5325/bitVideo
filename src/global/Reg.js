@@ -13,7 +13,8 @@ let lockReg = {
 }
 
 let newReg = {
-    isNew: true
+    isNew: true,
+    mineIsNew: true,
 }
 
 let videoChanelReg = {

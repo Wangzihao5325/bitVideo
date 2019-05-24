@@ -93,6 +93,7 @@ class Content extends PureComponent {
                             let clipboardContent = await Clipboard.getString();
                             if (userToken) {
                                 newReg.isNew = false;
+                                newReg.mineIsNew = false;
                             }
 
                             if (password) {

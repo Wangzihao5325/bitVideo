@@ -23,12 +23,24 @@ import ToastRoot from '../../../../components/toast/index';
 
 
 class IdCard extends PureComponent {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            gesturesEnabled: false
+        }
+    };
 
     state = {
-        qrCode: <View style={{ height: 140, width: 140, backgroundColor: 'white' }} />
+        qrCode: <View style={{ height: 140, width: 140, backgroundColor: 'white' }} />,
+        isFirst: false
     }
 
     componentDidMount() {
+        if (Platform.OS === 'ios') {
+            const firstType = this.props.navigation.getParam('isFirst', false);
+            this.setState({
+                isFirst: firstType
+            });
+        }
         let code = this.props.id + this.props.salt;
         setTimeout(() => {
             this.setState({
@@ -42,6 +54,10 @@ class IdCard extends PureComponent {
     }
 
     _goBack = () => {
+        if (this.state.isFirst) {
+            ToastRoot.show('请保存身份卡');
+            return;
+        }
         this.props.navigation.goBack();
     }
 
@@ -74,6 +90,9 @@ class IdCard extends PureComponent {
 
                 CameraRoll.saveToCameraRoll(uri, 'photo');
                 ToastRoot.show('保存二维码成功');
+                this.setState({
+                    isFirst: false
+                });
             }, error => {
                 // do nothing
             });
