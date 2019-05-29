@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     },
     imageBackground: {
         height: 39,
-        width: 77,
+        width: 117,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',

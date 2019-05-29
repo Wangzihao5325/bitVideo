@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StatusBar, StyleSheet, TouchableHighlight, Image, Text } from 'react-native';
+import { View, StatusBar, StyleSheet, TouchableHighlight, Image, Text, Linking } from 'react-native';
 import Api from '../../socket/index';
 import SecurtyImage from '../../components/securtyImage/index';
 
@@ -21,7 +21,8 @@ export default class AdModel extends PureComponent {
         Api.getSplashScreen((result) => {
             if (result.ad_path) {
                 this.setState({
-                    uri: result.ad_path
+                    uri: result.ad_path,
+                    href: result.href
                 });
             }
         });
@@ -50,6 +51,12 @@ export default class AdModel extends PureComponent {
         this.props.navigation.goBack();
     }
 
+    _watchAd = () => {
+        if (this.state.href) {
+            Linking.openURL(this.state.href);
+        }
+    }
+
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.6)' }}>
@@ -59,7 +66,9 @@ export default class AdModel extends PureComponent {
                 </TouchableHighlight>
                 {typeof this.state.uri === 'string' &&
                     this.state.uri !== '' &&
-                    <SecurtyImage style={{ flex: 1 }} source={{ uri: this.state.uri }} />
+                    <TouchableHighlight style={{ flex: 1 }} underlayColor='transparent' onPress={this._watchAd}>
+                        <SecurtyImage style={{ flex: 1 }} source={{ uri: this.state.uri }} />
+                    </TouchableHighlight>
                     // <Image style={{ flex: 1 }} source={{ uri: this.state.uri }} />
                 }
             </View>
