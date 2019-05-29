@@ -1109,7 +1109,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 2279YW8L58;
+						DevelopmentTeam = 325UG6H2XP;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1836,7 +1836,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 2279YW8L58;
+				DEVELOPMENT_TEAM = 325UG6H2XP;
 				ENABLE_BITCODE = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1863,7 +1863,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv.dadi01;
 				PRODUCT_NAME = BitVideos;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1878,7 +1878,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2279YW8L58;
+				DEVELOPMENT_TEAM = 325UG6H2XP;
 				ENABLE_BITCODE = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1905,7 +1905,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ss.kedou.tv.dadi01;
 				PRODUCT_NAME = BitVideos;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
