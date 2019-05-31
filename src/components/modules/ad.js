@@ -25,7 +25,7 @@ export default class AdModule extends PureComponent {
         return (
             <TouchableWithoutFeedback style={styles.container} onPress={this._watchAd}>
                 <View style={{ flex: 1 }}>
-                    <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={styles.image} source={{ uri: this.props.data.cover_oss_path }} />
+                    <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={styles.image} source={{ uri: this.props.data.cover_path }} />
                     <Text style={styles.titleText}>{this.props.data.title}</Text>
                     <Text style={styles.remarkText}>{this.props.data.remark}</Text>
                 </View>
