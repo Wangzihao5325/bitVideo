@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Image, TouchableHighlight } from 'react-native';
+import { View, Image, TouchableHighlight, Linking } from 'react-native';
 import * as Sizes from '../../global/Sizes';
 import { naviToVideoService } from '../../screens/videoModel/VideoService';
 
@@ -21,9 +21,17 @@ export default class BannerModule extends PureComponent {
         this.setState({ size: { width: layout.width, height: layout.height } });
     }
 
-    _bannerPress = (id) => {
+    _bannerPress = (id, type, link) => {
         if (this.props.navi) {
-            this.props.navi.navigate('VideoModel', { videoId: id });
+            if (type === 'VIDEO') {
+                this.props.navi.navigate('VideoModel', { videoId: id });
+            }
+            if (type === 'LINK' && link) {
+                Linking.openURL(link);
+            }
+            if (type === 'LINK_VIDEO') {
+                this.props.navi.navigate('VideoModel', { videoId: id, type: 'ad' });
+            }
         }
         //naviToVideoService(id);
     }
@@ -33,7 +41,7 @@ export default class BannerModule extends PureComponent {
         dataArr.forEach((item, index) => {
             items.push(
                 <View key={index} style={[this.state.size, { display: 'flex' }]}>
-                    <TouchableHighlight style={{ flex: 1 }} onPress={() => this._bannerPress(item.id)}>
+                    <TouchableHighlight style={{ flex: 1 }} onPress={() => this._bannerPress(item.id, item.type, item.redirect_url)}>
                         {/* <Image style={{ flex: 1, borderRadius: 5 }} defaultSource={require('../../image/usual/banner_load_failed.png')} source={{ uri: item.cover_path }}></Image> */}
                         <SecurtyImage default={require('../../image/usual/banner_load_failed.png')} style={{ height: 200, width: '100%', borderRadius: 5 }} source={{ uri: item.cover_path }} />
                     </TouchableHighlight>
@@ -44,6 +52,7 @@ export default class BannerModule extends PureComponent {
     }
 
     render() {
+        console.log(this.props.data);
         let tabs = this.itemGenerator(this.props.data);
         return (
             <Carousel
