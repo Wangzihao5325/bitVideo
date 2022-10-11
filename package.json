@@ -9,7 +9,7 @@
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "react": "16.6.3",
-    "react-native": "0.57.8",
+    "react-native": "0.70.2",
     "react-native-android-fullscreen-webview-video": "^1.0.3",
     "react-native-camera": "^2.6.0",
     "react-native-device-info": "^0.24.3",
